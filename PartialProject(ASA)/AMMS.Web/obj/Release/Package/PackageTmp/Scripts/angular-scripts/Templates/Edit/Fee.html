@@ -1,0 +1,350 @@
+﻿<div class="panel panel-default panel-primary" ng-controller="feeEditController">
+    <h5><i class="fa fa-asterisk required-icon"></i> Required field</h5>
+    <div class="panel-body font-asa-11">
+        <form angular-validator-submit="editFee()" name="editFeeForm" class="form-horizontal" novalidate angular-validator>
+            <div class="row">
+                <div class="col-md-6 col-lg-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <label for="name" class="col-lg-4 col-md-4 col-sm-12">Name<i class="fa fa-asterisk required-icon"></i> </label>
+                            <input type="text" id="name" class="col-lg-6 col-md-6 col-sm-12 form-control form-control-asa width-asa" ng-model="fee.Name"
+                                   placeholder="Name"
+                                   required-message="'Name is required'"
+                                   name="name"
+                                   required
+                                   validate-on="dirty" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <label for="ChargeType" class="col-lg-4 col-md-4 col-sm-12">Charge Type<i class="fa fa-asterisk required-icon"></i></label>
+                            <select name="ChargeType" id="ChargeType" ng-model="fee.ChargeType" class="col-lg-6 col-md-6 col-sm-12 form-control form-control-asa form-control-asa-select-box-padding width-asa"
+                                    ng-options="option.value as option.text for option in type" required
+                                    required-message="'Please select a Charge Type'"
+                                    ng-change="chargeTypeChanged(fee.ChargeType)">
+                                <option value="" selected="selected">Select Charge Type</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <label for="AppliedTo" class="col-lg-4 col-md-4 col-sm-12">Charge Applies To<i class="fa fa-asterisk required-icon"></i></label>
+                            <select name="AppliedTo" id="AppliedTo" ng-model="fee.AppliedTo"
+                                    class="col-lg-6 col-md-6 col-sm-12 form-control form-control-asa form-control-asa-select-box-padding width-asa"
+                                    ng-options="option.value as option.text for option in appliesTo" required
+                                    required-message="'Please select a Applied to Option'"
+                                    ng-change="feeApplyChange(fee.AppliedTo)"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <label for="TimeOfCharge" class="col-lg-4 col-md-4 col-sm-12">
+                                Time of Charge<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select name="TimeOfCharge" id="TimeOfCharge" ng-model="fee.TimeOfCharge"
+                                    class="col-lg-6 col-md-6 col-sm-12 form-control form-control-asa form-control-asa-select-box-padding width-asa"
+                                    ng-options="chargeTime.value as chargeTime.text for chargeTime in timeOfCharge"
+                                    required
+                                    required-message="'Please select a time of change'"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <label for="CalculationMethod" class="col-lg-4 col-md-4 col-sm-12">
+                                Calculation Method
+                            </label>
+                            <select name="CalculationMethod" id="CalculationMethod" ng-model="fee.CalculationMethod"
+                                    ng-change="calculationMethodChange(fee.CalculationMethod)"
+                                    class="col-lg-6 col-md-6 col-sm-12 form-control form-control-asa form-control-asa-select-box-padding width-asa"
+                                    ng-options="calculationMehtod.value as calculationMehtod.text for calculationMehtod in feeCalculationMethod"></select>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <label for="status" class="col-lg-4 col-md-4 col-sm-12">Status<i class="fa fa-asterisk required-icon"></i></label>
+                            <select name="status" id="status" ng-model="fee.Status"
+                                    class="col-lg-6 col-md-6 col-sm-12 form-control form-control-asa form-control-asa-select-box-padding width-asa"
+                                    ng-options="status.value as status.text for status in feeStatus"
+                                    required
+                                    required-message="'Please select status'"
+                                    ng-disabled="true"></select>
+                        </div>
+                    </div>
+                </div>
+
+            <!--<div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="form-inline">
+                        <label for="sdate" class="col-md-4 col-sm-12">
+                            Start Date <i class="fa fa-asterisk required-icon"></i>
+                        </label>
+                        <div class="dropdown input-group date width-asa">
+                            <a class="dropdown-toggle" id="sdate" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                <div class="input-group date-input-group">
+                                    <input type="text" readonly="readonly" date-time-input="DD-MM-YYYY" class="form-control-asa full-width-asa" data-ng-model="fee.StartDate"
+                                           is-open="false">
+                                    <span class="input-group-addon input-group-addon-asa"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                <datetimepicker data-ng-model="fee.StartDate" data-datetimepicker-config="{ startView:'day', minView:'day',dropdownSelector: '#sdate' }"
+                                                data-before-render="beforeStartDateRender($dates)"/>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="form-group">
+                    <div class="form-inline">
+                        <label for="edate" class="col-md-4 col-sm-12">
+                            End Date
+                        </label>
+                        <div class="dropdown input-group date width-asa">
+                            <a class="dropdown-toggle col-md-10" id="edate" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                <div class="input-group date-input-group">
+                                    <input type="text" readonly="readonly" date-time-input="DD-MM-YYYY" class="form-control-asa full-width-asa" data-ng-model="fee.EndDate">
+                                    <span class="input-group-addon input-group-addon-asa"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                <datetimepicker data-ng-model="fee.EndDate" data-datetimepicker-config="{ startView:'day', minView:'day',dropdownSelector: '#edate' }"
+                                                data-before-render="beforeEndDateRender($dates)"/>
+                            </ul>
+                            <h4><span><i style="position: absolute; height: 0; bottom: 24px; right: 0; left: 280px;" class="fa fa-times-circle add-remove-loan-field" aria-hidden="true" ng-click="removeEndDate()"></i></span></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+
+                <!--new DateTimePicker-->
+                <div class="col-lg-6 col-md-6 col-sm-12" style="position: relative">
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <label class="col-md-4 col-sm-12">
+                                Start Date<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <div class="dropdown input-group date width-asa">
+                                <p class="input-group">
+                                    <input ng-change="startDateValidator()"
+                                           readonly="readonly" class="form-control-asa full-width-asa" type="text" uib-datepicker-popup="{{format}}"
+                                           ng-model="fee.StartDate" is-open="popupStartDate.opened" datepicker-options="dateOptions" close-text="Close"
+                                           alt-input-formats="altInputFormats" />
+                                    <span class="input-group-addon input-group-addon-asa">
+                                        <button type="button" ng-click="openStartDate()"><i class="fa fa-calendar"></i></button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-6 col-md-6 col-sm-12" style="position: relative">
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <label class="col-md-4 col-sm-12">
+                                End Date<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <div class="dropdown input-group date width-asa">
+                                <p class="input-group">
+                                    <input ng-change="endDateValidator()"
+                                           readonly="readonly" class="form-control-asa full-width-asa" type="text" uib-datepicker-popup="{{format}}"
+                                           ng-model="fee.EndDate" is-open="popupEndDate.opened" datepicker-options="dateOptions" close-text="Close"
+                                           alt-input-formats="altInputFormats" />
+                                    <span class="input-group-addon input-group-addon-asa">
+                                        <button type="button" ng-click="openEndDate()"><i class="fa fa-calendar"></i></button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            <div class="col-md-6 col-lg-6 col-sm-12" ng-hide="fee.ChargeType==FeeConfig.ChargeType.Insurance.value || fee.ChargeType==FeeConfig.ChargeType.LateFee.value">
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <label for="fee" class="col-lg-4 col-md-4 col-sm-12">Fee<i class="fa fa-asterisk required-icon"></i> </label>
+                            <input type="number" id="fee" class="col-lg-6 col-md-6 col-sm-12 form-control form-control-asa width-asa" ng-model="feeValue"
+                                   placeholder="Fee"
+                                   required-message="'Fee is required'"
+                                   name="fee"
+                                   ng-required="fee.ChargeType==FeeConfig.ChargeType.OneTimeFee.value || fee.ChargeType==FeeConfig.ChargeType.PeriodicFee.value"
+                                   validate-on="dirty" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-12 col-sm-12">
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <label for="note" class="col-lg-2 col-md-2 col-sm-12">
+                                Note<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <textarea id="note" ng-model="fee.Note" name="note"
+                                      class="col-lg-6 col-md-6 col-sm-12 form-control form-control-asa width-asa-fee-notes"
+                                      placeholder="Note"
+                                      validate-on="dirty"
+                                      required
+                                      required-message="'Note is Required'"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-12 col-sm-12" ng-if="fee.ChargeType===FeeConfig.ChargeType.Insurance.value.toString() && durationPrincipleRangeForMSMEInsurance.length <= 0">
+                    <fieldset style="border: 1px solid black; padding-top: 10px;">
+                        <div class="col-md-6 col-lg-6 col-sm-12" ng-repeat="policy in feePolicy">
+                            <div class="form-group">
+                                <div class="form-inline">
+                                    <label class="col-lg-4 col-md-4 col-sm-12" ng-model="FeeFrequency[$index].Policy" ng-init="FeeFrequency[$index].Policy=policy.value">{{policy.text}} </label>
+                                    <input type="number" name="{{policy}}" min="0" placeholder="{{policy.text+' '+amountRate }}" ng-model="FeeFrequency[$index].Value"
+                                           class="col-lg-6 col-md-6 col-sm-12 form-control form-control-asa width-asa"
+                                           validate-on="dirty"
+                                           ng-required="fee.ChargeType===FeeConfig.ChargeType.Insurance.value.toString()"
+                                           required-message="'Field is Required'" />
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="col-md-12 col-lg-12 col-sm-12" ng-if="fee.ChargeType===FeeConfig.ChargeType.Insurance.value.toString()" style="border: 1px solid #d6d3d3; padding-top : 10px; padding-bottom: 10px; margin-top: 10px">
+
+
+                    <div class="col-md-12 col-lg-12 col-sm-12" ng-repeat="msme in durationPrincipleRangeForMSMEInsurance" style="border: 1px solid black; margin: 4px">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <i class="fa fa-times-circle add-remove-loan-field fa-pull-right" style="margin: 5px" ng-click="removeFromList(msme)"></i>
+                        </div>
+                        <div class="form-group col-md-3 col-lg-3 col-sm-12">
+                            <div class="form-inline">
+                                <label class="col-lg-4 col-md-4 col-sm-12"> Minimum Principal </label>
+                                <input type="number" name="minimumPrinciple" placeholder="Minimum Principle" ng-model="msme.MinPrinciple"
+                                       class="col-lg-6 col-md-6 col-sm-12 form-control form-control-asa width-asa"
+                                       required-message="'Field is Required'" />
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3 col-lg-3 col-sm-12">
+                            <div class="form-inline">
+                                <label class="col-lg-4 col-md-4 col-sm-12"> Maximum Principal </label>
+                                <input type="number" name="maximumPrinciple" placeholder="Maximum Principle" ng-model="msme.MaxPrinciple"
+                                       class="col-lg-6 col-md-6 col-sm-12 form-control form-control-asa width-asa"
+                                       required-message="'Field is Required'" />
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3 col-lg-3 col-sm-12">
+                            <div class="form-inline">
+                                <label class="col-lg-4 col-md-4 col-sm-12"> Duration In Month </label>
+                                <select class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                        id="ptype" ng-model="msme.Duration"
+                                        name="ptype"
+                                        ng-options="duration.Value as duration.Value for duration in durationArray"></select>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3 col-lg-3 col-sm-12">
+                            <div class="form-inline">
+                                <label class="col-lg-4 col-md-4 col-sm-12"> Value </label>
+                                <input type="number" name="value" min="0" placeholder="value" ng-model="msme.Value"
+                                       class="col-lg-6 col-md-6 col-sm-12 form-control form-control-asa width-asa"
+                                       required-message="'Field is Required'" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-12 col-sm-12">
+                        <span style="float: right">Add MSME Setting</span><i class="fa fa-plus-circle add-remove-loan-field" style="float: right" aria-hidden="true" ng-click="addMsmeSetting()"></i>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-12 col-sm-12" ng-if="fee.ChargeType===FeeConfig.ChargeType.LateFee.value.toString()">
+                    <div class="col-md-12 col-lg-12 col-sm-12">
+                        <div class="form-group" style="border: 1px solid black; padding-top: 10px;">
+                            <div class="form-inline">
+                                <div class="col-md-2 col-lg-2 col-sm-12" ng-repeat="selectFrequency in frequencyList">
+                                    <select name="installmentfrequencyselect" ng-model="frequencyRate[$index]"
+                                            class="col-lg-2 col-md-2 col-sm-12 form-control form-control-asa form-control-asa-select-box-padding"
+                                            ng-change="frequencySelected(frequencyRate[$index])"
+                                            ng-options="fee.Value as fee.Name for fee in RateFrequency | filter: feeRateFrequencyFilter($index)"
+                                            ng-required="fee.ChargeType===FeeConfig.ChargeType.LateFee.value.toString()"
+                                            required-message="'Please select Frequency'">
+                                        <option value="" selected="selected">Select Frequency</option>
+                                    </select>
+                                    <input type="number" name="{{selectFrequency}}" min="0" placeholder="{{amountRate}}" ng-model="frequencyRateValue[$index]"
+                                           class="col-lg-1 col-md-1 col-sm-12 form-control form-control-asa" style="width: 100px"
+                                           validate-on="dirty"
+                                           ng-required="fee.ChargeType===FeeConfig.ChargeType.LateFee.value.toString()"
+                                           required-message="'Field is Required'" />
+                                    <span class="fa fa-times-circle" ng-click="removeFrequencySelect($index)" style="font-size: 15px !important; margin-left:2px; margin-top: 4px;"></span>
+                                </div>
+                                <h4 ng-hide="frequencyList.length === fee.FeeRateFrequency.length" style="margin-top: 4px;"><span class="fa fa-plus-circle" aria-hidden="true" ng-click="addFrequencySelect(selectedFrequency)"></span></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-sm-12" style="padding-top: 15px;">
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <label for="file" class="col-lg-4 col-md-4 col-sm-12">Upload File<i class="fa fa-asterisk required-icon"></i></label>
+                            <input type="file" id="file" class="uploadFile" accept="image/*,.doc,.pdf,.docx,.xlsx,.rtf,.odt,.zip,.xls,.txt,.ppt" ngf-select ngf-keep="true" ng-model="files" ngf-multiple="true">
+                            <label style="text-align: right; color: blue; margin-left: 15px;">Please select Document or Image type files (Max File Size 3MB) </label>
+                        </div>
+                        <div class="form-group " style="margin-left:15px">
+                            <table style="text-align: center">
+                                <thead>
+                                    <tr>
+                                        <td> Name</td>
+                                        <td> Size (Byte)</td>
+                                        <td> Action</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="ufile in uploadedFiles">
+                                        <td>
+                                            <a ng-href="{{commonDownloadUrl + ufile.DocumentUrl}}" target="_blank">{{ufile.Name}}{{ufile.Format}}</a>
+                                        </td>
+                                        <td>
+                                            {{ufile.Size}}
+                                        </td>
+                                        <td>
+                                            <i class="fa fa-times asa-icon-DELETE" ng-click="removefileDB(ufile)"></i>
+                                        </td>
+                                    </tr>
+                                    <tr ng-repeat="file in files">
+                                        <td>
+                                            {{file.name}}
+                                        </td>
+                                        <td>
+                                            {{file.size }}<i class="form-validation-message" ng-show="file.size>(1024*1024*documentSize)"> (max file size exceeded ! ) </i>
+                                        </td>
+                                        <td>
+                                            <i class="fa fa-times asa-icon-DELETE" ng-click="removefile(file,files,'name')"></i>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-sm-12">
+                        <div ng-if="editFeeForm.$valid === false && editFeeForm.$dirty === true">
+                            <p class="form-validation-message">Validation failed, one or more required field is missing</p>
+                        </div>
+                        <button type="submit" class="btn btn-primary pull-right" ng-click="onSubmitForm()">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

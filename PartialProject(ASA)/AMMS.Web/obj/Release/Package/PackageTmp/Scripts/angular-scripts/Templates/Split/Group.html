@@ -1,0 +1,224 @@
+﻿<div class="panel panel-default panel-primary" ng-controller="loanGroupSplitController">
+    <div class="panel-heading panel-title">
+        Split Group
+    </div>
+    <div class="panel-body font-asa-11">
+        <form angular-validator-submit="SplitGroup()" name="SplitGroupForm" class="form-horizontal" novalidate angular-validator>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <center>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-lg-offset-4 col-md-offset-4">
+                        <label for="sdate" class="col-lg-4 col-md-4 col-sm-12">
+                            Split Date <i class="fa fa-asterisk required-icon"></i>
+                        </label>
+                        <div class="input-group date width-asa">
+                                    <input type="text" readonly="readonly" date-time-input="DD-MM-YYYY" class="form-control-asa full-width-asa" data-ng-model="group.SplitDate"
+                                           is-open="false"
+                                           required
+                                           required-message="'Field is required'">
+                        </div>
+                    </div>
+                </center>
+            </div>
+            <div class="row">
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <h4>Existing Group</h4>
+                    </div>
+                    <div class="form-group">
+
+                        <div class="form-inline">
+                            <label for="disolveGroupLoanOfficer" class="col-md-4 col-sm-12">
+                                Loan Officer<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select tabindex="1"
+                                    class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="disolveGroupLoanOfficer" ng-model="disolveGroup.LoanOfficer"
+                                    ng-change="getGroupsByProgramOfficerForDisolve(disolveGroup.LoanOfficer)"
+                                    name="disolveLoanOfficer"
+                                    required-message="'Loan Officer field is required'"
+                                    ng-options="loanOffice.Id as loanOffice.Name for loanOffice in disolveGroupLoanOfficerList" required></select>
+                        </div>
+                        <div class="form-inline">
+                            <label for="disolveGroup" class="col-md-4 col-sm-12">
+                                Group<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select tabindex="3"
+                                    class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="disolveGroup" ng-model="disolveGroup.Group"
+                                    name="disolveGroup"
+                                    ng-change="getMembersByGroupId(disolveGroup.Group); getDetails(disolveGroup.Group);getGroupTypesOfSelectedGroup(disolveGroup.Group);"
+                                    required-message="'Group field is required'"
+                                    ng-options="disolveGroup.Value as disolveGroup.Name for disolveGroup in disolveGroupGroupList" required></select>
+                        </div>
+                        <div class="form-inline">
+                            <label for="disolveGroupType" class="col-md-4 col-sm-12">
+                                Group Type<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select tabindex="2"
+                                    class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="disolveGroupType" ng-model="disolveGroup.groupType"
+                                    name="disolveGroupType"
+                                    ng-change="getGroupsByProgramOfficerAndGroupTypeForDisolve(disolveGroup.LoanOfficer, disolveGroup.groupType);"
+                                    required-message="'Group Type field is required'"
+                                    ng-readonly="true"
+                                    ng-disabled="true"
+                                    ng-options="gt.Value as gt.Name for gt in groupType" required></select>
+                        </div>
+                        
+                        <div class="form-inline">
+                            <label for="disolveGroupMeetingDay" nguid-model="disolveGroupMeetingDay" class="col-md-4 col-sm-12">
+                                Meeting Day
+                            </label>
+                            <input type="text" maxlength="100"
+                                   class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                   id="disolveGroupMeetingDay"
+                                   name="disolveGroupMeetingDay"
+                                   ng-model="disolveGroupMeetingDay" readonly="readonly"
+                                   ng-required="true" required-message="'Meeting day is required'">
+
+                        </div>
+                        <div class="form-inline">
+                            <label for="disolveGroupTotalMember" nguid-model="disolveGroupTotalMember" class="col-md-4 col-sm-12">
+                                Total member
+                            </label>
+                            <input type="text" tabindex="26" maxlength="100"
+                                   class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                   id="disolveGroupTotalMember"
+                                   name="disolveGroupTotalMember"
+                                   ng-model="disolveGroupTotalMember" readonly="readonly">
+
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="pull-right">New Group</h4>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <label for="mergeLoanOfficer" class="col-md-4 col-sm-12">
+                                Loan Officer<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select tabindex="5"
+                                    class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="mergeLoanOfficer" ng-model="mergeGroup.LoanOfficer"
+                                    ng-change="getMergeLoanOfficerGroups(mergeGroup.LoanOfficer); getGroupsByProgramOfficerAndGroupTypeForMerge(mergeGroup.LoanOfficer, mergeGroup.groupType)"
+                                    name="mergeLoanOfficer"
+                                    required-message="'Loan Officer field is required'"
+                                    ng-options="loanOffice.Id as loanOffice.Name for loanOffice in mergeGroupLoanOfficerList" required></select>
+                        </div>
+                        <div class="form-inline">
+                            <label for="mergeGroup" class="col-md-4 col-sm-12">
+                                Group<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <input type="text" tabindex="7" name="mergeGroup"
+                                   ng-model="group.NewGroupName" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="mergeGroup" validate-on="dirty" placeholder="Group Name"
+                                   required-message="'New Group name field is required'" required>
+                        </div>
+                        <div class="form-inline">
+                            <label for="mergeGroupType" class="col-md-4 col-sm-12">
+                                Group Type<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select tabindex="6"
+                                    class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="mergeGroupType"
+                                    name="mergeGroupType"
+                                    required-message="'groupType field is required'"
+                                    ng-model="mergeGroup.groupType"
+                                    ng-disabled="true" required
+                                    ng-options="gt.Value as gt.Name for gt in groupType" ></select>
+                        </div>
+                        
+                        <div class="form-inline">
+                            <label for="meetingDay" class="col-md-4 col-sm-12">
+                                Meeting Day<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select tabindex="9"
+                                    class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="meetingDay" ng-model="mergeGroup.MeetingDay"
+                                    name="MeetingDay"
+                                    required-message="'Meeting Day field is Required '"
+                                    ng-options="meetingDay.Value as meetingDay.Name disable when meetingDay.DisabledState for meetingDay in filters.MeetingDay" required></select>
+                        </div>
+                            <div class="form-inline">
+                                <label for="notes" class="col-lg-4 col-md-4 col-sm-2">
+                                    Notes
+                                </label>
+                                <textarea ng-model="group.Notes"
+                                          class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                          id="notes" placeholder="Notes" rows="5"
+                                          name="notes"></textarea>
+                            </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-5 col-md-5 col-sm-12" style="overflow-y: scroll; height:200px;">
+                    <div>
+                        <!--<pre>{{dgroup.groupMembers}}</pre>-->
+
+                        <table class="table asa-custom-table">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>S# </th>
+                                <th>Member</th>
+                                <th>Loan Product</th>
+                            </tr>
+                            </thead>
+                            <tbody ng-repeat="member in groupMembers">
+                            <tr class="info">
+                                <td><label><input type="checkbox" data-checklist-model="dgroup.groupMembers" data-checklist-value="member"/></label></td>
+                                <td>{{$index+1}}</td>
+                                <td>{{member.Name}}</td>
+                                <td>{{member.ProgramName}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12 col-middle-btn">
+                    <button type="button" ng-click="shiftRight()" title="shift right"> > </button>
+                    <!--<button type="button" ng-click="shiftAllRight()" title="shift all right"> >> </button>-->
+                    <button type="button" ng-click="shiftAllLeft()" title="shift all left"> << </button>
+                    <button type="button" ng-click="shiftLeft()" title="shift left"> < </button>
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-12" style="overflow-y: scroll; height:200px;">
+                    <div>
+                        <!--<pre>{{dgroup.newgroupMembers}}</pre>-->
+                        <table class="table asa-custom-table">
+
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>S#</th>
+                                <th>Member</th>
+                                <th>Loan Product</th>
+                            </tr>
+                            </thead>
+                            <tbody ng-repeat="member in newgroupMembers">
+                            <tr class="success">
+                                <td><label><input type="checkbox" data-checklist-model="dgroup.newgroupMembers" data-checklist-value="member"/></label></td>
+                                <td>{{$index+1}}</td>
+                                <td>{{member.Name}}</td>
+                                <td>{{member.ProgramName}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        <div class="col-lg-12 col-md-12 col-sm-12" ng-if="SplitGroupForm.$valid === false  && SplitGroupForm.$dirty === true" style="margin-top: 10px;">
+            <p class="form-validation-message pull-right">Validation failed, on or more required field is missing</p>
+        </div>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <button type="submit" tabindex="100" class="btn btn-primary pull-right" style="margin-top: 10px;">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

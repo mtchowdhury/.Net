@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNet.Identity
+@using ArmadaReports.Web.Helper
+<div class="row row-margin">
+    <div class="col-lg-4 col-md-4 col-sm-4">
+        <div class="form-inline">
+            <div class="form-group">
+                <label for="program">Select Hub Program:</label>
+                <select id="program" class="form-control form-control-height" onchange="service.reload()">
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="margin-top: 10px;" class="row">
+    @Html.Partial("_TopPanelPartial")
+    @Html.Partial("_MiddlePanelPartial")
+    @Html.Partial("_BottomPanelPartial")
+    @Html.Partial("_InventoryPartial")
+</div>
+
+
+
+@Html.Partial("_TopChartDetailsPartial")
+@Html.Partial("_MiddleChartDetailsPartial")
+@Html.Partial("_BottomChartDetailsPartial")
+
+<script>
+    $(document).ready(function () {
+        utility.onMozAndMs();
+        $('#sales-rep').text('Sales Reps for ' + '@UserInfoCookie.GetUserInfo().FullName');
+        $('#sales-rep-d').text('Sales Reps for ' + '@UserInfoCookie.GetUserInfo().FullName');
+        
+        utility.adjustGroupBtnFont();
+        service.getExportUrl('nav-home', '/Home/Index');
+        service.getPrograms();
+        $('.canvasjs-chart-credit').hide();
+    });
+</script>

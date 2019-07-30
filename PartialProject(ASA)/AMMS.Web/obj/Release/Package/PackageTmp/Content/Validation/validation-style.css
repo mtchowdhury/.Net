@@ -1,0 +1,14 @@
+﻿.validationMessage {
+    padding-top: 0 !important;
+    padding-left: 217px;
+    padding-bottom: 5px !important;
+}
+.validationGroupTransctionMessage {
+    padding-top: 0 !important;
+    padding-bottom: 5px !important;
+}
+
+.form-validation-message {
+    font-size: 12px;
+    color: #f90909;
+}

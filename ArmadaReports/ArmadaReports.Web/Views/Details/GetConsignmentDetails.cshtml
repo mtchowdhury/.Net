@@ -1,0 +1,50 @@
+﻿@model List<ArmadaReports.Common.Models.ConsignmentDetails>
+<div class="row row-margin">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <a id="consignment-excel" class="btn btn-primary" onclick="service.showExportPopup('@ViewData["excelurl"]')">Create Spreadsheet</a>
+    </div>
+</div>
+<!-- Data table -->
+<div style="margin-top: 10px;" class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <table id="consignment-details-table" class="table table-bordered table-hover aspn-table">
+            <thead>
+                <tr>
+                    <th>AspnRx ID</th>
+                    <th>Assigned Pharmacy</th>
+                    <th>Fill Type</th>
+                    <th>Program Status</th>
+                    <th>BIN Number</th>
+                    <th>PCN Number</th>
+                    <th>Needs By Date Passed</th>
+                    <th>Referral Type</th>
+                    <th>Fill No.</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var data in Model)
+                {
+                    <tr>
+                        <td> @data.AspnrxID</td>
+                        <td> @data.AssignedPharmacy</td>
+                        <td> @data.FillType</td>
+                        <td> @data.ProgramStatus</td>
+                        <td> @data.BinNumber</td>
+                        <td> @data.PcnNumber</td>
+                        <td> @data.NeedsByDatePassed</td>
+                        <td> @data.ReferralType</td>
+                        <td> @data.FillNo</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<!--End of Data table-->
+
+<script>
+    $(document).ready(function () {
+        service.getExportUrl('consignment-excel', '@ViewData["excelurl"]');
+        tableWrapper.initConsignmentDetails();
+    });
+</script>

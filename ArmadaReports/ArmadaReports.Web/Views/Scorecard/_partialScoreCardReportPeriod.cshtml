@@ -1,0 +1,371 @@
+﻿@model ArmadaReports.Web.Models.ScorecardViewModel
+
+<style>
+    .indicator {
+        width: 22px;
+    }
+
+    .dashes {
+        width: 14px;
+    }
+
+    table {
+        table-layout: fixed;
+        width: 155px;
+    }
+
+        table td:nth-child(1) {
+            width: 350px;
+        }
+</style>
+<div style="min-height: 300px;">
+    <div class="table-responsive">
+        <table class="table table-bordered table-condensed" style="font-size: 14px !important; white-space: nowrap;">
+            <thead>
+            <thead>
+                <tr class="tableHeader">
+                    <td rowspan="2" style="text-align:center;padding-top:18px;width:375px!important;">Metrics</td>
+                    <td colspan="6" style="text-align:center;">
+                        @if (Model.FilterType == "w")
+                        { <text>Weeks</text> }
+                        else
+                        { <text>Months</text> }
+                    </td>
+                </tr>
+                <tr class="tableHeader" style="text-align:center;">
+                    <td>@Model.PeriodLabels.Period6Label</td>
+                    <td>@Model.PeriodLabels.Period5Label</td>
+                    <td>@Model.PeriodLabels.Period4Label</td>
+                    <td>@Model.PeriodLabels.Period3Label</td>
+                    <td>@Model.PeriodLabels.Period2Label</td>
+                    <td>@Model.PeriodLabels.Period1Label</td>
+                </tr>
+            </thead>
+            @if (Model.ScoreCardReportPeriod != null && Model.ScoreCardReportPeriod.Any())
+            {
+                foreach (var item in Model.ScoreCardReportPeriod)
+                {
+                    <tr style="text-align:right;">
+                        <td style="text-align:left;padding-top:13px;">@item.Status</td>
+                        @if (item.Status == "Fill Rate (Completion %)" || item.Status == "% of Referrals Accepted within 4 hrs")
+                        {
+                            <td style="padding-top:11px;">@item.Period6%</td>
+
+                            if (item.Period5Performance == "down")
+                            {
+                                <td style="padding-top:8px;">
+                                    @item.Period5%
+
+                                    <img title="down" src="~/Content/img/down.png" class="indicator" />
+                                </td>
+                            }
+                            else if (item.Period5Performance == "up")
+                            {
+                                <td style="padding-top:8px;">
+                                    @item.Period5%
+
+                                    <img title="UP" src="~/Content/img/up.png" class="indicator" />
+                                </td>
+                            }
+                            else if (item.Period5Performance == "dash")
+                            {
+                                <td style="padding-top:11px;">
+                                    @item.Period5%
+
+                                    <img title="UP" src="~/Content/img/dashes.png" class="dashes" />
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="padding-top:11px;">
+                                    @item.Period5%
+                                </td>
+                            }
+                            if (item.Period4Performance == "down")
+                            {
+                                <td style="padding-top:8px;">
+                                    @item.Period4%
+
+                                    <img title="down" src="~/Content/img/down.png" class="indicator" />
+                                </td>
+                            }
+                            else if (item.Period4Performance == "up")
+                            {
+                                <td style="padding-top:8px;">
+                                    @item.Period4%
+
+                                    <img title="UP" src="~/Content/img/up.png" class="indicator" />
+                                </td>
+                            }
+                            else if (item.Period4Performance == "dash")
+                            {
+                                <td style="padding-top:11px;">
+                                    @item.Period4%
+
+                                    <img title="UP" src="~/Content/img/dashes.png" class="dashes" />
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="padding-top:11px;">
+                                    @item.Period4%
+                                </td>
+                            }
+                            if (item.Period3Performance == "down")
+                            {
+                                <td style="padding-top:8px;">
+                                    @item.Period3%
+
+                                    <img title="down" src="~/Content/img/down.png" class="indicator" />
+                                </td>
+                            }
+                            else if (item.Period3Performance == "up")
+                            {
+                                <td style="padding-top:8px;">
+                                    @item.Period3%
+
+                                    <img title="up" src="~/Content/img/up.png" class="indicator" />
+                                </td>
+                            }
+                            else if (item.Period3Performance == "dash")
+                            {
+                                <td style="padding-top:11px;">
+                                    @item.Period3%
+
+                                    <img title="up" src="~/Content/img/dashes.png" class="dashes" />
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="padding-top:11px;">
+                                    @item.Period3%
+                                </td>
+                            }
+                            if (item.Period2Performance == "down")
+                            {
+                                <td style="padding-top:8px;">
+                                    @item.Period2%
+
+                                    <img title="down" src="~/Content/img/down.png" class="indicator" />
+                                </td>
+                            }
+                            else if (item.Period2Performance == "up")
+                            {
+                                <td style="padding-top:8px;">
+                                    @item.Period2%
+
+                                    <img title="up" src="~/Content/img/up.png" class="indicator" />
+                                </td>
+                            }
+                            else if (item.Period2Performance == "dash")
+                            {
+                                <td style="padding-top:11px;">
+                                    @item.Period2%
+
+                                    <img title="up" src="~/Content/img/dashes.png" class="dashes" />
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="padding-top:11px;">
+                                    @item.Period2%
+                                </td>
+                            }
+                            if (item.Period1Performance == "down")
+                            {
+                                <td style="padding-top:8px;">
+                                    @item.Period1%
+
+                                    <img title="down" src="~/Content/img/down.png" class="indicator" />
+                                </td>
+                            }
+                            else if (item.Period1Performance == "up")
+                            {
+                                <td style="padding-top:8px;">
+                                    @item.Period1%
+
+                                    <img title="up" src="~/Content/img/up.png" class="indicator" />
+                                </td>
+                            }
+                            else if (item.Period1Performance == "dash")
+                            {
+                                <td style="padding-top:11px;">
+                                    @item.Period1%
+
+                                    <img title="up" src="~/Content/img/dashes.png" class="dashes" />
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="padding-top:11px;">
+                                    @item.Period1%
+                                </td>
+                            }
+                        }
+                        else
+                        {
+                            <td style="padding-top:11px;">@item.Period6</td>
+
+                            if (item.Period5Performance == "down")
+                            {
+                                <td style="padding-top:8px;">
+                                    @item.Period5
+
+                                    <img title="down" src="~/Content/img/down.png" class="indicator" />
+                                </td>
+                            }
+                            else if (item.Period5Performance == "up")
+                            {
+                                <td style="padding-top:8px;">
+                                    @item.Period5
+
+                                    <img title="up" src="~/Content/img/up.png" class="indicator" />
+                                </td>
+                            }
+                            else if (item.Period5Performance == "dash")
+                            {
+                                <td style="padding-top:11px;">
+                                    @item.Period5
+
+                                    <img title="up" src="~/Content/img/dashes.png" class="dashes" />
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="padding-top:11px;">
+                                    @item.Period5
+                                </td>
+                            }
+                            if (item.Period4Performance == "down")
+                            {
+                                <td style="padding-top:8px;">
+                                    @item.Period4
+
+                                    <img title="down" src="~/Content/img/down.png" class="indicator" />
+                                </td>
+                            }
+                            else if (item.Period4Performance == "up")
+                            {
+                                <td style="padding-top:8px;">
+                                    @item.Period4
+
+                                    <img title="up" src="~/Content/img/up.png" class="indicator" />
+                                </td>
+                            }
+                            else if (item.Period4Performance == "dash")
+                            {
+                                <td style="padding-top:11px;">
+                                    @item.Period4
+
+                                    <img title="up" src="~/Content/img/dashes.png" class="dashes" />
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="padding-top:11px;">
+                                    @item.Period4
+                                </td>
+                            }
+                            if (item.Period3Performance == "down")
+                            {
+                                <td style="padding-top:8px;">
+                                    @item.Period3
+
+                                    <img title="down" src="~/Content/img/down.png" class="indicator" />
+                                </td>
+                            }
+                            else if (item.Period3Performance == "up")
+                            {
+                                <td style="padding-top:8px;">
+                                    @item.Period3
+
+                                    <img title="up" src="~/Content/img/up.png" class="indicator" />
+                                </td>
+                            }
+                            else if (item.Period3Performance == "dash")
+                            {
+                                <td style="padding-top:11px;">
+                                    @item.Period3
+
+                                    <img title="up" src="~/Content/img/dashes.png" class="dashes" />
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="padding-top:11px;">
+                                    @item.Period3
+                                </td>
+                            }
+                            if (item.Period2Performance == "down")
+                            {
+                                <td style="padding-top:8px;">
+                                    @item.Period2
+
+                                    <img title="down" src="~/Content/img/down.png" class="indicator" />
+                                </td>
+                            }
+                            else if (item.Period2Performance == "up")
+                            {
+                                <td style="padding-top:8px;">
+                                    @item.Period2
+
+                                    <img title="up" src="~/Content/img/up.png" class="indicator" />
+                                </td>
+                            }
+                            else if (item.Period2Performance == "dash")
+                            {
+                                <td style="padding-top:11px;">
+                                    @item.Period2
+
+                                    <img title="up" src="~/Content/img/dashes.png" class="dashes" />
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="padding-top:11px;">
+                                    @item.Period2
+                                </td>
+                            }
+                            if (item.Period1Performance == "down")
+                            {
+                                <td style="padding-top:8px;">
+                                    @item.Period1
+
+                                    <img title="down" src="~/Content/img/down.png" class="indicator" />
+                                </td>
+                            }
+                            else if (item.Period1Performance == "up")
+                            {
+                                <td style="padding-top:8px;">
+                                    @item.Period1
+
+                                    <img title="up" src="~/Content/img/up.png" class="indicator" />
+                                </td>
+                            }
+                            else if (item.Period1Performance == "dash")
+                            {
+                                <td style="padding-top:11px;">
+                                    @item.Period1
+
+                                    <img title="up" src="~/Content/img/dashes.png" class="dashes" />
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="padding-top:11px;">
+                                    @item.Period1
+                                </td>
+                            }
+                        }
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="7" style="font-size:14px;text-align:center;color:cornflowerblue;font-family:sans-serif;">No data available in table.</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

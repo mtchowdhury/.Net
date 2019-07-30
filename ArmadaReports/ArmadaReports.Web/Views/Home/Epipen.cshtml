@@ -1,0 +1,23 @@
+﻿@using ArmadaReports.Web.Helper
+
+<div class="row row-margin">
+    @Html.Partial("_EpipenPanelPartial")
+</div>
+
+@Html.Partial("_EpipenPanelPopupPartial")
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#send-mail-id').hide();
+        utility.adjustGroupBtnFont();
+        $('.epipen-date').datepicker({
+            format: 'yyyy-mm-dd'
+        });
+        if ('@UserInfoCookie.GetUserInfo().HasPrivilege' === 'VUMP EpiPen') {
+            service.getExportUrl('nav-home', '/Home/Epipen');
+        } else {
+            service.getExportUrl('nav-home', '/Home/Index');
+        }
+        epipenService.init();
+    });
+</script>

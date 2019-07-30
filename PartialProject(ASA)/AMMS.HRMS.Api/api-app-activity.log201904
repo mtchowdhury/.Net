@@ -1,0 +1,10 @@
+2019-04-01 15:00:43,081 [37] INFO AMMS.Logger.Services.LoggerService - user: 40, Accessed : /hrms/employeeAccount/addEmployeeAccount
+2019-04-01 15:01:58,960 [19] INFO AMMS.Logger.Services.LoggerService - user: 40, Accessed : /hrms/employeeAccount/editEmployeeAccount
+2019-04-16 12:27:46,216 [71] INFO AMMS.Logger.Services.LoggerService - user: 40, Accessed : /hrms/employeeAccount/addEmployeeAccount
+2019-04-28 14:45:03,925 [65] INFO AMMS.Logger.Services.LoggerService - user: 3, Accessed : /hrms/employeeAccount/addEmployeeAccount
+2019-04-28 15:03:57,011 [8] INFO AMMS.Logger.Services.LoggerService - user: 3, Accessed : /hrms/employeeAccount/addEmployeeAccount
+2019-04-28 15:04:56,459 [5] INFO AMMS.Logger.Services.LoggerService - user: 3, Accessed : /hrms/employeeAccount/addEmployeeAccount
+2019-04-28 15:10:39,236 [11] INFO AMMS.Logger.Services.LoggerService - user: 3, Accessed : /hrms/employeeAccount/addEmployeeAccount
+2019-04-29 11:05:32,932 [35] INFO AMMS.Logger.Services.LoggerService - user: 3, Accessed : /hrms/employeeAccount/editEmployeeAccount
+2019-04-29 11:06:11,997 [35] INFO AMMS.Logger.Services.LoggerService - user: 3, Accessed : /hrms/employeeAccount/editEmployeeAccount
+2019-04-29 11:06:40,639 [40] INFO AMMS.Logger.Services.LoggerService - user: 3, Accessed : /hrms/employeeAccount/editEmployeeAccount

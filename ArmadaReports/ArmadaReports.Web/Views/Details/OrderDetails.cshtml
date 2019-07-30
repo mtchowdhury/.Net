@@ -1,0 +1,77 @@
+﻿@model List<ArmadaReports.Common.Models.OrderDetails>
+
+<div class="row row-margin">
+    <div class="col-md-12">
+        <input type="hidden" id="program-hidden" value="@ViewData["programId"]"/>
+        <input type="hidden" id="divreport-hidden" value="@ViewData["divreport"]" />
+        <a id="details-excel" target="_blank" class="btn btn-primary">Create Spreadsheet</a>
+        <button class="btn btn-primary" onclick="detailsWrapper.showOdFilterSelection()">Selection Filters</button>
+        <h4>Number of Orders: <strong id="number-of-referrals">@ViewData["orders"]</strong></h4>
+    </div>
+    <div class="col-md-12">
+        <table id="order-details-table" class="table table-bordered aspn-table">
+            <thead>
+                <tr>
+                    <th>Program</th>
+                    <th>Ceated On</th>
+                    <th>Application Approval Date</th>
+                    <th>Application Expiration Date</th>
+                    <th>NDC #</th>
+                    <th>Type</th>
+                    <th>ASPN ID</th>
+                    @*<th>Patient ID</th>*@
+                    <th>Program Status</th>
+                    <th>Ship Date</th>
+                    <th>Assigned On</th>
+                    <th>Filling Pharmacy</th>
+                    <th>Physician</th>
+                    <th>Address</th>
+                    <th>Prescriber Zip</th>
+                    <th>State</th>
+                    <th>NPI</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var d in Model)
+                {
+                    <tr>
+                        <td>@d.ProgramName</td>
+                        <td>@d.CreatedOn</td>
+                        <td>@d.ApplicationApprovalDate</td>
+                        <td>@d.ApplicationExpirationDate</td>
+                        <td>@d.Ndc</td>
+                        <td>@d.ReferralType</td>
+                        <td>@d.AspnrxId</td>
+                        @*<td>@d.PatientId</td>*@
+                        <td>@d.ProgramStatus</td>
+                        <td>@d.ShipDate</td>
+                        <td>@d.AssignedOn</td>
+                        <td>@d.FillingPharmacyName</td>
+                        <td>@d.PhysicianFirstName @d.PhysicianLastName</td>
+                        <td>@d.Address1</td>
+                        <td>@d.PrescriberZip</td>
+                        <td>@d.State</td>
+                        <td>@d.Npi</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    @Html.Partial("_OdFilterSelectionPartial")
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#send-mail-id').hide();
+        service.getExportUrl('details-excel', '@ViewData["excelurl"]');
+        detailsWrapper.initOrderDetails();
+        service.getFilterValuesById('[analytics].[GetProgramStatusById]', $('#program-hidden').val(), 'odfs-status');
+        service.getFilterValuesById('[analytics].[GetPharmacyById]', $('#program-hidden').val(), 'odfs-fillingpharmacy');
+
+        setTimeout(function () {
+            $('#odfs-state').val('@ViewData["state"]');
+            $('#odfs-status').val('@ViewData["status"]');
+            $('#odfs-fillingpharmacy').val('@ViewData["fillingPharmacyId"]');
+        }, 2000);
+    });
+</script>

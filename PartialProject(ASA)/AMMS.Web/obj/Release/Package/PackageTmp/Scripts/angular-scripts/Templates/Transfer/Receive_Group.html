@@ -1,0 +1,504 @@
+﻿<div class="row panel panel-default panel-primary" ng-controller="receiveController">
+    <div class="panel-heading panel-title">
+        Receive Group/Member
+    </div>
+    <div class="row">
+        <div class="form-inline col-sm-12 col-md-6 col-lg-6 pull-left">
+            <label><i class="fa fa-asterisk required-icon"></i> Required field</label>
+        </div>
+    </div>
+    <div class="panel-body font-asa-11">
+        <div class="form-horizontal">
+            <div class="row">
+                <span ng-repeat="command in commandList">
+                    <span ng-if="command.IsGeneral === true">
+                        <button class="btn btn-primary" type="button">
+                            <span>{{command.CommandName}}</span>
+                        </button>
+                    </span>
+                </span>
+                <button type="submit" style="margin-bottom: 10px" class="btn btn-primary pull-right" ng-click="init()">
+                    Refresh
+                </button>
+            </div>
+            <!--Group recive main panel start -->
+            <div class="row panel panel-default panel-primary" style="padding: 10px">
+                <div class="panel-heading panel-title">
+                    <b>Receive Group</b>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 panel-body" style="padding: 5px" ng-repeat="Group in Groups">
+                    <div class="col-lg-12 col-md-12 col-sm-12 panel-body font-asa-12 ">
+                        <label class="col-lg-4 col-md-4 col-sm-12">
+                            Transfer Date : <span style="color: green">{{Group.TransferDate }}</span>
+                        </label>
+                        <label class="col-lg-4 col-md-4 col-sm-12">
+                            Transferring Branch : <span style="color: green">{{Group.TransferredFromBranch}}</span>
+                        </label>
+                        <label class="col-lg-4 col-md-4 col-sm-12">
+                            Transferring Officer : <span style="color: green"> {{ Group.ProgramOfficer}} </span>
+                        </label>
+                        <label class="col-lg-4 col-md-4 col-sm-12">
+                            Group Name : <span style="color: green">{{Group.TransferredFromGroupName}} </span>
+                        </label>
+                        <label class="col-lg-4 col-md-4 col-sm-12">
+                            Meeting Day : <span style="color: green">{{Group.MeetingDay }}</span>
+                        </label>
+
+                        <div class="col-lg-4 col-md-4 col-sm-12" style="margin-left: -15px">
+                            <label for="pofficer" class="col-lg-7 col-md-7 col-sm-12">
+                                Transfer To
+                            </label>
+                            <select class="form-control form-control-asa form-control-asa-select-box-padding  col-lg-2 col-md-2 col-sm-12 font-asa-10"
+                                    style="width: 41%; text-align: center"
+                                    id="pofficer" ng-model="Group.ProgramOfficerId"
+                                    name="pofficer"
+                                    required-message="'Please select a program officer'"
+                                    ng-options="officer.Value as officer.Name for officer in ProgramOfficerList" required>
+                                <option value="">-Select-</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-6 col-md-5 col-sm-12">
+                            <label for="grouopNotes" class="col-lg-2 col-md-2 col-sm-12">
+                                Notes
+                            </label>
+                            <textarea ng-model="Group.Notes"
+                                      style="width: 75%"
+                                      class="form-control form-control-asa  font-asa-10"
+                                      id="grouopNotes" placeholder="Notes"
+                                      name="grouopNotes"
+                                      maxlength="500"
+                                      required
+                                      required-message="'Field is required'"></textarea>
+                        </div>
+                    </div>
+                    <table style="width: 100%"
+                           class="pro-table table-striped table-bordered table-hover table-asa beta font-asa-10">
+                        <thead>
+                            <tr>
+                                <th>P#</th>
+                                <th>Member Name</th>
+                                <th>No.of Loan</th>
+                                <th>Disbursed</th>
+                                <th>Outstanding</th>
+                                <th>Overdue</th>
+                                <th>Savings</th>
+                                <th>Security</th>
+                                <th>LTS</th>
+                                <th>No.of LTS</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr ng-repeat="member in Group.AmmsTransferReceiveMembers">
+                                <td>{{member.PassBookNo}}</td>
+
+                                <td ng-click="detailsModal($parent.$index, $index)" data-toggle="modal" data-target="#receiveModalHorizontal">
+                                    <a href="" title="Show Details">{{member.MemberName}} </a>
+                                </td>
+                                <td>{{member.NoOfLoans}}</td>
+                                <td>{{member.TotalDisburseAmount}}</td>
+                                <td>{{member.TotalOutstandingAmount}}</td>
+                                <td>{{member.TotalOverdueAmount}}</td>
+                                <td>{{member.SavingsBalance}}</td>
+                                <td>{{member.CbsBalance}}</td>
+                                <td>{{member.LtsBalance}}</td>
+                                <td>{{member.NoofLts}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button style="margin-top: 20px" class="btn btn-primary pull-right" ng-click="detailsModalForGroup($index)" data-toggle="modal" data-target="#groupReceiveModalHorizontal" ng-disabled="Group.ProgramOfficerId == null || Group.ProgramOfficerId <= 0">
+                        Group Details
+                    </button>
+                </div>
+
+            </div>
+            <!--Group recive main panel end -->
+            <!--Member recive main panel start -->
+            <div class="row panel panel-default panel-primary" style="padding: 10px">
+                <div class="panel-heading panel-title">
+                    <b> Receive Member </b>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12" style="margin-top: 20px">
+                    <div class="col-lg-12 col-md-12 col-sm-12 font-asa-12">
+                        <div class="col-lg-3 col-md-3 col-sm-12">
+                            <label for="mpofficer" class="col-lg-7 col-md-7 col-sm-12">
+                                Program Officer
+                            </label>
+                            <select class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-lg-1 col-md-1 col-sm-1 font-asa-10"
+                                    style="width: 40% !important"
+                                    id="mpofficer" ng-model="GeneralSettingForAllmember.ProgramOfficerId"
+                                    name="pcategory"
+                                    ng-change="changeGroup(-1); setMeetingDayModel();"
+                                    ng-options="officer.Value as officer.Name for officer in ProgramOfficerList">
+                                <option value="">Select</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-12">
+                            <label for="group" class="col-lg-5 col-md-5 col-sm-12">
+                                Group
+                            </label>
+                            <select class="font-asa-10 form-control form-control-asa form-control-asa-select-box-padding width-asa col-lg-2 col-md-2 col-sm-12"
+                                    style="width: 58% !important"
+                                    id="group" ng-model="GeneralSettingForAllmember.TransferredToGroupId"
+                                    name="pcategory"
+                                    ng-change="setMeetingDayModel()"
+                                    ng-options="group.Id as group.Name for group in GeneralSettingForAllmember.GroupListFiltered"></select>
+                        </div>
+                        <label class="col-lg-2 col-md-2 col-sm-12">
+                            Meeting Day : {{GeneralSettingForAllmember.MeetingDayName}}
+                        </label>
+                        <div class="col-lg-3 col-md-3 col-sm-12">
+                            <label for="GgrouopNotes" class="col-lg-3 col-md-3 col-sm-2">
+                                Notes<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <textarea ng-model="GeneralSettingForAllmember.Notes"
+                                      style="width: 75%"
+                                      class="form-control form-control-asa  col-lg-4 col-md-4 col-sm-4 font-asa-10"
+                                      id="GgrouopNotes" placeholder="Notes" rows="1"
+                                      name="notes"
+                                      maxlength="500"></textarea>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-12">
+                            <label for="isAtMaturity" class="col-lg-10 col-md-10 col-sm-12">
+                                Apply To All
+                            </label>
+                            <input type="checkbox"
+                                   ng-click="applyToAll()"
+                                   ng-disabled="GeneralSettingForAllmember.ProgramOfficerId == null || GeneralSettingForAllmember.ProgramOfficerId < 0 ||  GeneralSettingForAllmember.TransferredToGroupId == null || GeneralSettingForAllmember.TransferredToGroupId < 0 || GeneralSettingForAllmember.Notes == null"
+                                   ng-model="GeneralSettingForAllmember.checked"
+                                   id="isAtMaturity"
+                                   ng-true-value="true" ng-false-value="false">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 panel-body">
+                    <table class="pro-table table-striped table-bordered table-hover table-asa beta font-asa-10 ">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox"
+                                           id="check"
+                                           ng-model="checkAll"
+                                           ng-click="checkAllCheckBox()"
+                                           ng-true-value="true" ng-false-value="false">
+                                </th>
+                                <th>P#</th>
+                                <th>Transfer Date</th>
+                                <th>Member Name</th>
+                                <th>No.of Loan</th>
+                                <th>Disbursed</th>
+                                <th>Outstanding</th>
+                                <th>Overdue</th>
+                                <th>Savings</th>
+                                <th>Security</th>
+                                <th>LTS</th>
+                                <th>No.of LTS</th>
+                                <th>Transferring Branch</th>
+                                <th>Transfer To</th>
+                                <th>Group</th>
+                                <th>Notes<i class="fa fa-asterisk required-icon"></i></th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="member in Members">
+                            <td>
+                                <input type="checkbox"
+                                       ng-model="member.checked"
+                                       ng-change="UpdateTotalPrice()"
+                                       ng-true-value="true" ng-false-value="false">
+                            </td>
+                            <td>{{member.PassBookNo}}</td>
+                            <td>{{member.TransferDate}}</td>
+                            <td ng-click="detailsModalMember($index)" data-toggle="modal" data-target="#receiveModalHorizontal"> <a href="" title="Show Details">{{member.MemberName}}</a></td>
+                            <td>{{member.NoOfLoans}}</td>
+                            <td>{{member.TotalDisburseAmount}}</td>
+                            <td>{{member.TotalOutstandingAmount}}</td>
+                            <td>{{member.TotalOverdueAmount}}</td>
+                            <td>{{member.SavingsBalance}}</td>
+                            <td>{{member.CbsBalance}}</td>
+                            <td>{{member.LtsBalance}}</td>
+                            <td>{{member.NoofLts}}</td>
+                            <td>{{member.TransferredFromBranch}}</td>
+                            <td>
+                                <select class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-lg-2 col-md-2 col-sm-12 font-asa-9"
+                                        style="width: 98% !important; padding: 0 !important; padding-left: 2px !important"
+                                        id="mpOfficer" ng-model="member.ProgramOfficerId"
+                                        name="ARstatus"
+                                        ng-change="changeGroup($index)"
+                                        ng-options="officer.Value as officer.Name for officer in ProgramOfficerList">
+                                    <option value="">Select</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select class="form-control pull-left form-control-asa form-control-asa-select-box-padding  col-lg-2 col-md-2 col-sm-12 font-asa-9"
+                                        id="mgrouop" ng-model="member.TransferredToGroupId"
+                                        name="ARstatus"
+                                        style="width: 100%; align-self: center; padding: 0 !important; padding-left: 2px !important"
+                                        ng-options="group.Id as group.Name for group in member.GroupListFiltered">
+                                    <option value="">--</option>
+                                </select>
+                            </td>
+
+                            <td>
+                                <textarea title="Notes"
+                                          class="font-asa-10"
+                                          ng-model="member.ReceivingOrRejectNote"
+                                          placeholder="Notes"></textarea>
+                            </td>
+
+                            <td>
+
+                                <i ng-click="detailsModalMemberButton($index)" data-toggle="modal" data-target="#receiveModalHorizontal" class="fa fa-sign-in asa-icon-VIEW" style="font-size: 18px"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Total</td>
+                            <td>{{TotalNoOfLoans}}</td>
+                            <td>{{TotalDisburseAmount}}</td>
+                            <td>{{TotalOutstandingAmount}}</td>
+                            <td>{{TotalOverdueAmount}}</td>
+                            <td>{{TotalSavingsBalance}}</td>
+                            <td>{{TotalCbsBalance}}</td>
+                            <td>{{TotalLtsBalance}}</td>
+                            <td>{{TotalNoofLts}}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <button style="margin-top: 10px;" class="btn btn-primary pull-right" ng-click="submitMembers()" ng-disabled="booler">Submit All</button>
+            </div>
+
+            <!--Member recive main panel end -->
+        </div>
+
+        <!-- member details modal -->
+        <div class="modal fade" id="receiveModalHorizontal" role="dialog"
+             aria-labelledby="receiveMember" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close"
+                                data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <h4 class="modal-title" id="receiveModalLabel">
+                            Member Details
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group col-sm-12 col-md-12  alert-warning" style="margin-bottom: 10px; padding-bottom: 10px">
+                            <h5> <b> {{selectedMember.MemberName}} </b></h5>
+                            <div class="row panel  panel-default panel-primary" style="margin-bottom: 1px">
+
+                                <fieldset>
+                                    <div class="panel-heading panel-title">
+                                        Loan Accounts
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12  beta">
+                                        <table style="width: 100%; margin-bottom: 5px"
+                                               class="pro-table table-striped table-bordered table-hover table-asa">
+                                            <thead>
+                                                <tr>
+                                                    <th>Program Name</th>
+                                                    <th>Duration</th>
+                                                    <th>Installment Type</th>
+                                                    <th>Disburse Date</th>
+                                                    <th>Disbursed Amount</th>
+                                                    <th>Outstanding Amount</th>
+                                                    <th>Overdue Amount</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="account in LAccounts">
+
+                                                    <td>{{account.Programname}}</td>
+                                                    <td>{{account.Duration}}</td>
+                                                    <td>{{account.InstallmentType}}</td>
+                                                    <td>{{account.DisburseDate}}</td>
+                                                    <td>{{account.DisburseAmount}}</td>
+                                                    <td>{{account.OutstandingAmount}}</td>
+                                                    <td>{{account.OverDueAmount}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="row panel panel-default panel-primary" style="margin-bottom: 1px">
+                                <fieldset>
+                                    <div class="panel-heading panel-title">
+                                        Savings/Security Accounts
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 font-asa-12">
+                                        <table style="width: 100%; margin-bottom: 5px"
+                                               class="pro-table table-striped table-bordered table-hover table-asa beta">
+                                            <thead>
+                                                <tr>
+                                                    <th>Program Name</th>
+                                                    <th>Opening Date</th>
+                                                    <th>Duration</th>
+                                                    <th>Deposit Amount</th>
+                                                    <th>Balance Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="account in SAccounts">
+                                                    <td>{{account.Programname}}</td>
+                                                    <td>{{account.SavingsOpeningDate}}</td>
+                                                    <td ng-if="account.Duration !== 0">{{account.Duration}}</td>
+                                                    <td ng-if="account.Duration === 0"> --- </td>
+                                                    <td>{{account.SavingsDepositAmount}}</td>
+                                                    <td>{{account.SavingsBalance}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div ng-if="validationBool" style="padding-bottom: 20px">
+                                <label class="alert-danger fa-align-center pull-left"> {{validationText}} </label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+
+                            <button ng-if="selectedMember.ProgramOfficerId != null && selectedMember.ProgramOfficerId > 0 && selectedMember.TransferredToGroupId != null && selectedMember.TransferredToGroupId > 0 && selectedMember.ReceivingOrRejectNote != null && selectedMember.ReceivingOrRejectNote !== ''" type="button" class="btn btn-primary" data-dismiss="modal" ng-click="acceptOrRejectMember(1)">
+                                Accept
+                            </button>
+                            <button ng-if="acceptButtonShow == true" type="button" class="btn btn-primary" data-dismiss="modal" ng-click="acceptOrRejectMember(0)">
+                                Reject
+                            </button>
+                            <button type="button" class="btn btn-default"
+                                    data-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Member modal end-->
+        <!--Group details Modal start-->
+        <div class="modal fade" id="groupReceiveModalHorizontal" role="dialog"
+             aria-labelledby="receiveMember" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close"
+                                data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <h4 class="modal-title">
+                            Group Details
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <!--Div start-->
+                        <div ng-repeat="member in selectedGroup.AmmsTransferReceiveMembers">
+                            <div class="form-group col-sm-12 col-md-12  alert-warning" style="margin-bottom: 10px; padding-bottom: 10px">
+                                <h5> <b> {{member.MemberName}} </b></h5>
+                                <div class="row panel  panel-default panel-primary" style="margin-bottom: 1px">
+
+                                    <fieldset>
+                                        <div class="panel-heading panel-title">
+                                            Loan Accounts
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12  beta">
+                                            <table style="width: 100%; margin-bottom: 5px"
+                                                   class="pro-table table-striped table-bordered table-hover table-asa">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Program Name</th>
+                                                        <th>Duration</th>
+                                                        <th>Installment Type</th>
+                                                        <th>Disburse Date</th>
+                                                        <th>Disbursed Amount</th>
+                                                        <th>Outstanding Amount</th>
+                                                        <th>Overdue Amount</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="account in member.LAccounts">
+                                                        <td>{{account.Programname}}</td>
+                                                        <td>{{account.Duration}}</td>
+                                                        <td>{{account.InstallmentType}}</td>
+                                                        <td>{{account.DisburseDate}}</td>
+                                                        <td>{{account.DisburseAmount}}</td>
+                                                        <td>{{account.OutstandingAmount}}</td>
+                                                        <td>{{account.OverDueAmount}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="row panel panel-default panel-primary" style="margin-bottom: 1px">
+                                    <fieldset>
+                                        <div class="panel-heading panel-title">
+                                            Savings/Security Accounts
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 font-asa-12">
+                                            <table style="width: 100%; margin-bottom: 5px"
+                                                   class="pro-table table-striped table-bordered table-hover table-asa beta">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Program Name</th>
+                                                        <th>Opening Date</th>
+                                                        <th>Duration</th>
+                                                        <th>Deposit Amount</th>
+                                                        <th>Balance Amount</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="account in member.SAccounts">
+                                                        <td>{{account.Programname}}</td>
+                                                        <td>{{account.SavingsOpeningDate}}</td>
+                                                        <td>{{account.Duration}}</td>
+                                                        <td>{{account.SavingsDepositAmount}}</td>
+                                                        <td>{{account.SavingsBalance}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div ng-if="validationBool" style="padding-bottom: 20px">
+                                    <label class="alert-danger fa-align-center pull-left"> {{validationText}} </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!--div end-->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="acceptRejectGroup(1)">
+                                Accept
+                            </button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="acceptRejectGroup(0)">
+                                Reject
+                            </button>
+                            <button type="button" class="btn btn-default"
+                                    data-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Group details end-->
+    </div>
+</div>

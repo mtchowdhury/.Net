@@ -1,0 +1,253 @@
+﻿@{
+    var reportsTos = ViewData["reportstoddl"] as Dictionary<string, string>;
+    var salesReferrals = ViewData["salesreferralddl"] as Dictionary<string, string>;
+    var programStatuses = ViewData["programstatusddl"] as Dictionary<string, string>;
+    var programSubStatuses = ViewData["programsubstatusddl"] as Dictionary<string, string>;
+    var insuranceTypes = ViewData["insurancetypeddl"] as Dictionary<string, string>;
+    var referralTypes = ViewData["referraltypeddl"] as Dictionary<string, string>;
+}
+
+<div id="filter-modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content details-filter-modal-dialog">
+            <div class="modal-header modal-custom-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h5 class="modal-title">Selection Filters</h5>
+            </div>
+            <div class="modal-body modal-body-height">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-inline">
+                            @*<div class="form-group details-filter-form-group">
+            <label class="details-filter-label" for="fs-aspnid">ASPN ID:</label>
+            <input id="fs-aspnid" type="text" value="@ViewData["aspndid"]" class="form-control" placeholder="" />
+        </div>*@
+                            <div class="form-group details-filter-form-group">
+                                <label class="details-filter-label" for="fs-state">State:</label>
+                                <select id="fs-state" class="form-control form-control-height" onchange="">
+                                    <option value="">Show All</option>
+                                    <option row="1" value=""></option>
+                                    <option row="3" value="AK">AK</option>
+                                    <option row="4" value="AL">AL</option>
+                                    <option row="5" value="AR">AR</option>
+                                    <option row="6" value="AZ">AZ</option>
+                                    <option row="7" value="CA">CA</option>
+                                    <option row="8" value="CO">CO</option>
+                                    <option row="9" value="CT">CT</option>
+                                    <option row="10" value="DC">DC</option>
+                                    <option row="11" value="DE">DE</option>
+                                    <option row="12" value="FL">FL</option>
+                                    <option row="13" value="GA">GA</option>
+                                    <option row="14" value="HI">HI</option>
+                                    <option row="15" value="IA">IA</option>
+                                    <option row="16" value="ID">ID</option>
+                                    <option row="17" value="IL">IL</option>
+                                    <option row="18" value="IN">IN</option>
+                                    <option row="19" value="KS">KS</option>
+                                    <option row="20" value="KY">KY</option>
+                                    <option row="21" value="LA">LA</option>
+                                    <option row="22" value="MA">MA</option>
+                                    <option row="23" value="MD">MD</option>
+                                    <option row="24" value="ME">ME</option>
+                                    <option row="25" value="MI">MI</option>
+                                    <option row="26" value="MN">MN</option>
+                                    <option row="27" value="MO">MO</option>
+                                    <option row="28" value="MS">MS</option>
+                                    <option row="29" value="MT">MT</option>
+                                    <option row="30" value="NC">NC</option>
+                                    <option row="31" value="NE">NE</option>
+                                    <option row="32" value="NH">NH</option>
+                                    <option row="33" value="NJ">NJ</option>
+                                    <option row="34" value="NM">NM</option>
+                                    <option row="35" value="NV">NV</option>
+                                    <option row="36" value="NY">NY</option>
+                                    <option row="37" value="OH">OH</option>
+                                    <option row="38" value="OK">OK</option>
+                                    <option row="39" value="OR">OR</option>
+                                    <option row="40" value="PA">PA</option>
+                                    <option row="41" value="PR">PR</option>
+                                    <option row="42" value="RI">RI</option>
+                                    <option row="43" value="SC">SC</option>
+                                    <option row="44" value="SD">SD</option>
+                                    <option row="45" value="TN">TN</option>
+                                    <option row="46" value="TX">TX</option>
+                                    <option row="47" value="UT">UT</option>
+                                    <option row="48" value="VA">VA</option>
+                                    <option row="49" value="VT">VT</option>
+                                    <option row="50" value="WA">WA</option>
+                                    <option row="51" value="WI">WI</option>
+                                    <option row="52" value="WV">WV</option>
+                                    <option row="53" value="WY">WY</option>
+                                </select>
+                            </div>
+                            <div class="form-group details-filter-form-group">
+                                <label class="details-filter-label" for="fs-status">Status:</label>
+                                <select id="fs-status" class="form-control form-control-height" onchange="">
+                                    <option value="">Show All</option>
+                                    @foreach (var item in programStatuses)
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group details-filter-form-group">
+                                <label class="details-filter-label" for="fs-substatus">Sub Status:</label>
+                                <select id="fs-substatus" class="form-control form-control-height" onchange="">
+                                    <option value="">Show All</option>
+                                    @foreach (var item in programSubStatuses)
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group details-filter-form-group">
+                                <label class="details-filter-label" for="fs-reportsto">Reports To:</label>
+                                <select id="fs-reportsto" class="form-control form-control-height" onchange="">
+                                    <option value="">Show All</option>
+                                    @foreach (var item in reportsTos)
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group details-filter-form-group">
+                                <label class="details-filter-label" for="fs-salesreferral">Sales Referral:</label>
+                                <select id="fs-salesreferral" class="form-control form-control-height" onchange="">
+                                    <option value="">Show All</option>
+                                    @foreach (var item in salesReferrals)
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group details-filter-form-group">
+                                <label class="details-filter-label" for="fs-plastname">Physician Last Name:</label>
+                                <select id="fs-plastname" class="form-control form-control-height" onchange="">
+                                    <option value="beginswith" selected="selected">Begins With</option>
+                                    <option value="contains">Contains</option>
+                                    <option value="endswith">Ends With</option>
+                                </select>
+                            </div>
+                            <div class="form-group details-filter-form-group">
+                                <label class="details-filter-label" for="fs-plastnamestr"></label>
+                                <input id="fs-plastnamestr" type="text" class="form-control" placeholder="" />
+                            </div>
+                            <div id="fs-ndc-div" class="form-group details-filter-form-group">
+                                <label class="details-filter-label" for="fs-ndc">NDC:</label>
+                                <input id="fs-ndc" type="text" class="form-control" placeholder="NDC" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-inline">
+                            <div class="form-group details-filter-form-group-date">
+                                <label class="details-filter-label" for="fs-from">From:</label>
+                                <div class="input-group date" data-provide="datepicker">
+                                    <input id="fs-from" type="text" class="form-control" value="@ViewData["fromdate"]">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group details-filter-form-group-date">
+                                <label class="details-filter-label" for="fs-to">To:</label>
+                                <div class="input-group date" data-provide="datepicker">
+                                    <input id="fs-to" type="text" class="form-control" value="@ViewData["todate"]">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group details-filter-form-group">
+                                <label class="details-filter-label" for="fs-copyfrom">Copay $ From (inclusive):</label>
+                                <input id="fs-copyfrom" type="text" class="form-control" placeholder=""/>
+                            </div>
+                            <div class="form-group details-filter-form-group">
+                                <label class="details-filter-label" for="fs-copyto">To:</label>
+                                <input id="fs-copyto" type="text" class="form-control" placeholder=""/>
+                            </div>
+                            <div id="fs-treatment-div" class="form-group details-filter-form-group">
+                                <label class="details-filter-label" for="fs-treatment">Treatment:</label>
+                                <select id="fs-treatment" class="form-control form-control-height" onchange="">
+                                    <option row="1" value="All">All</option>
+                                    <option row="2" value="Unknown">Unknown</option>
+                                    <option row="3" value="Pain">Pain</option>
+                                    <option row="4" value="Addiction">Addiction</option>
+                                </select>
+                            </div>
+                            <div id="fs-hubsubhub-div" class="form-group details-filter-form-group">
+                                <label class="details-filter-label" for="fs-hubsubhub">Hub/Subhub:</label>
+                                <select id="fs-hubsubhub" class="form-control form-control-height" onchange="">
+                                    <option row="1" value="All">All</option>
+                                    <option row="2" value="Hub">Hub</option>
+                                    <option row="3" value="SubHub">SubHub</option>
+                                </select>
+                            </div>
+                            <div id="fs-priorauth-div" class="form-group details-filter-form-group">
+                                <label class="details-filter-label" for="fs-priorauth">Prior Auth:</label>
+                                <select id="fs-priorauth" class="form-control form-control-height" onchange="">
+                                    <option value="">All</option>
+                                    <option row="1" value="1" title="Is Prior Authorization required?">Yes</option>
+                                    <option row="2" value="0" title="Is Prior Authorization required?">No</option>
+                                </select>
+                            </div>
+                            <div id="fs-tubesqty-div" class="form-group details-filter-form-group">
+                                <label class="details-filter-label" for="fs-tubesqty">Tube Quantity:</label>
+                                <input id="fs-tubesqty" type="text" class="form-control" placeholder=""/>
+                            </div>
+                            <div id="fs-insurance-type-div" class="form-group details-filter-form-group">
+                                <label class="details-filter-label" for="fs-insurance-type">Insurance Type:</label>
+                                <select id="fs-insurance-type" class="form-control form-control-height" onchange="">
+                                    <option value="">Show All</option>
+                                    @foreach (var item in insuranceTypes)
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+                                    }
+                                </select>
+                            </div>
+                            <div id="fs-registry-div" class="form-group details-filter-form-group">
+                                <label class="details-filter-label" for="fs-registry">Registry:</label>
+                                <select id="fs-registry" class="form-control form-control-height" onchange="">
+                                    <option value="">Show All</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+                            <div id="fs-on-label-div" class="form-group details-filter-form-group">
+                                <label class="details-filter-label" for="fs-on-label">On-Label:</label>
+                                <select id="fs-on-label" class="form-control form-control-height" onchange="">
+                                    <option value="">Show All</option>
+                                    <option value="Y">Y</option>
+                                    <option value="N">N</option>
+                                </select>
+                            </div>
+                            <div id="fs-source-div" class="form-group details-filter-form-group">
+                                <label class="details-filter-label" for="fs-source">Source:</label>
+                                <select id="fs-source" class="form-control form-control-height" onchange="">
+                                    <option value="">Show All</option>
+                                    <option value="WEB PORTAL">WEB PORTAL</option>
+                                    <option value="Fax">Fax</option>
+                                    <option value="ESCRIPT">ESCRIPT</option>
+                                </select>
+                            </div>
+                            <div class="form-group details-filter-form-group">
+                                <label class="details-filter-label" for="fs-referral-type">Referral Type:</label>
+                                <select id="fs-referral-type" class="form-control form-control-height" onchange="">
+                                    <option value="">Show All</option>
+                                    @foreach (var item in referralTypes)
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <button class="btn btn-primary pull-right" onclick="detailsWrapper.onFilterSelected()">Select Scripts</button>
+                        <button class="btn btn-primary pull-left" onclick="detailsWrapper.onTodayFilterSelected()">All Scripts Updated Today</button>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

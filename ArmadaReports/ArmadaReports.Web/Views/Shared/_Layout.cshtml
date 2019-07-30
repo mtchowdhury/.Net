@@ -1,0 +1,90 @@
+﻿@using System.Configuration
+@using ArmadaReports.Web.Helper
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manufacturer - Asembia Analytics</title>
+    @*@Styles.Render("~/Content/css")*@
+    <link href="~/Content/font-asembia/font-asembia.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/datepicker/bootstrap-datepicker.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/jqvmap.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/font-aewsome/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/datatables/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/multi-select/css/multi-select.css" rel="stylesheet" />
+    <link href="~/Content/jquery.auto-complete.css" rel="stylesheet" />
+    <link href="~/Content/select2.css" rel="stylesheet" />
+    <script src="~/Scripts/Charts/colors.js"></script>
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/datatables/dataTables.bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.multi-select.js"></script>
+    <script src="~/Scripts/jquery.auto-complete.js"></script>
+    <script src="~/Scripts/select2.js"></script>
+    @Scripts.Render("~/bundles/charts")
+    @Scripts.Render("~/bundles/utility")
+    @Scripts.Render("~/bundles/service")
+    <script src="~/Scripts/ReportRequestService/report-service.js"></script>
+    <script src="~/Scripts/admin/admin-wrapper.js"></script>
+    <script src="~/Scripts/Service/admin-service.js"></script>
+    <script src="~/Scripts/jquery.blockUI.js"></script>
+
+</head>
+<body>
+    <input id="hid-user-role" type="hidden" value="@ViewData["usertype"]" />
+    <input id="hid-user-id" type="hidden" value="@ViewData["userid"]" />
+    <input id="hid-user-rolename" type="hidden" value="@ViewData["userrolename"]" />
+    <input id="hid-cipher" type="hidden" value="@ViewData["cipher"]" />
+    <input id="hid-is-auviq" type="hidden" value="@ViewData["isauviq"]" />
+    <input id="hid-is-kaleo" type="hidden" value="@ViewData["iskaleo"]" />
+    <input id="hid-kaleo-user-type" type="hidden" value="@ViewData["kaleousertype"]" />
+    <input type="hidden" value="@System.Environment.MachineName" />
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a id="nav-home" class="navbar-brand"><img class="assembia-brand" src="~/Content/images/logo_header_x2.png" /></a>
+                <label class="portal-label">Member Portal</label>
+            </div>
+            <div class="navbar-collapse collapse">
+                @if (Request.IsAuthenticated)
+                {
+                    <ul id="parent-0" class="nav navbar-nav">
+                        @*<li><a href="#" onclick="service.goToHome()"><i class="fa fa-home" title="Portal Home"></i></a></li>*@
+
+                    </ul>
+                }
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+        <div class="row breadcrumb-nav">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <h5><a href="#" onclick="service.goToHome()">DASHBOARD</a> &gt; <a id="nav-portal" href="#">MANUFACTURER PORTALS</a></h5>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Asembia Analytics</p>
+        </footer>
+    </div>
+    @Html.Partial("_MailTemplateForm")
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        $(document).ready(function () {
+            service.gotoBreadcrumbHome('@UserInfoCookie.GetUserInfo().HasPrivilege');
+        });
+    </script>
+</body>
+</html>

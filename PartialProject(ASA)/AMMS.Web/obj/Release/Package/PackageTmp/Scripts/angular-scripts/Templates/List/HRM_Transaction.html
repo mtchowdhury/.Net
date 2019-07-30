@@ -1,0 +1,450 @@
+﻿<div class="container">
+    <div class="row" ng-controller="hrmTransactionListController">
+        <div class="col-md-12 panel panel-default panel-primary">
+            <div class="col-lg-12 panel-body">
+            <span ng-repeat="command in commandList">
+                    <span ng-if="command.IsGeneral === true">
+                        <button ng-click="(command.HasView)? openCommandTab(command, tab.id, 'hrmTransaction',{}) : ((command.DisplayName == 'Refresh')? Init() : exportData())"><span>{{command.CommandName}}</span></button>
+                    </span>
+                </span>
+                <br/>
+
+            <div style="font-size: 11px!important">
+                <div class="panel-heading" role="tab" id="headingGeneral">
+                    <h4 class="panel-title">
+                        Search Panel
+                    </h4>
+                </div>
+
+                <div >
+
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <label for="officeType" class="col-md-4 col-sm-12">
+                                    Office Type
+                                </label>
+                                <select tabindex="1" name="OfficeType"
+                                        ng-model="hrmTransactionModel.OfficeType"
+                                        class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                        ng-change="OnOfficeTypeChange(hrmTransactionModel.OfficeType)"
+                                        ng-disabled="user.Role === rootLevel.BM.toString() || user.Role === rootLevel.DM.toString()||user.Role === rootLevel.RM.toString()"
+                                        ng-options="officeType.Value as officeType.Name for officeType in filters.OfficeTypes"
+                                        id="officeType" placeholder="Ofiice Type">
+                                    <option value="">--Select Office Type --</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <label for="officeName" class="col-md-4 col-sm-12">
+                                    Office Name
+                                </label>
+                                <select tabindex="1" name="officeName"
+                                        ng-model="hrmTransactionModel.Office"
+                                        class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                        ng-change="OnOfficeChange(hrmTransactionModel.Office)"
+                                        ng-options="office.Value as office.Name for office in filters.Offices"
+                                        id="officeName" placeholder="Office Name">
+                                    <option value="">--Select Office Name--</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <label for="employee" class="col-md-4 col-sm-12">
+                                    Employee
+                                </label>
+                                <select tabindex="1" name="employee"
+                                        ng-model="hrmTransactionModel.EmployeeId"
+                                        class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                        ng-change="getAccountAndTransactionTypeByAccountType()"
+                                        ng-options="employee.Value as employee.Name for employee in filters.Employees"
+                                        id="employee" placeholder="Employee">
+                                    <option value="">--Select Employee--</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <label for="accountType" class="col-md-4 col-sm-12">
+                                    Account Type
+                                </label>
+                                <select tabindex="1" name="accountType"
+                                        ng-model="hrmTransactionModel.AccountTypeId"
+                                        ng-change="getAccountAndTransactionTypeByAccountType()"
+                                        class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                        ng-options="accountType.Value as accountType.Name for accountType in filters.AccountTypes "
+                                        id="accountType" placeholder="Account Type">
+                                    <option value="">--Select Account Type --</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <label for="accountId" class="col-md-4 col-sm-12">
+                                    Account
+                                </label>
+                                <select tabindex="1" name="account"
+                                        ng-model="hrmTransactionModel.AccountId"
+                                        class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                        ng-options="account.Value as account.Name for account in filters.Accounts |orderBy:'AnyAdditionalValue'"
+                                        id="accountId" placeholder="Account">
+                                    <option value="">--Select Account--</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <label for="transactionType" class="col-md-4 col-sm-12">
+                                    Transaction Type
+                                </label>
+                                <select tabindex="1" name="transactionType"
+                                        ng-model="hrmTransactionModel.TransactionTypeId"
+                                        class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                        ng-change="onTransactionTypeChange(hrmTransactionModel.TransactionTypeId)"
+                                        ng-options="transactionType.Value as transactionType.Name for transactionType in filters.TransactionTypes |orderBy:'AnyAdditionalValue'"
+                                        id="transactionType" placeholder="Transaction Types">
+                                    <option value="">--Select Transaction Type--</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-inline col-md-4 col-sm-12">
+                        <label for="enlistmentDatef" class="col-md-4 col-sm-12">
+                            Transaction Date From
+                        </label>
+
+                        <div class="dropdown input-group date two-third-width-asa">
+                            <p class="input-group">
+                                <input readonly="readonly" class="form-control-asa full-width-asa" type="text" uib-datepicker-popup="{{format}}" ng-required="true" required
+                                       ng-model="hrmTransactionModel.enlistDayFrom" is-open="popupEnlistDayFrom.opened" datepicker-options="dateOptionsEnlistDayFrom" close-text="Close"
+                                       alt-input-formats="altInputFormats"
+                                       id="enlistmentDatef" name="enlistmentDatef" ng-change="entryDateFromChange();"/>
+                                <span class="input-group-addon input-group-addon-asa">
+                                    <button type="button" ng-click="openEnlistDayFromPopup();"><i class="fa fa-calendar"></i></button>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="form-inline col-md-4 col-sm-12">
+                        <label for="enlistmentDatet" class="col-md-4 col-sm-12">
+                            Transaction Date To
+                        </label>
+
+                        <div class="dropdown input-group date two-third-width-asa">
+                            <p class="input-group">
+                                <input readonly="readonly" class="form-control-asa full-width-asa" type="text" uib-datepicker-popup="{{format}}" ng-required="true" required
+                                       ng-model="hrmTransactionModel.enlistDayTo" is-open="popupEnlistDayTo.opened" datepicker-options="dateOptionsEnlistDayTo" close-text="Close"
+                                       alt-input-formats="altInputFormats"
+                                       id="enlistmentDatet" name="enlistmentDatet" ng-change="entryDateToChange();"/>
+                                <span class="input-group-addon input-group-addon-asa">
+                                    <button type="button" ng-click="openEnlistDayToPopup();"><i class="fa fa-calendar"></i></button>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <!--<div class="col-lg-4 col-md-4 col-sm-6">
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <label for="fromDate" class="col-md-4 col-sm-12">
+                                    From Date
+                                </label>
+                                <select tabindex="1" name="fromDate"
+                                        ng-model="hrmTransactionModel.SalaryYear"
+                                        class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                        ng-options="year.Value as year.Name for year in filters.Years"
+                                        id="fromDate" placeholder="From Date">
+                                    <option value="">--Select From Date--</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <label for="month" class="col-md-4 col-sm-12">
+                                    To Date
+                                </label>
+                                <select tabindex="1" name="month"
+                                        ng-model="hrmTransactionModel.SalaryMonth"
+                                        class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                        ng-options="month.Value as month.Name for month in filters.Months"
+                                        id="month" placeholder="Months">
+                                    <option value="">--Select To Date--</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>-->
+
+
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="form-group">
+                        <div class="form-inline">
+
+                            <button class="btn btn-asa pull-left" ng-click="searchTransaction()">Search</button> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+                        <!--<form>
+                        <div ng-show="showSearch" style="margin-top:10px;">
+                            <div class="col-lg-12 col-md-12 col-sm-12" ng-repeat="i in getNumber(number) track by $index">
+                                <div class="col-lg-3 col-md-3 col-sm-12">
+                                    <div class="form-inline">
+                                        <select class="form-control-asa-search col-md-8 col-sm-12"
+                                                id="filterFirstColumnName"
+                                                ng-model="searchArr[$index].filterColumnName"
+                                                name="{{'filterFirstColumnName' + $index}}">
+                                            <option value="" disabled selected>Select Column</option>
+                                            <option value="AppointmentLetterDate">
+                                                Appointment Letter date
+                                            </option>
+                                            <option value="AppointmentLetterNo">
+                                                Appointment Letter No
+                                            </option>
+                                            <option value="NameInBangla">
+                                                Bangla Name
+                                            </option>
+                                            <option value="Branch">
+                                                Branch
+                                            </option>
+                                            <option value="Code">
+                                                Code
+                                            </option>
+                                            <option value="DateOfBirth">
+                                                Date Of Birth
+                                            </option>
+                                            <option value="Department">
+                                                Department
+                                            </option>
+                                            <option value="Designation">
+                                                Designation
+                                            </option>
+                                            <option value="EmploymentType">
+                                                Employment Type
+                                            </option>
+                                            <option value="FatherName">
+                                                Father's Name
+                                            </option>
+                                            <option value="Grade">
+                                                Grade
+                                            </option>
+                                            <option value="MaritalStatus">
+                                                Marital Status
+                                            </option>
+                                            <option value="MotherName">
+                                                Mother's Name
+                                            </option>
+                                            <option value="MobilePhoneNo">
+                                                Mobile Phone
+                                            </option>
+                                            <option selected="selected" value="Name">
+                                                Name
+                                            </option>
+                                            <option value="Religion">
+                                                Religion
+                                            </option>
+                                            <option value="Sex">
+                                                Sex
+                                            </option>
+                                            <option value="employeeStatus">
+                                                Status
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-12">
+                                    <div class="form-inline">
+                                        <select class="form-control-asa-search col-md-8 col-sm-12"
+                                                id="firstComparison"
+                                                ng-model="searchArr[$index].comparison"
+                                                name="{{'Comparison' + $index}}">
+                                            <option value="" disabled selected>Select Comparison</option>
+                                            <option selected="selected" value="contains">
+                                                Contains
+                                            </option>
+                                            <option value="notContains">
+                                                Not Contains
+                                            </option>
+                                            <option value="equals">
+                                                Equals
+                                            </option>
+                                            <option value="notEquals">
+                                                Not Equals
+                                            </option>
+                                            <option value="greaterThan">
+                                                Greater Than
+                                            </option>
+                                            <option value="lessThan">
+                                                Less Than
+                                            </option>
+                                            <option value="startsWith">
+                                                Starts With
+                                            </option>
+                                            <option value="endsWith">
+                                                Ends With
+                                            </option>
+                                            <option value="isNull">
+                                                Is Null
+                                            </option>
+                                            <option value="isNotNull">
+                                                Is Not Null
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-12">
+                                    <input type="text"
+                                           name="{{'SearchValue' + $index}}"
+                                           ng-model="searchArr[$index].searchValue"
+                                           class="width-asa col-md-8 col-sm-12"
+                                           id="firstSearchValue">
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-12">
+                                    <label class="radio-inline">
+                                        <input type="radio"
+                                               ng-model="searchArr[$index].radioOption"
+                                               name="{{'opradio' + $index}}"
+                                               value="and">
+                                        and
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio"
+                                               ng-model="searchArr[$index].radioOption"
+                                               name="{{'opradio' + $index}}"
+                                               value="or">
+                                        or
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button class="btn btn-asa-default btn-top-margin" ng-click="reloadPage()" style="float: right">
+                                    Refresh
+                                </button>
+                                <button class="btn btn-asa btn-top-margin" ng-click="searchEmployee()" style="float: right">
+                                    Submit
+                                </button>
+                                <button class="btn btn-asa btn-top-margin" ng-click="showSearch=false">
+                                    Simple Search
+                                </button>
+                            </div>
+                        </div>
+                        <div ng-hide="showSearch" style="margin-top: 10px;">
+                            <button class="btn btn-asa" ng-click="showSearch=true">Advanced Search</button>
+                        </div>
+                    </form>-->
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 panel-body font-asa-12 ">
+                        <table style="width: 100%" datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs"
+                               class="table table-striped table-bordered table-hover table-asa emp-list-font">
+                            <thead>
+                                <tr>
+                                    <th ng-if="hasNonGeneralCommands">Actions</th>
+                                    <th>Name</th>
+                                    <th>AccountType</th>
+                                    <th>AccountNumber</th>
+                                    <th>Transaction Type</th>
+                                    <th>Debit</th>
+                                    <th>Credit</th>
+
+                                    <th>Process</th>
+                                    <th>Date</th>
+                                    <th>Br. Working Date</th>
+
+                                    <th>Salary Year</th>
+                                    <th>Salary Month</th>
+                                    <th>Cheque No</th>
+
+                                    <th>Is Reversed</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="hrmTransaction in hrmTransactionList">
+                                    <!--<td ng-if="hasNonGeneralCommands && hrmTransaction.employeeStatus != -2">
+                                        <span ng-repeat="command in commandList">
+                                            <span ng-if="command.IsGeneral !== true" ng-click="(command.HasView) ? openCommandTab(command, tab.id, 'hrmTransaction',{'hramTransactionEdit':hrmTransaction}): handleNonGeneralActions(command.CommandName, hrmTransaction)">
+                                                <i class="{{command.IconClass}} asa-icon-{{command.CommandName}}" title="{{command.ToolTip}}"></i>
+                                            </span>
+                                        </span>
+                                    </td>-->
+
+                                    <td ng-if="hasNonGeneralCommands ">
+                                        <span ng-repeat="command in customCommandList">
+                                            <span ng-if="command.IsGeneral !== true" ng-click="(command.HasView) ? openCommandTab(command, tab.id, 'hrmTransaction',{'hramTransactionEdit':hrmTransaction}): handleNonGeneralActions(command.CommandName, hrmTransaction)">
+                                                <i class="{{command.IconClass}} asa-icon-{{command.CommandName}}" title="{{command.ToolTip}}"></i>
+                                            </span>
+                                        </span>
+                                    </td>
+                                    <td>{{hrmTransaction.EmployeeName}}</td>
+                                    <td>{{hrmTransaction.AccountType}}</td>
+                                    <td>{{hrmTransaction.AccountNumber}}</td>
+                                    <td>{{hrmTransaction.TransactionType}}</td>
+                                    <td>{{hrmTransaction.Debit}}</td>
+                                    <td>{{hrmTransaction.Credit}}</td>
+
+                                    <td>{{hrmTransaction.Process}}</td>
+                                    <td>{{hrmTransaction.Date}}</td>
+                                    <td>{{hrmTransaction.WorkingDate}}</td>
+                                    <td>{{hrmTransaction.SalaryYear}}</td>
+                                    <td>{{hrmTransaction.SalaryMonth}}</td>
+                                    <td>{{hrmTransaction.ChequeNo}}</td>
+
+                                    <td class="danger" ng-if="hrmTransaction.IsReversed ">
+                                        Yes
+                                    </td>
+
+                                    <td class="success" ng-if="!hrmTransaction.IsReversed ">
+                                        No
+                                    </td>
+
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+
+                <!--<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="deleteEmployee()"></button>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+            </div>
+</div>
+
+

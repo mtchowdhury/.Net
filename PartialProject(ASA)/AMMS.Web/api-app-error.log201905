@@ -1,0 +1,27 @@
+2019-05-15 11:28:13,057 [38] ERROR AMMS.Logger.Services.LoggerService - The view 'Index' or its master was not found or no view engine supports the searched locations. The following locations were searched:
+~/Views/Branch/Index.aspx
+~/Views/Branch/Index.ascx
+~/Views/Shared/Index.aspx
+~/Views/Shared/Index.ascx
+~/Views/Branch/Index.cshtml
+~/Views/Branch/Index.vbhtml
+~/Views/Shared/Index.cshtml
+~/Views/Shared/Index.vbhtml
+2019-05-15 11:45:37,649 [22] ERROR AMMS.Logger.Services.LoggerService - The view 'Index' or its master was not found or no view engine supports the searched locations. The following locations were searched:
+~/Views/Branch/Index.aspx
+~/Views/Branch/Index.ascx
+~/Views/Shared/Index.aspx
+~/Views/Shared/Index.ascx
+~/Views/Branch/Index.cshtml
+~/Views/Branch/Index.vbhtml
+~/Views/Shared/Index.cshtml
+~/Views/Shared/Index.vbhtml
+2019-05-15 11:45:53,589 [24] ERROR AMMS.Logger.Services.LoggerService - The view 'Index' or its master was not found or no view engine supports the searched locations. The following locations were searched:
+~/Views/Branch/Index.aspx
+~/Views/Branch/Index.ascx
+~/Views/Shared/Index.aspx
+~/Views/Shared/Index.ascx
+~/Views/Branch/Index.cshtml
+~/Views/Branch/Index.vbhtml
+~/Views/Shared/Index.cshtml
+~/Views/Shared/Index.vbhtml

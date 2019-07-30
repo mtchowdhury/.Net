@@ -1,0 +1,132 @@
+﻿<!--Middle left chart modal-->
+<div id="ml-modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog wide-modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-custom-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h5 class="modal-title">Large View</h5>
+            </div>
+            <div class="modal-body modal-body-height">
+                <div class="form-inline">
+                    <div class="form-group" style="display: none;">
+                        <label for="treatment-ml-details">Treatment:</label>
+                        <select id="treatment-ml-details" class="form-control form-control-height" onchange="service.getDetailsReferralSummaryByWeek() ">
+                            <option value="All">All</option>
+                            <option value="Unknown">Unknown</option>
+                        </select>
+                    </div>
+                    <img id="loading-ml-d" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 15px; left: 10px;" />
+                </div>
+                <div class="details-table-cotainer table-cotainer-margin">
+                    <label id="ccc-d" style="margin-left: 10px;"></label>
+                    <label id="pb-d" style="margin-left: 10px;"></label>
+                    <div class="form-inline" style="margin-left:-75px;margin-bottom:10px;">
+                        <label class="details-filter-label" for="year">Insurance Type :</label>
+                        <select id="select-filter-insurance-type-dv" class="form-control form-control-height" onchange="service.getDetailsReferralSummaryByWeek();">
+                        </select>
+                    </div>
+                    <table id="m-m-d-table" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <td style="width: 145px;">Program Status</td>
+                                <td>Total HUB Referrals</td>
+                                <td>% Total</td>
+                                <td>This Week</td>
+                                <td>Last Week</td>
+                                <td>Two Weeks Ago</td>
+                                <td>Three Weeks Ago</td>
+                                <td>Four or More Weeks Ago</td>
+                                <td>QTD</td>
+                                <td>YTD</td>
+                                <td>This Week %</td>
+                                <td>Last Week %</td>
+                                <td>Two Weeks Ago %</td>
+                                <td>Three Weeks Ago %</td>
+                                <td>Four or More Weeks Ago %</td>
+                                <td>QTD %</td>
+                                <td>YTD %</td>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>                    
+                </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<!--Middle left chart modal-->
+<div id="mr-modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog wide-modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-custom-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h5 class="modal-title">Large View</h5>
+            </div>
+            <div class="modal-body modal-body-height">
+                <div class="form-inline">
+                    <div class="form-group" style="display: none;">
+                        <label for="treatment-mr-details">Treatment:</label>
+                        <select id="treatment-mr-details" class="form-control form-control-height" onchange="service.getDetailsPorgramMaps() ">
+                            <option value="All">All</option>
+                            <option value="Unknown">Unknown</option>
+                        </select>
+                    </div>
+                    <img id="loading-mr-d" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 15px; left: 10px;" />
+                </div>
+                <div style="width: 100%">
+                    <div id="usmap-details" class="details-map-container"></div>
+                    <div class="map-legend-div">
+                        <table>
+                            <tr id="mr-d-tr-limit-1"><td>
+                                <div class="box-div bg1-5"></div></td><td id="mr-d-limit-1"></td></tr>
+                            <tr id="mr-d-tr-limit-2"><td>
+                                <div class="box-div bg6-10"></div></td><td id="mr-d-limit-2"></td></tr>
+                            <tr id="mr-d-tr-limit-3"><td>
+                                <div class="box-div bg11-15"></div></td><td id="mr-d-limit-3"></td></tr>
+                            <tr id="mr-d-tr-limit-4"><td>
+                                <div class="box-div bg16-20"></div></td><td id="mr-d-limit-4"></td></tr>
+                            <tr id="mr-d-tr-limit-5"><td>
+                                <div class="box-div bg21-25"></div></td><td id="mr-d-limit-5"></td></tr>
+                            <tr id="mr-d-tr-limit-6"><td>
+                                <div class="box-div bg26-above"></div></td><td id="mr-d-limit-6"></td></tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="mr-map-details-title" class="map-title"></div>
+                <div class="btn-group-container-d">
+                    <div id="bg-mr-d" class="btn-group dropup" role="group" aria-label="">
+                        <button type="button" data-date="today" class="btn btn-primary custom-btn-group btn-selected" onclick="utility.dateBtnClick('bg-mr-d', this, service.getDetailsPorgramMaps)">Today</button>
+                        <button type="button" data-date="yesterday" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-mr-d', this, service.getDetailsPorgramMaps)">Yesterday</button>
+                        <button type="button" data-date="thisweek" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-mr-d', this, service.getDetailsPorgramMaps)">This Week</button>
+                        <button type="button" data-date="lastweek" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-mr-d', this, service.getDetailsPorgramMaps)">Last Week</button>
+                        <button type="button" data-date="currentmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-mr-d', this, service.getDetailsPorgramMaps)">Current Month</button>
+                        <button type="button" data-date="lastmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-mr-d', this, service.getDetailsPorgramMaps) ">Last Month</button>
+                        <button type="button" data-date="qtd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-mr-d', this, service.getDetailsPorgramMaps)">Calendar QTD</button>
+                        <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-mr-d', this, service.getDetailsPorgramMaps)">Calendar YTD</button>
+
+                        <button style="border-radius: 0px;" id="btn-qtd-mr-d" type="button" data-date="qtd" class="btn btn-primary dropdown-toggle custom-btn-group not-for-cipher" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                            QTD<span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu qtd-dropdown">
+                            <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-mr-d', 'btn-qtd-mr-d', 'qtd5', service.getDetailsPorgramMaps, this)">QTR5</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-mr-d', 'btn-qtd-mr-d', 'qtd4', service.getDetailsPorgramMaps, this)">QTR4</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-mr-d', 'btn-qtd-mr-d', 'qtd3', service.getDetailsPorgramMaps, this)">QTR3</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-mr-d', 'btn-qtd-mr-d', 'qtd2', service.getDetailsPorgramMaps, this)">QTR2</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-mr-d', 'btn-qtd-mr-d', 'qtd1', service.getDetailsPorgramMaps, this)">QTR1</a></li>
+                        </ul>
+
+                        <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-mr-d', this, service.getDetailsPorgramMaps)">YTD</button>
+                        @*<button type="button" data-date="allreferrals" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-mr-d', this, service.getDetailsPorgramMaps)">24 Months</button>*@
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

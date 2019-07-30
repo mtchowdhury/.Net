@@ -1,0 +1,1548 @@
+﻿<div id="widget-panel-6" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="bl-title" class="panel-title">Intake Workflow</h4>
+            @*<img src="~/Content/images/expand-icon.png" class="details-icon"></i>*@
+        </div>
+        <div class="panel-body panel-body-height">
+            <img id="loading-bl" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 10px;" />
+            <table id="bl-patient-workflow" class="table table-bordered"></table>
+
+            <table id="bl-physican-workflow" class="table table-bordered"></table>
+        </div>
+    </div>
+</div>
+
+<div id="widget-panel-7" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="bm-title" class="panel-title">Pharmacy Referrals</h4>
+            <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showBm()">
+        </div>
+        <div class="panel-body panel-body-height">
+            <div class="form-inline">
+                <div class="form-group" style="display: none;">
+                    <label for="treatment-bm">Treatment:</label>
+                    <select style="width: 180px;" id="treatment-bm" class="form-control form-control-height" onchange="service.getPharmacyReferrals() ">
+                        <option value="All">All</option>
+                        <option value="Unknown">Unknown</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="pharmacy-bm">Pharmacy:</label>
+                    <select id="pharmacy-bm" class="form-control form-control-height" onchange="service.getPharmacyReferrals()">
+                    </select>
+                </div>
+                <div style="display: none;" class="form-group">
+                    <input type="radio" name="p-referrals" value="Direct" checked="checked" onclick="service.getPharmacyReferrals()" /> Direct
+                </div>
+                <img id="loading-bm" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 10px;" />
+            </div>
+
+            <div style="display:none;" id="bottom-middle-no-data" class="no-data-div">
+                <span>No data available for this time period</span>
+            </div>
+            <div class="irbh-chart-container" id="bottom-middle-pie-chart"></div>
+            <div id="bm-chart-title" class="chart-title"></div>
+
+            <div class="btn-group-container">
+                <div id="bg-bm" class="btn-group dropup" role="group" aria-label="">
+                    <button type="button" data-date="today" class="btn btn-primary custom-btn-group btn-selected" onclick="utility.dateBtnClick('bg-bm', this, service.getPharmacyReferrals)">Today</button>
+                    <button type="button" data-date="yesterday" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-bm', this, service.getPharmacyReferrals)">Yesterday</button>
+                    <button type="button" data-date="thisweek" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-bm', this, service.getPharmacyReferrals)">This Week</button>
+                    <button type="button" data-date="lastweek" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-bm', this, service.getPharmacyReferrals)">Last Week</button>
+                    <button type="button" data-date="currentmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-bm', this, service.getPharmacyReferrals)">Current Month</button>
+                    <button type="button" data-date="lastmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-bm', this, service.getPharmacyReferrals) ">Last Month</button>
+                    <button type="button" data-date="qtd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-bm', this, service.getPharmacyReferrals)">Calendar QTD</button>
+                    <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-bm', this, service.getPharmacyReferrals)">Calendar YTD</button>
+
+                    <button style="border-radius: 0px;" id="btn-qtd-bm" type="button" data-date="qtd" class="btn btn-primary dropdown-toggle custom-btn-group not-for-cipher" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                        QTD<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu qtd-dropdown">
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-bm', 'btn-qtd-bm', 'qtd5', service.getPharmacyReferrals, this)">QTR5</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-bm', 'btn-qtd-bm', 'qtd4', service.getPharmacyReferrals, this)">QTR4</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-bm', 'btn-qtd-bm', 'qtd3', service.getPharmacyReferrals, this)">QTR3</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-bm', 'btn-qtd-bm', 'qtd2', service.getPharmacyReferrals, this)">QTR2</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-bm', 'btn-qtd-bm', 'qtd1', service.getPharmacyReferrals, this)">QTR1</a></li>
+                    </ul>
+
+                    <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-bm', this, service.getPharmacyReferrals)">YTD</button>
+                    @*<button type="button" data-date="allreferrals" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-bm', this, service.getPharmacyReferrals)">24 Months</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="widget-panel-8" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="br-title" class="panel-title">Tubes Filled (Shipped)</h4>
+            <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showBr()">
+        </div>
+        <div class="panel-body panel-body-height">
+            <div class="form-inline">
+                <div class="form-group" style="display: none;">
+                    <label for="treatment-br">Treatment:</label>
+                    <select id="treatment-br" class="form-control form-control-height">
+                        <option value="All">All</option>
+                        <option value="Unknown">Unknown</option>
+                    </select>
+                </div>
+                <img id="loading-br" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 10px;" />
+            </div>
+
+            <div style="display:none;" id="bottom-right-no-data" class="no-data-div">
+                <span>No data available for this time period</span>
+            </div>
+            <div class="pie-chart-container" id="bottom-right-doughnut-chart"></div>
+            <div id="br-chart-title" class="chart-title"></div>
+
+            <div class="btn-group-container">
+                <div id="bg-br" class="btn-group dropup" role="group" aria-label="">
+                    <button type="button" data-date="today" class="btn btn-primary custom-btn-group btn-selected" onclick="utility.dateBtnClick('bg-br', this, service.getTubesFilled)">Today</button>
+                    <button type="button" data-date="yesterday" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-br', this, service.getTubesFilled)">Yesterday</button>
+                    <button type="button" data-date="thisweek" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-br', this, service.getTubesFilled)">This Week</button>
+                    <button type="button" data-date="lastweek" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-br', this, service.getTubesFilled)">Last Week</button>
+                    <button type="button" data-date="currentmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-br', this, service.getTubesFilled)">Current Month</button>
+                    <button type="button" data-date="lastmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-br', this, service.getTubesFilled) ">Last Month</button>
+                    <button type="button" data-date="qtd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-br', this, service.getTubesFilled)">Calendar QTD</button>
+                    <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-br', this, service.getTubesFilled)">Calendar YTD</button>
+
+                    <button style="border-radius: 0px;" id="btn-qtd-br" type="button" data-date="qtd" class="btn btn-primary dropdown-toggle custom-btn-group not-for-cipher" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                        QTD<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu qtd-dropdown">
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-br', 'btn-qtd-br', 'qtd5', service.getTubesFilled, this)">QTR5</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-br', 'btn-qtd-br', 'qtd4', service.getTubesFilled, this)">QTR4</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-br', 'btn-qtd-br', 'qtd3', service.getTubesFilled, this)">QTR3</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-br', 'btn-qtd-br', 'qtd2', service.getTubesFilled, this)">QTR2</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-br', 'btn-qtd-br', 'qtd1', service.getTubesFilled, this)">QTR1</a></li>
+                    </ul>
+
+                    <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-br', this, service.getTubesFilled)">YTD</button>
+                    @*<button type="button" data-date="allreferrals" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-br', this, service.getTubesFilled)">24 Months</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="widget-panel-9" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="br6-title" class="panel-title">Program Patch Replacement Orders Analysis</h4>
+            <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showBr6()">
+        </div>
+        <div class="panel-body panel-body-height">
+            <div class="form-inline">
+                <img id="loading-br6" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 10px;" />
+            </div>
+
+            <div style="display:none;" id="bottom-right6-no-data" class="no-data-div">
+                <span>No data available for this time period</span>
+            </div>
+            <div class="pie-chart-container" id="bottom-right6-column-chart"></div>
+        </div>
+    </div>
+</div>
+
+<div id="widget-panel-10" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="br1-title" class="panel-title">Program Unique Patients</h4>
+            <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showBr1()">
+        </div>
+        <div class="panel-body panel-body-height">
+            <div class="form-inline">
+                <img id="loading-br1" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 10px;" />
+            </div>
+
+            <div style="display:none;" id="bottom-right1-no-data" class="no-data-div">
+                <span>No data available for this time period</span>
+            </div>
+            <div class="pie-chart-container" id="bottom-right1-column-chart"></div>
+        </div>
+    </div>
+</div>
+
+<div id="widget-panel-11" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="br2-title" class="panel-title">Program Order Counts (Shipped)</h4>
+            <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showBr2()">
+        </div>
+        <div class="panel-body panel-body-height">
+            <div class="form-inline">
+                <img id="loading-br2" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 10px;" />
+            </div>
+
+            <div style="display:none;" id="bottom-right2-no-data" class="no-data-div">
+                <span>No data available for this time period</span>
+            </div>
+            <div class="pie-chart-container" id="bottom-right2-column-chart"></div>
+        </div>
+    </div>
+</div>
+
+<div id="widget-panel-12" class="col-lg-8 col-md-12 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="br3-title" class="panel-title">Practitioner Rank and Address (Shipped)</h4>
+            <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showBr3()">
+        </div>
+        <div class="panel-body panel-body-height">
+            <div class="form-inline">
+                <img id="loading-br3" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 10px;" />
+            </div>
+            <div class="table-nonscroll-cotainer">
+                <table id="br3-table" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <td>Practitioner</td>
+                            <td>Product Description</td>
+                            <td>Product NDC</td>
+                            <td>Orders</td>
+                            <td>Patients</td>
+                            <td>Practioner DEA</td>
+                            <td>License #</td>
+                            <td>Address</td>
+                            <td>City</td>
+                            <td>State</td>
+                            <td>Zip</td>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div id="br3-table-title" class="chart-title"></div>
+
+            <div class="btn-group-container">
+                <div id="bg-br3" class="btn-group dropup" role="group" aria-label="">
+                    <button type="button" data-date="today" class="btn btn-primary custom-btn-group btn-selected" onclick="utility.dateBtnClick('bg-br3', this, service.getRankAndAddress)">Today</button>
+                    <button type="button" data-date="yesterday" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-br3', this, service.getRankAndAddress)">Yesterday</button>
+                    <button type="button" data-date="thisweek" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-br3', this, service.getRankAndAddress)">This Week</button>
+                    <button type="button" data-date="lastweek" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-br3', this, service.getRankAndAddress)">Last Week</button>
+                    <button type="button" data-date="currentmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-br3', this, service.getRankAndAddress)">Current Month</button>
+                    <button type="button" data-date="lastmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-br3', this, service.getRankAndAddress) ">Last Month</button>
+                    <button type="button" data-date="qtd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-br3', this, service.getRankAndAddress)">Calendar QTD</button>
+                    <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-br3', this, service.getRankAndAddress)">Calendar YTD</button>
+
+                    <button style="border-radius: 0px;" id="btn-qtd-br3" type="button" data-date="qtd" class="btn btn-primary dropdown-toggle custom-btn-group not-for-cipher" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                        QTD<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu qtd-dropdown">
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-br3', 'btn-qtd-br3', 'qtd5', service.getRankAndAddress, this)">QTR5</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-br3', 'btn-qtd-br3', 'qtd4', service.getRankAndAddress, this)">QTR4</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-br3', 'btn-qtd-br3', 'qtd3', service.getRankAndAddress, this)">QTR3</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-br3', 'btn-qtd-br3', 'qtd2', service.getRankAndAddress, this)">QTR2</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-br3', 'btn-qtd-br3', 'qtd1', service.getRankAndAddress, this)">QTR1</a></li>
+                    </ul>
+
+                    <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-br3', this, service.getRankAndAddress)">YTD</button>
+                    @*<button type="button" data-date="allreferrals" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-br3', this, service.getRankAndAddress)">24 Months</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="widget-panel-13" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="br4-title" class="panel-title">Orders by Status</h4>
+            <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showBr4()">
+        </div>
+        <div class="panel-body panel-body-height">
+            <div class="form-inline">
+                <img id="loading-br4" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 10px;" />
+            </div>
+
+            <div style="display:none;" id="bottom-middle4-no-data" class="no-data-div">
+                <span>No data available for this time period</span>
+            </div>
+            <div class="pie-chart-container" id="bottom-middle4-pie-chart"></div>
+            <div id="br4-chart-title" class="chart-title"></div>
+
+            <div class="btn-group-container">
+                <div id="bg-br4" class="btn-group dropup" role="group" aria-label="">
+                    <button type="button" data-date="today" class="btn btn-primary custom-btn-group btn-selected" onclick="utility.dateBtnClick('bg-br4', this, service.getPAPorgramStatus) ">Today</button>
+                    <button type="button" data-date="yesterday" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-br4', this, service.getPAPorgramStatus) ">Yesterday</button>
+                    <button type="button" data-date="thisweek" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-br4', this, service.getPAPorgramStatus) ">This Week</button>
+                    <button type="button" data-date="lastweek" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-br4', this, service.getPAPorgramStatus) ">Last Week</button>
+                    <button type="button" data-date="currentmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-br4', this, service.getPAPorgramStatus) ">Current Month</button>
+                    <button type="button" data-date="lastmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-br4', this, service.getPAPorgramStatus) ">Last Month</button>
+                    <button type="button" data-date="qtd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-br4', this, service.getPAPorgramStatus)">Calendar QTD</button>
+                    <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-br4', this, service.getPAPorgramStatus)">Calendar YTD</button>
+
+                    <button style="border-radius: 0px;" id="btn-qtd-br4" type="button" data-date="qtd" class="btn btn-primary dropdown-toggle custom-btn-group not-for-cipher" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                        QTD<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu qtd-dropdown">
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-br4', 'btn-qtd-br4', 'qtd5', service.getPAPorgramStatus, this)">QTR5</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-br4', 'btn-qtd-br4', 'qtd4', service.getPAPorgramStatus, this)">QTR4</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-br4', 'btn-qtd-br4', 'qtd3', service.getPAPorgramStatus, this)">QTR3</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-br4', 'btn-qtd-br4', 'qtd2', service.getPAPorgramStatus, this)">QTR2</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-br4', 'btn-qtd-br4', 'qtd1', service.getPAPorgramStatus, this)">QTR1</a></li>
+                    </ul>
+
+                    <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-br4', this, service.getPAPorgramStatus) ">YTD</button>
+                    @*<button type="button" data-date="allreferrals" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-br4', this, service.getPAPorgramStatus) ">24 Months</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="widget-panel-14" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="br5-title" class="panel-title">Orders by Physician State</h4>
+            <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showBr5()">
+        </div>
+        <div class="panel-body panel-body-height">
+            <div class="form-inline">
+                <img id="loading-br5" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 10px;" />
+            </div>
+            <div style="width: 100%">
+                <div id="usmapbr5" class="map-container"></div>
+                <div class="map-legend-div">
+                    <table>
+                        <tr id="br5-tr-limit-1">
+                            <td>
+                                <div class="box-div bg1-5"></div>
+                            </td>
+                            <td id="br5-limit-1"></td>
+                        </tr>
+                        <tr id="br5-tr-limit-2">
+                            <td>
+                                <div class="box-div bg6-10"></div>
+                            </td>
+                            <td id="br5-limit-2"></td>
+                        </tr>
+                        <tr id="br5-tr-limit-3">
+                            <td>
+                                <div class="box-div bg11-15"></div>
+                            </td>
+                            <td id="br5-limit-3"></td>
+                        </tr>
+                        <tr id="br5-tr-limit-4">
+                            <td>
+                                <div class="box-div bg16-20"></div>
+                            </td>
+                            <td id="br5-limit-4"></td>
+                        </tr>
+                        <tr id="br5-tr-limit-5">
+                            <td>
+                                <div class="box-div bg21-25"></div>
+                            </td>
+                            <td id="br5-limit-5"></td>
+                        </tr>
+                        <tr id="br5-tr-limit-6">
+                            <td>
+                                <div class="box-div bg26-above"></div>
+                            </td>
+                            <td id="br5-limit-6"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div id="br5-map-title" class="map-title"></div>
+            <div class="btn-group-container">
+                <div id="bg-br5" class="btn-group dropup" role="group" aria-label="">
+                    <button type="button" data-date="today" class="btn btn-primary custom-btn-group btn-selected" onclick="utility.dateBtnClick('bg-br5', this, service.getPAPorgramMaps) ">Today</button>
+                    <button type="button" data-date="yesterday" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-br5', this, service.getPAPorgramMaps) ">Yesterday</button>
+                    <button type="button" data-date="thisweek" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-br5', this, service.getPAPorgramMaps) ">This Week</button>
+                    <button type="button" data-date="lastweek" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-br5', this, service.getPAPorgramMaps) ">Last Week</button>
+                    <button type="button" data-date="currentmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-br5', this, service.getPAPorgramMaps) ">Current Month</button>
+                    <button type="button" data-date="lastmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-br5', this, service.getPAPorgramMaps) ">Last Month</button>
+                    <button type="button" data-date="qtd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-br5', this, service.getPAPorgramMaps)">Calendar QTD</button>
+                    <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-br5', this, service.getPAPorgramMaps)">Calendar YTD</button>
+
+                    <button style="border-radius: 0px;" id="btn-qtd-br5" type="button" data-date="qtd" class="btn btn-primary dropdown-toggle custom-btn-group not-for-cipher" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                        QTD<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu qtd-dropdown">
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-br5', 'btn-qtd-br5', 'qtd5', service.getPAPorgramMaps, this)">QTR5</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-br5', 'btn-qtd-br5', 'qtd4', service.getPAPorgramMaps, this)">QTR4</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-br5', 'btn-qtd-br5', 'qtd3', service.getPAPorgramMaps, this)">QTR3</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-br5', 'btn-qtd-br5', 'qtd2', service.getPAPorgramMaps, this)">QTR2</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-br5', 'btn-qtd-br5', 'qtd1', service.getPAPorgramMaps, this)">QTR1</a></li>
+                    </ul>
+
+                    <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-br5', this, service.getPAPorgramMaps) ">YTD</button>
+                    @*<button type="button" data-date="allreferrals" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-br5', this, service.getPAPorgramMaps) ">24 Months</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="widget-panel-15" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="cipher-title" class="panel-title">Prior Authorization</h4>
+            <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showCipherPriorAuth()">
+        </div>
+        <div class="panel-body panel-body-height">
+            <div class="form-inline">
+                <div class="form-group">
+                    <label for="cipher-chart-type">Chart Type:</label>
+                    <select id="cipher-chart-type" class="form-control form-control-height" onchange="service.getCipherPriorAuth()">
+                        <option value="INPROCESS">INPROCESS</option>
+                        <option value="COMPLETE">COMPLETE</option>
+                    </select>
+                </div>
+                <img id="loading-cipher" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 10px;" />
+            </div>
+
+            <div style="display: none;" id="cipher-no-data" class="no-data-div">
+                <span>No data available for this time period</span>
+            </div>
+            <div class="pie-chart-container" id="cipher-pie-chart"></div>
+            <div id="cipher-chart-title" style="display: none;" class="chart-title"></div>
+            <div id="cipher-date-container" class="btn-group-container">
+                <div id="bg-cipher" class="btn-group dropup" role="group" aria-label="">
+                    <button type="button" data-date="today" class="btn btn-primary custom-btn-group btn-selected" onclick="utility.dateBtnClick('bg-cipher', this, service.getCipherPriorAuth) ">Today</button>
+                    <button type="button" data-date="yesterday" class="btn btn-primary custom-btn-group btn-selected not-for-cipher" onclick="utility.dateBtnClick('bg-cipher', this, service.getCipherPriorAuth) ">Yesterday</button>
+                    <button type="button" data-date="thisweek" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-cipher', this, service.getCipherPriorAuth) ">This Week</button>
+                    <button type="button" data-date="lastweek" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-cipher', this, service.getCipherPriorAuth) ">Last Week</button>
+                    <button type="button" data-date="currentmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-cipher', this, service.getCipherPriorAuth) ">Current Month</button>
+                    <button type="button" data-date="lastmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-cipher', this, service.getCipherPriorAuth)">Last Month</button>
+                    <button type="button" data-date="qtd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-cipher', this, service.getCipherPriorAuth) ">Calendar QTD</button>
+                    <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-cipher', this, service.getCipherPriorAuth)">Calendar YTD</button>
+
+                    <button style="border-radius: 0px;" id="btn-qtd-cipher" type="button" data-date="qtd" class="btn btn-primary dropdown-toggle custom-btn-group not-for-cipher" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                        QTD<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu qtd-dropdown">
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-cipher', 'btn-qtd-cipher', 'qtd5', service.getCipherPriorAuth, this)">QTR5</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-cipher', 'btn-qtd-cipher', 'qtd4', service.getCipherPriorAuth, this)">QTR4</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-cipher', 'btn-qtd-cipher', 'qtd3', service.getCipherPriorAuth, this)">QTR3</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-cipher', 'btn-qtd-cipher', 'qtd2', service.getCipherPriorAuth, this)">QTR2</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-cipher', 'btn-qtd-cipher', 'qtd1', service.getCipherPriorAuth, this)">QTR1</a></li>
+                    </ul>
+
+                    <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-cipher', this, service.getCipherPriorAuth) ">YTD</button>
+                    @*<button type="button" data-date="allreferrals" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-cipher', this, service.getCipherPriorAuth) ">24 Months</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div id="widget-panel-16" class="col-md-8 non-pad-col">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 id="informix-panel-title" class="informix-title">Call Center Data/Statistics</h4>
+                <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showInformix()"></i>
+            </div>
+            <div class="panel-body">
+                <img id="loading-informix" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 10px;" />
+                <div style="display: none;" id="informix-panel-no-data" class="no-data-div">
+                    <span>No data available for this program</span>
+                </div>
+                <div class="table-scroll-cotainer">
+                    <table id="informix-panel-table" class="table table-bordered table-hover aspn-table">
+                        <thead></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>*@
+
+<div id="widget-panel-16" class="col-lg-6 col-md-6 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="informix-panel-title1" class="panel-title">Inbound Call Center Data/Statistics</h4>
+            <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showInformix1()">
+        </div>
+        <div class="panel-body ex-panel-body-height">
+            <div style="display: none;" class="form-inline form-controll-calls">
+                <input class="form-controll-48-hour" type="radio" name="calls1-overview-radio" value="all" checked="checked" onclick="service.getCallCenterStatictics1()" /> All &nbsp;&nbsp;&nbsp;&nbsp;
+                <input class="form-controll-48-hour" type="radio" name="calls1-overview-radio" value="auto" onclick="service.getCallCenterStatictics1()" /> Auto Dial &nbsp;&nbsp;&nbsp;&nbsp;
+                <input class="form-controll-48-hour" type="radio" name="calls1-overview-radio" value="manual" onclick="service.getCallCenterStatictics1()" /> Manual Dial
+            </div>
+            <img id="loading-ccs1" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 10px;"/>
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div style="display: none;" id="ccs-asa-no-data" class="no-data-div">
+                        <span>No data available for this time period</span>
+                    </div>
+                    <div id="ccs-asa-title" class="informix-title">Avg Speed Answer [sec]</div>
+                    <div class="pie-chart-container" id="ccs-asa-chart"></div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div style="display: none;" id="ccs-aht-no-data" class="no-data-div">
+                        <span>No data available for this time period</span>
+                    </div>
+                    <div id="ccs-aht-title" class="informix-title">Avg Handle Time [sec]</div>
+                    <div class="pie-chart-container" id="ccs-aht-chart"></div>
+                </div>
+            </div>
+            <div id="ccs-container1" class="btn-group-container">
+                <div id="bg-ccs1" class="btn-group" role="group" aria-label="">
+                    <button style="width: 70px;" type="button" data-date="Day" class="btn btn-primary custom-btn-group btn-selected" onclick="utility.dateBtnClick('bg-ccs1', this, service.getCallCenterStatictics1)">Daily</button>
+                    <button style="width: 70px;" type="button" data-date="Week" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-ccs1', this, service.getCallCenterStatictics1)">Weekly</button>
+                    <button style="width: 70px;" type="button" data-date="Month" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-ccs1', this, service.getCallCenterStatictics1)">Monthly</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="widget-panel-21" class="col-lg-6 col-md-6 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="informix-panel-title2" class="panel-title">Inbound Call Center Data/Statistics</h4>
+            <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showInformix2()">
+        </div>
+        <div class="panel-body ex-panel-body-height">
+            <div style="display: none;" class="form-inline form-controll-calls">
+                <input class="form-controll-48-hour" type="radio" name="calls2-overview-radio" value="all" checked="checked" onclick="service.getCallCenterStatictics2()" /> All &nbsp;&nbsp;&nbsp;&nbsp;
+                <input class="form-controll-48-hour" type="radio" name="calls2-overview-radio" value="auto" onclick="service.getCallCenterStatictics2()" /> Auto Dial &nbsp;&nbsp;&nbsp;&nbsp;
+                <input class="form-controll-48-hour" type="radio" name="calls2-overview-radio" value="manual" onclick="service.getCallCenterStatictics2()" /> Manual Dial
+            </div>
+            <img id="loading-ccs2" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 10px;"/>
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div style="display: none;" id="ccs-ach-no-data" class="no-data-div">
+                        <span>No data available for this time period</span>
+                    </div>
+                    <div id="ccs-ach-title" class="informix-title">Avg Calls Handled</div>
+                    <div class="pie-chart-container" id="ccs-ach-chart"></div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div style="display: none;" id="ccs-ar-no-data" class="no-data-div">
+                        <span>No data available for this time period</span>
+                    </div>
+                    <div id="ccs-ar-title" class="informix-title">Abandonment Rate [%]</div>
+                    <div class="pie-chart-container" id="ccs-ar-chart"></div>
+                </div>
+            </div>
+            <div id="ccs-container2" class="btn-group-container">
+                <div id="bg-ccs2" class="btn-group" role="group" aria-label="">
+                    <button style="width: 70px;" type="button" data-date="Day" class="btn btn-primary custom-btn-group btn-selected" onclick="utility.dateBtnClick('bg-ccs2', this, service.getCallCenterStatictics2) ">Daily</button>
+                    <button style="width: 70px;" type="button" data-date="Week" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-ccs2', this, service.getCallCenterStatictics2) ">Weekly</button>
+                    <button style="width: 70px;" type="button" data-date="Month" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-ccs2', this, service.getCallCenterStatictics2) ">Monthly</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="widget-panel-17" class="col-lg-12 col-md-12 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="network-panel-title" class="panel-title">Network Capacity</h4>
+            <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showNetworkCapacity()">
+        </div>
+        <div class="panel-body ex-panel-body-height">
+            <img id="loading-nc" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 10px;" />
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div style="display: none;" id="nc-no-data" class="no-data-div">
+                        <span>No data available for this time period</span>
+                    </div>
+                    @*<div id="nc-title" class="informix-title"></div>*@
+                    <div class="pie-chart-container" id="nc-chart"></div>
+                </div>
+                <div class="col-md-6">
+                    <table id="nc-table" class="table table-bordered table-hover">
+                        <thead>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="nc-container" class="btn-group-container">
+                <div id="bg-nc" class="btn-group" role="group" aria-label="">
+                    <button style="width: 70px;" type="button" data-date="Day" class="btn btn-primary custom-btn-group btn-selected" onclick="utility.dateBtnClick('bg-nc', this, service.getNetworkCapacity)">Daily</button>
+                    <button style="width: 70px;" type="button" data-date="Week" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-nc', this, service.getNetworkCapacity)">Weekly</button>
+                    <button style="width: 70px;" type="button" data-date="Month" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-nc', this, service.getNetworkCapacity)">Monthly</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="widget-panel-18" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="irbh-title" class="panel-title">Incoming Referrals By Hour</h4>
+            <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showIncomingReferralsByHour()">
+        </div>
+        <div class="panel-body panel-body-height">
+            <div class="form-inline">
+                <div class="form-group">
+                    <label class="irbh-label-bold-control">Physician</label>
+                    <label class="irbh-label-control" for="irbh-physician-fname">First Name:</label>
+                    <input id="irbh-physician-fname" type="text" class="form-control form-control-height irbh-form-control" placeholder="search first name" />
+                    <label class="irbh-label-control" for="irbh-physician-lname">Last Name:</label>
+                    <input id="irbh-physician-lname" type="text" class="form-control form-control-height irbh-form-control" placeholder="search last name" />
+                </div>
+                <img id="loading-irbh" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 10px;" />
+            </div>
+
+            <div style="display: none;" id="irbh-no-data" class="no-data-div">
+                <span>No data available for this time period</span>
+            </div>
+            <div class="irbh-chart-container" id="irbh-column-chart"></div>
+            <div id="irbh-chart-title" class="chart-title"></div>
+
+            <div class="btn-group-container">
+                <div id="bg-irbh" class="btn-group dropup" role="group" aria-label="">
+                    <button type="button" data-date="today" class="btn btn-primary custom-btn-group btn-selected" onclick="utility.dateBtnClick('bg-irbh', this, service.getIncomingReferralsByHour)">Today</button>
+                    <button type="button" data-date="yesterday" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-irbh', this, service.getIncomingReferralsByHour)">Yesterday</button>
+                    <button type="button" data-date="thisweek" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-irbh', this, service.getIncomingReferralsByHour)">This Week</button>
+                    <button type="button" data-date="lastweek" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-irbh', this, service.getIncomingReferralsByHour)">Last Week</button>
+                    <button type="button" data-date="currentmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-irbh', this, service.getIncomingReferralsByHour)">Current Month</button>
+                    <button type="button" data-date="lastmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-irbh', this, service.getIncomingReferralsByHour)">Last Month</button>
+                    <button type="button" data-date="qtd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-irbh', this, service.getIncomingReferralsByHour)">Calendar QTD</button>
+                    <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-irbh', this, service.getIncomingReferralsByHour)">Calendar YTD</button>
+
+                    <button style="border-radius: 0px;" id="btn-qtd-irbh" type="button" data-date="qtd" class="btn btn-primary dropdown-toggle custom-btn-group not-for-cipher" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                        QTD<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu qtd-dropdown">
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-irbh', 'btn-qtd-irbh', 'qtd5', service.getIncomingReferralsByHour, this)">QTR5</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-irbh', 'btn-qtd-irbh', 'qtd4', service.getIncomingReferralsByHour, this)">QTR4</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-irbh', 'btn-qtd-irbh', 'qtd3', service.getIncomingReferralsByHour, this)">QTR3</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-irbh', 'btn-qtd-irbh', 'qtd2', service.getIncomingReferralsByHour, this)">QTR2</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-irbh', 'btn-qtd-irbh', 'qtd1', service.getIncomingReferralsByHour, this)">QTR1</a></li>
+                    </ul>
+
+                    <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-irbh', this, service.getIncomingReferralsByHour)">YTD</button>
+                    @*<button type="button" data-date="allreferrals" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-irbh', this, service.getIncomingReferralsByHour)">24 Months</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="widget-panel-19" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="2hck-title" class="panel-title">2 Hour Call KPI Success Rate</h4>
+            <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.show2HourCallKpiPercent()">
+        </div>
+        <div class="panel-body panel-body-height">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="form-inline">
+                    <img id="loading-2hck" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 5px; left: 10px;" />
+                    <input type="checkbox" id="full-day" onchange="service.get2HourCallKpiPercent()" title="Show full day analysis" /> Show All
+                </div>
+                <div style="display: none;" id="2hckp-no-data" class="no-data-div">
+                    <span>No data available for this time period</span>
+                </div>
+                <div class="hck2-chart-container" id="2hckp-column-chart"></div>
+            </div>
+            <div class="btn-group-container">
+                <div id="bg-2hck" class="btn-group" role="group" aria-label="">
+                    <button type="button" data-date="daily" class="btn btn-primary custom-btn-group btn-selected" onclick="utility.dateBtnClick('bg-2hck', this, service.get2HourCallKpiPercent)">Daily</button>
+                    <button type="button" data-date="weekly" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-2hck', this, service.get2HourCallKpiPercent)">Weekly</button>
+                    <button type="button" data-date="monthly" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-2hck', this, service.get2HourCallKpiPercent)">Monthly</button>
+                    <button type="button" data-date="quarterly" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-2hck', this, service.get2HourCallKpiPercent)">Quarterly</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="widget-panel-20" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="2hcv-title" class="panel-title">2 Hour Call Volume</h4>
+            <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.show2HourCallVolume()">
+        </div>
+        <div class="panel-body panel-body-height">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="form-inline">
+                    <img id="loading-2hcv" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 5px; left: 10px;" />
+                </div>
+                <div style="display: none;" id="2hcv-no-data" class="no-data-div">
+                    <span>No data available for this time period</span>
+                </div>
+                <div class="hck2-chart-container" id="2hcv-column-chart"></div>
+            </div>
+            <div class="btn-group-container">
+                <div id="bg-2hcv" class="btn-group" role="group" aria-label="">
+                    <button type="button" data-date="daily" class="btn btn-primary custom-btn-group btn-selected" onclick="utility.dateBtnClick('bg-2hcv', this, service.get2HourCallVolume)">Daily</button>
+                    <button type="button" data-date="weekly" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-2hcv', this, service.get2HourCallVolume)">Weekly</button>
+                    <button type="button" data-date="monthly" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-2hcv', this, service.get2HourCallVolume)">Monthly</button>
+                    <button type="button" data-date="quarterly" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-2hcv', this, service.get2HourCallVolume)">Quarterly</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="widget-panel-22" class="col-lg-6 col-md-6 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="obc-panel-title" class="panel-title">Outbound Call Center Data/Statistics</h4>
+            <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showOutboundStatistics()">
+        </div>
+        <div class="panel-body ex-panel-body-height">
+            <img id="loading-obc" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 10px;" />
+            <div style="display: none;" class="form-inline form-controll-calls">
+                <input class="form-controll-48-hour" type="radio" name="callso-overview-radio" value="all" checked="checked" onclick="service.getHubStatisticsOutboundCalls()" /> All &nbsp;&nbsp;&nbsp;&nbsp;
+                <input class="form-controll-48-hour" type="radio" name="callso-overview-radio" value="auto" onclick="service.getHubStatisticsOutboundCalls()" /> Auto Dial &nbsp;&nbsp;&nbsp;&nbsp;
+                <input class="form-controll-48-hour" type="radio" name="callso-overview-radio" value="manual" onclick="service.getHubStatisticsOutboundCalls()" /> Manual Dial
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div id="obc-tc-title" class="informix-title">Total Calls</div>
+                    <div style="display: none; margin-top: 90px;" id="obc-tc-no-data" class="no-data-div">
+                        <span>No data available for this time period</span>
+                    </div>
+                    <div class="pie-chart-container" id="obc-tc-chart"></div>
+                </div>
+                <div class="col-md-6">
+                    <div id="obc-alc-title" class="informix-title">Avg Length of Call [sec]</div>
+                    <div style="display: none; margin-top: 90px;" id="obc-alc-no-data" class="no-data-div">
+                        <span>No data available for this time period</span>
+                    </div>
+                    <div class="pie-chart-container" id="obc-alc-chart"></div>
+                </div>
+            </div>
+            <div id="obc-container" class="btn-group-container">
+                <div id="bg-obc" class="btn-group" role="group" aria-label="">
+                    <button style="width: 70px;" type="button" data-date="daily" class="btn btn-primary custom-btn-group btn-selected" onclick="utility.dateBtnClick('bg-obc', this, service.getHubStatisticsOutboundCalls)">Daily</button>
+                    <button style="width: 70px;" type="button" data-date="weekly" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-obc', this, service.getHubStatisticsOutboundCalls)">Weekly</button>
+                    <button style="width: 70px;" type="button" data-date="monthly" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-obc', this, service.getHubStatisticsOutboundCalls)">Monthly</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="widget-panel-23" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="qa-compliance-panel-title" class="panel-title">
+                QA Compliance
+            </h4>
+        </div>
+        <div class="panel-body panel-body-height">
+            <img id="loading-qa-compliance" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 20px;" />
+            <div class="pie-chart-container" id="qa-compliance-column-chart"></div>
+        </div>
+    </div>
+</div>
+<div id="widget-panel-24" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="qa-process-panel-title" class="panel-title">
+                QA Process
+            </h4>
+        </div>
+        <div class="panel-body panel-body-height">
+            <img id="loading-qa-process" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 20px;" />
+            <div class="pie-chart-container" id="qa-process-column-chart"></div>
+        </div>
+    </div>
+</div>
+<div id="widget-panel-25" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="qa-quality-panel-title" class="panel-title">
+                QA Quality
+            </h4>
+        </div>
+        <div class="panel-body panel-body-height">
+            <img id="loading-qa-quality" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 20px;" />
+            <div class="pie-chart-container" id="qa-quality-column-chart"></div>
+        </div>
+    </div>
+</div>
+<div id="widget-panel-26" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="compliance-trending-panel-title" class="panel-title">
+                Compliance Trending
+            </h4>
+        </div>
+        <div class="panel-body panel-body-height">
+            <div class="form-inline">
+                <div class="form-group">
+                    <select id="compliance-trending-question" class="form-control form-control-height form-control-full-width" title="Question" onchange="service.getAnswerStatsByComplianceQuestion()"></select>
+                    <img id="loading-compliance-trending" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 20px;" />
+                </div>
+            </div>
+            <div class="pie-chart-container" id="compliance-trending-column-chart"></div>
+        </div>
+    </div>
+</div>
+<div id="widget-panel-27" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="process-trending-panel-title" class="panel-title">
+                Process Trending
+            </h4>
+        </div>
+        <div class="panel-body panel-body-height">
+            <div class="form-inline">
+                <div class="form-group">
+                    <select id="process-trending-question" class="form-control form-control-height form-control-full-width" title="Question" onchange="service.getAnswerStatsByProcessQuestion()"></select>
+                    <img id="loading-process-trending" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 20px;" />
+                </div>
+            </div>
+            <div class="pie-chart-container" id="process-trending-column-chart"></div>
+        </div>
+    </div>
+</div>
+<div id="widget-panel-28" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="quality-trending-panel-title" class="panel-title">
+                Quality Trending
+            </h4>
+        </div>
+        <div class="panel-body panel-body-height">
+            <div class="form-inline">
+                <div class="form-group">
+                    <select id="quality-trending-question" class="form-control form-control-height form-control-full-width" title="Question" onchange="service.getAnswerStatsByQualityQuestion()"></select>
+                    <img id="loading-quality-trending" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 20px;" />
+                </div>
+            </div>
+            <div class="pie-chart-container" id="quality-trending-column-chart"></div>
+        </div>
+    </div>
+</div>
+
+<div id="widget-panel-30" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="aps-title" class="panel-title">Intake Program Status</h4>
+            <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showAps()">
+        </div>
+        <div class="panel-body ex-panel-body-height">
+            <div class="form-inline">
+                <div class="form-group" style="display: none;">
+                    <label for="treatment-aps">Treatment:</label>
+                    <select id="treatment-aps" class="form-control form-control-height" onchange="">
+                        <option value="All">All</option>
+                        <option value="Unknown">Unknown</option>
+                    </select>
+                </div>
+                <img id="loading-aps" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 10px;" />
+            </div>
+
+            <div style="display: none;" id="aps-no-data" class="no-data-div">
+                <span>No data available for this time period</span>
+            </div>
+            <div class="row">
+                <div id="aps-chart-panel-div" style="padding-left: 0; padding-right: 0; margin-left: -5px;" class="col-sm-12 col-xs-12">
+                    <div class="pie-chart-container" id="aps-pie-chart"></div>
+                </div>
+                <div id="aps-table-panel-div" style="padding-left: 0; padding-right: 0; margin-left: -5px;" class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <table id="aps-table">
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div id="aps-chart-title" class="chart-title"></div>
+                </div>
+            </div>
+            <div class="btn-group-container">
+                <div id="bg-aps" class="btn-group dropup" role="group" aria-label="">
+                    <button type="button" data-date="today" class="btn btn-primary custom-btn-group btn-selected" onclick="utility.dateBtnClick('bg-aps', this, service.getAfrezzaPorgramStatus)">Today</button>
+                    <button type="button" data-date="yesterday" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-aps', this, service.getAfrezzaPorgramStatus)">Yesterday</button>
+                    <button type="button" data-date="thisweek" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-aps', this, service.getAfrezzaPorgramStatus)">This Week</button>
+                    <button type="button" data-date="lastweek" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-aps', this, service.getAfrezzaPorgramStatus)">Last Week</button>
+                    <button type="button" data-date="currentmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-aps', this, service.getAfrezzaPorgramStatus)">Current Month</button>
+                    <button type="button" data-date="lastmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-aps', this, service.getAfrezzaPorgramStatus)">Last Month</button>
+                    <button type="button" data-date="qtd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-aps', this, service.getAfrezzaPorgramStatus)">Calendar QTD</button>
+                    <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-aps', this, service.getAfrezzaPorgramStatus)">Calendar YTD</button>
+
+                    <button style="border-radius: 0px;" id="btn-qtd-aps" type="button" data-date="qtd" class="btn btn-primary dropdown-toggle custom-btn-group not-for-cipher" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                        QTD<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu qtd-dropdown">
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-aps', 'btn-qtd-aps', 'qtd5', service.getAfrezzaPorgramStatus, this)">QTR5</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-aps', 'btn-qtd-aps', 'qtd4', service.getAfrezzaPorgramStatus, this)">QTR4</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-aps', 'btn-qtd-aps', 'qtd3', service.getAfrezzaPorgramStatus, this)">QTR3</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-aps', 'btn-qtd-aps', 'qtd2', service.getAfrezzaPorgramStatus, this)">QTR2</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-aps', 'btn-qtd-aps', 'qtd1', service.getAfrezzaPorgramStatus, this)">QTR1</a></li>
+                    </ul>
+
+                    <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-aps', this, service.getAfrezzaPorgramStatus)">YTD</button>
+                    @*<button type="button" data-date="allreferrals" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-aps', this, service.getAfrezzaPorgramStatus)">24 Months</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div id="widget-panel-29" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 id="pa-appeal-panel-title" class="panel-title">
+                    PA and Appeal
+                </h4>
+            </div>
+            <div class="panel-body panel-body-height">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <input class="form-control" type="radio" name="pa-appeal-radio" value="pa" checked="checked" onclick="" /> PA &nbsp;
+                        <input class="form-control" type="radio" name="pa-appeal-radio" value="appeal" onclick="" /> Appeal
+                        <img id="loading-pa-appeal" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 20px;" />
+                    </div>
+                </div>
+                <div class="pie-chart-container" id="pa-appeal-column-chart"></div>
+            </div>
+        </div>
+    </div>*@
+
+<div id="widget-panel-31" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="mdeov-panel-title" class="panel-title">
+                Medvantx Delivered vs Exception order volume
+            </h4>
+        </div>
+        <div class="panel-body panel-body-height">
+            <img id="loading-mdeov" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 20px;" />
+            <div class="form-inline form-controll-48-hour">
+                <input class="form-controll-48-hour" type="radio" name="mdeov-radio" value="All" checked="checked" onclick="service.getMedvantxDeliveredVsExceptionOrderVolume() " /> All &nbsp;
+                <input class="form-controll-48-hour" type="radio" name="mdeov-radio" value="Delivered" onclick="service.getMedvantxDeliveredVsExceptionOrderVolume() " /> Delivered &nbsp;
+                <input class="form-controll-48-hour" type="radio" name="mdeov-radio" value="Exceptions" onclick="service.getMedvantxDeliveredVsExceptionOrderVolume() " /> Exceptions
+            </div>
+            <div class="pie-chart-container" id="mdeov-column-chart"></div>
+
+            <div class="btn-group-container">
+                <div id="bg-mdeov" class="btn-group" role="group" aria-label="">
+                    <button type="button" data-date="Day" class="btn btn-primary custom-btn-group btn-selected" onclick="utility.dateBtnClick('bg-mdeov', this, service.getMedvantxDeliveredVsExceptionOrderVolume)">Daily</button>
+                    <button type="button" data-date="Week" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-mdeov', this, service.getMedvantxDeliveredVsExceptionOrderVolume)">Weekly</button>
+                    <button type="button" data-date="Month" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-mdeov', this, service.getMedvantxDeliveredVsExceptionOrderVolume)">Monthly</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="widget-panel-32" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="mudov-panel-title" class="panel-title">
+                Medvantx UPS 48 hr delivery order volume
+            </h4>
+        </div>
+        <div class="panel-body panel-body-height">
+            <img id="loading-mudov" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 20px;" />
+            <div class="form-inline form-controll-48-hour">
+                <input class="form-controll-48-hour" type="radio" name="mudov-radio" value="<= 48 hrs" checked="checked" onclick="service.getMedvantxUPS48hrDeliveryOrderVolume()" /> &lt;= 48 hrs &nbsp;
+                <input class="form-controll-48-hour" type="radio" name="mudov-radio" value="> 48 hrs" onclick="service.getMedvantxUPS48hrDeliveryOrderVolume()" /> &gt; 48 hrs
+            </div>
+            <div class="pie-chart-container" id="mudov-column-chart"></div>
+
+            <div class="btn-group-container">
+                <div id="bg-mudov" class="btn-group" role="group" aria-label="">
+                    <button type="button" data-date="Week" class="btn btn-primary custom-btn-group btn-selected" onclick="utility.dateBtnClick('bg-mudov', this, service.getMedvantxUPS48hrDeliveryOrderVolume)">Weekly</button>
+                    <button type="button" data-date="Month" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-mudov', this, service.getMedvantxUPS48hrDeliveryOrderVolume)">Monthly</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="widget-panel-33" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="mudsr-panel-title" class="panel-title">
+                Medvantx UPS 48 hr delivery success rate
+            </h4>
+        </div>
+        <div class="panel-body panel-body-height">
+            <img id="loading-mudsr" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 20px;" />
+
+            <div class="pie-chart-container" id="mudsr-line-chart"></div>
+
+            <div class="btn-group-container">
+                <div id="bg-mudsr" class="btn-group" role="group" aria-label="">
+                    <button type="button" data-date="Week" class="btn btn-primary custom-btn-group btn-selected" onclick="utility.dateBtnClick('bg-mudsr', this, service.getMedvantxUPS48hrDeliverySuccessRate) ">Weekly</button>
+                    <button type="button" data-date="Month" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-mudsr', this, service.getMedvantxUPS48hrDeliverySuccessRate) ">Monthly</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="widget-panel-34" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="cp-panel-title" class="panel-title">
+                "Clean Path" - From BV directly into Schedule Delivery
+            </h4>
+        </div>
+        <div class="panel-body panel-body-height">
+            <img id="loading-cp" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 20px;" />
+            <div class="form-inline form-controll-48-hour">
+                <input class="form-controll-48-hour" type="radio" name="cp-radio" value="BV-QAR" checked="checked" onclick="service.getCleanPathFromBVDirectlyIntoScheduleDelivery()" /> BV-QAR &nbsp;
+                <input class="form-controll-48-hour" type="radio" name="cp-radio" value="BV-SD" onclick="service.getCleanPathFromBVDirectlyIntoScheduleDelivery()" /> BV-SD &nbsp;
+                <input class="form-controll-48-hour" type="radio" name="cp-radio" value="SD-QAR" onclick="service.getCleanPathFromBVDirectlyIntoScheduleDelivery()" /> SD-QAR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                @*<input class="form-controll-48-hour" type="checkbox" name="cp-ex-checkbox-onhold" value="Exclude onhold" onclick="service.getCleanPathFromBVDirectlyIntoScheduleDelivery()" /> Exclude onhold &nbsp;
+                    <input class="form-controll-48-hour" type="checkbox" name="cp-ex-checkbox-cancelled" value="Exclude cancelled" onclick="service.getCleanPathFromBVDirectlyIntoScheduleDelivery()" /> Exclude cancelled*@
+            </div>
+            <div class="pie-chart-container" id="cp-column-chart"></div>
+
+            <div class="btn-group-container">
+                <div id="bg-cp" class="btn-group" role="group" aria-label="">
+                    <button type="button" data-date="Week" class="btn btn-primary custom-btn-group btn-selected" onclick="utility.dateBtnClick('bg-cp', this, service.getCleanPathFromBVDirectlyIntoScheduleDelivery)">Weekly</button>
+                    <button type="button" data-date="Month" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-cp', this, service.getCleanPathFromBVDirectlyIntoScheduleDelivery)">Monthly</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="widget-panel-35" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="ip-panel-title" class="panel-title" style="font-size: 11px; margin-bottom: 4px;">
+                "Indirect Path" – From BV directly into any status other than Schedule Delivery
+            </h4>
+        </div>
+        <div class="panel-body panel-body-height">
+            <img id="loading-ip" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 20px;" />
+            <div class="form-inline form-controll-48-hour">
+                <input class="form-controll-48-hour" type="radio" name="ip-radio" value="BV-QAR" checked="checked" onclick="service.getIndirectPathFromBVDirectlyIntoAnyStatus()" /> BV-QAR &nbsp;
+                <input class="form-controll-48-hour" type="radio" name="ip-radio" value="BV to Call Protocol" onclick="service.getIndirectPathFromBVDirectlyIntoAnyStatus()" /> BV to Call Protocol &nbsp;
+                <input class="form-controll-48-hour" type="radio" name="ip-radio" value="Call Protocol to SD" onclick="service.getIndirectPathFromBVDirectlyIntoAnyStatus()" /> Call Protocol to SD &nbsp;
+                <input class="form-controll-48-hour" type="radio" name="ip-radio" value="SD-QAR" onclick="service.getIndirectPathFromBVDirectlyIntoAnyStatus()" /> SD-QAR
+                @*<br/>
+                    <input class="form-controll-48-hour" type="checkbox" name="ip-ex-checkbox-onhold" value="Exclude onhold" onclick="service.getIndirectPathFromBVDirectlyIntoAnyStatus()" /> Exclude onhold &nbsp;
+                    <input class="form-controll-48-hour" type="checkbox" name="ip-ex-checkbox-cancelled" value="Exclude cancelled" onclick="service.getIndirectPathFromBVDirectlyIntoAnyStatus()" /> Exclude cancelled*@
+            </div>
+            <div class="pie-chart-container" id="ip-column-chart"></div>
+
+            <div class="btn-group-container">
+                <div id="bg-ip" class="btn-group" role="group" aria-label="">
+                    <button type="button" data-date="Week" class="btn btn-primary custom-btn-group btn-selected" onclick="utility.dateBtnClick('bg-ip', this, service.getIndirectPathFromBVDirectlyIntoAnyStatus)">Weekly</button>
+                    <button type="button" data-date="Month" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-ip', this, service.getIndirectPathFromBVDirectlyIntoAnyStatus)">Monthly</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="widget-panel-36" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="vcpip-panel-title" class="panel-title">
+                Volume % of "Clean Path" vs "Indirect Path"
+            </h4>
+        </div>
+        <div class="panel-body panel-body-height">
+            <img id="loading-vcpip" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 20px;" />
+            <div class="form-inline form-controll-48-hour">
+                @*<input class="form-controll-48-hour" type="checkbox" name="vcpip-ex-checkbox-onhold" value="Exclude onhold" onclick="service.getVolumePercentOfCleanPathVSIndirectPath()" /> Exclude onhold &nbsp;
+                    <input class="form-controll-48-hour" type="checkbox" name="vcpip-ex-checkbox-cancelled" value="Exclude cancelled" onclick="service.getVolumePercentOfCleanPathVSIndirectPath()" /> Exclude cancelled*@
+            </div>
+
+            <div class="pie-chart-container" id="vcpip-column-chart"></div>
+
+            <div class="btn-group-container">
+                <div id="bg-vcpip" class="btn-group" role="group" aria-label="">
+                    <button type="button" data-date="Week" class="btn btn-primary custom-btn-group btn-selected" onclick="utility.dateBtnClick('bg-vcpip', this, service.getVolumePercentOfCleanPathVSIndirectPath)">Weekly</button>
+                    <button type="button" data-date="Month" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-vcpip', this, service.getVolumePercentOfCleanPathVSIndirectPath)">Monthly</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="widget-panel-37" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="prc-title" class="panel-title">Pharmacy Referrals</h4>
+            <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showPrc()">
+        </div>
+        <div class="panel-body panel-body-height">
+            <div class="form-inline">
+                <div class="form-group" style="display: none;">
+                    <label for="treatment-prc">Treatment:</label>
+                    <select id="treatment-prc" class="form-control form-control-height" onchange="service.getPharmacyCReferrals() ">
+                        <option value="All">All</option>
+                        <option value="Unknown">Unknown</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="pharmacy-prc">Pharmacy:</label>
+                    <select style="width: 180px;" id="pharmacy-prc" class="form-control form-control-height" onchange="service.getPharmacyCReferrals()"></select>
+                </div>
+                <div class="form-group">
+                    <input type="radio" name="prc-referrals" value="All" checked="checked" onclick="service.getPharmacyCReferrals() " /> All &nbsp;
+                    <input type="radio" name="prc-referrals" value="Direct" onclick="service.getPharmacyCReferrals() " /> Direct &nbsp;
+                    <input type="radio" name="prc-referrals" value="Organic" onclick="service.getPharmacyCReferrals() " /> Organic
+                </div>
+                <img id="loading-prc" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 10px;" />
+            </div>
+
+            <div style="display: none;" id="prc-no-data" class="no-data-div">
+                <span>No data available for this time period</span>
+            </div>
+            <div class="irbh-chart-container" id="prc-pie-chart"></div>
+            <div id="prc-chart-title" class="chart-title"></div>
+
+            <div class="btn-group-container">
+                <div id="bg-prc" class="btn-group dropup" role="group" aria-label="">
+                    <button type="button" data-date="today" class="btn btn-primary custom-btn-group btn-selected" onclick="utility.dateBtnClick('bg-prc', this, service.getPharmacyCReferrals) ">Today</button>
+                    <button type="button" data-date="yesterday" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-prc', this, service.getPharmacyCReferrals) ">Yesterday</button>
+                    <button type="button" data-date="thisweek" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-prc', this, service.getPharmacyCReferrals) ">This Week</button>
+                    <button type="button" data-date="lastweek" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-prc', this, service.getPharmacyCReferrals) ">Last Week</button>
+                    <button type="button" data-date="currentmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-prc', this, service.getPharmacyCReferrals) ">Current Month</button>
+                    <button type="button" data-date="lastmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-prc', this, service.getPharmacyCReferrals) ">Last Month</button>
+                    <button type="button" data-date="qtd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-prc', this, service.getPharmacyCReferrals) ">Calendar QTD</button>
+                    <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-prc', this, service.getPharmacyCReferrals) ">Calendar YTD</button>
+
+                    <button style="border-radius: 0px;" id="btn-qtd-prc" type="button" data-date="qtd" class="btn btn-primary dropdown-toggle custom-btn-group not-for-cipher" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                        QTD<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu qtd-dropdown">
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-prc', 'btn-qtd-prc', 'qtd5', service.getPharmacyCReferrals, this) ">QTR5</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-prc', 'btn-qtd-prc', 'qtd4', service.getPharmacyCReferrals, this) ">QTR4</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-prc', 'btn-qtd-prc', 'qtd3', service.getPharmacyCReferrals, this) ">QTR3</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-prc', 'btn-qtd-prc', 'qtd2', service.getPharmacyCReferrals, this) ">QTR2</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-prc', 'btn-qtd-prc', 'qtd1', service.getPharmacyCReferrals, this) ">QTR1</a></li>
+                    </ul>
+
+                    <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-prc', this, service.getPharmacyCReferrals) ">YTD</button>
+                    @*<button type="button" data-date="allreferrals" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-prc', this, service.getPharmacyCReferrals) ">24 Months</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="widget-panel-38" class="col-lg-8 col-md-8 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="rttp-title" class="panel-title">Referral Time To Process</h4>
+            <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showRttp() ">
+        </div>
+        <div class="panel-body ex-panel-body-height">
+            <div style="margin-top: -8px;" class="form-inline">
+                <div class="form-group">
+                    <label for="rttp-location">Location: </label>
+                    <select id="rttp-location" class="form-control form-control-height" onchange="service.getReferralTimeToProcess()">
+                        <option value="All">All</option>
+                        <option value="HUB">HUB</option>
+                        <option value="Pharmacy">Pharmacy</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="rttp-pa">PA: </label>
+                    <select id="rttp-pa" class="form-control form-control-height" onchange="service.getReferralTimeToProcess()">
+                        <option value="All">All (with and without PA)</option>
+                        <option value="Yes">PA Only</option>
+                        <option value="No">Without PA</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    &nbsp;<input type="checkbox" id="rttp-weekends" onclick="service.getReferralTimeToProcess()"/> Include Weekends&nbsp;&nbsp;
+                </div>
+                <div id="rttp-datetype-div" class="form-group">
+                    <input type="radio" name="rttp-datetype" value="filldate" checked="checked" onclick="service.getReferralTimeToProcess()"/> By Fill Date &nbsp;
+                    <input type="radio" name="rttp-datetype" value="shipdate" onclick="service.getReferralTimeToProcess()"/> By Ship Date
+                </div>
+                <img id="loading-rttp" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 10px;"/>
+            </div>
+
+            <div style="display: none;" id="rttp-no-data" class="no-data-div">
+                <span>No data available for this time period</span>
+            </div>
+            <div style="height: 60px;" class="pie-chart-container" id="rttp-line-chart"></div>
+            <div style="height: 200px;" class="pie-chart-container" id="rttp-column-chart"></div>
+        </div>
+    </div>
+</div>
+
+<div id="widget-panel-39" class="col-lg-8 col-md-8 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="bi-title" class="panel-title">Benefits Investigation</h4>
+            <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showBi() ">
+        </div>
+        <div class="panel-body ex-panel-body-height">
+            <div class="form-inline">
+                <div class="form-group">
+                    <label for="bi-insurance-type">Insurance Type: </label>
+                    <select id="bi-insurance-type" style="width: 170px;" class="form-control form-control-height" onchange="service.getBenfitsInvestigations() ">
+                    </select>
+                </div>
+                <div class="form-group">
+                    &nbsp;&nbsp;<label for="bi-drug-name">Drug: </label>
+                    <select id="bi-drug-name" style="width: 170px;" class="form-control form-control-height" onchange="service.getBenfitsInvestigations() ">
+                        <option value="-1">All</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    &nbsp;&nbsp;<input type="radio" name="bi-agerange" value="0-17" checked="checked" onclick="service.getBenfitsInvestigations() "/> &lt; 18 yrs &nbsp;
+                    <input type="radio" name="bi-agerange" value="18-64" onclick="service.getBenfitsInvestigations() "/> 18 - 64 yrs &nbsp;
+                    <input type="radio" name="bi-agerange" value="65-200" onclick="service.getBenfitsInvestigations() "/> &gt; 64
+                </div>
+                <img id="loading-bi" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 10px;"/>
+            </div>
+
+            <div style="display: none;" id="bi-no-data" class="no-data-div">
+                <span>No data available for this time period</span>
+            </div>
+            <div class="pie-chart-container" id="bi-column-chart"></div>
+
+            <div class="btn-group-container">
+                <div id="bg-bi" class="btn-group dropup" role="group" aria-label="">
+                    <button type="button" data-date="today" class="btn btn-primary custom-btn-group btn-selected" onclick="utility.dateBtnClick('bg-bi', this, service.getBenfitsInvestigations) ">Today</button>
+                    <button type="button" data-date="yesterday" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-bi', this, service.getBenfitsInvestigations) ">Yesterday</button>
+                    <button type="button" data-date="thisweek" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-bi', this, service.getBenfitsInvestigations) ">This Week</button>
+                    <button type="button" data-date="lastweek" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-bi', this, service.getBenfitsInvestigations) ">Last Week</button>
+                    <button type="button" data-date="currentmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-bi', this, service.getBenfitsInvestigations) ">Current Month</button>
+                    <button type="button" data-date="lastmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-bi', this, service.getBenfitsInvestigations) ">Last Month</button>
+                    <button type="button" data-date="qtd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-bi', this, service.getBenfitsInvestigations) ">Calendar QTD</button>
+                    <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-bi', this, service.getBenfitsInvestigations) ">Calendar YTD</button>
+
+                    <button style="border-radius: 0px;" id="btn-qtd-bi" type="button" data-date="qtd" class="btn btn-primary dropdown-toggle custom-btn-group not-for-cipher" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                        QTD<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu qtd-dropdown">
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-bi', 'btn-qtd-bi', 'qtd5', service.getBenfitsInvestigations, this) ">QTR5</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-bi', 'btn-qtd-bi', 'qtd4', service.getBenfitsInvestigations, this) ">QTR4</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-bi', 'btn-qtd-bi', 'qtd3', service.getBenfitsInvestigations, this) ">QTR3</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-bi', 'btn-qtd-bi', 'qtd2', service.getBenfitsInvestigations, this) ">QTR2</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-bi', 'btn-qtd-bi', 'qtd1', service.getBenfitsInvestigations, this) ">QTR1</a></li>
+                    </ul>
+
+                    <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-bi', this, service.getBenfitsInvestigations) ">YTD</button>
+                    @*<button type="button" data-date="allreferrals" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-bi', this, service.getBenfitsInvestigations) ">24 Months</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="widget-panel-40" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="cor-title" class="panel-title">Cash Option Referrals</h4>
+            <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showCor()">
+        </div>
+        <div class="panel-body ex-panel-body-height">
+            <div class="form-inline">
+                <img id="loading-cor" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 10px;"/>
+            </div>
+
+            <div style="display: none;" id="cor-no-data" class="no-data-div">
+                <span>No data available for this time period</span>
+            </div>
+            <div class="pie-chart-container" id="cor-pie-chart"></div>
+            <div id="cor-chart-title" class="chart-title"></div>
+
+            <div class="btn-group-container">
+                <div id="bg-cor" class="btn-group dropup" role="group" aria-label="">
+                    <button type="button" data-date="today" class="btn btn-primary custom-btn-group btn-selected" onclick="utility.dateBtnClick('bg-cor', this, service.getCashOptions) ">Today</button>
+                    <button type="button" data-date="yesterday" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-cor', this, service.getCashOptions) ">Yesterday</button>
+                    <button type="button" data-date="thisweek" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-cor', this, service.getCashOptions) ">This Week</button>
+                    <button type="button" data-date="lastweek" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-cor', this, service.getCashOptions) ">Last Week</button>
+                    <button type="button" data-date="currentmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-cor', this, service.getCashOptions) ">Current Month</button>
+                    <button type="button" data-date="lastmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-cor', this, service.getCashOptions) ">Last Month</button>
+                    <button type="button" data-date="qtd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-cor', this, service.getCashOptions) ">Calendar QTD</button>
+                    <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-cor', this, service.getCashOptions) ">Calendar YTD</button>
+
+                    <button style="border-radius: 0px;" id="btn-qtd-cor" type="button" data-date="qtd" class="btn btn-primary dropdown-toggle custom-btn-group not-for-cipher" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                        QTD<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu qtd-dropdown">
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-cor', 'btqtdDateBtnClickn-qtd-cor', 'qtd5', service.getCashOptions, this) ">QTR5</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-cor', 'btn-qtd-cor', 'qtd4', service.getCashOptions, this) ">QTR4</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-cor', 'btn-qtd-cor', 'qtd3', service.getCashOptions, this) ">QTR3</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-cor', 'btn-qtd-cor', 'qtd2', service.getCashOptions, this) ">QTR2</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-cor', 'btn-qtd-cor', 'qtd1', service.getCashOptions, this) ">QTR1</a></li>
+                    </ul>
+
+                    <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-cor', this, service.getCashOptions) ">YTD</button>
+                    @*<button type="button" data-date="allreferrals" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-cor', this, service.getCashOptions) ">24 Months</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="widget-panel-41" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="sntl-title" class="panel-title">Referrals In Process > 2 Days</h4>
+            <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showSantyl()">
+        </div>
+        <div class="panel-body ex-panel-body-height">
+            <div class="form-inline">
+                <img id="loading-sntl" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 10px;"/>
+            </div>
+
+            <div style="display: none;" id="sntl-no-data" class="no-data-div">
+                <span>No data available for this time period</span>
+            </div>
+            <div class="pie-chart-container" id="sntl-pie-chart"></div>
+            <div id="sntl-chart-title" class="chart-title"></div>
+        </div>
+    </div>
+</div>
+
+<div id="widget-panel-42" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="rgnx-title" class="panel-title">Referrals In Process > 4 Days</h4>
+            <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showRegranex() ">
+        </div>
+        <div class="panel-body ex-panel-body-height">
+            <div class="form-inline">
+                <img id="loading-rgnx" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 10px;"/>
+            </div>
+
+            <div style="display: none;" id="rgnx-no-data" class="no-data-div">
+                <span>No data available for this time period</span>
+            </div>
+            <div class="pie-chart-container" id="rgnx-pie-chart"></div>
+            <div id="rgnx-chart-title" class="chart-title"></div>
+        </div>
+    </div>
+</div>
+
+<div id="widget-panel-43" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="rc75-title" class="panel-title">Referrals with Copay > 75</h4>
+            <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showReferralsCopayGt75()">
+        </div>
+        <div class="panel-body ex-panel-body-height">
+            <div class="form-inline">
+                <img id="loading-rc75" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 10px;"/>
+            </div>
+
+            <div style="display: none;" id="rc75-no-data" class="no-data-div">
+                <span>No data available for this time period</span>
+            </div>
+            <div class="pie-chart-container" id="rc75-pie-chart"></div>
+            <div id="rc75-chart-title" class="chart-title"></div>
+        </div>
+    </div>
+</div>
+
+<div id="widget-panel-44" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="consignment-panel-title" class="panel-title">
+                Consignment – Traditional
+            </h4>
+            <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showHubstatisticsConsignment()">
+        </div>
+        <div class="panel-body panel-body-height">
+            <img id="loading-consginment" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 20px;"/>
+            <div class="" id="consignment-rolling-line-chart" style="height: 70px;"></div>
+            <div class="" id="consignment-stacked-column-chart" style="height: 180px;"></div>
+
+            <div class="btn-group-container">
+                <div id="bg-consignment" class="btn-group" role="group" aria-label="">
+                    <button type="button" data-date="daily" class="btn btn-primary custom-btn-group btn-selected" onclick="utility.dateBtnClick('bg-consignment', this, service.getHubStatisticsConsignmentChart) ">Daily</button>
+                    <button type="button" data-date="weekly" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-consignment', this, service.getHubStatisticsConsignmentChart) ">Weekly</button>
+                    <button type="button" data-date="monthly" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-consignment', this, service.getHubStatisticsConsignmentChart) ">Monthly</button>
+                    <button type="button" data-date="quarterly" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-consignment', this, service.getHubStatisticsConsignmentChart) ">Quarterly</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="widget-panel-45" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="pa-status-panel-title" class="panel-title">
+                PA Status Updates
+            </h4>
+            <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showPaStatus() ">
+        </div>
+        <div class="panel-body panel-body-height">
+            <img id="loading-pa-status" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 20px;"/>
+
+            <div style="display: none;" id="pa-status-no-data" class="no-data-div">
+                <span>No data available for this time period</span>
+            </div>
+            <div class="pie-chart-container" id="pa-status-chart"></div>
+            <div id="pa-status-chart-title" class="chart-title"></div>
+        </div>
+    </div>
+</div>
+
+<div id="widget-panel-46" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="referral-status-panel-title" class="panel-title">
+                Referral Status
+            </h4>
+            <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showReferralStatus() ">
+        </div>
+        <div class="panel-body panel-body-height">
+            <img id="loading-referral-status" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 20px;"/>
+
+            <div style="display: none;" id="referral-status-no-data" class="no-data-div">
+                <span>No data available for this time period</span>
+            </div>
+            <div class="pie-chart-container" id="referral-status-chart"></div>
+            <div id="referral-status-chart-title" class="chart-title"></div>
+        </div>
+    </div>
+</div>
+
+<div id="widget-panel-47" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="prad-title" class="panel-title">Pharmacy referrals by Assigned Date</h4>
+            <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showPharmacyReferralsByAssignedOn() ">
+        </div>
+        <div class="panel-body panel-body-height">
+            <div class="form-inline">
+                <div class="form-group" style="display: none;">
+                    <label for="treatment-bm">Treatment:</label>
+                    <select style="width: 180px;" id="treatment-prad" class="form-control form-control-height" onchange="service.getPharmacyReferralsByAssignedOn() ">
+                        <option value="All">All</option>
+                        <option value="Unknown">Unknown</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="pharmacy-prad">Pharmacy:</label>
+                    <select id="pharmacy-prad" class="form-control form-control-height" onchange="service.getPharmacyReferralsByAssignedOn() "></select>
+                </div>
+                <div style="display: none;" class="form-group">
+                    <input type="radio" name="prad-referrals" value="Direct" checked="checked" onclick="service.getPharmacyReferralsByAssignedOn() "/> Direct
+                </div>
+                <img id="loading-prad" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 10px;"/>
+            </div>
+
+            <div style="display: none;" id="prad-no-data" class="no-data-div">
+                <span>No data available for this time period</span>
+            </div>
+            <div class="irbh-chart-container" id="prad-pie-chart"></div>
+            <div id="prad-chart-title" class="chart-title"></div>
+
+            <div class="btn-group-container">
+                <div id="bg-prad" class="btn-group dropup" role="group" aria-label="">
+                    <button type="button" data-date="today" class="btn btn-primary custom-btn-group btn-selected" onclick="utility.dateBtnClick('bg-prad', this, service.getPharmacyReferralsByAssignedOn) ">Today</button>
+                    <button type="button" data-date="yesterday" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-prad', this, service.getPharmacyReferralsByAssignedOn) ">Yesterday</button>
+                    <button type="button" data-date="thisweek" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-prad', this, service.getPharmacyReferralsByAssignedOn) ">This Week</button>
+                    <button type="button" data-date="lastweek" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-prad', this, service.getPharmacyReferralsByAssignedOn) ">Last Week</button>
+                    <button type="button" data-date="currentmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-prad', this, service.getPharmacyReferralsByAssignedOn) ">Current Month</button>
+                    <button type="button" data-date="lastmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-prad', this, service.getPharmacyReferralsByAssignedOn) ">Last Month</button>
+                    <button type="button" data-date="qtd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-prad', this, service.getPharmacyReferralsByAssignedOn) ">Calendar QTD</button>
+                    <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-prad', this, service.getPharmacyReferralsByAssignedOn) ">Calendar YTD</button>
+
+                    <button style="border-radius: 0px;" id="btn-qtd-prad" type="button" data-date="qtd" class="btn btn-primary dropdown-toggle custom-btn-group not-for-cipher" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                        QTD<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu qtd-dropdown">
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-prad', 'btn-qtd-prad', 'qtd5', service.getPharmacyReferralsByAssignedOn, this) ">QTR5</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-prad', 'btn-qtd-prad', 'qtd4', service.getPharmacyReferralsByAssignedOn, this) ">QTR4</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-prad', 'btn-qtd-prad', 'qtd3', service.getPharmacyReferralsByAssignedOn, this) ">QTR3</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-prad', 'btn-qtd-prad', 'qtd2', service.getPharmacyReferralsByAssignedOn, this) ">QTR2</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-prad', 'btn-qtd-prad', 'qtd1', service.getPharmacyReferralsByAssignedOn, this) ">QTR1</a></li>
+                    </ul>
+
+                    <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-prad', this, service.getPharmacyReferralsByAssignedOn) ">YTD</button>
+                    @*<button type="button" data-date="allreferrals" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-bm', this, service.getPharmacyReferrals)">24 Months</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="widget-panel-48" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="rxc-title" class="panel-title">RXC Reason by Prescriber</h4>
+            <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showRxcReasonByPrescriber() ">
+        </div>
+        <div class="panel-body ex-panel-body-height">
+            <div class="form-inline">
+                <div class="form-group">
+                    <label for="rxc-first-name" title="Physician First Name">First Name:</label>
+                    <select style="width: 120px;" id="rxc-first-name" class="form-control form-control-height" onchange="service.getRxcReasonByPrescriber() "></select>
+                </div>
+                <div class="form-group">
+                    <label for="rxc-last-name" title="Physician Last Name">Last Name:</label>
+                    <select style="width: 120px;" id="rxc-last-name" class="form-control form-control-height" onchange="service.getRxcReasonByPrescriber()"></select>
+                </div>
+                <img id="loading-rxc" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 10px;"/>
+            </div>
+
+            <div style="display: none;" id="rxc-no-data" class="no-data-div">
+                <span>No data available for this search criteria</span>
+            </div>
+            <div class="pie-chart-container" id="rxc-pie-chart"></div>
+            <div id="rxc-chart-title" class="chart-title"></div>
+        </div>
+    </div>
+</div>

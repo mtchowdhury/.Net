@@ -1,0 +1,442 @@
+﻿<div class="panel panel-default panel-primary" ng-controller="hrmTransactionEditController">
+    <div class="panel-heading panel-title">
+        Edit HRM Transaction
+    </div>
+    <div class="panel-body panel-body-asa font-asa-11">
+        <form angular-validator-submit="editHrmTransaction()" name="hrmTransactionEditForm" class="form-horizontal" novalidate angular-validator>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-lg-offset-2 col-md-offset-2">
+
+
+                    <!--employee Select-->
+                    <div class="form-inline">
+                        <label for="employeeId" class="col-md-4 col-sm-12">
+                            Employee <i class="fa fa-asterisk required-icon"></i>
+                        </label>
+                        <select tabindex="1" name="employeeId"
+                                ng-model="hrmTransactionToEdit.EmployeeId"
+                                class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+
+                                ng-options="employee.Value as employee.Name for employee in filters.employees"
+                                id="employeeId" placeholder="Employee"
+                                disabled="disabled">
+                            <option value="">--Select employee--</option>
+                        </select>
+                    </div>
+
+
+                    <!--Account Select-->
+                    <div class="form-inline">
+                        <label for="eEmployeeAccount" class="col-md-4 col-sm-12">
+                            Account <i class="fa fa-asterisk required-icon"></i>
+                        </label>
+                        <select tabindex="1" name="EmployeeAccountId"
+                                ng-model="hrmTransactionToEdit.EmpAccountId"
+                                class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                ng-options="employeeAccount.Value as employeeAccount.Name for employeeAccount in employeesAccounts"
+                                id="eEmployeeAccount" placeholder="Account Name"
+                                disabled="disabled"
+                                required>
+                            <option value="">--Select Account--</option>
+                        </select>
+                    </div>
+
+
+                    <!--Transaction Date-->
+                <!--<div class="form-inline">
+                    <label for="transactionDate" class="col-md-4 col-sm-12">
+                        Transaction date<i class="fa fa-asterisk required-icon"></i>
+                    </label>
+                    <div tabindex="4" class="dropdown input-group date width-asa">
+                        <a class="dropdown-toggle" id="transactionDate" role="button" data-toggle="dropdown" data-target="#" href="#">
+                            <div class="input-group date-input-group">
+                                <input type="text" date-time-input="DD-MM-YYYY" class="form-control-asa full-width-asa" ng-model="hrmTransactionToEdit.TransactionDate" ng-disabled="true">
+                                <span class="input-group-addon input-group-addon-asa"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker ng-model="hrmTransactionToEdit.TransactionDate" data-datetimepicker-config="{ startView:'day', minView:'day' ,dropdownSelector: '#startDate'}"
+                                            data-before-render="beforeStartDateRender($dates)"/>
+                        </ul>
+                    </div>
+                </div>-->
+                    <div class="form-inline">
+                        <label for="transactionDate" class="col-md-4 col-sm-12">
+                            Date <i class="fa fa-asterisk required-icon"></i>
+                        </label>
+                        <input type="text"
+                               date-time-input="DD-MM-YYYY"
+                               tabindex="1"
+                               name="transactionDate"
+                               ng-model="hrmTransactionToEdit.TransactionDate"
+                               class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                               id="transactionDate"
+                               placeholder="Transaction Date"
+                               disabled="disabled"
+                               required />
+                    </div>
+
+
+                    <!--Transaction Type-->
+                    <div class="form-inline">
+                        <label for="eTransactionType" class="col-md-4 col-sm-12">
+                            Type <i class="fa fa-asterisk required-icon"></i>
+                        </label>
+                        <select tabindex="1" name="TransactionTypeId"
+                                ng-model="hrmTransactionToEdit.TransactionTypeId"
+                                class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                ng-options="transactionType.Value as transactionType.Name for transactionType in filters.transactionTypes"
+                                id="eTransactionType" placeholder="Transaction Type"
+                                disabled="disabled"
+                                required>
+                            <option value="">--Select Transaction Type--</option>
+                        </select>
+                    </div>
+
+
+                    <!--Transaction Process-->
+                    <div class="form-inline">
+                        <label for="eTransactionprocess" class="col-md-4 col-sm-12">
+                            Process <i class="fa fa-asterisk required-icon"></i>
+                        </label>
+                        <select tabindex="1" name="TransactionProcess"
+                                ng-model="hrmTransactionToEdit.TransactionProcess"
+                                class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                ng-options="transactionProcess.Value as transactionProcess.Name for transactionProcess in filters.transactionProcesses"
+                                id="eTransactionprocess" placeholder="Transaction Process"
+                                disabled="disabled"
+                                required>
+                            <option value="">--Select Transaction Process--</option>
+                        </select>
+                    </div>
+
+
+                    <!--Amount-->
+                    <div class="form-inline" ng-if="hrmTransactionToEdit.TransactionCreatedFrom === 64">
+                        <label for="eAmount" class="col-md-4 col-sm-12">
+                            Amount <i class="fa fa-asterisk required-icon"></i>
+                        </label>
+                        <input type="number"
+                               tabindex="1"
+                               name="Amount"
+                               ng-model="hrmTransactionToEdit.Amount"
+                               class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                               id="eAmount"
+                               placeholder="Amount"
+                               required />
+                    </div>
+
+
+                    <!--Transaction Location-->
+                    <div class="form-inline">
+                        <label for="eTransactionLocation" class="col-md-4 col-sm-12">
+                            Location <i class="fa fa-asterisk required-icon"></i>
+                        </label>
+                        <select tabindex="1" name="Location"
+                                ng-model="hrmTransactionToEdit.Location"
+                                class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                ng-options="Location.Value as Location.Name for Location in filters.transactionLocation"
+                                id="eTransactionLocation" placeholder="Transaction Location"
+                                required
+                                disabled="disabled">
+                            <option value="">--Select Transaction Location--</option>
+                        </select>
+                    </div>
+
+
+                    <!--Cheque Number-->
+                    <div class="form-inline" ng-if="hrmTransactionToEdit.TransactionProcess===2">
+                        <label for="eChequeNum" class="col-md-4 col-sm-12">
+                            Cheque Number <i class="fa fa-asterisk required-icon"></i>
+                        </label>
+                        <input type="text"
+                               tabindex="1"
+                               name="ChequeNo"
+                               ng-model="hrmTransactionToEdit.ChequeNo"
+                               class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                               id="eChequeNum"
+                               placeholder="Cheque Number"
+                               disabled="disabled" />
+
+                    </div>
+
+
+
+                    <!--Bank Account Select-->
+                    <div class="form-inline" ng-if="hrmTransactionToEdit.TransactionProcess===2">
+                        <label for="eEmployeeBankAccount" class="col-md-4 col-sm-12">
+                           Bank Account <i class="fa fa-asterisk required-icon"></i>
+                        </label>
+                        <select tabindex="1" name="BankAccount"
+                                ng-model="hrmTransactionToEdit.BankAccount"
+                                class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                ng-options="employeeBankAccount.Id as employeeBankAccount.AccountNo for employeeBankAccount in employeeBankAccounts"
+                                id="eEmployeeBankAccount" placeholder="Bank Account Number"
+                                disabled="disabled"
+                                required>
+                            <option value="">--Select Bank Account--</option>
+                        </select>
+                    </div>
+
+
+                    <!--Description-->
+                    <div class="form-inline">
+                        <label for="eDescription" class="col-md-4 col-sm-12">
+                            Description 
+                        </label>
+                        <textarea rows="5" cols="50" tabindex="1"
+                                  name="Description"
+                                  ng-model="hrmTransactionToEdit.Description"
+                                  class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                  id="eDescription"
+                                  placeholder="Description"
+                                  disabled="disabled"
+                                  ></textarea>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <!--Hidden Fields-->
+
+
+
+
+                    <div class="form-inline">
+                        <input type="text"
+                               ng-show="false"
+                               tabindex="1"
+                               name="CreatedBy"
+                               ng-model="hrmTransactionToEdit.CreatedBy"
+                               value="{{hrmTransactionToEdit.EmployeeId}}"
+                               class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                               id="eCreatedBy" />
+                    </div>
+
+                    <div class="form-inline">
+                        <input type="text"
+                               ng-show="false"
+                               tabindex="1"
+                               name="ModifiedBy"
+                               ng-model="hrmTransactionToEdit.ModifiedBy"
+                               value="{{hrmTransactionToEdit.EmployeeId}}"
+                               class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                               id="eModifiedBy" />
+                    </div>
+                    <div class="form-inline">
+                        <input type="text"
+                               ng-show="false"
+                               tabindex="1"
+                               name="EmployeeName"
+                               ng-model="hrmTransactionToEdit.EmployeeName"
+                               class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                               id="eEmployeeName" />
+                    </div>
+                    <div class="form-inline">
+                        <input type="text"
+                               ng-show="false"
+                               tabindex="1"
+                               name="Grade"
+                               ng-model="hrmTransactionToEdit.Grade"
+                               class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                               id="eGrade" />
+                    </div>
+                    <div class="form-inline">
+                        <input type="text"
+                               ng-show="false"
+                               tabindex="1"
+                               name="Designation"
+                               ng-model="hrmTransactionToEdit.Designation"
+                               class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                               id="eDesignation" />
+                    </div>
+                    <div class="form-inline">
+                        <input type="text"
+                               ng-show="false"
+                               tabindex="1"
+                               name="OfficeType"
+                               ng-model="hrmTransactionToEdit.OfficeType"
+                               class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                               id="eOfficeType" />
+                    </div>
+                    <div class="form-inline">
+                        <input type="text"
+                               ng-show="false"
+                               tabindex="1"
+                               name="OfficeName"
+                               ng-model="hrmTransactionToEdit.OfficeName"
+                               class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                               id="eOfficeName" />
+                    </div>
+                    <div class="form-inline">
+                        <input type="text"
+                               ng-show="false"
+                               tabindex="1"
+                               name="OfficeCode"
+                               ng-model="hrmTransactionToEdit.OfficeCode"
+                               class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                               id="eOfficeCode" />
+                    </div>
+
+
+                    <div class="form-inline">
+                        <input type="text"
+                               ng-show="false"
+                               tabindex="1"
+                               name="EmployeeAccountName"
+                               ng-model="hrmTransactionToEdit.EmployeeAccountName"
+                               class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                               id="eEmployeeAccountName" />
+                    </div>
+
+
+
+
+                    <div class="form-inline">
+                        <input type="number"
+                               ng-show="false"
+                               tabindex="1"
+                               name="TransactionCreatedFrom"
+                               ng-model="hrmTransactionToEdit.TransactionCreatedFrom"
+                               class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                               id="eTransactionCreatedFrom" />
+                    </div>
+
+                    <div class="form-inline">
+                        <input type="text"
+                               ng-show="false"
+                               tabindex="1"
+                               name="TransactionTypeName"
+                               ng-model="hrmTransactionToEdit.TransactionTypeName"
+                               class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                               id="eTransactionTypeName" />
+                    </div>
+
+
+                    <div class="form-inline">
+                        <input type="number"
+                               ng-show="false"
+                               tabindex="1"
+                               name="SalaryYear"
+                               ng-model="hrmTransactionToEdit.SalaryYear"
+                               class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                               id="eSalaryYear" />
+                    </div>
+
+                    <div class="form-inline">
+                        <input type="number"
+                               ng-show="false"
+                               tabindex="1"
+                               name="SalaryMonth"
+                               ng-model="hrmTransactionToEdit.SalaryMonth"
+                               class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                               id="eSalaryMonth" />
+                    </div>
+
+                    <div class="form-inline">
+                        <input type="checkbox"
+                               ng-show="false"
+                               tabindex="1"
+                               name="IsAutoTransaction"
+                               ng-model="hrmTransactionToEdit.IsAutoTransaction"
+                               class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                               id="eIsAutoTransaction" />
+                    </div>
+
+
+
+                    <div class="form-inline">
+                        <input type="number"
+                               ng-show="false"
+                               tabindex="1"
+                               name="CreatedBranchWorkingDate"
+                               ng-model="hrmTransactionToEdit.CreatedBranchWorkingDate"
+                               class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                               id="eCreatedBranchWorkingDate" />
+                    </div>
+
+                    <div class="form-inline">
+                        <input type="number"
+                               ng-show="false"
+                               tabindex="1"
+                               name="ModifiedBranchWorkingDate"
+                               ng-model="hrmTransactionToEdit.ModifiedBranchWorkingDate"
+                               class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                               id="eModifiedBranchWorkingDate" />
+                    </div>
+
+                    <div class="form-inline">
+                        <input type="number"
+                               ng-show="false"
+                               tabindex="1"
+                               name="CurrentBranchWorkingDate"
+                               ng-model="hrmTransactionToEdit.CurrentBranchWorkingDate"
+                               class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                               id="eCurrentBranchWorkingDate" />
+                    </div>
+
+                    <div class="form-inline">
+                        <input type="number"
+                               ng-show="false"
+                               tabindex="1"
+                               name="ReferenceTransactionid"
+                               ng-model="hrmTransactionToEdit.ReferenceTransactionid"
+                               class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                               id="eReferenceTransactionid" />
+                    </div>
+
+                    <div class="form-inline">
+                        <input type="number"
+                               ng-show="false"
+                               tabindex="1"
+                               name="ReverseBranchWorkingDate"
+                               ng-model="hrmTransactionToEdit.ReverseBranchWorkingDate"
+                               class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                               id="eReverseBranchWorkingDate" />
+                    </div>
+
+
+                    <div class="form-inline">
+                        <input type="number"
+                               ng-show="false"
+                               tabindex="1"
+                               name="ReferenceAccountId"
+                               ng-model="hrmTransactionToEdit.ReferenceAccountId"
+                               class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                               id="eReferenceAccountId" />
+                    </div>
+
+                    <div class="form-inline">
+                        <input type="number"
+                               ng-show="false"
+                               tabindex="1"
+                               name="ReferenceBranchId"
+                               ng-model="hrmTransactionToEdit.ReferenceBranchId"
+                               class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                               id="eReferenceBranchId" />
+                    </div>
+
+
+
+
+
+                    <div ng-if="hrmTransactionEditForm.$dirty === true && hrmTransactionEditForm.$valid === false">
+                    </div>
+                    <button style="margin-top: 10px;" type="submit" tabindex="100" class="btn btn-primary pull-right" ng-if="hrmTransactionToEdit.TransactionCreatedFrom === 64">
+                        Submit
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

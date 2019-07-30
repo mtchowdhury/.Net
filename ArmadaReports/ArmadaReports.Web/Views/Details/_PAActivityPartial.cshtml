@@ -1,0 +1,31 @@
+﻿<div id="pa-activity-modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog status-notes-modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-custom-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @*<h5 class="modal-title">Note and Status History Activity (ASPN ID: <strong id="popup-statusnotes-aspnid"></strong>)</h5>*@
+                <h5 class="modal-title">PA Activity</h5>
+            </div>
+            <div class="modal-body">
+                @*<div class="form-inline">
+                    <div class="form-group">
+                        <label for="history-statusnotes-contains">Note Category or Status Contains:</label>
+                        <input type="text" id="history-statusnotes-contains" class="form-control" placeholder="status or notes contains" />
+                    </div>
+                </div>*@
+                <img id="loading-pa-activity" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none;" />
+                <table id="table-pa-activity" class="table table-bordered details-popup-table">
+                    <thead>
+                        <tr>
+                            <td>Status</td>
+                            <td>Initiation Date</td>
+                            <td>Approval Date</td>
+                            <td>Expiration Date</td>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

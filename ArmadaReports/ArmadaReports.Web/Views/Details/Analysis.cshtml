@@ -1,0 +1,112 @@
+﻿@model IEnumerable<ArmadaReports.Common.Models.SalesAnalysis>
+
+<div class="row row-margin">
+    <div class="col-lg-8 col-md-10 col-sm-12 col-lg-offset-2 col-md-offset-1">
+        <a id="analysis-excel" style="margin-bottom: 5px;" target="_blank" class="btn btn-primary">Create Spreadsheet</a>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <input type="hidden" id="program-hidden" value="@ViewData["programId"]" />
+                <input type="hidden" id="referralType-hidden" value="@ViewData["referraltype"]" />
+                <h3 class="panel-title">Sales Referral Analysis</h3>
+            </div>
+            <div class="panel-body">
+                <div class="btn-group-container">
+                    <div id="bg-analysis" class="btn-group dropup" role="group" aria-label="">
+                        <button type="button" data-date="today" class="btn btn-primary custom-btn-group" onclick="detailsWrapper.onDateBtnPress(this)">Today</button>
+                        <button type="button" data-date="yesterday" class="btn btn-primary custom-btn-group" onclick="detailsWrapper.onDateBtnPress(this)">Yesterday</button>
+                        <button type="button" data-date="thisweek" class="btn btn-primary custom-btn-group" onclick="detailsWrapper.onDateBtnPress(this)">This Week</button>
+                        <button type="button" data-date="lastweek" class="btn btn-primary custom-btn-group" onclick="detailsWrapper.onDateBtnPress(this)">Last Week</button>
+                        <button type="button" data-date="currentmonth" class="btn btn-primary custom-btn-group" onclick="detailsWrapper.onDateBtnPress(this)">Current Month</button>
+                        <button type="button" data-date="lastmonth" class="btn btn-primary custom-btn-group" onclick="detailsWrapper.onDateBtnPress(this)">Last Month</button>
+
+                        <button style="border-radius: 0px;" id="btn-qtd-a" type="button" data-date="qtd" class="btn btn-primary dropdown-toggle custom-btn-group" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                            QTD<span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu qtd-dropdown">
+                            <li><a href="javascript:void(0)" data-date="qtd4" onclick="detailsWrapper.onDateBtnPress(this)">QTR4</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="javascript:void(0)" data-date="qtd3" onclick="detailsWrapper.onDateBtnPress(this)">QTR3</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="javascript:void(0)" data-date="qtd2" onclick="detailsWrapper.onDateBtnPress(this)">QTR2</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="javascript:void(0)" data-date="qtd1" onclick="detailsWrapper.onDateBtnPress(this)">QTR1</a></li>
+                        </ul>
+
+                        <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group" onclick="detailsWrapper.onDateBtnPress(this)">YTD</button>
+                        <button type="button" data-date="allreferrals" class="btn btn-primary custom-btn-group" onclick="detailsWrapper.onDateBtnPress(this)">24 Months</button>
+                    </div>
+                </div>
+                <h5>Time Period: <strong>@ViewData["tomeperiod"]</strong></h5>
+                <h5>Number of Referrals: <strong>@ViewData["referrals"]</strong></h5>
+                <table id="analysis-table" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <td>Region</td>
+                            <td>District Manager</td>
+                            <td>Sales Rep.</td>
+                            <td>Area</td>
+                            <td>Referrals</td>
+                            <td>Avg. Per Rep.</td>
+                            <td>% District</td>
+                            <td>% Total</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            if (item.DistrictManagerId.Equals("-5000"))
+                            {
+                                <tr class="black-row">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            }
+                            else if (item.DistrictManagerId.Equals("-1000"))
+                            {
+                                <tr class="total-analysis-row">
+                                    <td>@item.RegionName</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>@item.TotalCount</td>
+                                    <td>@item.AvgPerRep</td>
+                                    <td>@item.PercentageDistrict%</td>
+                                    <td>@item.PercentageTotal%</td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td>@item.RegionName</td>
+                                    <td>@item.DistrictManagerName</td>
+                                    <td>@item.SalesRepName</td>
+                                    <td>@item.SalesRepAreaName</td>
+                                    <td>@item.TotalCount</td>
+                                    <td>@item.AvgPerRep</td>
+                                    <td>@item.PercentageDistrict%</td>
+                                    <td>@item.PercentageTotal%</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#send-mail-id').hide();
+        service.getExportUrl('analysis-excel', '@ViewData["excelurl"]');
+        detailsWrapper.initAnalysis();
+        detailsWrapper.selectDateBtn('@ViewData["dateType"]');
+    });
+</script>

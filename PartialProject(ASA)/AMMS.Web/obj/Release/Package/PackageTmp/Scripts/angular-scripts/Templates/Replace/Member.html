@@ -1,0 +1,132 @@
+﻿<div class="panel panel-default panel-primary" ng-controller="memberReplaceController">
+    <div class="panel-heading panel-title">
+        Replace Member
+    </div>
+    <div class="panel-body font-asa-11">
+        <form angular-validator-submit="replaceMember()" name="ReplaceMemberForm" class="form-horizontal" novalidate angular-validator>
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12">
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <label for="sdate" class="col-md-4 col-sm-12">
+                                    Replace Date<i class="fa fa-asterisk required-icon"></i>
+                                </label>
+                                <div class="dropdown input-group date width-asa">
+                                    <a class="dropdown-toggle" id="sdate" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                        <div class="input-group date-input-group">
+                                            <input type="text" readonly="readonly" date-time-input="DD-MM-YYYY" class="form-control-asa full-width-asa" data-ng-model="replace.WorkingDate"
+                                                   is-open="false"
+                                                   ng-disabled="true"
+                                                   required
+                                                   required-message="'Field is required'">
+                                            <span ng-hide="roleId==='2'" class="input-group-addon input-group-addon-asa"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </a>
+                                    <ul ng-hide="roleId==='2'" class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                        <datetimepicker data-ng-model="replace.WorkingDate" data-datetimepicker-config="{ startView:'day', minView:'day',dropdownSelector: '#sdate' }"
+                                                        data-before-render="beforeStartDateRender($dates)" />
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <h4>From</h4>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <label for="FromMember" class="col-md-4 col-sm-12">
+                                Member<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select tabindex="1"
+                                    class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="FromMember" ng-model="replace.ReplacedMemberId"
+                                    ng-change="fetchMemberData('replace')"
+                                    name="FromMember"
+                                    required-message="'Replace Member Field is required'"
+                                    ng-options="member.Id as member.NickName for member in groupMembers"
+                                    required></select>
+                        </div>
+                       
+                       
+                        <div class="form-inline">
+                            <label for="fguardianName" nguid-model="disolveGroupMeetingDay" class="col-md-4 col-sm-12">
+                               Guardian Name
+                            </label>
+                            <input type="text" maxlength="100"
+                                   class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                   id="fguardianName"
+                                   name="fguardianName"
+                                   ng-model="fGuardian" readonly="readonly">
+
+                        </div>
+                        <div class="form-inline">
+                            <label for="fpassBookno" nguid-model="disolveGroupTotalMember" class="col-md-4 col-sm-12">
+                                Passbook Number
+                            </label>
+                            <input type="text" tabindex="26" maxlength="100"
+                                   class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                   id="fpassBookno"
+                                   name="fpassBookno"
+                                   ng-model="fPassbook" readonly="readonly">
+                        </div>
+
+                     </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <h4>To</h4>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <label for="toMember" class="col-md-4 col-sm-12">
+                                Member<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select tabindex="4"
+                                    class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="toMember" ng-model="replace.NewMemberId"
+                                    ng-change="fetchMemberData('new')"
+                                    name="toMember"
+                                    required-message="'New Member field is required'"
+                                    ng-options="member.Id as member.NickName for member in newMembers"
+                                    required></select>
+                        </div>
+
+                      
+                        <div class="form-inline">
+                            <label for="tguardianName" nguid-model="disolveGroupMeetingDay" class="col-md-4 col-sm-12">
+                                Guardian Name
+                            </label>
+                            <input type="text" maxlength="100"
+                                   class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                   id="tguardianName"
+                                   name="tguardianName"
+                                   ng-model="tGuardian" readonly="readonly">
+
+                        </div>
+                        <div class="form-inline">
+                            <label for="tpassBookno" nguid-model="disolveGroupTotalMember" class="col-md-4 col-sm-12">
+                                Passbook Number
+                            </label>
+                            <input type="text" tabindex="26" maxlength="100"
+                                   class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                   id="tpassBookno"
+                                   name="tpassBookno"
+                                   ng-model="tPassbook" readonly="readonly">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="ReplaceMemberForm.$valid === false  && ReplaceMemberForm.$dirty === true">
+                <p class="form-validation-message">Validation failed, one or more required field is missing</p>
+            </div>
+            <button type="submit" tabindex="100" class="btn btn-primary">
+                Submit
+            </button>
+        </form>
+    </div>
+</div>

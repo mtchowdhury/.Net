@@ -1,0 +1,52 @@
+﻿@model List<ArmadaReports.Common.Models.ReferralTimeToProcessDetails>
+
+<div class="row row-margin">
+    <div class="col-lg-3 col-md-3 col-sm-12">
+        <h4><strong>Referral Time To Process</strong></h4>
+        <h5>Number of Referrals: <strong>@ViewData["referrals"]</strong></h5>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-12">
+        <a id="rttp-excel" style="margin-top: 20px;" target="_blank" class="btn btn-primary">Create Spreadsheet</a>
+    </div>
+</div>
+
+<div style="margin-top: 3px;" class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <table id="rttp-table" class="table table-bordered aspn-table">
+            <thead>
+                <tr>
+                    <td>ASPN ID</td>
+                    <td>Days To Process</td>
+                    <td>PA Required</td>
+                    <td>Status</td>
+                    <td>Created Date</td>
+                    <td>Assigned Date</td>
+                    <td>Fill Date</td>
+                    <td>Ship Date</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.AspnRxID</td>
+                        <td>@item.DaysToProcess</td>
+                        <td>@item.PriorAuthRequired</td>
+                        <td>@item.Status</td>
+                        <td>@item.CreatedDate.ToString("MM/dd/yyyy")</td>
+                        <td>@item.AssignedDate.ToString("MM/dd/yyyy")</td>
+                        <td>@item.FillDate.ToString("MM/dd/yyyy")</td>
+                        <td>@item.ShipDate.ToString("MM/dd/yyyy")</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        service.getExportUrl('rttp-excel', '@ViewData["excelurl"]');
+        detailsWrapper.initRttpTable();
+    });
+</script>

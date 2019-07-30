@@ -1,0 +1,72 @@
+﻿@using ArmadaReports.Web.Models
+@model NewRxByPhysicianData
+
+<div class="row row-margin">
+    <h3 style="margin-left: 15px;">New Rx By Physician Report</h3>
+    <div class="row">
+        <div class="col-lg-3 col-md-5 col-sm-12">
+            <div class="form-inline">
+                <label for="newrx-program" class="">Program: </label>
+                <select class="form-control form-control-height" id="newrx-program">
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-5 col-sm-12">
+            <div class="form-group">
+                <a class="btn btn-primary" onclick="tableWrapper.getNewRxReport(false)">Submit</a>
+                <a id="newrx-excel" style="display: none;" target="_blank" class="btn btn-primary">Create Spreadsheet</a>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-2 col-sm-12"></div>
+    </div>
+</div>
+
+<!-- Data table -->
+<div style="margin-top: 10px;" class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <table id="newrx-table" class="table table-bordered table-hover aspn-table">
+            <thead>
+                <tr>
+                    <th>Physician First Name</th>
+                    <th>Physician Last Name</th>
+                    <th>Physician NPI</th>
+                    <th>Drug Name</th>
+                    <th>Strength</th>
+                    @foreach (var column in Model.Columns)
+                    {
+                        <th>@column.Replace("-", "/")</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var data in Model.Rows)
+                {
+                    <tr class="@data.Strength">
+                        <td>@data.PhysicianFirstName</td>
+                        <td>@data.PhysicianLastName</td>
+                        <td>@data.PhysicianNPI</td>
+                        <td>@data.DrugName</td>
+                        <td>@data.Strength</td>
+                        @foreach (var cell in data.DatesCount)
+                        {
+                            <td>@cell</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<!--End of Data table-->
+
+<script>
+    $(document).ready(function () {
+        $('#send-mail-id').hide();
+        service.getExportUrl('nav-home', '/Home/Index');
+        service.getExportUrl('newrx-excel', '@ViewData["excelurl"]');
+        tableWrapper.getNewRxPrograms('@ViewData["programId"]');
+        service.IsExportDenied('@ViewData["programid"]', 'newrx-excel', '');
+        tableWrapper.initNewRxReport();
+    });
+</script>

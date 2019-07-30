@@ -1,0 +1,51 @@
+﻿@using CanvasJSChartPanel
+
+@{
+    ViewBag.Title = "Expiration Detail";
+}
+
+<link href="~/Content/inventory.reports.css" rel="stylesheet" />
+
+<br />
+
+@Html.ChartPanelScripts()
+
+@Html.TablePanel(new TablePanelSettings()
+{
+    Id = "expirationReportDetail",
+    Title = "Expiration Report Detail",
+    DataSourceUrl = ViewBag.BaseUrl + "/Inventory/GetExpirationReportDetail" + ViewBag.QueryString,
+    ShowExportToExcelButton = (bool)ViewBag.IsExportDenied,
+    ExportToExcelUrl = ViewBag.BaseUrl + "/Inventory/GetExpirationReportDetail" + ViewBag.QueryString + "&excel=true",
+    Columns = new List<TableDataColumn>()
+    {
+        new TableDataColumn()
+        {
+            Title = "Pharmacy Name"
+        },
+        new TableDataColumn()
+        {
+            Title = "Inventory Type"
+        },
+        new TableDataColumn()
+        {
+            Title = "Drugname"
+        },
+        new TableDataColumn()
+        {
+            Title = "Lot Number"
+        },
+        new TableDataColumn()
+        {
+            Title = "Exp Date"
+        },
+        new TableDataColumn()
+        {
+            Title = "On Hand Carton"
+        },
+        new TableDataColumn()
+        {
+            Title = "Reported Date"
+        }
+    }
+})                            

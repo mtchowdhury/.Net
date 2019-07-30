@@ -1,0 +1,57 @@
+﻿<div class="row" ng-controller="userAdminListController">
+    <div class="col-md-12 panel panel-default panel-primary">
+        <div class="col-lg-12 panel-body">
+            <span ng-repeat="command in commandList">
+                <span ng-if="command.IsGeneral === true">
+                    <button ng-click="(command.HasView) ? openCommandTab(command, tab.id, 'Users',{}): exportData()">
+                        <span>{{command.CommandName}}</span>
+                    </button>
+                </span>
+            </span>
+            <div class="col-lg-12 panel-body font-asa-12">
+                <div class="form-inline col-md-12" ng-if="user.Role=='0' || user.Role=='1' || user.Role=='12' || user.Role=='13'|| user.Role=='6'|| user.Role=='5'|| user.Role=='4'|| user.Role=='3'">
+                    <label for="branch" class="col-md-1 col-sm-12">
+                        Branch
+                    </label>
+                    <select class="form-control form-control-asa form-control-asa-select-box-padding col-md-4 col-sm-12 col-md-offset-7"
+                            id="branch" ng-model="selectedBranchForUserList"
+                            name="branch"
+                            ng-change="getUsers(selectedBranchForUserList);"
+                            ng-options="branch.Value as branch.Name for branch in supervisedBranches"></select>
+                </div>
+                <table style="width: 98%" datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs"
+                       class="table table-striped table-bordered table-hover table-asa">
+                    <thead>
+                        <tr>
+                            <th ng-if="hasNonGeneralCommands">Actions</th>
+                            <th>Employee ID</th>
+                            <th>Name</th>
+                            <th>Active?</th>
+                            <th>Assigned Roles</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="user in userList">
+                            <td ng-if="hasNonGeneralCommands">
+                                <span ng-repeat="command in commandList">
+                                    <span ng-if="command.IsGeneral !== true && command.CommandName !== 'EDIT'" ng-click="(command.HasView) ? openCommandTab(command, tab.id, 'Users',{'editUserId':user.Id}): handleNonGeneralActions(command.CommandName, user)">
+                                        <i class="{{command.IconClass}} asa-icon-{{command.CommandName}}" title="{{command.ToolTip}}"></i>
+                                    </span>
+                                    <span ng-if="command.IsGeneral !== true && command.CommandName === 'EDIT' && user.IsEmployeeActive" ng-click="(command.HasView) ? openCommandTab(command, tab.id, 'Users',{'editUserId':user.Id,'editEmpId':user.EmpId}): handleNonGeneralActions(command.CommandName, user)">
+                                        <i class="{{command.IconClass}} asa-icon-{{command.CommandName}}" title="{{command.ToolTip}}"></i>
+                                    </span>
+                                </span>
+                            </td>
+                            <td>{{user.EmployeeId}}</td>
+                            <td>{{user.Name}}</td>
+                            <td>{{user.Active ? 'Yes' : 'No'}}</td>
+                            <td>{{user.RoleNames}}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

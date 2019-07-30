@@ -1,0 +1,197 @@
+﻿<div class="col-md-12">
+    <div class="panel panel-primary ReferralsChartAnalysisPanel">
+        <div class="panel-heading">
+            <h3 class="panel-title">Referral Volume vs. Time to Fill Analysis</h3>
+        </div>
+        <div class="panel-body">
+            <div id="ReferralsChartAnalysis" style="width: 100%;">
+                <div id="ReferralsLineChart" style="height: 90px"></div>
+                <div id="ReferralsColumnChart" style="height: 250px!important"></div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function GetReferralsVsTimeToFill() {
+        var formData = $("#headerForm").serialize();
+        var url = "@Url.Action("GetReferralsVsTimeToFillAnalysis", "Scorecard")?" + formData;
+        $.ajax({
+            url: url,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            beforeSend: function () {
+                $(".ReferralsChartAnalysisPanel").block();
+            },
+            success: function (data) {
+                var dataPlots = [];
+                var markerPoints = [];
+                if (data && data.ReferralsVsTimeToFill && data.ReferralsVsTimeToFill.length > 0) {
+                    $.each(data.ReferralsVsTimeToFill, function (index, item) {
+                        markerPoints.push({
+                            y: item.TimeToFill,
+                            label: item.PeriodName,
+                            legendText: 'Time To Fill (Days): ' + digits(item.TimeToFill) +
+                                       '<br/> Time Period: ' + item.PeriodName
+                        });
+                        dataPlots.push({
+                            y: item.Referrals,
+                            label: item.PeriodName,
+                            legendText: 'Number of Referrals: ' + item.Referrals +
+                                        '<br/> Time Period: ' + item.PeriodName +
+                                         '<br/> Time To Fill (Days): ' + digits(item.TimeToFill)
+                        });
+                    });
+
+                    var columnChart = new CanvasJS.Chart("ReferralsColumnChart",
+                    {
+                        backgroundColor: "",
+                        dataPointWidth: 60,
+                        //theme: "theme2",
+                        animationEnabled: true,
+                        height: 250, //in pixels
+                        axisX: {
+                            interval: 1,
+                            tickThickness: 0,
+                            //labelAngle: 315,
+                            lineThickness: 1,
+                            titleFontSize: 14,
+                            titleFontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif",
+                            labelFontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif",
+                            titleFontColor: '#333333',
+                            labelFontColor: '#333333',
+                            labelFontSize: 14,
+                        },
+                        axisY: {
+                            title: '',
+                            titleFontSize: 14,
+                            includeZero: true,
+                            gridThickness: 1,
+                            tickThickness: 0,
+                            titleFontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif",
+                            labelFontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif",
+                            titleFontColor: '#333333',
+                            labelFontColor: '#333333',
+                            labelFontSize: 14,
+                            lineThickness: 0
+                        },
+                        legend: {
+                            verticalAlign: "bottom",
+                            horizontalAlign: "center",
+                            fontSize: 15,
+                            fontColor: '#333333',
+                            fontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif"
+                        },
+                        data: [
+                                {
+                                    type: "column",
+                                    color: '#8B8B00',
+                                    showInLegend: true,
+                                    toolTipContent: "{legendText}",
+                                    indexLabel: "{y}",
+                                    legendText: 'Total Referrals',
+                                    indexLabelFontColor: "#333333",
+                                    indexLabelFontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif",
+                                    indexLabelPlacement: "outside",
+                                    indexLabelFontSize: 14,
+                                    dataPoints: dataPlots,
+                                },
+                                {
+                                    type: "column",
+                                    color: '#8B4500',
+                                    showInLegend: true,
+                                    toolTipContent: "{legendText}",
+                                    indexLabel: "{y}",
+                                    legendText: 'Time To Fill (Days)',
+                                    indexLabelFontColor: "#333333",
+                                    indexLabelFontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif",
+                                    indexLabelFontSize: 14,
+                                    dataPoints: []
+                                }
+                        ]
+                    });
+                    columnChart.render();
+                    $('.canvasjs-chart-credit').hide();
+
+                   var lineChart = new CanvasJS.Chart("ReferralsLineChart",
+                   {
+                       //theme: "theme2",
+                       title: {
+                           text: ""
+                       },
+                       animationEnabled: true,
+                       axisX: {
+                           interval: 1,
+                           tickThickness: 0,
+                           lineColor: "#FFF",
+                           labelAngle: 315,
+                           lineThickness: 1,
+                           titleFontSize: 14,
+                           titleFontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif",
+                           labelFontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif",
+                           titleFontColor: '#333333',
+                           labelFontColor: '#333333',
+                           labelFontSize: 14,
+                           labelFormatter: function (e) {
+                               return '';
+                           }
+                       },
+                       axisY: {
+                           title: '',
+                           titleFontSize: 14,
+                           gridThickness: 0,
+                           tickThickness: 0,
+                           titleFontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif",
+                           labelFontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif",
+                           titleFontColor: '#333333',
+                           labelFontColor: '#333333',
+                           labelFontSize: 14,
+                           lineThickness: 0,
+                           labelFormatter: function () {
+                               return " ";
+                           }
+                       },
+                       legend: {
+                           verticalAlign: "bottom",
+                           horizontalAlign: "center",
+                           fontSize: 15,
+                           fontColor: '#333333',
+                           fontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif"
+                       },
+                       data: [
+                           {
+                               type: "line",
+                               color: '#8B4500',
+                               showInLegend: false,
+                               toolTipContent: "{legendText}",
+                               indexLabel: "{y}",
+                               legendText: 'Time to Fill (Days)',
+                               indexLabelFontColor: "#333333",
+                               indexLabelFontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif",
+                               indexLabelFontSize: 14,
+                               dataPoints: markerPoints,
+                           }
+                       ]
+                   });
+                   lineChart.render();
+                   $('.canvasjs-chart-credit').hide();
+                } else {
+                    $("#ReferralsChart").html(' No referrals for this time period.');
+                    $("#ReferralsChartTitle").html("");
+                }
+            },
+            complete: function () {
+                $(".ReferralsChartAnalysisPanel").unblock();
+            },
+            error: function () {
+                $("#ReferralsChart").html('No referrals for this time period.');
+                $("#ReferralsChartTitle").html("");
+                $(".ReferralsChartAnalysisPanel").unblock();
+            }
+        });
+    }   
+
+</script>

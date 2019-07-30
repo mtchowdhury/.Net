@@ -1,0 +1,133 @@
+﻿<div id="up-filter-modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content details-filter-modal-dialog">
+            <div class="modal-header modal-custom-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h5 class="modal-title">Selection Filters</h5>
+            </div>
+            <div class="modal-body modal-body-height">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                        <div class="form-inline">
+                            <div class="form-group details-filter-form-group">
+                                <label class="details-filter-label" for="upfs-patientid">Patient ID:</label>
+                                <input id="upfs-patientid" type="text" value="@ViewData["patientid"]" class="form-control" placeholder="" />
+                            </div>
+                            <div class="form-group details-filter-form-group">
+                                <label class="details-filter-label" for="upfs-ndc">NDC:</label>
+                                <input id="upfs-ndc" type="text" value="@ViewData["ndc"]" class="form-control" placeholder="" />
+                            </div>
+                            <div class="form-group details-filter-form-group">
+                                <label class="details-filter-label" for="upfs-fillingpharmacy">Filling Pharmacy:</label>
+                                <select id="upfs-fillingpharmacy" class="form-control form-control-height" onchange="">
+                                    <option value="">Show All</option>
+                                </select>
+                            </div>
+                            <div class="form-group details-filter-form-group">
+                                <label class="details-filter-label" for="upfs-state">State:</label>
+                                <select id="upfs-state" class="form-control form-control-height" onchange="">
+                                    <option value="">Show All</option>
+                                    <option row="1" value=""></option>
+                                    <option row="3" value="AK">AK</option>
+                                    <option row="4" value="AL">AL</option>
+                                    <option row="5" value="AR">AR</option>
+                                    <option row="6" value="AZ">AZ</option>
+                                    <option row="7" value="CA">CA</option>
+                                    <option row="8" value="CO">CO</option>
+                                    <option row="9" value="CT">CT</option>
+                                    <option row="10" value="DC">DC</option>
+                                    <option row="11" value="DE">DE</option>
+                                    <option row="12" value="FL">FL</option>
+                                    <option row="13" value="GA">GA</option>
+                                    <option row="14" value="HI">HI</option>
+                                    <option row="15" value="IA">IA</option>
+                                    <option row="16" value="ID">ID</option>
+                                    <option row="17" value="IL">IL</option>
+                                    <option row="18" value="IN">IN</option>
+                                    <option row="19" value="KS">KS</option>
+                                    <option row="20" value="KY">KY</option>
+                                    <option row="21" value="LA">LA</option>
+                                    <option row="22" value="MA">MA</option>
+                                    <option row="23" value="MD">MD</option>
+                                    <option row="24" value="ME">ME</option>
+                                    <option row="25" value="MI">MI</option>
+                                    <option row="26" value="MN">MN</option>
+                                    <option row="27" value="MO">MO</option>
+                                    <option row="28" value="MS">MS</option>
+                                    <option row="29" value="MT">MT</option>
+                                    <option row="30" value="NC">NC</option>
+                                    <option row="31" value="NE">NE</option>
+                                    <option row="32" value="NH">NH</option>
+                                    <option row="33" value="NJ">NJ</option>
+                                    <option row="34" value="NM">NM</option>
+                                    <option row="35" value="NV">NV</option>
+                                    <option row="36" value="NY">NY</option>
+                                    <option row="37" value="OH">OH</option>
+                                    <option row="38" value="OK">OK</option>
+                                    <option row="39" value="OR">OR</option>
+                                    <option row="40" value="PA">PA</option>
+                                    <option row="41" value="PR">PR</option>
+                                    <option row="42" value="RI">RI</option>
+                                    <option row="43" value="SC">SC</option>
+                                    <option row="44" value="SD">SD</option>
+                                    <option row="45" value="TN">TN</option>
+                                    <option row="46" value="TX">TX</option>
+                                    <option row="47" value="UT">UT</option>
+                                    <option row="48" value="VA">VA</option>
+                                    <option row="49" value="VT">VT</option>
+                                    <option row="50" value="WA">WA</option>
+                                    <option row="51" value="WI">WI</option>
+                                    <option row="52" value="WV">WV</option>
+                                    <option row="53" value="WY">WY</option>
+                                </select>
+                            </div>
+                            <div class="form-group details-filter-form-group">
+                                <label class="details-filter-label" for="upfs-status">Status:</label>
+                                <select id="upfs-status" class="form-control form-control-height" onchange=""></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                        <div class="form-inline">
+                            <div class="form-group details-filter-form-group">
+                                <label class="details-filter-label" for="upfs-plastname">Physician Last Name:</label>
+                                <select id="upfs-plastname" class="form-control form-control-height" onchange="">
+                                    <option value="beginswith">Begins With</option>
+                                    <option value="contains">Contains</option>
+                                    <option value="endswith">Ends With</option>
+                                </select>
+                            </div>
+                            <div class="form-group details-filter-form-group">
+                                <label class="details-filter-label" for="upfs-plastnamestr"></label>
+                                <input id="upfs-plastnamestr" type="text" class="form-control" value="@ViewData["physicianLastnamesrcqry"]" placeholder="" />
+                            </div>
+                            <div class="form-group details-filter-form-group-date">
+                                <label class="details-filter-label" for="upfs-from">Approval Date (From):</label>
+                                <div class="input-group date" data-provide="datepicker">
+                                    <input id="upfs-from" type="text" class="form-control" value="@ViewData["fromdate"]">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group details-filter-form-group-date">
+                                <label class="details-filter-label" for="upfs-to">Approval Date (To):</label>
+                                <div class="input-group date" data-provide="datepicker">
+                                    <input id="upfs-to" type="text" class="form-control" value="@ViewData["todate"]">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                        <button class="btn btn-success pull-right" onclick="detailsWrapper.onUpFilterSelected()">Submit</button>
+                        @*<button class="btn btn-primary pull-left">All Scripts Updated Today</button>*@
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+

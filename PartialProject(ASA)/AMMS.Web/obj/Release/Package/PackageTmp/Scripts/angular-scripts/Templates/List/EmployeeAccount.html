@@ -1,0 +1,161 @@
+﻿<div class="container">
+    <div class="row" ng-controller="employeeAccountListController">
+        <div class="col-md-12 panel panel-default panel-primary">
+            <div class="col-lg-12 panel-body">
+                <span ng-repeat="command in commandList">
+                    <span ng-if="command.IsGeneral === true">
+                        <button  ng-click="(command.HasView)?checkfornullemployeeIdPassBeforeAdd(command): ((command.DisplayName == 'Refresh')? Init() : exportData())"><span>{{command.CommandName}}</span></button>
+                    </span>
+                </span>
+
+                <div class="row">
+                    <div class="col-lg-5 col-md-5 col-sm-12 report-col">
+                        <span class="badge">Filters</span>
+                        <div class="filter-form">
+                            <div class="form-inline">
+                                <label for="officeType" class="col-md-4 col-sm-12 font-asa-eac" style="font-size: 11px">
+                                    Office Type<i class="fa fa-asterisk required-icon"></i>
+                                </label>
+                                <select tabindex="47" ng-change="loadBranches(filter.OfficeTypeId)"
+                                        class="form-control form-control-asa form-control-asa-select-box-padding width-asa-eac col-md-8 col-sm-12"
+                                        id="officeType"
+                                        name="officeType"
+                                        ng-disabled="user.Role === rootLevel.BM.toString()||user.Role === rootLevel.DM.toString()||user.Role === rootLevel.RM.toString()"
+                                        ng-model="filter.OfficeTypeId"
+                                        required-message="'officeType field is required'"
+                                        ng-options="officeType.Value as officeType.Name for officeType in filters.OfficeTypes" required></select>
+                            </div>
+                            <!--<div class="form-inline">
+                                <label for="officeId" class="col-md-4 col-sm-12 font-asa-eac">
+                                    Office Name<i class="fa fa-asterisk required-icon"></i>
+                                </label>
+                                <select tabindex="47" ng-change="loadEmployeesFromSp()"
+                                        class="form-control form-control-asa form-control-asa-select-box-padding col-md-8 width-asa-eac col-sm-12"
+                                        id="officeId"
+                                        name="officeId"
+                                        ng-model="filter.BranchId"
+                                        required-message="'office name field is required'"
+                                        ng-options="branch.Value as branch.Name for branch in BranchList" required></select>
+                            </div>-->
+                            <div class="form-inline">
+                                <label for="office" class="col-md-4 col-sm-12">
+                                    Office Name
+                                </label>
+                                <input style="width: 40%" type="text" id="office" name="office"
+                                       ng-model="filter.BranchId"
+                                       uib-typeahead="office as office.Name for office in BranchList | filter:$viewValue"
+                                       placeholder="Select Office"
+                                       required
+                                       required-message="'Office is required'"
+                                       validate-on="dirty"
+                                       typeahead-on-select="loadEmployeesFromSp()"
+                                       autocomplete="off"
+                                       class="form-control col-md-6 col-lg-6 col-sm-12 form-control-asa">
+
+                                <!--<button class="btn btn-default add-remove-user-btn" ng-click="clearSearch()"><i class="fa fa-times-circle add-remove-loan-field"></i></button>-->
+                            </div>
+                            <div class="form-inline">
+                                <label for="employeeId" class="col-md-4 col-sm-12 font-asa-eac">
+                                    Employee <i class="fa fa-asterisk required-icon"></i>
+                                </label>
+                                <select tabindex="47" ng-change="setDefaults()"
+                                        class="form-control form-control-asa form-control-asa-select-box-padding col-md-8 width-asa-eac col-sm-12"
+                                        id="employeeId"
+                                        name="employeeId"
+                                        ng-model="filter.EmployeeId"
+                                        required-message="'employee name field is required'"
+                                        ng-options="emplyoee.Value as emplyoee.Name for emplyoee in EmployeeList |orderBy:'Name'" required></select>
+                            </div>
+                            <div class="form-inline">
+                                <label for="accountType" class="col-md-4 col-sm-12 font-asa-eac">
+                                    Account Type<i class="fa fa-asterisk required-icon"></i>
+                                </label>
+                                <select tabindex="47" ng-change=""
+                                        class="form-control form-control-asa form-control-asa-select-box-padding col-md-8 width-asa-eac col-sm-12"
+                                        id="accountType"
+                                        name="accountType"
+                                        ng-model="filter.AccountTypeId"
+                                        required-message="'account type field is required'"
+                                        ng-options="accountType.Value as accountType.Name for accountType in filters.AccountTypes |orderBy:'Name'" required></select>
+                            </div>
+                            <div class="form-inline">
+                                <label for="status" class="col-md-4 col-sm-12 font-asa-eac">
+                                    Status<i class="fa fa-asterisk required-icon"></i>
+                                </label>
+                                <select tabindex="47" ng-change=""
+                                        class="form-control form-control-asa form-control-asa-select-box-padding col-md-8 width-asa-eac col-sm-12"
+                                        id="status"
+                                        name="status"
+                                        ng-model="filter.Status"
+                                        required-message="'status field is required'"
+                                        ng-options="status.Value as status.Name for status in filters.Status" required></select>
+                            </div>
+                            <div class="form-inline col-md-12 col-sm-12">
+                                <button ng-click="loadSelectedEmployeeAccounts(filter.EmployeeId,filter.AccountTypeId,filter.Status)" class="btn btn-info fa-pull-right">LOAD </button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 panel-body font-asa-12">
+                    <table style="width: 100%" datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs"
+                           class="pro-table table-striped table-bordered table-hover table-asa">
+                        <thead>
+                            <tr>
+                                <th >Actions</th>
+                                <th>Employee</th>
+                                <th>Account Type Name</th>
+                                <th>Disburse Amount</th>
+                                <th>Received Amount</th>
+                                <th>Balance/Outstanding</th>
+                                <th>Disburse Date</th>
+                                <th>Opening Date</th>
+                                <th>Receive Date</th>
+                                <th>Closing Date</th>
+                                <th>Status</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="account in AccountList |orderBy:['EmployeeName','Status','OpeningDate']">
+                                <td ng-if="hasNonGeneralCommands ">
+                                    <span ng-repeat="command in commandList">
+                                        <span ng-if="command.IsGeneral !== true" ng-click="(command.HasView) ? openCommandTab(command, tab.id, 'EmployeeAccount',{'editEmployeeAccountId':account.Id,'command':command.Name}): handleNonGeneralActions(command.CommandName, account)">
+                                            <i class="{{command.IconClass}} asa-icon-{{command.CommandName}}" title="{{command.ToolTip}}"></i>
+                                        </span>
+                                    </span>
+                                </td>
+
+                                <!--<td ng-if="account.AccountOpeningType===2">Current</td>
+                                <td ng-if="account.AccountOpeningType===3">Received</td>
+                                <td ng-if="account.AccountOpeningType===1">Previous</td>-->
+                                <td>{{account.EmployeeName}}</td>
+                                <td>{{account.AccountTypeName}}</td>
+                                <td>{{account.PrincipalAmount}}</td>
+                                <!--<td ng-if="account.InstallmentType===1">Monthly</td>
+                                <td ng-if="account.InstallmentType===-10000">Monthly</td>-->
+                                <td>{{account.ReceiveAmount}}</td>
+                                <!--<td ng-if="account.LifeCycle===1">Life Time</td>
+                                <td ng-if="account.LifeCycle===2">Outstanding</td>
+                                <td ng-if="account.LifeCycle===3">Duration</td>
+                                <td ng-if="account.LifeCycle===-10000">Duration</td>-->
+                                <td>{{account.OutstandingAmount}}</td>
+                                <td>{{account.DisburseDate}}</td>
+                                <td>{{account.OpeningDate}}</td>
+                                <td>{{account.ReceiveDate}}</td>
+                                <td>{{account.ClosingDate}}</td>
+                                <td  style="background-color: #ebcccc" ng-if="account.Status === 2">
+                                Inactive
+                            </td>
+                            <td  style="background-color: #d0e9c6" ng-if="account.Status === 1">
+                                Active
+                             </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+                    </div>
+                </div>
+            </div>

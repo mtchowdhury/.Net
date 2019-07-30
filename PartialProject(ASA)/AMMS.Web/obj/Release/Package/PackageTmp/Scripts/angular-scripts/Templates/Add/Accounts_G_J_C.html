@@ -1,0 +1,340 @@
+﻿<div id="general-journal-add" class="panel panel-default panel-primary" ng-controller="countrySystemGJAddController">
+
+    <div class="panel-body">
+    
+        <div class="row">
+
+            <div class="col-lg-5 col-md-5 col-sm-12">
+
+                <div class="filter-form">
+                    <div>
+                        <!--<div class="form-group">
+                            <div class="form-inline">
+                                <label for="voucherno" class="label-form-control-asa col-lg-3 col-md-3 col-sm-12">
+                                    Voucher No
+                                </label>
+                                <input type="text" tabindex="" name="voucherno"
+                                       ng-model="voucher.VoucherNo" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                       id="voucherno" validate-on="blur" placeholder="Voucher No "
+                                       ng-disabled="false">
+                            </div>
+                        </div>-->
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <div class="form-inline">
+                                    <label for="ngexcelfile" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                        Import Data
+                                    </label>
+
+                                    <input ng-change="" type="file" id="ngexcelfile" class="uploadFile" accept="xls,xlsx" ngf-select ngf-keep="true" ng-model="files" ngf-multiple="false">
+                                    
+                                    <label> Download </label><a href="" ng-click="getTemplateUrl()"> sample template </a> <label> for importing data</label>
+                                    <div> <hr/>
+                                    </div>
+                                   
+                                    
+                                    <input ng-if="files.length>0" type="button" value="Import Data" ng-click="readData()" />   
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <div class="form-inline">
+                                    <label for="" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                        Entity
+                                    </label>
+                                    <select style="width: 64%" class="form-control form-control-asa form-control-asa-select-box-padding" ng-model="voucher.Entity"
+                                            name="district"
+                                            ng-change=""
+                                            ng-disabled=""
+                                            ng-options="ad.Value as ad.Name for ad in filters.Entity|orderBy:'Name'">
+
+                                        <option value=-1>select</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <div class="form-inline">
+                                    <label for="" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                        Transaction Date
+                                    </label>
+                                    <div class="dropdown input-group date width-asa">
+                                        <p class="input-group" style="width: 100%">
+                                            <input readonly="readonly" class="form-control-asa full-width-asa" type="text"
+                                                   uib-datepicker-popup="{{format}}" ng-model="voucher.TransactionDate" is-open="tdate.opened"
+                                                   datepicker-options="dateOptionsDOB" close-text="Close" alt-input-formats="altInputFormats"
+                                                   ng-change="tDateValidator()" />
+                                            <span ng-if="user.Role==='1'" class="input-group-addon input-group-addon-asa">
+                                                <button type="button" ng-click="openTDatePop()"><i class="fa fa-calendar"></i></button>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <!--<input type="text" tabindex="" name="transactionDate"
+                                           ng-model="voucher.TransactionDate" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                           id="transactionDate" validate-on="blur" placeholder="Transaction Date "
+                                           ng-disabled="true">-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <div class="form-inline">
+                                    <label for="description" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                        Description
+                                    </label>
+                                    <textarea type="text" tabindex="" name="description"
+                                              ng-model="voucher.Description" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                              id="description" validate-on="blur" placeholder="Description "
+                                              ng-disabled="false"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <div class="form-inline">
+                                    <label class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                        Pay to
+                                    </label>
+                                    <div class="dropdown input-group date width-asa">
+                                        <p class="input-group date-input-group">
+                                            <span class="input-group-addon input-group-addon-asa">
+                                                <input type="checkbox" ng-model="voucher.Paytochecked"
+                                                       ng-true-value="'YES'" ng-false-value="'NO'" ng-click="">
+                                            </span>
+                                            <input ng-disabled="voucher.Paytochecked==='NO'" class="form-control-asa " type="text" style="width: 100%"
+                                                   placeholder="Payee Name "
+                                                   validate-on="blur"
+                                                   ng-model="voucher.PayeeName" />
+
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <div class="form-inline">
+                                    <label for="address" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                        Address
+                                    </label>
+                                    <textarea type="text" tabindex="" name="amountFrom"
+                                              ng-model="voucher.PayeeAddresss" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                              id="address" validate-on="blur" placeholder="address "
+                                              ng-disabled="voucher.Paytochecked==='NO'"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <hr />
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <h4>
+                    <a class="h4-asa" role="button" data-toggle="collapse" href="#collapseAddEmployeeAcademic" aria-expanded="true" aria-controls="collapseAddEmployeeAcademic" onclick="accordionUtility.setCaret('ac')">
+                        Transactions
+                        <i id="ac-down" class="fa fa-caret-down"></i>
+                        <i id="ac-up" class="fa fa-caret-up hide-caret"></i>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseAddEmployeeAcademic" class="panel-collapse in" role="tabpanel" aria-labelledby="headingAddGeneral" showHide="showHide">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <table class="table-asa tbody tr td table-asa thead tr th">
+                            <thead>
+                                <tr>
+                                    <th rowspan="1" colspan="1">GL Account<i class="fa fa-asterisk required-icon"></i></th>
+                                    <th rowspan="1" colspan="1">GL Head<i class="fa fa-asterisk required-icon"></i></th>
+                                    <th rowspan="1" colspan="1">Debit<i class="fa fa-asterisk required-icon"></i></th>
+                                    <th rowspan="1" colspan="1">Credit<i class="fa fa-asterisk required-icon"></i></th>
+                                    <th rowspan="1" colspan="1">Cheque No<i class="fa fa-asterisk required-icon"></i></th>
+                                    <th rowspan="1" colspan="1">Bank Account<i class="fa fa-asterisk required-icon"></i></th>
+                                    <th rowspan="1" colspan="1">District<i class="fa fa-asterisk required-icon"></i></th>
+                                    <th rowspan="1" colspan="1">Branch<i class="fa fa-asterisk required-icon"></i></th>
+                                    <th rowspan="1" colspan="1">Action</th>
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="transaction in voucher.GlTransactions">
+
+                                    <td>
+                                        <div class="dropdown input-group date width-asa">
+                                            <p class="input-group date-input-group">
+                                                <span class="input-group-addon input-group-addon-asa">
+                                                    <button type="button" data-toggle="modal" data-target="#myModalHorizontal" ng-click="viewOptionModifier(false,$index)"><i class="fa fa-rocket"></i></button>
+                                                </span>
+                                                <input readonly="readonly" class="form-control-asa " type="text"
+                                                       placeholder="GL Head "
+                                                       ng-model="transaction.AccountHeadCode"
+                                                       title="{{transaction.AccountHeadName}}"
+                                                       ng-change="getGlAccountsDetails(transaction.GlAccountId,$index)"
+                                                       id="accountCode" />
+
+                                            </p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="dropdown input-group date width-asa">
+                                            <p class="input-group date-input-group">
+                                                <input readonly="readonly" class="form-control-asa " type="text"
+                                                       placeholder="GL Name"
+                                                       ng-model="transaction.AccountHeadName"
+                                                       title="{{transaction.AccountHeadValue}}"
+                                                       id="accountHead" />
+                                            </p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input type="number" name="debit{{$index}}"
+                                               class="form-control form-control-asa"
+                                               ng-disabled="(transaction.Credit!==0 )||  transaction.GlAccount.ManualEntryMode===1"
+                                               ng-model="transaction.Debit"
+                                               
+                                               ng-change="sumDebit();debitCreditNonZeroMaker($index);" />
+                                    </td>
+                                    <td>
+                                        <input type="number" name="credit{{$index}}"
+                                               class="form-control form-control-asa"
+                                               ng-disabled="(transaction.Debit!==0 )||transaction.GlAccount.ManualEntryMode===0"
+                                               ng-model="transaction.Credit "
+                                               
+                                               ng-change="sumCredit();debitCreditNonZeroMaker($index);" />
+
+                                    </td>
+                                    <td>
+                                        <input type="text" name="cheque{{$index}}"
+                                               class="form-control form-control-asa"
+                                               ng-disabled=""
+                                               ng-model="transaction.ChequeNumber"
+                                               ng-change=";" />
+
+                                    </td>
+                                    <td>
+                                        <!--<select id="bankAccount{{$index}}" class="form-control form-control-asa form-control-asa-select-box-padding" ng-model="transaction.BankAccount"
+                                                name="bankAccount{{$index}}"
+                                                ng-options="ba.Value as ba.Name for ba in filters.BankAccounts|orderBy:'Name'"
+                                                ng-change=""
+                                                required-message="''" required
+                                                ng-disabled="false"
+                                                validate-on="ditry">
+                                            <option value=-1>select</option>
+                                        </select>-->
+                                        <input type="text" name="BankAccount{{$index}}"
+                                               class="form-control form-control-asa"
+                                               ng-disabled=""
+                                               readonly="readonly"
+                                               ng-model="transaction.BankAccountName"
+                                               ng-change=";" />
+
+                                    </td>
+                                    <td>
+                                        <select id="district{{$index}}" class="form-control form-control-asa form-control-asa-select-box-padding" ng-model="transaction.District"
+                                                name="district{{$index}}"
+                                                ng-change="loadDistrictwiseBranches(transaction.District,$index);"
+                                                ng-disabled="transaction.GlAccount.InterbranchHead===undefined || !transaction.GlAccount.InterbranchHead"
+                                                ng-options="ad.Value as ad.Name for ad in filters.AdministrativeDistricts|orderBy:'Name'">
+
+                                            <option value=-1>select</option>
+
+                                        </select>
+
+                                    </td>
+                                    <td>
+                                        <select id="branch{{$index}}" class="form-control form-control-asa form-control-asa-select-box-padding" ng-model="transaction.DistrictBranch"
+                                                name="branch{{$index}}"
+                                                ng-change=";"
+                                                ng-disabled="!transaction.GlAccount.InterbranchHead"
+                                                ng-options="br.Value as br.Name for br in transaction.Branches|orderBy:'Name'">
+
+                                            <option value=-1>select</option>
+
+                                        </select>
+
+                                    </td>
+
+
+
+                                    <td>
+
+                                        <h4><span class="pull-left"><i class="fa fa-times-circle pull-right add-remove-loan-field" aria-hidden="true" ng-click="removeTransaction($index);sumDebit();sumCredit();"></i></span></h4>
+
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-align: center; font-family: bold"> Total</td>
+                                    <td style="text-align: center">{{debitSum}}</td>
+                                    <td style="text-align: center">{{creditSum}}</td>
+                                    <td colspan="5"></td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <h4><span class="pull-right"><label class="font-asa-12">Add More </label><i class="fa fa-plus-circle add-remove-loan-field" aria-hidden="true" ng-click="addHrmTransaction()"></i></span></h4>
+                </div>
+
+
+                <div ng-if="debitSum!==creditSum">
+                    <p class="form-validation-message">Debit & Credit sum is not same!</p>
+                </div>
+            </div>
+
+
+            <button type="submit" ng-click="saveVoucher()" tabindex="100" class="btn btn-primary">
+                Save
+            </button>
+
+            <div class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static"
+                 aria-labelledby="accountHead" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <button type="button" class="close"
+                                    data-dismiss="modal">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">Close</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                Accounts Head
+                            </h4>
+                        </div>
+
+                        <!-- Modal Body -->
+                        <div class="modal-body" style="overflow-y: auto; height: calc(100vh - 210px) ">
+
+                            <div ng-include src="getSecondaryPath() + locationStr +'/Scripts/angular-scripts/Templates/List/ChartOfAccount.html'">
+                            </div>
+
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default"
+                                    ng-click="viewOptionModifier(true); "
+                                    data-dismiss="modal">
+                                Close
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+

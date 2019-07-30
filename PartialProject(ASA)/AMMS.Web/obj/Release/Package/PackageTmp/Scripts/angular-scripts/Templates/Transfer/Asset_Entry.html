@@ -1,0 +1,245 @@
+﻿<div class="container">
+    <div class="panel panel-default panel-primary" ng-controller="assetTransferController">
+        <div class="panel-heading panel-title">
+            Asset Transfer
+        </div>
+        <div style="padding-top: 10px;"></div>
+        <form style="min-height: 250px;" angular-validator-submit="transferAsset()" name="assetTransferForm" class="form-horizontal" novalidate angular-validator>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group">
+                        <div class="form-inline col-lg-12 col-md-12 col-sm-12" ng-show="assetToTransfer.TransferReferenceNo">
+                            <label class="col-lg-2 col-md-2 col-sm-12">
+                                Reference No.
+                            </label>
+                            <input type="text" tabindex="3" name="referencenumber"
+                            readonly="readonly"
+                            ng-model="assetToTransfer.TransferReferenceNo"
+                            class="form-control form-control-asa col-md-4 col-lg-4 col-sm-12"
+                            id="referencenumber" placeholder="Reference number">
+                        </div>
+                        <div class="form-inline col-lg-12 col-md-12 col-sm-12">
+                            <label class="col-lg-2 col-md-2 col-sm-12">
+                                Transfer Date
+                            </label>
+                            <!--<div tabindex="19" class="dropdown input-group date width-asa">
+                                <a class="dropdown-toggle" id="tdate" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                    <div class="input-group date-input-group">
+                                        <input type="text"
+                                               required
+                                               date-time-input="DD-MM-YYYY"
+                                               class="form-control-asa full-width-asa"
+                                               ng-model="assetToTransfer.TransferDate"
+                                               ng-readonly="true"
+                                               validate-on="dirty"
+                                               required-message="'Admission date field is required'">
+                                        <span class="input-group-addon input-group-addon-asa"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <datetimepicker ng-model="assetToTransfer.TransferDate" data-datetimepicker-config="{ startView:'day', minView:'day',dropdownSelector: '#tdate' }"
+                                                    data-before-render=""/>
+                                </ul>
+                            </div>-->
+                            <div class="dropdown input-group date two-third-width-asa">
+                                <p class="input-group">
+                                    <input readonly="readonly" class="form-control-asa full-width-asa" type="text" uib-datepicker-popup="{{format}}" ng-required="true" required
+                                    ng-model="assetToTransfer.TransferDate" is-open="popupTransferDate.opened" datepicker-options="dateOptionsTransferDate" close-text="Close"
+                                    alt-input-formats="altInputFormats"
+                                           id="transferDate" name="transferDate"
+                                          />
+                                    <span class="input-group-addon input-group-addon-asa">
+                                        <button type="button" ng-click="openTransferDatePopup()"><i class="fa fa-calendar"></i></button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-inline col-lg-12 col-md-12 col-sm-12">
+                                <div class="row">
+                                        <label class="col-lg-2 col-md-2 col-sm-12">
+                                            Transfer To
+                                        </label>
+                                    <select class="form-control form-control-asa form-control-asa-select-box-padding col-md-5 col-lg-5 col-sm-12"
+                                            ng-disabled="assetToTransfer.TransferReferenceNo"
+                                                id="officetype"
+                                                ng-model="assetToTransfer.ReceivingOfficeType"
+                                                name="officetype"
+                                                required
+                                                required-message="'Office type is required'"
+                                                ng-options="officeType.Value as officeType.Name for officeType in officeTypeList"
+                                                validate-on="dirty"
+                                                ng-change="filterOfficeList(assetToTransfer.TransferredOfficeType);officeTypeChanged();">
+                                            <option value="">Select Office Type</option>
+                                        </select>
+                                    <input type="text" id="office" name="office"
+                                           ng-disabled="assetToTransfer.TransferReferenceNo"
+                                               ng-model="recBranch"
+                                               uib-typeahead="office as office.Name for office in branchList | filter:$viewValue"
+                                               placeholder="Select Office"
+                                               required
+                                               required-message="'Office is required'"
+                                               validate-on="dirty"
+                                               typeahead-on-select="officeSeleted();branchChange();"
+                                               autocomplete="off"
+                                               class="form-control col-md-5 col-lg-5 col-sm-12 form-control-asa">
+                                    </div>
+                        </div>
+                        <div class="form-inline col-lg-12 col-md-12 col-sm-12">
+                            <label class="col-lg-2 col-md-2 col-sm-12">
+                                Notes
+                            </label>
+                            <textarea type="text" name="notes"
+                                      class="form-control form-control-asa col-md-10 col-lg-10 col-sm-12"
+                                      id="notes" placeholder="Notes"
+                                      ng-model="assetToTransfer.Note"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="assetTransferForm.$valid === false && assetTransferForm.$dirty === true">
+                <p class="form-validation-message">Validation failed, on or more required field is missing</p>
+            </div>
+            <button type="button" class="pull-left btn-primary pull-left" style="margin-left: 15px;" ng-show="btnUpdateShow" ng-click="updateAssetTransfer();">{{updateButtonText}}</button>
+            <button type="submit" class="pull-right btn-primary pull-left" style="margin-left: 30px;" ng-show="btnTransferShow">Transfer</button>
+            <div class="row" style="margin-top: 30px;">
+                <table class="table table-striped table-bordered table-hover table-asa">
+                    <thead>
+                    <tr>
+                        <th >
+                            Action
+                        </th>
+                        <th>
+                            Ref. No
+                        </th>
+                        <th>
+                            Asset Tag Id
+                        </th>
+                        <th>
+                            Transfer Date
+                        </th>
+                        <!--th>
+                        Br. Working Date
+                        </th>-->
+                        <th>
+                            From Office Type
+                        </th>
+                        <th>
+                            From District
+                        </th>
+                        <th>
+                            From Office /Branch
+                        </th>
+                        <th>
+                            To Office Type
+                        </th>
+                        <th>
+                            To District
+                        </th>
+                        <th>
+                            To Office/ Branch
+                        </th>
+                        <th>
+                            Written Down Value
+                        </th>
+                        <th>
+                            Last Depriciation Period
+                        </th>
+                        <!--<th>
+                            Transfer User Id
+                        </th>
+                        <th>
+                            Receiving User Id
+                        </th>-->
+                        <th>
+                            Receiving Date
+                        </th>
+                        <!--<th>
+                            Receiving Branch Working Date
+                        </th>-->
+                        <th>
+                            Transfer Status
+                        </th>
+                        <th>
+                            Receiving Note
+                        </th>
+                        <th>
+                            Transfer Note
+                        </th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="assetTR in assetTransferReceiveHistoryList">
+                        <td >
+                            <span ng-if="assetTR.TransferStatus==AssetConfig.AssetTransferStatus.TransferInitiated" class="fa fa-times asa-icon-DELETE" style="color: red;" ng-click="cancelTransferAsset(assetTR);" title="Cancel Transfer"></span>
+                            <span ng-if="assetTR.TransferStatus==AssetConfig.AssetTransferStatus.TransferInitiated" class="fa fa-pencil-square-o asa-icon-EDIT" ng-click="updateAssetToTransferFields(assetTR);" title=""></span>
+                        </td>
+                        <td>{{assetTR.TransferReferenceNo}}</td>
+                        <td>{{assetTR.AssetTagId}}</td>
+                        <td>{{assetTR.TransferDateStr}}</td>
+                        <!--<td>{{assetTR.TransferBranchWorkingDateStr}}</td>-->
+                        <td>{{assetTR.TransferredOfficeTypeStr}}</td>
+                        <td>{{assetTR.TransferredDistrictName}}</td>
+                        <td>{{assetTR.TransferredBranchName}}</td>
+                        <td>{{assetTR.ReceivedOfficeTypeStr}}</td>
+                        <td>{{assetTR.ReceivedDistrictName}}</td>
+                        <td>{{assetTR.ReceivedBranchName}}</td>
+                        <td>{{assetTR.WrittenDownValueToShow}}</td>
+                        <td>{{assetTR.LastDepreciationPeriod}}</td>
+                        <!--<td>{{assetTR.TransferredByUserId}}</td>
+                        <td>{{assetTR.ReceivedOrRejectByUserId}}</td>-->
+                        <td>{{assetTR.ReceivedDateStr}}</td>
+                        <!--<td>{{assetTR.ReceivingBranchWorkingDateStr}}</td>-->
+                        <td>{{assetTR.TransferStatusStr}}</td>
+                        <td>{{assetTR.ReceivedNote}}</td>
+                        <td>{{assetTR.TransferNote}}</td>
+
+                    </tr>
+                    </tbody>
+                </table>
+                <hr/>
+                <h3>Asset Description :</h3>
+                <table style="width: 98%"
+                       class="table table-striped table-bordered table-hover table-asa">
+                    <thead>
+                        <tr>
+                            <!--<th>Id</th>-->
+                            <th>Asset Tag</th>
+                            <th>Name</th>
+                            <th>Item Type</th>
+                            <th>Category</th>
+                            <th>Asset Type</th>
+                            <!--<th>Is Asset</th>-->
+                            <th>Status</th>
+                            <th>Sub Status</th>
+                            <th>Purchased Entry Date</th>
+                            <!--<th>Last Status Change Date</th>-->
+                            <th>Current Office Branch</th>
+                            <th>Purchased Price</th>
+                            <th>Written Down Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr >
+                            <!--<td>{{asset.Id}}</td>-->
+                        <td>{{asset.AssetId}}</td>
+                        <td>{{asset.Name}}</td>
+                            <td>{{asset.ItemTypeName}}</td>
+                            <td>{{asset.ItemCategoryName}}</td>
+                            <td>{{asset.AssetTypeName}}</td>
+                            <!--<td>{{asset.IsFixedAssetName}}</td>-->
+                            <td>{{asset.StatusName}}</td>
+                            <td>{{asset.SubStatusName}}</td>
+                            <td>{{asset.PurchaseWorkingDateS}}</td>
+                            <!--<td>{{asset.LastStatusChangeBranchDate}}</td>-->
+                            <td>{{asset.CurrentBranchName}}</td>
+                            <td>{{asset.BillingPrice}}</td>
+                            <td>{{asset.WrittenDownValue}}</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </form>
+    </div>
+</div>

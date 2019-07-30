@@ -1,0 +1,89 @@
+﻿<div class="panel panel-default panel-primary" ng-controller="inventoryItemTypeEditController">
+    <div class="panel-heading panel-title">
+        Edit Inventory Item Type
+    </div>
+    <div class="panel-body font-asa-11">
+        <form angular-validator-submit="editInventoryItem()" name="editInventoryItemForm" class="form-horizontal" novalidate angular-validator>
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-12 col-md-offset-2 col-lg-offset-2">
+                    <div class="form-group" style="padding-bottom: 70px;">
+                        <div class="form-inline">
+                            <label for="id" class="col-md-4 col-sm-12">
+                                Item Type Id
+                            </label>
+                            <input type="text" tabindex="2" name="id"
+                                   ng-model="itemType.Id" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="id" placeholder="Id"
+                                   disabled="disabled">
+                        </div>
+                        <div class="form-inline">
+                            <label for="category" class="col-md-4 col-sm-12">
+                                Inventory Category<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select tabindex="3"
+                                    class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="category" ng-model="itemType.CategoryId"
+                                    ng-change="categoryChanged();"
+                                    name="category"
+                                    ng-options="category.Value as category.Name for category in categoryList"
+                                    required-message="'Category field is required'" required></select>
+                        </div>
+                        <div class="form-inline">
+                            <label for="name" class="col-md-4 col-sm-12">
+                                Item Type Name <i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <input type="text" tabindex="1" name="Name"
+                                   ng-model="itemType.Name" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="name" validate-on="dirty" placeholder="name" maxlength="100"
+                                   validator="itemTypeNameValidator() === true"
+                                   invalid-message="itemTypeNameValidator()"
+                                   required-message="'Name field is required'" required>
+                        </div>
+                        <div class="form-inline">
+                            <label for="ShortName" class="col-md-4 col-sm-12">
+                                Item Type Short Code <i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <input type="text" tabindex="1" name="ShortName"
+                                   ng-model="itemType.ShortName" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="ShortName" validate-on="dirty" placeholder="ShortName"
+                                   maxlength="5"
+                                   validator="itemTypeShortNameValidator() === true"
+                                   invalid-message="itemTypeShortNameValidator()"
+                                   style="text-transform: uppercase"
+                                   required-message="'ShortName field is required'" required>
+                        </div>
+                        <div class="form-inline">
+                            <label for="Status" class="col-md-4 col-sm-12">
+                                Status<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select tabindex="3"
+                                    class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="Status" ng-model="itemType.Status"
+                                    name="Status"
+                                    ng-options="status.Value as status.Name  for status in itemTypeStatusList"
+                                    required-message="'Status field is required'" required></select>
+                        </div>
+                        <div class="form-inline">
+                            <label class="col-md-4 col-sm-12">
+                                Permitted Office Level<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <div ng-dropdown-multiselect=""
+                                 extra-settings="dropdownSetting"
+                                 class="multiselect-button-loan"
+                                 options="PermittedOfficeLevelListByCategory"
+                                 selected-model="itemType.PermittedOfficeLevel"
+                                 checkboxes="true"></div>
+                        </div>
+                    </div>
+                    <div ng-if="editInventoryItemForm.$valid === false && editInventoryItemForm.$dirty === true">
+                        <p class="form-validation-message">Validation failed, on or more required field is missing</p>
+                    </div>
+                    <button type="submit" tabindex="100" class="btn btn-primary">
+                        Submit
+                    </button>
+                </div>
+                
+            </div>
+        </form>
+    </div>
+</div>

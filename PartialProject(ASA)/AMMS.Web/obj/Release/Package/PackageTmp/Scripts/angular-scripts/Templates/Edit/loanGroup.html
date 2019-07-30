@@ -1,0 +1,236 @@
+﻿<div class="panel panel-default panel-primary" ng-controller="loanGroupEditController">
+    <div class="panel-heading panel-title">
+        Edit Group
+    </div>
+    <div class="panel-body font-asa-11">
+        <form angular-validator-submit="updateloanGroup()" name="updateloanGroupForm" class="form-horizontal" novalidate angular-validator>
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-8">
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <label for="name" class="col-md-4 col-sm-12">
+                                Name <i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <input type="text" tabindex="1" name="name"
+                                   ng-model="editloanGroup.Name" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="name" validate-on="dirty" placeholder="name"
+                                   maxlength="100"
+                                   required-message="'Name field is required'" required>
+                        </div>
+                        <!--<div class="form-inline">
+                            <label for="formationDate" class="col-md-4 col-sm-12">
+                                Formation date<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <div tabindex="2" class="dropdown input-group date width-asa">
+                                <a class="dropdown-toggle" id="formationDate" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                    <div class="input-group date-input-group">
+                                        <input type="text" date-time-input="DD-MM-YYYY" class="form-control-asa full-width-asa" ng-model="editloanGroup.FormationDate"ng-disabled="true">
+                                        <span class="input-group-addon input-group-addon-asa"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <datetimepicker ng-model="editloanGroup.FormationDate" data-datetimepicker-config="{ startView:'day', minView:'day',dropdownSelector: '#formationDate' }"
+                                                    data-before-render="beforeStartDateRender($dates)" ng-change="isHolidayOrOffDay(editloanGroup.FormationDate,'o')"/>
+                                </ul>
+                            </div>
+                        </div>-->
+
+                        <div class="form-inline">
+                            <label class="col-md-4 col-sm-12">
+                                Formation date<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <div class="dropdown input-group date width-asa">
+                                <p class="input-group">
+                                    <input ng-change="validator()"
+                                           readonly="readonly" class="form-control-asa full-width-asa" type="text" uib-datepicker-popup="{{format}}"
+                                           ng-model="editloanGroup.FormationDate" is-open="popup1.opened" datepicker-options="dateOptions" required required-message="'move date is required'" close-text="Close"
+                                           alt-input-formats="altInputFormats" />
+                                    <span class="input-group-addon input-group-addon-asa">
+                                        <button type="button" ng-click="open1()"><i class="fa fa-calendar"></i></button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-inline">
+                            <label for="meetingDay" class="col-md-4 col-sm-12">
+                                Meeting Day<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select tabindex="3"
+                                    class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="meetingDay" ng-model="editloanGroup.MeetingDay"
+                                    name="MeetingDay"
+                                    ng-options="meetingDay.Value as meetingDay.Name disable when meetingDay.DisabledState for meetingDay in filters.MeetingDay"
+                                    required ng-disabled="true"
+                                    required-message="'Meeting day field is required'"></select>
+                        </div>
+                        <!--<div class="form-inline">
+                            <label for="meetingDay" class="col-md-4 col-sm-12">
+                                Default Programs<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select tabindex="4"
+                                    class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="defaultProgram" ng-model="editloanGroup.DefaultProgram"
+                                    name="defaultProgram"
+                                    required-message="'Default Program field is required'"
+                                    ng-options="defaultProgram.Value as defaultProgram.Name for defaultProgram in filters.DefaultPrograms" required></select>
+                        </div>-->
+                        <div class="form-inline">
+                            <label for="village" class="col-md-4 col-sm-12">
+                                Village <i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <input type="text" tabindex="4" name="Village"
+                                   ng-model="editloanGroup.Village" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="village" placeholder="village"
+                                   validate-on="dirty"
+                                   maxlength="100"
+                                   required-message="'Village field is required'" required>
+                        </div>
+                        <div class="form-inline">
+                            <label for="minSavingDeposit" class="col-md-4 col-sm-12">
+                                Min. Saving Deposit<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <input type="number" tabindex="5" name="MinimumSavingDeposit"
+                                   class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                   onkeypress="return event.charCode >= 48 || event.charCode === 46"
+                                   validator="minimumDepositCheck(editloanGroup.MinSavingDeposit,SavingsConfig.SavingsType.General) === true"
+                               invalid-message="minimumDepositCheck(editloanGroup.MinSavingDeposit,SavingsConfig.SavingsType.General)"
+                                   validate-on="dirty"
+                                   min="0"
+                                   id="minSavingDeposit" placeholder="Minimum Saving Deposit"
+                                   ng-model="editloanGroup.MinSavingDeposit"
+                                   required-message="'Minimum saving deposit field is required'" required>
+                        </div>
+                        <div class="form-inline">
+                            <label for="minSecurityDeposit" class="col-md-4 col-sm-12">
+                                Min. Security Deposit<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <input type="number" tabindex="6" name="MinimumSecurityDeposit"
+                                   class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                   onkeypress="return event.charCode >= 48 || event.charCode === 46"
+                                   validator="minimumDepositCheck(editloanGroup.MinSecurityDeposit,SavingsConfig.SavingsType.CBS) === true"
+                               invalid-message="minimumDepositCheck(editloanGroup.MinSecurityDeposit,SavingsConfig.SavingsType.CBS)"
+                                   validate-on="dirty"
+                                   min="0"
+                                   required
+                                   required-message="'Minimum Security Deposit field is required'"
+                                   id="minSecurityDeposit" placeholder="Minimum Security Deposit"
+                                   ng-model="editloanGroup.MinSecurityDeposit">
+                        </div>
+                        <div class="form-inline">
+                            <label for="groupLeader" class="col-md-4 col-sm-12">
+                                Group Leader
+                            </label>
+                            <input type="text" tabindex="7" name="GroupLeader"
+                                   ng-model="editloanGroup.GroupLeaderName" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="groupLeader" placeholder="Group Leader Name"
+                                   maxlength="100">
+                        </div>
+                        <div class="form-inline">
+                            <label for="groupLeaderAddress" class="col-md-4 col-sm-12">
+                                Group Leader Address
+                            </label>
+                            <input type="text" tabindex="8" name="groupLeaderAddress"
+                                   ng-model="editloanGroup.GroupLeaderAddress" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="groupLeaderAddress" placeholder="Group Leader Address"
+                                   maxlength="200">
+                        </div>
+                        <div class="form-inline">
+                            <label for="groupLeaderPhone" class="col-md-4 col-sm-12">
+                                Group Leader Phone
+                            </label>
+                            <input type="text" tabindex="9" name="groupLeaderPhone"
+                                   class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                   validator="MobileValidator(editloanGroup.GroupLeaderPhone) === true"
+                                   invalid-message="MobileValidator(editloanGroup.GroupLeaderPhone)"
+                                   validate-on="dirty"
+                                   id="groupLeaderPhone"
+                                   placeholder="Group Leader Phone"
+                                   ng-model="editloanGroup.GroupLeaderPhone">
+                        </div>
+                        <!--<div class="form-inline">
+                            <label for="groupStatus" class="col-md-4 col-sm-12">
+                                Status<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select tabindex="10"
+                                    class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="groupStatus" ng-model="editloanGroup.GroupStatus"
+                                    name="GroupStatus"
+                                    validate-on="dirty"
+                                    required-message="'Group Status field is required'"
+                                    ng-options="GroupStatus.value as GroupStatus.text for GroupStatus in GroupStatusList" required
+                                    ng-change="groupStatusChange();"></select>
+                        </div>
+                        <div class="form-inline">
+                            <label for="substatus" class="col-md-4 col-sm-12">
+                                Sub Status<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select tabindex="11"
+                                    class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="substatus" ng-model="editloanGroup.SubStaus"
+                                    name="substatus"
+                                    validate-on="dirty"
+                                    ng-options="subStatus.value as subStatus.text disable when subStatus.DisabledState  for subStatus in GroupSubStatusList"
+                                    required-message="'Sub Status field is required'" required ng-disabled="flagEditable"></select>
+                        </div>-->
+                        <div class="form-inline">
+                            <label for="notes" class="col-lg-4 col-md-4 col-sm-2">
+                                Notes
+                            </label>
+                            <textarea ng-model="editloanGroup.Notes"
+                                      tabindex="12"
+                                      class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                      id="notes" placeholder="Notes" rows="5"
+                                      name="notes" maxlength="500"></textarea>
+                        </div>
+                    <!--<div ng-hide="editloanGroup.GroupStatus==GroupStatus.Active">
+                        <label for="ClosingDate" class="col-md-4 col-sm-12">
+                            Closing date
+                        </label>
+                        <div tabindex="13" class="dropdown input-group date width-asa">
+                            <a class="dropdown-toggle" id="ClosingDate" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                <div class="input-group date-input-group">
+                                    <input type="text" date-time-input="DD-MM-YYYY"
+                                           class="form-control-asa full-width-asa"
+                                           name="groupClosingDate"
+                                           validator="ClosingDate(editloanGroup.ClosingDate) === true"
+                                           invalid-message="ClosingDate(editloanGroup.ClosingDate)"
+                                           validate-on="dirty"
+                                           ng-model="editloanGroup.ClosingDate" ng-disabled="true">
+                                    <span class="input-group-addon input-group-addon-asa"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                <datetimepicker ng-model="editloanGroup.ClosingDate" data-datetimepicker-config="{ startView:'day', minView:'day',dropdownSelector: '#ClosingDate' }"
+                                                data-before-render="beforeEndDateRender($dates)" ng-change="isHolidayOrOffDay(editloanGroup.ClosingDate,'c')"/>
+                            </ul>
+                        </div>
+                    </div>-->
+                        <div class="form-inline" ng-hide="editloanGroup.GroupStatus==GroupStatus.Active">
+                            <label class="col-md-4 col-sm-12">
+                                Closing date<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <div class="dropdown input-group date width-asa">
+                                <p class="input-group">
+                                    <input ng-change="cDateValidator()"
+                                           readonly="readonly" class="form-control-asa full-width-asa" type="text" uib-datepicker-popup="{{format}}"
+                                           ng-model="editloanGroup.ClosingDate" is-open="popupC.opened" datepicker-options="dateOptions" close-text="Close"
+                                           alt-input-formats="altInputFormats" ng-required="editloanGroup.SubStatus==4"/>
+                                    <span class="input-group-addon input-group-addon-asa">
+                                        <button type="button" ng-click="openC()"><i class="fa fa-calendar"></i></button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="updateloanGroupForm.$valid === false && updateloanGroupForm.$dirty === true">
+                        <p class="form-validation-message">Validation failed, on or more required field is missing</p>
+                    </div>
+                    <button type="submit" tabindex="100" class="btn btn-primary">
+                        Submit
+                    </button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>

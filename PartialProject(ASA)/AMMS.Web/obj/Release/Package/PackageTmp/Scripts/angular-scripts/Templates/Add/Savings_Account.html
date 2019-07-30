@@ -1,0 +1,423 @@
+﻿<div class="panel panel-default panel-primary" ng-controller="savingsAccountAddController">
+    <div class="panel-heading panel-title">
+        <span ng-if="rootType == 1">Add Saving Account</span>
+        <span ng-if="rootType != 1">Add CBS Account</span>
+    </div>
+    <div class="panel-body font-asa-11">
+        <form angular-validator-submit="addsavingsAccount()" name="savingsaccountAddForm" class="form-horizontal" novalidate angular-validator>
+            <div class="row">
+
+                <div class="col-lg-2 col-md-1"></div>
+                <div class="col-lg-8 col-md-10 col-sm-12">
+                    <input type="button" ng-click="init()" value="Refresh Page">
+                    <div class="form-group">
+                        <!--<div class="form-inline">
+                            <label for="openingdate" class="col-md-4 col-sm-12">
+                                Opening date<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <div class="dropdown input-group date width-asa">
+                                <a class="dropdown-toggle" id="openingdate" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                    <div class="input-group date-input-group">
+                                        <input type="text" date-time-input="DD-MM-YYYY" class="form-control-asa full-width-asa" name="disbursedate" ng-model="account.OpeningDate" readonly="readonly">
+                                        <span class="input-group-addon input-group-addon-asa"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <datetimepicker ng-model="account.OpeningDate" data-datetimepicker-config="{ startView:'day', minView:'day',dropdownSelector: '#openingdate' }"
+                                                    data-before-render="beforeStartDateRender($dates)"/>
+                                </ul>
+                            </div>
+                        </div>-->
+
+
+                        <div class="form-inline">
+                            <label class="col-md-4 col-sm-12">
+                                Opening Date<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <div class="dropdown input-group date width-asa">
+                                <p class="input-group">
+                                    <input ng-change="validator()"
+                                           readonly="readonly" class="form-control-asa full-width-asa" type="text" uib-datepicker-popup="{{format}}"
+                                           ng-model="account.OpeningDate" is-open="popup1.opened" datepicker-options="dateOptions" required required-message="'opening date is required'" close-text="Close"
+                                           alt-input-formats="altInputFormats" />
+                                    <span class="input-group-addon input-group-addon-asa">
+                                        <button type="button" ng-click="open1()"><i class="fa fa-calendar"></i></button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="form-inline">
+                            <label for="installmentType" class="col-md-4 col-sm-12">
+                                Category<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="category"
+                                    ng-model="account.CategoryId"
+                                    ng-change="getAllPrograms()"
+                                    name="installmentType"
+                                    required-message="'Installment Type field is required'"
+                                    ng-options="category.Value as category.Name for category in CategoryList" required></select>
+                        </div>
+
+                        <div class="form-inline">
+                            <label for="Product" class="col-md-4 col-sm-12">
+                                Product Name<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="Product"
+                                    ng-model="account.ProductId"
+                                    name="Product"
+                                    required-message="'Product field is required'"
+                                    ng-change="setProgramDetails();"
+                                    ng-options="Product.Value as Product.Name disable when Product.DisabledState for Product in ProductList" required></select>
+                        </div>
+
+
+                        <div ng-if="account.CategoryId === SavingsConfig.SavingsType.LTS" class="form-inline">
+                            <label for="duration" class="col-md-4 col-sm-12">
+                                Duration<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="duration"
+                                    ng-model="account.Duration"
+                                    name="duration"
+                                    ng-change="changeSync()"
+                                    required-message="'Duration field is required'"
+                                    ng-options="duration.Value as duration.Name for duration in DurationList" required></select>
+                        </div>
+
+
+                        <div class="form-inline">
+                            <label for="installmentType" class="col-md-4 col-sm-12">
+                                Installment Type<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="installmentType"
+                                    ng-model="account.InstallmentFrequencyId"
+                                    name="installmentType"
+                                    required-message="'Installment Type field is required'"
+                                    ng-change="changeSync();onInstallmentTypeChange();"
+                                    ng-options="installmentFrequency.Value as installmentFrequency.Name for installmentFrequency in InstallmentFrequencyList" required></select>
+                        </div>
+
+
+                        <div ng-if="account.CategoryId === SavingsConfig.SavingsType.General" class="form-inline">
+                            <label for="minimumdeposit" class="col-md-4 col-sm-12">
+                                Minimum Deposit<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <input type="number"
+                                   required-message="'Minimum Deposit field is required'"
+                                   required onkeypress="return event.charCode >= 48" min="1" name="minimumdeposit"
+                                   ng-model="account.MinimumDepositAmount" ng-disabled="account.CategoryId === SavingsConfig.SavingsType.CBS"
+                                   class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="minimumdeposit" validate-on="blur" placeholder="Minimum Deposit">
+                        </div>
+                        <div ng-if="account.CategoryId === SavingsConfig.SavingsType.LTS" class="form-inline">
+                            <label for="minimumdeposit" class="col-md-4 col-sm-12">
+                                Minimum Deposit<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="minimumdeposit"
+                                    ng-model="account.MinimumDepositAmount"
+                                    name="minimumdeposit"
+                                    required-message="'Minimum Deposit field is required'"
+                                    ng-options="mindeposit.Value as mindeposit.Name for mindeposit in LTSMinDeposits" required></select>
+                        </div>
+                        <div ng-if="account.CategoryId === SavingsConfig.SavingsType.CBS && DisbaleMinDeposit ==false" class="form-inline">
+                            <label for="minimumdeposit" class="col-md-4 col-sm-12">
+                                Minimum Deposit<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="minimumdeposit"
+                                    ng-model="account.MinimumDepositAmount"
+                                    name="minimumdeposit"
+                                    required-message="'Minimum Deposit field is required'"
+                                    ng-options="mindeposit.Value as mindeposit.Name for mindeposit in CBSMinDeposits" required></select>
+                        </div>
+                        <div ng-if="account.CategoryId === SavingsConfig.SavingsType.CBS && DisbaleMinDeposit ==true" class="form-inline">
+                            <label for="minimumdeposit" class="col-md-4 col-sm-12">
+                                Minimum Deposit<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <input type="number"
+                                   required-message="'Minimum Deposit field is required'"
+                                   required onkeypress="return event.charCode >= 48" min="1" name="minimumdeposit"
+                                   ng-model="account.MinimumDepositAmount"
+                                   class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="minimumdeposit" validate-on="blur" placeholder="Minimum Deposit">
+                        </div>
+
+                        <div class="form-inline" style="padding-bottom: 10px">
+                            <label for="IsSyncWithMeetingDay" class="col-md-4 col-sm-12">
+                                Sync With Meeting day
+                            </label><input type="checkbox" ng-model="account.IsSyncWithMeetingDay" id="IsSyncWithMeetingDay"
+                                           ng-true-value="true" ng-disabled="account.InstallmentFrequencyId === SavingsConfig.InstallmentFrequencyId.Weekly" ng-false-value="false">
+                        </div>
+                        <div class="form-inline">
+                            <label for="meetingday" class="col-md-4 col-sm-12">
+                                Meeting Day<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <input class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                   id="meetingday"
+                                   ng-model="account.MeetingDay"
+                                   name="meetingday"
+                                   disabled="disabled">
+                        </div>
+                        <div ng-if="account.IsSyncWithMeetingDay == 0 || account.IsSyncWithMeetingDay == 'false'" class="form-inline">
+                            <label for="meetingdate" class="col-md-4 col-sm-12">
+                                Meeting date<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="meetingdate"
+                                    ng-model="account.MeetingDate"
+                                    name="account.MeetingDate"
+                                    ng-options="MeetingDate.Value as MeetingDate.Name for MeetingDate in MeetingDateList"></select>
+                        </div>
+
+                        <div class="form-inline">
+                            <label for="status" class="col-md-4 col-sm-12">
+                                Status<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <input class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                   id="status" ng-model="StatusTest"
+                                   name="status"
+                                   disabled="disabled">
+                        </div>
+
+                        <div class="form-inline">
+                            <label for="closingdate" class="col-md-4 col-sm-12">
+                                Closing date
+                            </label>
+                            <div class="dropdown input-group date width-asa">
+                                <a class="dropdown-toggle" id="closingdate" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                    <div class="input-group date-input-group">
+                                        <input type="text" date-time-input="DD-MM-YYYY" class="form-control-asa full-width-asa" name="closingdate" ng-model="account.DisburseDate" readonly="readonly" disabled="disabled">
+
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="form-inline">
+                            <label for="retamount" class="col-md-4 col-sm-12">
+                                Returning Amount
+                            </label>
+                            <input type="number" name="retamount" value="0"
+                                   class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="retamount" placeholder="Returning Amount"
+                                   disabled="disabled">
+                        </div>
+
+
+
+                        <style>
+                            table#recTable {
+                                width: 100%;
+                                border: 1px solid black;
+                            }
+
+                            #recTable tr td {
+                                height: 10px;
+                                border: 2px solid black;
+                            }
+
+                            #recTable tr th {
+                                height: 10px;
+                                border: 2px solid black;
+                            }
+                        </style>
+                        <div class="form-inline" ng-show="account.AccountFeeInfo.length>0">
+
+                            <label class="col-md-4 col-sm-12">
+                                Fee Info
+                            </label>
+                            <table id="recTable">
+                                <tr>
+                                    <th>Fee Name</th>
+                                    <th>Fee Type</th>
+                                    <th>Fee Amount</th>
+                                    <th>Exemption</th>
+                                </tr>
+
+                                <tr ng-repeat="fee in account.AccountFeeInfo">
+                                    <td>{{fee.Name}}</td>
+                                    <td>{{fee.Type}}</td>
+                                    <td>{{fee.Amount}}</td>
+                                    <td>
+                                        <label>
+                                            Exempt?
+                                            <input type="checkbox" ng-model="fee.IsExempt">
+                                        </label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="form-inline">
+                            <label for="interest" class="col-md-4 col-sm-12">
+                                Interest Amount
+                            </label>
+                            <input type="number" name="interest" value="0"
+                                   class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   ng-model="account.TotalInterestEarned" ng-init="account.TotalInterestEarned=0"
+                                   id="interest" placeholder="Interest Amount"
+                                   disabled="disabled">
+                        </div>
+
+                        <div class="form-inline">
+                            <label for="adjustdate" class="col-md-4 col-sm-12">
+                                Adjust date
+                            </label>
+                            <div class="dropdown input-group date width-asa">
+                                <a class="dropdown-toggle" id="adjustdate" role="button" data-toggle="dropdown">
+                                    <div class="input-group date-input-group">
+                                        <input type="text" class="form-control-asa full-width-asa" name="adjustdate" readonly="readonly" disabled="disabled">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="form-inline">
+                            <label for="adjustamount" class="col-md-4 col-sm-12">
+                                Adjusted Amount
+                            </label>
+                            <input type="number" name="adjustamount" value="0"
+                                   class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="adjustamount" placeholder="Adjusted Amount"
+                                   disabled="disabled">
+                        </div>
+
+                        <div class="form-inline">
+                            <label for="notes" class="col-md-4 col-sm-12">
+                                Notes
+                            </label>
+                            <textarea ng-model="account.Notes"
+                                      class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                      id="notes" placeholder="Notes"
+                                      name="notes"></textarea>
+                        </div>
+
+                        <div style="margin-left: 13px" class="form-inline">
+                            <div class="form-inline" ng-click="otherInfo = ! otherInfo">
+                                <label>
+                                    Other Informations <i class="fa fa-plus add-remove-loan-field" aria-hidden="true"></i>
+                                </label>
+                            </div>
+
+                            <div class="form-inline" ng-model="otherInfo" ng-if="otherInfo==true" id="savingsaccountadd">
+                                <h6>Add Nominee Information </h6>
+                                <h4><span class="pull-right"><i class="fa fa-plus-circle add-remove-loan-field" aria-hidden="true" ng-click="addNominee()"></i></span></h4>
+
+                                <div ng-repeat="nmn in account.Nominee">
+                                    <div class="col-lg-12 col-md-12 col-sm-12" style="border: 3px solid black; margin: 5px">
+                                        <div class="col-lg-12 col-md-12 col-sm-12"><i class="fa fa-times-circle add-remove-loan-field fa-pull-right" style="margin: 5px" ng-click="removeFromList(nmn)"></i></div>
+                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                            <div class="form-inline">
+                                                <div class="form-group">
+                                                    <label for="nomineename" class="col-lg-6 col-md-6 col-sm-12">
+                                                        Name <i class="fa fa-asterisk required-icon"></i>
+                                                    </label>
+                                                    <input style="width: 100px"
+                                                           type="text"
+                                                           maxlength="100"
+                                                           ng-model="nmn.Name"
+                                                           class="form-control form-control-asa col-lg-4 col-md-4 col-sm-12"
+                                                           id="nomineename" placeholder="Nominee Name"
+                                                           name="nomineename"
+                                                           required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                            <div class="form-inline">
+                                                <div class="form-group">
+                                                    <label for="relation" class="col-lg-6 col-md-6 col-sm-12">
+                                                        Relation<i class="fa fa-asterisk required-icon"></i>
+                                                    </label>
+                                                    <input style="width: 100px"
+                                                           type="text"
+                                                           min="0"
+                                                           maxlength="100"
+                                                           ng-model="nmn.Relation"
+                                                           class="form-control form-control-asa col-lg-4 col-md-4 col-sm-12"
+                                                           id="relation" placeholder="Relation with Account holder"
+                                                           name="relation"
+                                                           required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                            <div class="form-inline">
+                                                <div class="form-group">
+                                                    <label for="Proportion" class="col-lg-6 col-md-6 col-sm-12 important-field-label-account">
+                                                        Percentage <i class="fa fa-asterisk required-icon"></i>
+                                                    </label>
+                                                    <input style="width: 100px"
+                                                           type="number"
+                                                           id="Proportion" placeholder="Percentage of Total Amount"
+                                                           name="percentage_{{$index}}"
+                                                           ng-model="nmn.Percentage"
+                                                           onkeypress="return event.charCode >= 48"
+                                                           min="1"
+                                                           max="100"
+                                                           validator="{{PercentageValidator(nmn.Percentage) === true}}"
+                                                           invalid-message="{{PercentageValidator(nmn.Percentage)}}.message"
+                                                           validate-on="dirty"
+                                                           maxlength="100"
+                                                           class="form-control form-control-asa col-lg-4 col-md-4 col-sm-12"
+                                                           required
+                                                           ng-change="totalNomineePercentage()">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="padding: 25px" class="col-md-12 col-lg-12 col-sm-12">
+                            <div class="form-group" ng-hide="hasFiles">
+                                <label for="newDocs" class="h4 h4-asa">Documents Upload</label>
+                                <input ng-change="docSizeBoolChecker()" type="file" id="newDocs" class="uploadFile" accept=".jpg,.jpeg,.pdf" ngf-select ngf-keep="true" ng-model="files" ngf-multiple="true">
+                                <label style="padding-top: 5px; color: blue;">Please select Document or Image type files (Max File Size 3MB) </label>
+                                <label ng-show="docError" style="padding-top: 5px; color: red;">Total File Size Exceeded! (Max File Size 3MB. Selected Total File Size {{ (fileSize/(1024*1024)) |number:2 }}MB!)</label>
+
+                            </div>
+                            <div class="form-group ">
+                                <table style="text-align: center">
+                                    <thead>
+                                        <tr>
+                                            <td> Name</td>
+                                            <td> Size (Byte)</td>
+                                            <td> Action</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="file in files">
+                                            <td>
+                                                {{file.name}}
+                                            </td>
+                                            <td>
+                                                {{file.size }}
+                                            </td>
+                                            <td>
+                                                <i class="fa fa-times asa-icon-DELETE" ng-click="removefile(file,files,'name')"></i>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    <div ng-if="savingsaccountAddForm.$valid === false && savingsaccountAddForm.$dirty === true">
+        <p class="form-validation-message">Validation failed, on or more required field is missing</p>
+    </div>
+    <button type="submit" class="btn btn-primary pull-right">
+        Submit
+    </button>
+    </form>
+</div>
+</div>

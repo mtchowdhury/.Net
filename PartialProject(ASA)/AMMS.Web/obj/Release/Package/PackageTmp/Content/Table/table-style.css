@@ -1,0 +1,74 @@
+﻿td, th {
+    border: 1px solid #ddd;
+    text-align: left;
+    font-size: 13px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+/*changed for ui bootstrap datepicker tuneup*/
+th, td {
+    /*padding: 15px;*/
+}
+
+.feeTable {
+    padding: 4px !important;
+}
+
+#feeTable {
+    margin-left: -50px;
+}
+
+#feeTableEdit {
+    margin-left: -13px;
+}
+
+.feePolicy {
+    width: 120px;
+}
+
+#otherInfoAccount {
+    margin-top: 15px;
+}
+
+#savingsaccountadd .validationMessage {
+    padding-left: 154px !important;
+}
+
+
+.table-test thead tr th, .table-loan-schedule tbody tr td{
+    padding: 0 !important;
+}
+#table-test thead tr th, .table-loan-schedule tbody tr td{
+    padding: 0 !important;
+}
+.tester {
+    padding: 0 !important;
+}
+
+
+/*.table-fixed thead {
+  width: 97%;
+}
+.table-fixed tbody {
+  height: 230px;
+  overflow-y: auto;
+  width: 100%;
+}
+.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+  display: block;
+}
+.table-fixed tbody td, .table-fixed thead > tr> th {
+  float: left;
+  border-bottom-width: 0;
+}*/
+
+.table-wrapper-scroll-y {
+  display: block;
+  max-height: 200px;
+  overflow-y: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}

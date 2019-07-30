@@ -1,0 +1,80 @@
+﻿<div class="panel panel-default panel-primary" ng-controller="userAdminAddController">
+    <div class="panel-heading panel-title">
+        Add User
+    </div>
+    <div class="panel-body panel-body-asa font-asa-11">
+        <form angular-validator-submit="addUser()" name="userAddForm" class="form-horizontal" novalidate angular-validator>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-lg-offset-2 col-md-offset-2">
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <label for="employeeId" class="col-md-4 col-sm-12">
+                                Employee/User<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <div angucomplete-alt
+                                 tabindex="1"
+                                 required
+                                 id="employeeId"
+                                 placeholder="Search employees"
+                                 pause="300"
+                                 selected-object="onUserSelected"
+                                 remote-request-url-formatter="remoteRequestUrlFormatterFn"
+                                 remote-url-request-formatter="remoteUrlRequestFn"
+                                 remote-request-header-formatter="remoteRequestHeaderFn"
+                                 remote-url-data-field="Items"
+                                 title-field="Name,Value"
+                                 description-field="Value"
+                                 minlength="1"
+                                 input-class="form-control form-control-asa form-control-asa-select-box-padding autocomplete-input col-md-8 col-sm-12"
+                                 match-class="highlight">
+                            </div>
+                            <!--<button class="btn btn-default add-remove-user-btn" ng-click="clearSearch()"><i class="fa fa-times-circle add-remove-loan-field"></i></button>-->
+                        </div>
+
+                        <div class="form-inline">
+                            <label for="password" class="col-md-4 col-sm-12">
+                                Password <i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <input type="password" tabindex="2" name="Password"
+                            ng-model="userToAdd.Password" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                            id="password" placeholder="password"
+                            validator="passwordValidator(userToAdd.Password) === true"
+                            invalid-message="passwordValidator(userToAdd.Password)"
+                            validate-on="dirty">
+                        </div>
+                        <div class="form-inline">
+                            <label for="confirmPassword" class="col-md-4 col-sm-12">
+                                Confirm Password <i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <input type="password" tabindex="3" name="ConfirmPassword"
+                                   ng-model="userToAdd.ConfirmPassword" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="confirmPassword" placeholder="confirm password"
+                                   validator="confirmPasswordValidator(userToAdd.ConfirmPassword) === true"
+                                   invalid-message="confirmPasswordValidator(userToAdd.ConfirmPassword)"
+                                   validate-on="dirty">
+                        </div>
+                        <div class="form-inline">
+                            <label class="col-md-4 col-sm-12">
+                                Assigned Roles
+                            </label>
+                            <div class="multiselect-parent-asa" ng-dropdown-multiselect="" extra-settings="dropdownSetting"
+                                 options="roleList" selected-model="selectedRoles" checkboxes="true"></div>
+                        </div>
+                        <div class="form-inline" style="margin-top: 10px;">
+                            <label for="active" class="col-md-4 col-sm-12" style="margin-top: 5px;">
+                                Active?
+                            </label>
+                            <input id="active" type="checkbox" ng-model="userToAdd.Active" tabindex="4">
+                        </div>
+                        <div ng-if="userAddForm.$dirty === true && userAddForm.$valid === false">
+                            <p class="form-validation-message">Validation failed, one or more required field is missing</p>
+                        </div>
+                        <button style="margin-top: 10px;" type="submit" tabindex="100" class="btn btn-primary pull-right">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

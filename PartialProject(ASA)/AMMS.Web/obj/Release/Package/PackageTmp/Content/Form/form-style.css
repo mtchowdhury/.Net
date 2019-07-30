@@ -1,0 +1,112 @@
+﻿.form-control-asa {
+    /*-webkit-appearance: textfield;*/
+    -webkit-rtl-ordering: logical;
+    background-color: #fff;
+    background-image: none;
+    border: none;
+    border-bottom: 1px solid #5f9ea0;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #000;
+    cursor: auto;
+    font-size: 11px !important;
+    height: 24px;
+    line-height: 1.42857143;
+    margin: 0 0 7px;
+    padding: 4px 8px;
+    user-select: text;
+    font-size: 18px;
+}
+
+.form-control-asa-search {
+    height: 24px;
+    width: 80%;
+    padding: 2px 12px;
+    font-size: 14px;
+    margin: 0 0 7px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-control-asa-search-sm {
+    height: 30px;
+    width: 40%;
+    padding: 2px 6px 2px 35px;
+    font-size: 14px;
+    margin: 0 0 7px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-search-icon {
+    width: 25px;
+    height: 25px;
+    float: left;
+    margin-top: -35px;
+    margin-left: 5px;
+}
+
+.form-control-report-asa {
+    /*-webkit-appearance: textfield;*/
+    -webkit-rtl-ordering: logical;
+    background-color: #fff;
+    background-image: none;
+    border: none;
+    border: 1px solid #5f9ea0;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #000;
+    cursor: auto;
+    font-size: 11px !important;
+    height: 30px;
+    line-height: 1.42857143;
+    margin: 0 0 7px;
+    padding: 3px 8px;
+    user-select: text;
+    font-size: 12px !important;
+    width: 250px !important;
+}
+
+.form-control-asa-select-box-padding {
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
+.autocomplete-label {
+    margin-left: 14px;
+}
+
+.autocomplete-input {
+    margin-left: 0;
+    width: 66% !important;
+}
+
+.filter-form {
+    border: 1px solid #708090;
+    border-radius: 4px;
+    height: auto;
+    display: flow-root;
+    padding: 5px;
+    min-height: 50px;
+}
+
+.label-form-control-asa {
+    font-size: 11px;
+    margin-top: 4px;
+}
+
+.btn-asa-normal {
+    margin: 5px 2px 0 2px;
+}
+
+#nomineeDiv .validationMessage {
+    padding-left: 0 !important;
+}

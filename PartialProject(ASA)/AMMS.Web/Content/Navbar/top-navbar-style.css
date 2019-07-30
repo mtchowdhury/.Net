@@ -1,0 +1,237 @@
+﻿.nav-pills-asa > .active > a > .badge {
+    background-color: #fff;
+    color: #337ab7;
+    
+}
+
+.nav-pills-asa > li {
+    float: left;
+    padding: 4px !important;
+    font-size: 13px;
+    
+}
+
+    .nav-pills-asa > li + li {
+        margin-left: 2px;
+        
+    }
+
+    .nav-pills-asa > li > a {
+        -ms-border-radius: 4px;
+        border-radius: 4px;
+        border: 0 !important;
+        
+    }
+
+        .nav-pills-asa > li > a > .badge {
+            margin-left: 3px;
+            
+        }
+
+    .nav-pills-asa > li.active > a, .nav-pills-asa > li.active > a:hover, .nav-pills-asa > li.active > a:focus {
+        background-color: #104E8B;
+        color: #fff;
+        
+    }
+
+.navbar-color-asa {
+    background-color: #A9A9A9;
+    color: #000;
+}
+
+.navbar-custom {
+    margin-left: -102px !important;
+    font-size: 24px;
+}
+
+.navbar-label-name {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.navbar-branch-name {
+    color: #87ceeb;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.navbar-date-name {
+    color: #87ceeb;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  
+}
+
+.navbar-date-name > span > a:hover{
+    cursor: pointer;
+  
+}
+.navbar-date-name > span > a{
+    color:#85b2d8;  
+}
+
+.navbar-user-name {
+    color: #87ceeb;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover {
+    color: #87ceeb;
+    cursor: pointer;
+}
+.navbar-header-custom-width {
+    width: 30% !important;
+
+}
+
+#nav{list-style:none;margin: 0;padding: 0;}
+#nav li {
+float: left;
+margin-right: 20px;
+font-family: Arial;
+font-size: 14px;
+font-weight:bold;
+}
+#nav li a{color:#333333;text-decoration:none}
+#nav li a:hover{color:#006699;text-decoration:none}
+
+
+#notification_li
+{
+position:relative
+}
+#notificationContainer {
+background-color: #fff;
+border: 1px solid #646464;
+-webkit-box-shadow: 0 3px 8px #000000;
+overflow: visible;
+position: absolute;
+top: 60px;
+margin-left: -300px;
+width: 400px;
+z-index: -1;
+display: none;
+}
+
+#notificationContainer:before {
+content: '';
+display: block;
+position: absolute;
+width: 0;
+height: 0;
+color: transparent;
+border: 10px solid black;
+border-color: transparent transparent white;
+margin-top: -20px;
+margin-left: 188px;
+}
+#notificationTitle
+{
+font-weight: bold;
+padding: 8px;
+font-size: 13px;
+background-color: #ffffff;
+position: fixed;
+z-index: 1000;
+width: 384px;
+color: black;
+border-bottom: 1px solid #dddddd;
+}
+#notificationsBody
+{
+padding: 50px 0px 0px 0px !important;
+min-height:300px;
+}
+#notificationsBody .singleNotification {
+    color: #1d84b1;
+    width: 400px;
+}
+
+#notificationFooter
+{
+background-color: #e9eaed;
+text-align: center;
+font-weight: bold;
+padding: 8px;
+font-size: 12px;
+border-top: 1px solid #dddddd;
+}
+
+
+
+	#notification_count 
+	{
+	padding: 3px 7px 3px 7px;
+	background: #cc0000;
+	color: #ffffff;
+	font-weight: bold;
+	margin-left: 23px;
+	border-radius: 9px;
+	-moz-border-radius: 9px; 
+	-webkit-border-radius: 9px;
+	position: absolute;
+	margin-top: -45px;
+	font-size: 11px;
+	}
+
+    .notify, .warning, .news, .task {
+	font-size: 12px;
+	height: auto;
+	background: #141414;
+	margin: 5px 0px;
+	display: block;
+	position: relative;
+	clear: both;
+}
+
+.notify {
+	background: #ffcb70;
+	color: #a1772d;
+	border: 1px solid #efb44e;
+}
+
+.warning {
+	background: #df7e7e;
+	color: #9c4c4c;
+	border: 1px solid #c16d6d;
+}
+
+.news {
+	background: #7ec296;
+	color: #537d62;
+	border: 1px solid #6cb184;
+}
+
+.task {
+	background: #3170ad;
+	color: #cbd9e5;
+	border: 1px solid #6fc1c6;
+}
+
+.notify strong, .warning strong, .news strong, .task strong {
+	text-transform: uppercase;
+	width: 89px;
+	display: inline-block;
+	text-align: center;
+	height: 100%;
+	padding: 17px 0px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+	background: rgba(0,0,0,0.1);
+}
+
+.notify span, .warning span, .news span, .task span {
+	
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+}

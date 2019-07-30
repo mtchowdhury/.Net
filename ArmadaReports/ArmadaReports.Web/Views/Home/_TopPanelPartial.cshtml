@@ -1,0 +1,211 @@
+﻿<div id="widget-panel-1" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="tl-title" class="panel-title">Days to Fill</h4>
+            <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showTl()">
+        </div>
+        <div class="panel-body panel-body-height">
+            <div class="form-inline">
+                <div class="form-group" style="display: none;">
+                    <label for="treatment-tl">Treatment:</label>
+                    <select id="treatment-tl" class="form-control form-control-height" onchange="service.getDaysToFill()">
+                        <option value="All">All</option>
+                        <option value="Unknown">Unknown</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="prior-auth">Prior Auth:</label>
+                    <select id="prior-auth" class="form-control form-control-height" onchange="service.getDaysToFill()">
+                        <option value="-1">All</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select style="width: 180px; display: none;" id="pharmacy" class="form-control form-control-height" onchange="service.getDaysToFill()"></select>
+                </div>
+                <img id="loading-tl" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 10px;" />
+            </div>
+
+            <div style="display:none;" id="top-left-no-data" class="no-data-div">
+                <span>No data available for this time period</span>
+            </div>
+            <div class="chart-container" id="top-left-column-chart"></div>
+            <div id="tl-chart-title" class="chart-title"></div>
+        </div>
+    </div>
+</div>
+<div id="widget-panel-2" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="tm-title" class="panel-title">Intake Program Status</h4>
+            <img src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showTm()">
+        </div>
+        <div class="panel-body panel-body-height">
+            <div class="form-inline">
+                <div class="form-group" style="display: none;">
+                    <label for="treatment-tm">Treatment:</label>
+                    <select id="treatment-tm" class="form-control form-control-height" onchange="service.getPorgramStatus()">
+                        <option value="All">All</option>
+                        <option value="Unknown">Unknown</option>
+                    </select>
+                </div>
+                <img id="loading-tm" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 10px;" />
+            </div>
+
+            <div style="display:none;" id="top-middle-no-data" class="no-data-div">
+                <span>No data available for this time period</span>
+            </div>
+            <div class="pie-chart-container" id="top-middle-pie-chart"></div>
+            <div id="tm-chart-title" class="chart-title"></div>
+
+            <div class="btn-group-container">
+                <div id="bg-tm" class="btn-group dropup" role="group" aria-label="">
+                    <button type="button" data-date="today" class="btn btn-primary custom-btn-group btn-selected" onclick="utility.dateBtnClick('bg-tm', this, service.getPorgramStatus)">Today</button>
+                    <button type="button" data-date="yesterday" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-tm', this, service.getPorgramStatus)">Yesterday</button>
+                    <button type="button" data-date="thisweek" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-tm', this, service.getPorgramStatus)">This Week</button>
+                    <button type="button" data-date="lastweek" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-tm', this, service.getPorgramStatus)">Last Week</button>
+                    <button type="button" data-date="currentmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-tm', this, service.getPorgramStatus)">Current Month</button>
+                    <button type="button" data-date="lastmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-tm', this, service.getPorgramStatus)">Last Month</button>
+                    <button type="button" data-date="qtd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-tm', this, service.getPorgramStatus)">Calendar QTD</button>
+                    <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-tm', this, service.getPorgramStatus)">Calendar YTD</button>
+
+                    <button style="border-radius: 0px;" id="btn-qtd-tm" type="button" data-date="qtd" class="btn btn-primary dropdown-toggle custom-btn-group not-for-cipher" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                        QTD<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu qtd-dropdown">
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-tm', 'btn-qtd-tm', 'qtd5', service.getPorgramStatus, this)">QTR5</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-tm', 'btn-qtd-tm', 'qtd4', service.getPorgramStatus, this)">QTR4</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-tm', 'btn-qtd-tm', 'qtd3', service.getPorgramStatus, this)">QTR3</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-tm', 'btn-qtd-tm', 'qtd2', service.getPorgramStatus, this)">QTR2</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-tm', 'btn-qtd-tm', 'qtd1', service.getPorgramStatus, this)">QTR1</a></li>
+                    </ul>
+
+                    <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-tm', this, service.getPorgramStatus)">YTD</button>
+                    @*<button type="button" data-date="allreferrals" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-tm', this, service.getPorgramStatus)">24 Months</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="widget-panel-3" class="col-lg-4 col-md-4 col-sm-12 non-pad-col">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h4 id="tr-title" class="panel-title">Regional/ District Managers</h4>
+            <img id="no-drilldown-popup" src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showTr()">
+            <img id="yes-drilldown-popup" src="~/Content/images/expand-icon.png" class="details-icon" onclick="popup.showDrilldownTr()">
+        </div>
+        <div class="panel-body panel-body-height">
+            <div class="form-inline">
+                <div class="form-group" style="display: none;">
+                    <label for="treatment-tr">Treatment:</label>
+                    <select id="treatment-tr" class="form-control form-control-height">
+                        <option value="All">All</option>
+                        <option value="Unknown">Unknown</option>
+                    </select>
+                </div>
+                <div id="strength-tr-div" class="form-group" style="display: none;">
+                    <label for="strength-tr">Product:</label>
+                    <select id="strength-tr" class="form-control form-control-height" onchange="service.getDistrictManagers()">
+                    </select>
+                </div>
+                <div style="display: none;" id="managers-tr-div" class="form-group">
+                    <select id="managers-tr" class="form-control form-control-height" onchange="pieChartWrapper.onManagerSelected()"></select>
+                </div>
+                <div style="display: none;" id="salesrep-tr-div" class="form-group">
+                    <select id="salesrep-tr" class="form-control form-control-height" onchange="pieChartWrapper.onSalesrepSelected()"></select>
+                </div>
+                <input type="hidden" id="reports-to" />
+                <input type="hidden" id="reports-name" />
+                <button class="btn btn-primary custom-btn-chart-top pull-right" onclick="detailsWrapper.gotoAnalysis()">Analysis</button>
+                <button style="display: none;" id="nra" class="btn btn-primary custom-btn-chart-top pull-right" onclick="detailsWrapper.gotoNewReferralAnalysis()">New Referrals Analysis</button>
+                <button style="display: none;" id="district-manager-btn" class="btn btn-primary custom-btn-chart-top pull-left" onclick="service.getDistrictManagers()">District Manager</button>
+                <span style="margin-left: 1px; margin-top: 5px; display: none; font-size: 10px;" id="sales-rep"></span>
+                <img id="loading-tr" src="~/Content/images/loading_blue_lg.gif" style="height: 30px; width: 30px; display: none; z-index: 200; position: absolute; top: 45px; left: 10px;" />
+            </div>
+
+            <div style="display:none;" id="top-right-no-data" class="no-data-div">
+                <span>No data available for this time period</span>
+            </div>
+            <div class="pie-chart-container-with-btn" id="top-right-pie-chart"></div>
+            <div id="tr-chart-title" class="chart-title"></div>
+
+            <div id="no-drilldown" class="btn-group-container">
+                <div id="bg-tr" class="btn-group dropup" role="group" aria-label="">
+                    <button type="button" data-date="today" class="btn btn-primary custom-btn-group btn-selected" onclick="utility.dateBtnClick('bg-tr', this, service.getDistrictManagers)">Today</button>
+                    <button type="button" data-date="yesterday" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-tr', this, service.getDistrictManagers)">Yesterday</button>
+                    <button type="button" data-date="thisweek" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-tr', this, service.getDistrictManagers)">This Week</button>
+                    <button type="button" data-date="lastweek" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-tr', this, service.getDistrictManagers)">Last Week</button>
+                    <button type="button" data-date="currentmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-tr', this, service.getDistrictManagers)">Current Month</button>
+                    <button type="button" data-date="lastmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-tr', this, service.getDistrictManagers)">Last Month</button>
+                    <button type="button" data-date="qtd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-tr', this, service.getDistrictManagers)">Calendar QTD</button>
+                    <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-tr', this, service.getDistrictManagers)">Calendar YTD</button>
+
+
+                    <button style="border-radius: 0px;" id="btn-qtd" type="button" data-date="qtd" class="btn btn-primary dropdown-toggle custom-btn-group not-for-cipher" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                        QTD<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu qtd-dropdown">
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-tr', 'btn-qtd', 'qtd5', service.getDistrictManagers, this)">QTR5</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-tr', 'btn-qtd', 'qtd4', service.getDistrictManagers, this)">QTR4</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-tr', 'btn-qtd', 'qtd3', service.getDistrictManagers, this)">QTR3</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-tr', 'btn-qtd', 'qtd2', service.getDistrictManagers, this)">QTR2</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-tr', 'btn-qtd', 'qtd1', service.getDistrictManagers, this)">QTR1</a></li>
+                    </ul>
+
+
+                    <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-tr', this, service.getDistrictManagers)">YTD</button>
+                    @*<button type="button" data-date="allreferrals" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-tr', this, service.getDistrictManagers)">24 Months</button>*@
+                </div>
+            </div>
+            <div style="display: none;" id="yes-drilldown" class="btn-group-container">
+                <div id="bg-tr-dd" class="btn-group dropup" role="group" aria-label="">
+                    <button type="button" data-date="today" class="btn btn-primary custom-btn-group btn-selected" onclick="utility.dateBtnClick('bg-tr', this, service.getDrilldownDistrictManagers)">Today</button>
+                    <button type="button" data-date="yesterday" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-tr', this, service.getDrilldownDistrictManagers)">Yesterday</button>
+                    <button type="button" data-date="thisweek" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-tr', this, service.getDrilldownDistrictManagers)">This Week</button>
+                    <button type="button" data-date="lastweek" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-tr', this, service.getDrilldownDistrictManagers)">Last Week</button>
+                    <button type="button" data-date="currentmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-tr', this, service.getDrilldownDistrictManagers)">Current Month</button>
+                    <button type="button" data-date="lastmonth" class="btn btn-primary custom-btn-group" onclick="utility.dateBtnClick('bg-tr', this, service.getDrilldownDistrictManagers) ">Last Month</button>
+                    <button type="button" data-date="qtd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-tr', this, service.getDrilldownDistrictManagers)">Calendar QTD</button>
+                    <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group for-cipher" onclick="utility.dateBtnClick('bg-tr', this, service.getDrilldownDistrictManagers)">Calendar YTD</button>
+
+                    <button style="border-radius: 0px;" id="btn-qtd-dd" type="button" data-date="qtd" class="btn btn-primary dropdown-toggle custom-btn-group not-for-cipher" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                        QTD<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu qtd-dropdown">
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-tr', 'btn-qtd-dd', 'qtd5', service.getDrilldownDistrictManagers, this)">QTR5</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-tr', 'btn-qtd-dd', 'qtd4', service.getDrilldownDistrictManagers, this)">QTR4</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-tr', 'btn-qtd-dd', 'qtd3', service.getDrilldownDistrictManagers, this)">QTR3</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-tr', 'btn-qtd-dd', 'qtd2', service.getDrilldownDistrictManagers, this)">QTR2</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)" onclick="utility.qtdDateBtnClick('bg-tr', 'btn-qtd-dd', 'qtd1', service.getDrilldownDistrictManagers, this)">QTR1</a></li>
+                    </ul>
+
+                    <button type="button" data-date="ytd" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-tr', this, service.getDrilldownDistrictManagers)">YTD</button>
+                    @*<button type="button" data-date="allreferrals" class="btn btn-primary custom-btn-group not-for-cipher" onclick="utility.dateBtnClick('bg-tr', this, service.getDrilldownDistrictManagers)">24 Months</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    setTimeout(function () {
+        service.getFilterValuesById('[analytics].[GetTradeNames]', $('#program').val(), 'strength-tr');
+    }, 5000);
+</script>

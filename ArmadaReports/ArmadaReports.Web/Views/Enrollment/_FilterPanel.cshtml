@@ -1,0 +1,28 @@
+﻿<div id="enrollment-filter-modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content enrollment-details-filter-modal-dialog">
+            <div class="modal-header modal-custom-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h5 class="modal-title">Selection Filters</h5>
+            </div>
+            <div class="modal-body enrollment-modal-body-height">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="form-inline">
+                            <div class="form-group details-filter-form-group">
+                                <label class="details-filter-label" for="year">Year:</label>
+                                <select id="year" class="form-control form-control-height" onchange="">
+                                    @for (var i = 2012; i <= DateTime.Today.Year; i++)
+                                    {
+                                        <option value="@i">@i</option>
+                                    }
+                                </select>
+                            </div>
+                            <button class="btn btn-primary pull-right" onclick="enrollmentWrapper.onFilterChange()">Select Physicians</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
