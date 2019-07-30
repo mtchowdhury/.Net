@@ -1,0 +1,15 @@
+﻿<div id="wrapper">
+    <div id="sidebar-wrapper" class="row-asa-collapse" style="padding-right: 210px">
+        <ul id="sidebar_menu" class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a id="menu-toggle">
+                    Menu
+                    <span id="main_icon" class="fa fa-bars"></span>
+                </a>
+            </li>
+        </ul>
+        <ul class="sidebar-nav" id="sidebar">
+            <li class="allMenus" ng-repeat="submenu in menus" ng-include="'submenu-partial'"></li>
+        </ul>
+    </div>
+</div>

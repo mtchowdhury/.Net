@@ -1,0 +1,72 @@
+﻿<div class="panel panel-default panel-primary" ng-controller="employeeReceiveController">
+    <div class="panel-heading panel-title">
+       Employee Receive
+    </div>
+    <div style="padding-top: 10px;"></div>
+    <table style="width: 100%"
+           class="pro-table table-striped table-bordered table-hover table-asa">
+        <thead>
+            <tr>
+                <th>Employee </th>
+                <th>Employee Data </th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Name</td>
+                <td>{{receiveEmployeeObj.EmployeeName}}</td>
+            </tr>
+            <tr>
+                <td>Employee Id</td>
+                <td>{{receiveEmployeeObj.EmployeeId}}</td>
+            </tr>
+            <tr>
+                <td>From District </td>
+                <td>{{receiveEmployeeObj.FromDistrictName}}</td>
+            </tr>
+            <tr>
+                <td>From Branch</td>
+                <td>{{receiveEmployeeObj.FromBranchName}}</td>
+            </tr>
+            <tr>
+                <td>Letter No.</td>
+                <td>{{receiveEmployeeObj.LetterNo}}</td>
+            </tr>
+            <tr>
+                <td>Transfer Date</td>
+                <td>{{receiveEmployeeObj.formattedTransferDate}}</td>
+            </tr>
+            <tr>
+                <td>Joining Date</td>
+                <td>{{receiveEmployeeObj.formattedJoiningDate}}</td>
+            </tr>
+        </tbody>
+    </table>
+        
+        <button ng-click="receiveEmployee()" class="pull-right btn-primary" style="margin-right: 15px;margin-top: 35px;" >Receive</button>
+    <!--<div class="col-lg-12 col-md-12 col-sm-12 panel-body font-asa-12">
+        <table style="width: 100%" datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs"
+               class="pro-table table-striped table-bordered table-hover table-asa">
+            <thead>
+                <tr>
+                    <th>Account Name </th>
+                    <th>PaymentTypeName</th>
+                    <th>Amount</th>
+                    <th>Outstanding Amount</th>
+                    <th>Duration</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="account in receiveEmployeeObj.Accounts">
+                    <td>{{account.AccountTypeName}}</td>
+                    <td>{{account.PaymentTypeName}}</td>
+                    <td>{{account.PrincipalAmount}}</td>
+                    <td>{{account.OutstandingAmount}}</td>
+                    <td>{{account.Duration}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>-->
+    
+</div>

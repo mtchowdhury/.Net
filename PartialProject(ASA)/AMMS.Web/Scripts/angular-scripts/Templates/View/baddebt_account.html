@@ -1,0 +1,195 @@
+﻿<div class="panel panel-default panel-primary" ng-controller="baddebtaccountEditController">
+    <div class="panel-heading panel-title">
+        Edit Bad Debt
+    </div>
+    <div class="panel-body panel-body-asa font-asa-11">
+        <form angular-validator-submit="editBadDebt()" name="badDebtEditForm" class="form-horizontal" novalidate angular-validator>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-inline">
+                                <label for="ddate" class="col-md-4 col-sm-12">
+                                    Disburse Date<i class="fa fa-asterisk required-icon"></i>
+                                </label>
+                                <div class="dropdown input-group date width-asa">
+                                    <a class="dropdown-toggle" id="ddate" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                        <div class="input-group date-input-group">
+                                            <input type="text" readonly="readonly" date-time-input="DD-MM-YYYY" class="form-control-asa full-width-asa" data-ng-model="badDebtAccount.DisburseDate">
+                                            <span class="input-group-addon input-group-addon-asa"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                        <datetimepicker data-ng-model="badDebtAccount.DisburseDate" data-datetimepicker-config="{ startView:'day', minView:'day',dropdownSelector: '#dob' }" data-before-render="beforeStartDateRender($dates)" />
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="form-inline">
+                                <label for="mstatus" class="col-md-4 col-sm-12">
+                                    Reference Loan
+                                </label>
+                                <input class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                       id="mstatus" ng-model="badDebtAccount.BadDebtAccountName"
+                                       name="MaritalStatus" disabled />
+                            </div>
+
+                            <div class="form-inline">
+                                <label for="dam" class="col-md-4 col-sm-12">
+                                    Disburse Amount
+                                </label>
+                                <input class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                       id="dam" ng-model="badDebtAccount.DisburseAmount"
+                                       name="MaritalStatus" disabled />
+                            </div>
+                            <div class="form-inline">
+                                <label for="dur" class="col-md-4 col-sm-12">
+                                    Duration
+                                </label>
+                                <input class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                       id="dur" ng-model="badDebtAccount.Duration"
+                                       name="MaritalStatus" disabled />
+                            </div>
+                            <div class="form-inline">
+                                <label for="freq" class="col-md-4 col-sm-12">
+                                    Installment Frequency
+                                </label>
+                                <select class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                        id="freq" ng-model="badDebtAccount.InstallmentFrequencyId"
+                                        name="freq"
+                                        ng-options="InstallmentFrequency.Value as InstallmentFrequency.Name for InstallmentFrequency in InstallmentFrequencyList" disabled></select>
+                            </div>
+                            <div class="form-inline">
+                                <label for="tdate" class="col-md-4 col-sm-12">
+                                    Transfer Date<i class="fa fa-asterisk required-icon"></i>
+                                </label>
+                                <div class="dropdown input-group date width-asa">
+                                    <a class="dropdown-toggle" id="tdate" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                        <div class="input-group date-input-group">
+                                            <input type="text" readonly="readonly" date-time-input="DD-MM-YYYY" class="form-control-asa full-width-asa" data-ng-model="badDebtAccount.BadDebtTransferDate">
+                                            <span class="input-group-addon input-group-addon-asa"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                        <datetimepicker data-ng-model="badDebtAccount.BadDebtTransferDate" data-datetimepicker-config="{ startView:'day', minView:'day',dropdownSelector: '#dob' }" data-before-render="beforeStartDateRenderT($dates)" />
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="form-inline">
+                                <label for="tam" class="col-md-4 col-sm-12">
+                                    Transferred Amount
+                                </label>
+                                <input class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                       id="tam" ng-model="badDebtAccount.TransferAmount"
+                                       name="tam" disabled />
+                            </div>
+
+                            <div class="form-inline">
+                                <label for="status" class="col-md-4 col-sm-12">
+                                    Status
+                                </label>
+                                <select class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                        id="status" ng-model="badDebtAccount.Status"
+                                        name="status" readonly="readonly"
+                                        ng-options="Status.Value as Status.Name for Status in StatusList"></select>
+                            </div>
+
+
+
+                            <div class="form-inline">
+                                <label for="reason" class="col-md-4 col-sm-12">
+                                    Reason
+                                </label>
+                                <select class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12" readonly="readonly"
+                                        id="reason" ng-model="badDebtAccount.Reason"
+                                        name="status"
+                                        ng-options="Reason.Value as Reason.Name for Reason in ReasonList | filter:reasonFilter()"></select>
+                            </div>
+
+                            <div class="form-inline">
+                                <label for="cdate" class="col-md-4 col-sm-12">
+                                    Closing Date<i class="fa fa-asterisk required-icon"></i>
+                                </label>
+                                <div class="dropdown input-group date width-asa">
+                                    <a class="dropdown-toggle" id="cdate" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                        <div class="input-group date-input-group">
+                                            <input type="text" readonly="readonly" date-time-input="DD-MM-YYYY" class="form-control-asa full-width-asa" data-ng-model="badDebtAccount.ClosingDate" disabled="disabled">
+                                            <span class="input-group-addon input-group-addon-asa"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                        <datetimepicker data-ng-model="badDebtAccount.ClosingDate" data-datetimepicker-config="{ startView:'day', minView:'day',dropdownSelector: '#dob' }" data-before-render="beforeStartDateRenderC($dates)" />
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12 col-sm-12">
+                                    <div ng-if="badDebtEditForm.$valid === false && badDebtEditForm.$dirty === true">
+                                        <p class="form-validation-message">Validation failed, one or more required field is missing</p>
+                                    </div>
+                                    <button type="submit" disabled="disabled" class="btn btn-primary pull-right" ng-click="onSubmitBadDebtForm()">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+
+                            <table style="width: 100%; display: block;" datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs"
+                                   data-page-length='10' id="table-loan-schedule-add" class="table table-striped table-hover table-asa">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Sl No
+                                        </th>
+                                        <th>
+                                            Transaction Date
+                                        </th>
+                                        <th>
+                                            Transaction Type
+                                        </th>
+                                        <th>
+                                            Amount
+                                        </th>
+                                        <th>
+                                            OutStanding
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="t in transactionList">
+                                        <td>{{t.$id}}</td>
+                                        <td>{{t.TransactionDate}}</td>
+                                        <td>{{t.TransactionType}}</td>
+                                        <td>{{t.Credit}}</td>
+                                        <td>{{t.OutstandingAmount}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

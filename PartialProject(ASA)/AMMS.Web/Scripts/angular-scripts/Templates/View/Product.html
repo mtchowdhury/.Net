@@ -1,0 +1,1540 @@
+﻿<div class="row" ng-controller="productEditController">
+
+<fieldset ng-disabled="true">
+
+    <h5><i class="fa fa-asterisk required-icon"></i> Required Filed</h5>
+    <div class="panel-body font-asa-11">
+        <form angular-validator-submit="editProduct()" name="editProductForm" class="form-horizontal" novalidate angular-validator>
+            <div class="panel-group" id="accordionedit" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingGeneral">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordionedit" href="#collapseEditGeneral" aria-expanded="true" aria-controls="collapseEditGeneral" onclick="accordionUtility.setCaret('gi')">
+                                Basic Information
+                                <i id="gi-down" class="fa fa-caret-down"></i>
+                                <i id="gi-up" class="fa fa-caret-up hide-caret"></i>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseEditGeneral" class="panel-collapse in" role="tabpanel" aria-labelledby="headingGeneral" showHide="showHide">
+                        <div class="panel-body">
+                            <!--<div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="ptype" class="col-md-4 col-sm-12">
+                                            Product Type <i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <select class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                                id="ptype" ng-model="product.ProductTypeId"
+                                                name="ptype"
+                                                required-message="'Please select a Product Type'"
+                                                ng-options="type.Value as type.Name for type in types" required disabled="disabled"></select>
+                                    </div>
+                                </div>
+                            </div>-->
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="pcategoryname" class="col-md-4 col-sm-12">
+                                            Product Category
+                                        </label>
+                                        <input type="text"
+                                               maxlength="100"
+                                               ng-model="categories.productCategoryName"
+                                               class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                               id="pcategoryname" placeholder="Product Category"
+                                               name="pcategoryname"
+                                               ng-disabled="true">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="prname" class="col-md-4 col-sm-12">
+                                            Product Name <i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <input type="text"
+                                               maxlength="100"
+                                               ng-model="productName"
+                                               class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                               validator="alphanumericValidator(product.Name) === true"
+                                               invalid-message="alphanumericValidator(product.Name)"
+                                               required-message="'Field is required'"
+                                               id="prname" placeholder="Product Name"
+                                               name="prname"
+                                               readonly="readonly"
+                                               validate-on="dirty">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="shortname" class="col-md-4 col-sm-12">
+                                            Product Short Name <i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <input type="text"
+                                               maxlength="8"
+                                               ng-model="productShortName"
+                                               class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                               validator="alphanumericValidator(product.ShortName) === true"
+                                               invalid-message="alphanumericValidator(product.ShortName)"
+                                               required-message="'Field is required'"
+                                               id="shortname" placeholder="Short Name"
+                                               name="shortname"
+                                               readonly="readonly"
+                                               validate-on="dirty">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="description" class="col-md-4 col-sm-12">
+                                            Product Description <i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <input type="text"
+                                               maxlength="500"
+                                               ng-model="product.Description"
+                                               class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                               id="description" placeholder="Description"
+                                               name="description"
+                                               required
+                                               required-message="'Field is required'">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="sdate" class="col-md-4 col-sm-12">
+                                            Start Date <i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <div class="dropdown input-group date width-asa">
+                                            <a class="dropdown-toggle" id="sdate" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                                <div class="input-group date-input-group">
+                                                    <input type="text" readonly="readonly" date-time-input="DD-MM-YYYY" class="form-control-asa full-width-asa" data-ng-model="product.StartDate">
+                                                    <span class="input-group-addon input-group-addon-asa"><i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </a>
+                                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                <datetimepicker data-ng-model="product.StartDate" data-datetimepicker-config="{ startView:'day', minView:'day',dropdownSelector: '#sdate' }"
+                                                                data-before-render="editBeforeStartDateRender($dates)" />
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12" style="position: relative">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="edate" class="col-md-4 col-sm-12">
+                                            End Date <i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <div class="dropdown input-group date width-asa">
+                                            <a class="dropdown-toggle col-md-10" id="edate" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                                <div class="input-group date-input-group">
+                                                    <input type="text" readonly="readonly" date-time-input="DD-MM-YYYY" class="form-control-asa full-width-asa" data-ng-model="product.EndDate">
+                                                    <span class="input-group-addon input-group-addon-asa"><i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </a>
+                                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                <datetimepicker data-ng-model="product.EndDate" data-datetimepicker-config="{ startView:'day', minView:'day',dropdownSelector: '#edate' }"
+                                                                data-before-render="editBeforeEndDateRender($dates)" />
+                                            </ul>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="status" class="col-md-4 col-sm-12">
+                                            Status <i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <select class="form-control form-control-asa form-control-asa-select-box-padding col-md-8 col-sm-12"
+                                                ng-disabled="true"
+                                                id="status"
+                                                ng-model="product.Status"
+                                                name="status"
+                                                required-message="'Field is required'"
+                                                ng-options="stts.value as stts.text for stts in statusList" required></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="isPrimary" class="col-md-4 col-sm-12">
+                                            Primary
+                                        </label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <input type="checkbox" ng-model="product.IsPrimary" id="isPrimary"
+                                                   ng-true-value="true" ng-false-value="false">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="isSupplimentary" class="col-md-4 col-sm-12">
+                                            Supplementary
+                                        </label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <input type="checkbox" ng-model="product.IsSupplimentary" id="isSupplimentary"
+                                                   ng-true-value="true" ng-false-value="false">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingBasic">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordionedit" href="#collapseEditBasic" aria-expanded="false" aria-controls="collapseEditBasic" onclick="accordionUtility.setCaret('bi')">
+                                Loan Disbursement Information
+                                <i id="bi-down" class="fa fa-caret-down"></i>
+                                <i id="bi-up" class="fa fa-caret-up hide-caret"></i>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseEditBasic" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingBasic" showHide="showHide">
+                        <div class="panel-body">
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label class=" col-lg-6 col-md-6 col-sm-12">
+                                            Frequencies <i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <div ng-dropdown-multiselect="" extra-settings="dropdownSetting" class="multiselect-button-loan"
+                                             options="installmentFrequencyListMain" selected-model="installmentFrequencies" checkboxes="true"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label class=" col-lg-6 col-md-6 col-sm-12">
+                                            Durations <i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <div ng-dropdown-multiselect="" extra-settings="dropdownSetting" class="multiselect-button-loan"
+                                             options="durationListMain" selected-model="durationsMultiSelect" checkboxes="true"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label class=" col-lg-6 col-md-6 col-sm-12">
+                                            Grace Periods <i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <div ng-dropdown-multiselect="" extra-settings="dropdownSetting" class="multiselect-button-loan"
+                                             options="gracePeriodListMain" selected-model="GracePeriods" checkboxes="true">
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label class=" col-lg-6 col-md-6 col-sm-12">
+                                            Sub Codes <i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <div ng-dropdown-multiselect="" extra-settings="dropdownSetting" class="multiselect-button-loan"
+                                             options="SubcodeListMain" selected-model="product.SubCodeId" checkboxes="true"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label class=" col-lg-6 col-md-6 col-sm-12">
+                                            Fund <i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <div ng-dropdown-multiselect="" extra-settings="dropdownSetting" class="multiselect-button-loan"
+                                             options="fundsListMain" selected-model="product.FundId" checkboxes="true"></div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label class="col-lg-6 col-md-6 col-sm-12">
+                                            Scheme <i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <div ng-dropdown-multiselect="" extra-settings="dropdownSetting" class="multiselect-button-loan"
+                                             options="purposeList" selected-model="product.SchemeId" checkboxes="true"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="disamount" class="col-lg-6 col-md-6 col-sm-12">
+                                            Max. Disbursement Count
+                                        </label>
+                                        <input type="number"
+                                               onkeypress="return event.charCode >= 48 || event.charCode === 46"
+                                               min="0"
+                                               maxlength="100"
+                                               ng-model="product.MaxDisburseNumber"
+                                               class="form-control form-control-asa col-md-5 col-sm-12"
+                                               style="width: 120px"
+                                               id="disamount" placeholder="Maximum Count"
+                                               name="disamount" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="calcmethod" class="col-lg-6 col-md-6 col-sm-12">
+                                            Interest Calc Method <i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <select class="form-control form-control-asa form-control-asa-select-box-padding col-md-6 col-sm-12"
+                                                id="calcmethod" ng-model="product.InterestCalculationMethod"
+                                                name="calcmethod"
+                                                required-message="'Field is required'"
+                                                ng-options="InterestCalculationMethod.Value as InterestCalculationMethod.Name for InterestCalculationMethod in InterestCalculationMethodList" required></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="calcperiod" class="col-lg-6 col-md-6 col-sm-12">
+                                            Interest Calc Period <i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <select class="form-control form-control-asa form-control-asa-select-box-padding col-md-6 col-sm-12"
+                                                id="calcperiod" ng-model="product.InterestCalculationPeriod"
+                                                name="calcperiod"
+                                                required-message="'Field is required'"
+                                                ng-options="InterestCalculationPeriod.Value as InterestCalculationPeriod.Name for InterestCalculationPeriod in InterestCalculationPeriodList" required></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="rateperiod" class="col-lg-6 col-md-6 col-sm-12">
+                                            Interest Service Charge <i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <select class="form-control form-control-asa form-control-asa-select-box-padding col-md-6 col-sm-12"
+                                                id="rateperiod" ng-model="product.InterestRatePeriod"
+                                                name="rateperiod"
+                                                required-message="'Field is required'"
+                                                ng-options="InterestRatePeriod.Value as InterestRatePeriod.Name for InterestRatePeriod in InterestRatePeriodList" required></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="iscollection" class="col-lg-6 col-md-6 col-sm-12">
+                                            Included in collection?
+                                        </label>
+                                        <input type="checkbox" ng-model="product.IsIncludedInCollectionSheet" id="iscollection"
+                                               ng-true-value="true" ng-false-value="false">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="isIncluded" class="col-lg-6 col-md-6 col-sm-12">
+                                            Included in Cycle
+                                        </label>
+                                        <input type="checkbox" ng-model="product.IsIncludedInCycle" id="isIncluded"
+                                               ng-true-value="true" ng-false-value="false">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label class="col-lg-6 col-md-6 col-sm-12">
+                                            Multiple Of
+                                        </label>
+                                        <input type="number"
+                                               onkeypress="return event.charCode >= 48 || event.charCode === 46"
+                                               min="0"
+                                               maxlength="100"
+                                               ng-model="product.PrincipleAmountMultipleOf"
+                                               class="form-control form-control-asa col-lg-6 col-md-6 col-sm-12"
+                                               style="width: 120px"
+                                               id="multipleof" placeholder="Multiple of"
+                                               name="multipleof" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="isrebateable" class="col-lg-6 col-md-6 col-sm-12">
+                                            Is Rebateable?
+                                        </label>
+                                        <input type="checkbox" ng-model="product.IsRebatable" id="isrebateable" name="isrebateable" class="col-lg-6 col-md-6 col-sm-12"
+                                               ng-true-value="true" ng-false-value="false">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6" ng-show="product.IsRebatable">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label class="col-lg-6 col-md-6 col-sm-12">
+                                            Rebate Percentage
+                                        </label>
+                                        <input type="number"
+                                               onkeypress="return event.charCode >= 48 || event.charCode === 46"
+                                               min="0"
+                                               maxlength="100"
+                                               ng-model="product.RebatePercentage"
+                                               class="form-control form-control-asa col-lg-6 col-md-6 col-sm-12"
+                                               style="width: 120px"
+                                               id="rebatepercentage" placeholder="Rebate Percentage"
+                                               name="rebatepercentage"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingSpecial">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordionedit" href="#collapseEditSpecial" aria-expanded="false" aria-controls="collapseSpecial" onclick="accordionUtility.setCaret('si')">
+                                Special Information
+                                <i id="si-down" class="fa fa-caret-down"></i>
+                                <i id="si-up" class="fa fa-caret-up hide-caret"></i>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseEditSpecial" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingSpecial" showHide="showHide">
+                        <div class="panel-body">
+                            <!--<div class="col-lg-3 col-md-3 col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="status" class="col-md-5 col-sm-12">
+                                            Status <i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <select class="form-control form-control-asa form-control-asa-select-box-padding col-md-1 col-sm-12"
+                                                ng-disabled="true"
+                                                id="status" ng-model="product.Status"
+                                                name="status"
+                                                required-message="'Field is required'"
+                                                ng-options="status.value as status.text for status in statusList" required></select>
+                                    </div>
+                                </div>
+                            </div>-->
+                            <!--<div class="col-lg-3 col-md-3 col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="calcmethod" class="col-md-8 col-sm-12">
+                                            Interest Calc Method <i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <select class="form-control form-control-asa form-control-asa-select-box-padding col-md-4 col-sm-12"
+                                                id="calcmethod" ng-model="product.InterestCalculationMethod"
+                                                name="calcmethod"
+                                                required-message="'Field is required'"
+                                                ng-options="InterestCalculationMethod.Value as InterestCalculationMethod.Name for InterestCalculationMethod in InterestCalculationMethodList" required></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="calcperiod" class="col-md-8 col-sm-12">
+                                            Interest Calc Period <i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <select class="form-control form-control-asa form-control-asa-select-box-padding col-md-4 col-sm-12"
+                                                id="calcperiod" ng-model="product.InterestCalculationPeriod"
+                                                name="calcperiod"
+                                                required-message="'Field is required'"
+                                                ng-options="InterestCalculationPeriod.Value as InterestCalculationPeriod.Name for InterestCalculationPeriod in InterestCalculationPeriodList" required></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="rateperiod" class="col-md-6 col-sm-12">
+                                            Interest Service Charge <i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <select class="form-control form-control-asa form-control-asa-select-box-padding col-md-1 col-sm-12"
+                                                id="rateperiod" ng-model="product.InterestRatePeriod"
+                                                name="rateperiod"
+                                                required-message="'Field is required'"
+                                                ng-options="InterestRatePeriod.Value as InterestRatePeriod.Name for InterestRatePeriod in InterestRatePeriodList" required></select>
+                                    </div>
+                                </div>
+                            </div>-->
+                            <!--<div class="col-lg-3 col-md-3 col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label class="col-md-4 col-sm-12">
+                                            Scheme <i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <div ng-dropdown-multiselect="" extra-settings="dropdownSetting" class="col-md-1 col-sm-12 multiselect-button-loan"
+                                             options="purposeList" selected-model="product.SchemeId" checkboxes="true"></div>
+                                    </div>
+                                </div>
+                            </div>-->
+                            <div class="col-lg-3 col-md-3 col-sm-4">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label class="col-lg-5 col-md-5 col-sm-12">
+                                            Permitted Roles
+                                        </label>
+                                        <div ng-dropdown-multiselect="" extra-settings="dropdownSetting" class="col-md-1 col-sm-12 multiselect-button-loan"
+                                             options="Roles" selected-model="product.RoleId" checkboxes="true"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-4">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label class="col-lg-5 col-md-5 col-sm-12">
+                                            Branch
+                                        </label>
+                                        <div ng-dropdown-multiselect=""
+                                             extra-settings="dropdownSetting_3"
+                                             events="branchDdlEvents"
+                                             class="col-md-1 col-sm-12 multiselect-button-loan"
+                                             options="allBranches"
+                                             selected-model="product.BranchId"
+                                             checkboxes="true"></div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-4">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="amortization" class="col-lg-5 col-md-5 col-sm-12">
+                                            Amortization <i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <select class="form-control form-control-asa form-control-asa-select-box-padding col-md-6 col-sm-12"
+                                                id="amortization" ng-model="product.Amortization"
+                                                name="amortization"
+                                                required-message="'Field is required'"
+                                                ng-options="amortization.Value as amortization.Name for amortization in amortizationList" required></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-4">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="strategy" class="col-lg-5 col-md-5 col-sm-12">
+                                            Repayment Strategy <i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <select class="form-control form-control-asa form-control-asa-select-box-padding col-md-6 col-sm-12"
+                                                id="strategy" ng-model="product.RepaymentStrategyId"
+                                                name="strategy"
+                                                required-message="'Field is required'"
+                                                ng-options="repaymentStrategy.Value as repaymentStrategy.Name for repaymentStrategy in repaymentStrategyList" required></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="notes" class="col-md-1 col-sm-2">
+                                            Notes <i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <textarea ng-model="product.Notes"
+                                                  class="form-control form-control-asa col-md-8 width-asa-notes col-sm-12"
+                                                  id="notes" placeholder="Notes" rows="5"
+                                                  name="notes"
+                                                  required
+                                                  required-message="'Field is required'"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="col-lg-3 col-md-3 col-sm-4">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="isPrimary" class="col-md-8 col-sm-12">
+                                            Primary
+                                        </label>
+                                        <input type="checkbox" ng-model="product.IsPrimary" id="isPrimary"
+                                               ng-true-value="true" ng-false-value="false">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-4">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="isSupplimentary" class="col-md-8 col-sm-12">
+                                            Supplementary
+                                        </label>
+                                        <input type="checkbox" ng-model="product.IsSupplimentary" id="isSupplimentary"
+                                               ng-true-value="true" ng-false-value="false">
+                                    </div>
+                                </div>
+                            </div>-->
+                            <!--<div class="col-lg-3 col-md-3 col-sm-4">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="iscollection" class="col-md-8 col-sm-12">
+                                            Included in collection?
+                                        </label>
+                                        <input type="checkbox" ng-model="product.IsIncludedInCollectionSheet" id="iscollection"
+                                               ng-true-value="true" ng-false-value="false">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-4">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="isIncluded" class="col-md-8 col-sm-12">
+                                            Included in Cycle
+                                        </label>
+                                        <input type="checkbox" ng-model="product.IsIncludedInCycle" id="isIncluded"
+                                               ng-true-value="true" ng-false-value="false">
+                                    </div>
+                                </div>
+                            </div>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingDuration">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordionedit" href="#collapseEditDuration" aria-expanded="false" aria-controls="collapseEditDuration" onclick="accordionUtility.setCaret('di')">
+                                Duration Information
+                                <i id="di-down" class="fa fa-caret-down"></i>
+                                <i id="di-up" class="fa fa-caret-up hide-caret"></i>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseEditDuration" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingDuration" showHide="showHide">
+                        <div class="panel-body">
+                           
+                            <div ng-repeat="duration in product.ProductDurations">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <hr />
+                                </div>
+                                <!--<div class="col-lg-12 col-md-12 col-sm-12">
+                                    <h4><span class="pull-right"><i class="fa fa-times-circle pull-right add-remove-loan-field" aria-hidden="true" ng-click="removeFromList('ProductDurations', duration)"></i></span></h4>
+                                </div>-->
+                                
+                                <div class="col-lg-4 col-md-4 col-sm-6">
+                                    <div class="form-group">
+                                        <div class="form-inline">
+                                            <label for="fund" class="col-md-4 col-sm-12">
+                                                Fund <i class="fa fa-asterisk required-icon"></i>
+                                            </label>
+                                            <select class="form-control form-control-asa form-control-asa-select-box-padding col-md-1 col-sm-12"
+                                                    id="fund" ng-model="duration.FundId"
+                                                    name="fund"
+                                                    required-message="'Field is required'"
+                                                    ng-options="fund.Value as fund.Name for fund in fundsList" required></select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6">
+                                    <div class="form-group">
+                                        <div class="form-inline">
+                                            <label for="grouptype" class="col-md-4 col-sm-12">
+                                                Group Type <i class="fa fa-asterisk required-icon"></i>
+                                            </label>
+                                            <select class="form-control form-control-asa form-control-asa-select-box-padding col-md-1 col-sm-12"
+                                                    id="grouptype" ng-model="duration.GroupTypeId"
+                                                    name="grouptype"
+                                                    required-message="'Field is required'"
+                                                    ng-options="gt.Id as gt.Name for gt in groupTypeList" required></select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-5">
+                                    <div class="form-group">
+                                        <div class="form-inline">
+                                            <label for="pduration" class="col-md-4 col-sm-12 important-field-label-loan">
+                                                Duration <i class="fa fa-asterisk required-icon"></i>
+                                            </label>
+                                            <select class="form-control form-control-asa form-control-asa-select-box-padding col-md-1 col-sm-12"
+                                                    id="pduration" ng-model="duration.DurationId"
+                                                    name="pduration"
+                                                    required-message="'Field is required'"
+                                                    ng-options="pduration.Value as pduration.Name for pduration in durationList" required></select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTenure">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordionedit" href="#collapseEditTenure" aria-expanded="false" aria-controls="collapseEditTenure" onclick="accordionUtility.setCaret('ti')">
+                                Tenure Information
+                                <i id="ti-down" class="fa fa-caret-down"></i>
+                                <i id="ti-up" class="fa fa-caret-up hide-caret"></i>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseEditTenure" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTenure" showHide="showHide">
+                        <div class="panel-body">
+                            
+                            <div ng-repeat="tenure in product.ProductCycleTenures">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <hr />
+                                </div>
+                                <!--<div class="col-lg-12 col-md-12 col-sm-12">
+                                    <h4><span class="pull-right"><i class="fa fa-times-circle pull-right add-remove-loan-field" aria-hidden="true" ng-click="removeFromList('ProductCycleTenures', tenure)"></i></span></h4>
+                                </div>-->
+                                
+                                <div class="col-lg-3 col-md-3 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="form-inline">
+                                            <label for="duration" class="col-md-5 col-sm-12">
+                                                Duration <i class="fa fa-asterisk required-icon"></i>
+                                            </label>
+                                            <select class="form-control form-control-asa form-control-asa-select-box-padding col-md-1 col-sm-12"
+                                                    id="duration" ng-model="tenure.DurationId"
+                                                    name="duration"
+                                                    required-message="'Field is required'"
+                                                    ng-options="duration.Value as duration.Name for duration in durationList" required></select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="form-inline">
+                                            <label for="frequency" class="col-md-5 col-sm-12">
+                                                Frequency <i class="fa fa-asterisk required-icon"></i>
+                                            </label>
+                                            <select class="form-control form-control-asa form-control-asa-select-box-padding col-md-1 col-sm-12"
+                                                    id="frequency" ng-model="tenure.InstallmentFrequencyId"
+                                                    name="frequency"
+                                                    required-message="'Field is required'"
+                                                    ng-options="frequency.Value as frequency.Name for frequency in installmentFrequencyList" required></select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="form-inline">
+                                            <label for="graceperiod" class="col-md-8 col-sm-12">
+                                                Grace Period <i class="fa fa-asterisk required-icon"></i>
+                                            </label>
+                                            <select class="form-control form-control-asa form-control-asa-select-box-padding col-md-1 col-sm-12"
+                                                    id="graceperiod" ng-model="tenure.GracePeriod"
+                                                    name="graceperiod"
+                                                    required-message="'Field is required'"
+                                                    ng-options="gracePeriod.Value as gracePeriod.Name for gracePeriod in gracePeriodList " required></select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="form-inline">
+                                            <label for="installmentamount" class="col-md-6 col-sm-12 important-field-label-loan">
+                                                Installment Amount / Thousand) <i class="fa fa-asterisk required-icon"></i>
+                                            </label>
+                                            <input type="number"
+                                                   maxlength="100"
+                                                   ng-model="tenure.InstallmentAmountPerThousand"
+                                                   class="number-input-loan form-control form-control-asa col-md-1 col-sm-12"
+                                                   id="installmentamount" placeholder="Installment Amount"
+                                                   name="installmentamount"
+                                                   required
+                                                   required-message="'Field is required'">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="form-inline">
+                                            <label for="noofinstallment" class="col-md-6 col-sm-12 important-field-label-loan">
+                                                Number Of Installment <i class="fa fa-asterisk required-icon"></i>
+                                            </label>
+                                            <input type="text"
+                                                   maxlength="100"
+                                                   ng-model="tenure.TotalNumberOfInstallment"
+                                                   class="number-input-loan form-control form-control-asa col-md-1 col-sm-12"
+                                                   id="noofinstallment" placeholder="Number Of Installment"
+                                                   name="noofinstallment"
+                                                   required
+                                                   required-message="'Field is required'">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingRate">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordionedit" href="#collapseEditRate" aria-expanded="false" aria-controls="collapseEditRate">
+                                Rate Range Information
+                                <i id="ri-down" class="fa fa-caret-down"></i>
+                                <i id="ri-up" class="fa fa-caret-up hide-caret"></i>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseEditRate" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingRate" showHide="showHide">
+                        <div class="panel-body">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 alert alert-warning">
+                                <h5>Default Values<i class="fa fa-asterisk required-icon"></i></h5>
+                                <div class="col-lg-6 col-md-6 col-sm-12" ng-if="product.InterestCalculationMethod==='1'">
+                                    <div class="form-group">
+                                        <div class="form-inline">
+                                            <label for="defaultdeclineinterestrate" class="col-md-6 col-sm-12">
+                                                Decline Service Charge <i class="fa fa-asterisk required-icon"></i>
+                                            </label>
+                                            <input type="number"
+                                                   onkeypress="return event.charCode >= 48 || event.charCode == 46" min="0"
+                                                   maxlength="100"
+                                                   ng-model="product.DefaultDeclineInterestRate"
+                                                   class="form-control form-control-asa col-md-2 col-sm-12"
+                                                   id="defaultdeclineinterestrate" placeholder="Decline Interest Rate"
+                                                   name="defaultdeclineinterestrate">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12" ng-if="product.InterestCalculationMethod==='2'">
+                                    <div class="form-group">
+                                        <div class="form-inline">
+                                            <label for="defaultflatinterestrate" class="col-md-6 col-sm-12">
+                                                Flat Service Charge <i class="fa fa-asterisk required-icon"></i>
+                                            </label>
+                                            <input type="number"
+                                                   onkeypress="return event.charCode >= 48 || event.charCode == 46" min="0"
+                                                   maxlength="100"
+                                                   ng-model="product.DefaultFlatInterestRate"
+                                                   class="form-control form-control-asa col-md-2 col-sm-12"
+                                                   id="defaultflatinterestrate" placeholder="Flat Interest Rate"
+                                                   name="defaultflatinterestrate">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="form-inline">
+                                            <label for="defaultflatinterestrate" class="col-md-6 col-sm-12">
+                                                Minimum Principal <i class="fa fa-asterisk required-icon"></i>
+                                            </label>
+                                            <input type="number"
+                                                   onkeypress="return event.charCode >= 48 || event.charCode == 46" min="0"
+                                                   maxlength="100"
+                                                   ng-model="product.MinimumPrincipal"
+                                                   class="form-control form-control-asa col-md-2 col-sm-12"
+                                                   id="defaultminimumprincipal" placeholder="Minimum Principle"
+                                                   name="defaultminimumprincipal"
+                                                   validator="principalValidator() === true"
+                                                   invalid-message="principalValidator()"
+                                                   validate-on="dirty"
+                                                   required
+                                                   required-message="'Field is required'">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="form-inline">
+                                            <label for="defaultflatinterestrate" class="col-md-6 col-sm-12">
+                                                Maximum Principal <i class="fa fa-asterisk required-icon"></i>
+                                            </label>
+                                            <input type="number"
+                                                   onkeypress="return event.charCode >= 48 || event.charCode == 46" min="0"
+                                                   maxlength="100"
+                                                   ng-model="product.MaximumPrincipal"
+                                                   class="form-control form-control-asa col-md-2 col-sm-12"
+                                                   id="defaultmaximumprincipal" placeholder="Maximum Principle"
+                                                   name="defaultmaximumprincipal"
+                                                   validator="principalValidator() === true"
+                                                   invalid-message="principalValidator()"
+                                                   validate-on="dirty"
+                                                   required
+                                                   required-message="'Field is required'">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="form-inline">
+                                            <label for="defaultflatinterestrate" class="col-md-6 col-sm-12">
+                                                Principal <i class="fa fa-asterisk required-icon"></i>
+                                            </label>
+                                            <input type="number"
+                                                   onkeypress="return event.charCode >= 48 || event.charCode == 46" min="0"
+                                                   maxlength="100"
+                                                   ng-model="product.DefaultPrincipal"
+                                                   class="form-control form-control-asa col-md-2 col-sm-12"
+                                                   id="defaultdefaultdefaultprincipal" placeholder="Default Principle"
+                                                   name="defaultdefaultdefaultprincipal"
+                                                   validator="defaultprincipalValidator() === true"
+                                                   invalid-message="defaultprincipalValidator()"
+                                                   required
+                                                   required-message="'Field is required'"
+                                                   validate-on="dirty">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12" style="margin-top: -20px;">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="varyingcycle" class="">
+                                            Varying principal & Service Charge with Respect to Different Attributes?
+                                        </label>
+                                        <input type="checkbox" ng-model="product.IsVaryingCycle" id="varyingcycle"
+                                               ng-true-value="true" ng-false-value="false">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 panel-body" style="margin-top:-20px;">
+                                <div ng-if="product.IsVaryingCycle === true" class="col-lg-12 col-md-12 col-sm-12 pull-right form-inline">
+                                    <!--<div class="col-lg-11 col-md-11 col-sm-12 alert alert-warning">
+                                        <h5>Preferences<i class="fa fa-asterisk required-icon"></i></h5>
+                                        <div ng-repeat="loanPreferenceList in loanProductPreferenceListMain">
+                                            <div class="col-lg-2 col-md-4 col-sm-6">
+                                                <div>
+                                                    <b>Preference {{$index+1}}</b>
+                                                </div>
+                                                <div class="form-inline">
+                                                    <select class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                                            ng-model="ProductPreferences[$index]"
+                                                            required-message="'Please select Preference'"
+                                                            ng-options="list.Value as list.Name for list in loanProductPreferenceList | filter :  filterPreference($index)" required>
+                                                        <option value="">--Select--</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>-->
+                                </div>
+
+                                <div ng-repeat="cyclerate in product.ProductRates track by $index" ng-if="product.IsVaryingCycle === true">
+
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <hr />
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-4 col-sm-12">
+                                        <div class="form-group">
+                                            <div class="form-inline">
+                                                <label for="rfund" class="col-md-4 col-sm-12">
+                                                    Fund <i class="fa fa-asterisk required-icon"></i>
+                                                </label>
+                                                <select class="form-control form-control-asa form-control-asa-select-box-padding col-md-1 col-sm-12"
+                                                        id="rfund" ng-model="cyclerate.FundId"
+                                                        name="rfund"
+                                                        required-message="'Field is required'"
+                                                        ng-options="fund.Value as fund.Name for fund in fundsList" required></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-12">
+                                        <div class="form-group">
+                                            <div class="form-inline">
+                                                <label for="rfund" class="col-md-6 col-sm-12">
+                                                    Subcode <i class="fa fa-asterisk required-icon"></i>
+                                                </label>
+                                                <select class="form-control form-control-asa form-control-asa-select-box-padding col-md-1 col-sm-12"
+                                                        id="rsub" ng-model="cyclerate.SubCodeId"
+                                                        name="rsub"
+                                                        required-message="'Field is required'"
+                                                        ng-options="Subcode.Value as Subcode.Name for Subcode in SubcodeList" required></select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-4 col-sm-12">
+                                        <div class="form-group">
+                                            <div class="form-inline">
+                                                <label for="cgender" class="col-md-6 col-sm-12">
+                                                    Gender <i class="fa fa-asterisk required-icon"></i>
+                                                </label>
+                                                <select class="form-control form-control-asa form-control-asa-select-box-padding col-md-1 col-sm-12"
+                                                        id="cgender" ng-model="cyclerate.GenderId"
+                                                        name="cgender"
+                                                        required-message="'Field is required'"
+                                                        ng-options="gender.value as gender.text for gender in genderList" required></select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-4 col-sm-12">
+                                        <div class="form-group">
+                                            <div class="form-inline">
+                                                <label for="rduration" class="col-md-6 col-sm-12">
+                                                    Duration <i class="fa fa-asterisk required-icon"></i>
+                                                </label>
+                                                <select class="form-control form-control-asa form-control-asa-select-box-padding col-md-1 col-sm-12"
+                                                        id="rduration" ng-model="cyclerate.DurationId"
+                                                        name="rduration"
+                                                        required-message="'Field is required'"
+                                                        ng-options="pduration.Value as pduration.Name for pduration in durationList" required></select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-4 col-sm-12">
+                                        <div class="form-group">
+                                            <div class="form-inline">
+                                                <label for="rfrequency" class="col-md-4 col-sm-12">
+                                                    Freq. <i class="fa fa-asterisk required-icon"></i>
+                                                </label>
+                                                <select class="form-control form-control-asa form-control-asa-select-box-padding col-md-1 col-sm-12"
+                                                        id="rfrequency" ng-model="cyclerate.InstallmentFrequencyId"
+                                                        name="rfrequency"
+                                                        required-message="'Field is required'"
+                                                        ng-options="frequency.Value as frequency.Name for frequency in installmentFrequencyList" required></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-12 " style="visibility:hidden;">
+                                        <div class="form-group">
+                                            <div class="form-inline">
+                                                <label for="none" class="col-md-4 col-sm-12">
+                                                    Freq. <i class="fa fa-asterisk required-icon"></i>
+                                                </label>
+                                                <select class="form-control form-control-asa form-control-asa-select-box-padding col-md-1 col-sm-12"
+                                                        
+                                                        ></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-12">
+                                        <div class="form-group">
+                                            <div class="form-inline">
+                                                <label for="MinCycle" class="col-md-6 col-sm-12 important-field-label-loan">
+                                                    Min Cycle <i class="fa fa-asterisk required-icon"></i>
+                                                </label>
+                                                <input type="number"
+                                                       onkeypress="return event.charCode >= 48 || event.charCode == 46" min="0"
+                                                       maxlength="100"
+                                                       ng-model="cyclerate.MinCycle"
+                                                       class="number-input-loan form-control form-control-asa col-md-1 col-sm-12"
+                                                       id="MinCycle" placeholder="Min Cycle"
+                                                       name="MinCycle"
+                                                       required
+                                                       required-message="'Field is required'">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-12">
+                                        <div class="form-group">
+                                            <div class="form-inline">
+                                                <label for="MaxCycle" class="col-md-4 col-sm-12 important-field-label-loan">
+                                                    Max Cycle <i class="fa fa-asterisk required-icon"></i>
+                                                </label>
+                                                <input type="number"
+                                                       onkeypress="return event.charCode >= 48 || event.charCode == 46" min="0"
+                                                       maxlength="100"
+                                                       ng-model="cyclerate.MaxCycle"
+                                                       class="number-input-loan form-control form-control-asa col-md-1 col-sm-12"
+                                                       id="MaxCycle" placeholder="Max Cycle"
+                                                       name="MaxCycle"
+                                                       required
+                                                       required-message="'Field is required'">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-12">
+                                        <div class="form-group">
+                                            <div class="form-inline">
+                                                <label for="MinPrincipal" class="col-md-6 col-sm-12 important-field-label-loan">
+                                                    Min Principal <i class="fa fa-asterisk required-icon"></i>
+                                                </label>
+                                                <input type="number"
+                                                       onkeypress="return event.charCode >= 48 || event.charCode == 46" min="0"
+                                                       maxlength="100"
+                                                       ng-model="cyclerate.MinPrincipal"
+                                                       class="number-input-loan form-control form-control-asa col-md-1 col-sm-12"
+                                                       id="MinPrincipal" placeholder="Min Principal"
+                                                       name="MinPrincipal"
+                                                       required
+                                                       required-message="'Field is required'">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-12">
+                                        <div class="form-group">
+                                            <div class="form-inline">
+                                                <label for="MaxPrincipal" class="col-md-6 col-sm-12 important-field-label-loan">
+                                                    Max Principal <i class="fa fa-asterisk required-icon"></i>
+                                                </label>
+                                                <input type="number"
+                                                       onkeypress="return event.charCode >= 48 || event.charCode == 46" min="0"
+                                                       maxlength="100"
+                                                       ng-model="cyclerate.MaxPrincipal"
+                                                       class="number-input-loan form-control form-control-asa col-md-1 col-sm-12"
+                                                       id="MaxPrincipal" placeholder="Max Principal"
+                                                       name="MaxPrincipal"
+                                                       ng-blur="MaxPrincipalConstraint($index)"
+                                                       required
+                                                       required-message="'Field is required'">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-12">
+                                        <div class="form-group">
+                                            <div class="form-inline">
+                                                <label for="DefaultPrincipal" class="col-md-6 col-sm-12 important-field-label-loan">
+                                                    Default Principal <i class="fa fa-asterisk required-icon"></i>
+                                                </label>
+                                                <input type="number"
+                                                       onkeypress="return event.charCode >= 48 || event.charCode == 46" min="0"
+                                                       maxlength="100"
+                                                       ng-model="cyclerate.DefaultPrincipal"
+                                                       class="number-input-loan form-control form-control-asa col-md-1 col-sm-12"
+                                                       id="DefaultPrincipal" placeholder="Default Principal"
+                                                       name="DefaultPrincipal"
+                                                       required
+                                                       required-message="'Field is required'">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-12" ng-if="product.InterestCalculationMethod ==='1'">
+                                        <div class="form-group">
+                                            <div class="form-inline">
+                                                <label for="declineinterestrate" class="col-md-6 col-sm-12 important-field-label-loan">
+                                                    Decline Service Charge <i class="fa fa-asterisk required-icon"></i>
+                                                </label>
+                                                <input type="number"
+                                                       onkeypress="return event.charCode >= 48 || event.charCode == 46" min="0"
+                                                       maxlength="100"
+                                                       ng-model="cyclerate.DeclineInterestRate"
+                                                       class="number-input-loan form-control form-control-asa col-md-1 col-sm-12"
+                                                       id="declineinterestrate" placeholder="Decline Interest Rate"
+                                                       name="declineinterestrate">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-12" ng-if="product.InterestCalculationMethod ==='2'">
+                                        <div class="form-group">
+                                            <div class="form-inline">
+                                                <label for="flatinterestrate" class="col-md-6 col-sm-12 important-field-label-loan">
+                                                    Flat Service Charge <i class="fa fa-asterisk required-icon"></i>
+                                                </label>
+                                                <input type="number"
+                                                       onkeypress="return event.charCode >= 48 || event.charCode == 46" min="0"
+                                                       maxlength="100"
+                                                       ng-model="cyclerate.FlatInterestRate"
+                                                       class="number-input-loan form-control form-control-asa col-md-1 col-sm-12"
+                                                       id="flatinterestrate" placeholder="Flat Interest Rate"
+                                                       name="flatinterestrate">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingGrace">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordionedit" href="#collapseEditGrace" aria-expanded="true" aria-controls="collapseEditGrace" onclick="accordionUtility.setCaret('gpi')">
+                            Grace Period Information
+                            <i id="gpi-down" class="fa fa-caret-down"></i>
+                            <i id="gpi-up" class="fa fa-caret-up hide-caret"></i>
+                        </a>
+                    </h4>
+
+                </div>
+                <div id="collapseEditGrace" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingGrace" showHide="showHide">
+                    <div class="panel-body">
+
+                        <div ng-repeat="GracePeriod in product.ProductGracePeriods" class="row">
+
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <hr/>
+                            </div>
+                            <!--<div class="col-lg-12 col-md-12 col-sm-12">
+                                <h4><span class="pull-right"><i class="fa fa-times-circle  add-remove-loan-field" aria-hidden="true" ng-click="removeFromList('ProductGracePeriods', GracePeriod)"></i></span></h4>
+                            </div>-->
+
+                            <div class="col-lg-3 col-md-3 col-sm-4">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="pduration" class="col-md-5 col-sm-12">
+                                            Duration <i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <select class="form-control form-control-asa form-control-asa-select-box-padding col-md-1 col-sm-12"
+                                                id="gduration" ng-model="GracePeriod.DurationId"
+                                                name="gduration"
+                                                required-message="'Field is required'"
+                                                ng-options="pduration.Value as pduration.Name for pduration in durationList" required></select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="frequency" class="col-md-4 col-sm-12">
+                                            Frequency <i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <select class="form-control form-control-asa form-control-asa-select-box-padding col-md-1 col-sm-12"
+                                                id="gfrequency" ng-model="GracePeriod.InstallmentFrequencyId"
+                                                name="gfrequency"
+                                                required-message="'Field is required'"
+                                                ng-options="frequency.Value as frequency.Name for frequency in installmentFrequencyList" required></select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="frequency" class="col-md-4 col-sm-12">
+                                            Gender <i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <select class="form-control form-control-asa form-control-asa-select-box-padding col-md-1 col-sm-12"
+                                                id="gender" ng-model="GracePeriod.GenderId"
+                                                name="gender"
+                                                required-message="'Field is required'"
+                                                ng-options="gender.value as gender.text for gender in genderList" required></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="pgpscheme" class="col-md-4 col-lg-4 col-sm-12">
+                                            Scheme
+                                        </label>
+                                        <select class="form-control form-control-asa form-control-asa-select-box-padding col-md-1 col-sm-12"
+                                                id="pgpscheme" ng-model="GracePeriod.SchemeId"
+                                                name="pgpscheme"
+                                                required-message="'Field is required'"
+                                                ng-options="scheme.Value as scheme.Name for scheme in purposeListMain |filter: schemeFilter()" required></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12 ">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="pduration" class="col-md-4 col-lg-4 col-sm-12 important-field-label-loan">
+                                            Grace Period <i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <select class="form-control form-control-asa form-control-asa-select-box-padding col-md-1 col-sm-12"
+                                                id="ggraceperiod" ng-model="GracePeriod.GracePeriodId"
+                                                name="ggraceperiod"
+                                                required-message="'Field is required'"
+                                                ng-options="ggraceperiod.Value as ggraceperiod.Name for ggraceperiod in gracePeriodIdForTenure" required></select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingAllowedSavingsproductview">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" href="#collapseAllowedsavingsproductview" aria-expanded="false" aria-controls="collapseAllowedsavingsproductview" onclick="accordionUtility.setCaret('aspv')">
+                                Allowed Savings Product
+                                <i id="aspv-down" class="fa fa-caret-down"></i>
+                                <i id="aspv-up" class="fa fa-caret-up hide-caret"></i>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseAllowedsavingsproductview" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingAllowedSavingsproductview">
+                        <div class="panel-body table-scroll-product">
+                            <table class="td-loan">
+                                <tr ng-repeat="savingsProduct in savingsProductsList">
+                                    <td>{{savingsProduct.Name}}</td>
+                                    <td ng-if="SavingsProductIdList.indexOf(savingsProduct.Value)!= -1">Allowed</td>
+                                    <td ng-if="SavingsProductIdList.indexOf(savingsProduct.Value)== -1">Restricted</td>
+                                    <td ng-if="SavingsProductIdList.indexOf(savingsProduct.Value)== -1"><i class="fa fa-toggle-off"  aria-hidden="true"></i></td>
+                                    <td ng-if="SavingsProductIdList.indexOf(savingsProduct.Value)!= -1"><i class="fa fa-toggle-on"  aria-hidden="true"></i></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingAllowed">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordionedit" href="#collapseEditAllowed" aria-expanded="false" aria-controls="collapseEditAllowed" onclick="accordionUtility.setCaret('arps')">
+                                Allowed/Restricted Product Selection
+                                <i id="arps-down" class="fa fa-caret-down"></i>
+                                <i id="arps-up" class="fa fa-caret-up hide-caret"></i>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseEditAllowed" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingAllowed" showHide="showHide">
+                        <div class="panel-body table-scroll-product">
+                            <table class="td-loan">
+                                <tr ng-repeat="Product in ProductList">
+                                    <td>{{Product.Name}}</td>
+                                    <td ng-if="product.RestrictedProductId.indexOf(Product.Id)== -1">Allowed</td>
+                                    <td ng-if="product.RestrictedProductId.indexOf(Product.Id)!= -1">Restricted</td>
+                                    <td ng-if="product.RestrictedProductId.indexOf(Product.Id)!= -1"><i class="fa fa-toggle-off"  aria-hidden="true"></i></td>
+                                    <td ng-if="product.RestrictedProductId.indexOf(Product.Id)== -1"><i class="fa fa-toggle-on"  aria-hidden="true"></i></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingPrerequisite">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordionedit" href="#collapseEditPrerequisite" aria-expanded="false" aria-controls="collapseEditPrerequisite" onclick="accordionUtility.setCaret('pps')">
+                            Active Other Loan Product
+                            <i id="pps-down" class="fa fa-caret-down"></i>
+                            <i id="pps-up" class="fa fa-caret-up hide-caret"></i>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseEditPrerequisite" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingPrerequisite" showHide="showHide">
+                    <div class="panel-body">
+                        <div class="col-lg-6 col-md-6 col-sm-4">
+                            <div class="form-group">
+                                <div class="form-inline">
+                                    <label for="defaultsaving" class="col-md-6 col-sm-12">
+                                        Savings Balance %
+                                    </label>
+                                    <input type="number"
+                                           onkeypress="return event.charCode >= 48 || event.charCode == 46" min="0"
+                                           maxlength="100"
+                                           ng-model="product.SavingPercentage"
+                                           class="form-control form-control-asa col-md-6 col-sm-12"
+                                           id="defaultsaving" placeholder="Savings Balance %"
+                                           name="defaultsaving">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--<div class="col-lg-6 col-md-6 col-sm-4">
+                            <div class="form-group">
+                                <div class="form-inline">
+                                    <label for="defaultsavingother" class="col-md-6 col-sm-12">
+                                        Total Saving Percentage Of Other Loan
+                                    </label>
+                                    <input type="number"
+                                           onkeypress="return event.charCode >= 48 || event.charCode == 46" min="0"
+                                           maxlength="100"
+                                           ng-model="product.TotalSavingPercentageOfOtherLoan"
+                                           class="form-control form-control-asa col-md-6 col-sm-12"
+                                           id="defaultsavingother" placeholder="Saving % Of Other Loan"
+                                           name="defaultsavingother">
+                                </div>
+                            </div>
+                        </div>-->
+                        <div class="col-lg-6 col-md-6 col-sm-4">
+                            <div class="form-group">
+                                <div class="form-inline">
+                                    <label for="maxoverdue" class="col-lg-6  col-md-6 col-sm-12">
+                                        Max. Overdue
+                                    </label>
+                                    <input type="number"
+                                           onkeypress="return event.charCode >= 48 || event.charCode == 46" min="0"
+                                           maxlength="100"
+                                           ng-model="product.MaxOverdueOfOther"
+                                           class="form-control form-control-asa col-md-2 col-sm-12"
+                                           id="maxoverdue" placeholder="Max. Overdue"
+                                           name="maxoverdue"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-4">
+                            <div class="form-group">
+                                <div class="form-inline">
+                                    <label for="maxoutstanding" class="col-lg-6  col-md-6 col-sm-12">
+                                        Max. Outstanding
+                                    </label>
+                                    <input type="number"
+                                           onkeypress="return event.charCode >= 48 || event.charCode == 46" min="0"
+                                           maxlength="100"
+                                           ng-model="product.MaxOutstandingOfOther"
+                                           class="form-control form-control-asa col-md-2 col-sm-12"
+                                           id="maxoutstanding" placeholder="Max. Outstanding"
+                                           name="maxoutstanding">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <div class="form-inline">
+                                    <label for="minmembercycle" class="col-md-6 col-sm-12">
+                                        Min. Member Cycle
+                                    </label>
+                                    <input type="number" style="width: 160px"
+                                           onkeypress="return event.charCode >= 48 || event.charCode == 46" min="0" max="20"
+                                           maxlength="2"
+                                           ng-model="product.MinimumMemberCycle"
+                                           class="form-control form-control-asa col-md-6 col-sm-12"
+                                           id="minmembercycle" placeholder="Minimum Member Cycle"
+                                           name="minmembercycle">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body table-scroll-product">
+                            <table class="td-loan">
+                                <tr ng-repeat="Product in ProductList">
+                                    <td>{{Product.Name}}</td>
+                                    <td ng-if="product.PrerequisiteProductId.indexOf(Product.Id)== -1">Not mandatory</td>
+                                    <td ng-if="product.PrerequisiteProductId.indexOf(Product.Id)!= -1">Mandatory</td>
+                                    <td ng-if="product.PrerequisiteProductId.indexOf(Product.Id)!= -1"><i class="fa fa-toggle-off" aria-hidden="true"></i></td>
+                                    <td ng-if="product.PrerequisiteProductId.indexOf(Product.Id)== -1"><i class="fa fa-toggle-on" aria-hidden="true"></i></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingFeeSettings">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFee" aria-expanded="false" aria-controls="collapseFee" onclick="accordionUtility.setCaret('fee')">
+                                Fee Settings
+                                <i id="fee-down" class="fa fa-caret-down"></i>
+                                <i id="fee-up" class="fa fa-caret-up hide-caret"></i>
+                            </a>
+                        </h4>
+                    </div>
+                    <div class="row panel-collapse collapse in" id="collapseFee" role="tabpanel" aria-labelledby="headingFeeSettings">
+                        <div class="panel-body">
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="insurancefee" class="col-lg-3 col-md-3 col-sm-12" style="width: 150px;">
+                                            Insurance Fee
+                                        </label>
+                                        <select class="form-control form-control-asa form-control-asa-select-box-padding col-md-1 col-sm-12"
+                                                id="insurancefee" ng-model="product.insurance"
+                                                name="insurancefee"
+                                                style="width: 100px;"
+                                                ng-options="insurance.Id as insurance.Name for insurance in InsuranceFee">
+                                            <option value="">Select</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="latefee" class="col-lg-2 col-md-2 col-sm-12" style="width: 150px;">
+                                            Late Fee
+                                        </label>
+                                        <select class="form-control form-control-asa form-control-asa-select-box-padding col-md-1 col-sm-12"
+                                                id="latefee" ng-model="product.lateFee"
+                                                name="latefee"
+                                                style="width: 100px;"
+                                                ng-options="lf.Id as lf.Name for lf in lateFee">
+                                            <option value="">Select</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label class="col-lg-3 col-md-3 col-sm-12" style="width: 150px;">
+                                            One Time Fee
+                                        </label>
+                                        <div ng-dropdown-multiselect=""
+                                             extra-settings="dropdownSetting"
+                                             class="col-md-1 col-sm-12 multiselect-button-loan"
+                                             options="oneTimeFee"
+                                             selected-model="product.oneTimeFee"
+                                             checkboxes="true"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="docPrerequisite">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordionedit" href="#collapseEditDoc" aria-expanded="false" aria-controls="collapseEditPrerequisite" onclick="accordionUtility.setCaret('doc')">
+                                Documents Upload
+                                <i id="doc-down" class="fa fa-caret-down"></i>
+                                <i id="doc-up" class="fa fa-caret-up hide-caret"></i>
+                            </a>
+                        </h4>
+                    </div>
+
+                    <div class="row panel-collapse collapse in" id="collapseEditDoc">
+                        <div style="padding: 25px" class="col-md-6 col-lg-6 col-sm-6">
+                            <div class="form-group" ng-hide="hasFiles">
+                                <label for="newDocs" class="h4 h4-asa">Documents Upload</label>
+                                <input type="file" id="newDocs" class="uploadFile" accept="image/*,.doc,.pdf,.docx,.xlsx,.rtf,.odt,.zip,.xls,.txt,.ppt" ngf-select ngf-keep="true" ng-model="files" ngf-multiple="true">
+                                <label style="padding-top: 5px; color: blue;">Please select Document or Image type files (Max File Size 3MB) </label>
+                            </div>
+
+                            <div class="form-group ">
+
+                                <table style="text-align: center">
+                                    <thead>
+                                        <tr>
+                                            <td> Name</td>
+                                            <td> Size (Byte)</td>
+                                            
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="ufile in uploadedFiles">
+                                            <td>
+                                                <a ng-href="{{commonDownloadUrl + ufile.DocumentUrl}}" target="_blank">{{ufile.Name}}{{ufile.Format}}</a>
+                                            </td>
+                                            <td>
+                                                {{ufile.Size}}
+                                            </td>
+                                            <!--<td>
+                                                <i class="fa fa-times asa-icon-DELETE" ng-click="removefileDB(ufile)"></i>
+                                            </td>-->
+                                        </tr>
+                                        <tr ng-repeat="file in files">
+                                            <td>
+                                                {{file.name}}
+                                            </td>
+                                            <td>
+                                                {{file.size }}<i class="form-validation-message" ng-show="file.size>(1024*1024*documentSize)"> (max file size exceeded ! ) </i>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="row">
+                <div ng-if="editProductForm.$valid === false && editProductForm.$dirty === true">
+                    <p class="form-validation-message">Validation failed, one or more required field is missing</p>
+                </div>
+                <button type="submit" class="btn btn-primary" ng-click="onSubmitForm()">
+                    Submit
+                </button>
+            </div>-->
+        </form>
+    </div>
+
+
+</fieldset>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#accordion').find('.collapse.in').collapse('hide');
+    });
+</script>

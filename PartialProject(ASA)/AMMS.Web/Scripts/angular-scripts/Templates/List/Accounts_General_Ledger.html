@@ -1,0 +1,377 @@
+﻿<div id="general-journal-list" class="panel panel-default panel-primary" ng-controller="generalLedgerListController">
+    <!--<div class="panel-heading panel-title">
+        Transaction Statement
+    </div>-->
+    <div class="panel-body">
+
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <span class="badge">Entities</span>
+                <div class="filter-form">
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <label for="entity" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                Entities
+                            </label>
+                            <select id="entity" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                    ng-model="filter.Entity" ng-options="ent.Value as ent.Name for ent in filters.Entity"
+                                    ng-disabled="user.Role===rootLevel.LO.toString()||user.Role===rootLevel.BM.toString()||user.Role===rootLevel.RM.toString()||user.Role===rootLevel.ABM.toString()||user.Role===rootLevel.ASE.toString()"
+                                    ng-change="correspondingEntityDataLoader(filter.Entity)"></select>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div ng-if="filter.Entity===4||filter.Entity===5" class="col-lg-6 col-md-6 col-sm-12">
+                <!--<span class="badge">Entities</span>-->
+                <div class="filter-form">
+                    <div ng-if="filter.Entity===4">
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <label for="division" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                    Division
+                                </label>
+                                <select id="division" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                        ng-model="filter.Zone" ng-options="zone.Value as zone.Name for zone in filters.Zones |orderBy:'Name'"
+                                        ng-disabled="user.Role === rootLevel.BM.toString()||user.Role === rootLevel.RM.toString()||user.Role === rootLevel.DM.toString()||user.Role === rootLevel.ZM.toString()"
+                                        ng-change="getDistrictsByZoneId()"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <label for="district" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                    District
+                                </label>
+                                <select id="district" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                        ng-model="filter.District" ng-options="d.Value as d.Name for d in filters.Districts |orderBy:'Name'"
+                                        ng-disabled="user.Role === rootLevel.BM.toString()||user.Role === rootLevel.RM.toString()||user.Role === rootLevel.DM.toString()"
+                                        ng-change="getRegionsByDistrictId()"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <label for="region" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                    Region
+                                </label>
+                                <select id="region" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                        ng-model="filter.Region" ng-options="m.Value as m.Name for m in filters.Regions |orderBy:'Name'"
+                                        ng-disabled="user.Role === rootLevel.BM.toString()||user.Role === rootLevel.RM.toString()"
+                                        ng-change="getBranchesByRegionId()"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <label for="branch" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                    Branch
+                                </label>
+                                <select id="branch" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                        ng-disabled="user.Role === rootLevel.BM.toString()"
+                                        ng-model="filter.Branch" ng-options="m.Value as m.Name for m in filters.Branches |orderBy:'Name'"></select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div ng-if="filter.Entity===5">
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <label for="divoffices" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                    Divisional Offices
+                                </label>
+                                <select id="divoffices" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                        ng-model="filter.DivisionalOffice" ng-options="do.Value as do.Name for do in filters.DivisionalOffices |orderBy:'Name'"></select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="row">
+                        <div ng-if="filter.IsSplitMonthly == false" class="col-lg-3 col-md-3 col-sm-3">
+                            <div class="form-inline">
+                                <label class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                    From Date
+                                </label>
+                                <div class="dropdown input-group date width-asa">
+                                    <p class="input-group date-input-group">
+                                        <input readonly="readonly" class="form-control-asa full-width-asa" type="text"
+                                               uib-datepicker-popup="{{format}}" ng-model="filter.FromDateM" is-open="fromPop.opened"
+                                               datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats"
+                                               ng-change="fromValidator()" />
+                                        <span class="input-group-addon input-group-addon-asa">
+                                            <button type="button" ng-click="fromPopper()"><i class="fa fa-calendar"></i></button>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-if="filter.IsSplitMonthly == false" class="col-lg-3 col-md-3 col-sm-3">
+                            <div class="form-inline">
+                                <label class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                    To Date
+                                </label>
+                                <div class="dropdown input-group date width-asa">
+                                    <p class="input-group date-input-group">
+                                        <input readonly="readonly" class="form-control-asa full-width-asa" type="text"
+                                               uib-datepicker-popup="{{format}}" ng-model="filter.ToDateM" is-open="toPop.opened"
+                                               datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats"
+                                               ng-change="toValidator()" />
+                                        <span class="input-group-addon input-group-addon-asa">
+                                            <button type="button" ng-click="toPopper()"><i class="fa fa-calendar"></i></button>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div ng-if="filter.IsSplitMonthly == true" class="col-lg-4 col-md-4 col-sm-4">
+                            <span class="badge">From</span>
+                            <div class="filter-form">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="branch" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                            Year
+                                        </label>
+                                        <select id="branch" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                                ng-disabled="user.Role === rootLevel.BM.toString()"
+                                                ng-model="filter.fYear" ng-options="m.Value as m.Name for m in YearList |orderBy:'Value': reverse : true"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="branch" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                            Month
+                                        </label>
+                                        <select id="branch" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                                ng-disabled="user.Role === rootLevel.BM.toString()"
+                                                ng-model="filter.fMonth" ng-options="m.Value as m.Name for m in MonthList |orderBy:'Value'"></select>
+                                    </div>
+                                </div>
+
+                                <!--<div ng-if="filter.IsSplitMonthly == true" class="col-lg-4 col-md-4 col-sm-4">-->
+
+                                <!--</div>-->
+                            </div>
+                        </div>
+                        <div ng-if="filter.IsSplitMonthly == true" class="col-lg-4 col-md-4 col-sm-4">
+                            <span class="badge">To</span>
+                            <div class="filter-form">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="branch" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                            Year
+                                        </label>
+                                        <select id="branch" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                                ng-disabled="user.Role === rootLevel.BM.toString()"
+                                                ng-model="filter.tYear" ng-options="m.Value as m.Name for m in YearList |orderBy:'Value': reverse : true"></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="branch" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                            Month
+                                        </label>
+                                        <select id="branch" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                                ng-disabled="user.Role === rootLevel.BM.toString()"
+                                                ng-model="filter.tMonth" ng-options="m.Value as m.Name for m in MonthList |orderBy:'Value'"></select>
+                                    </div>
+                                </div>
+
+                                <!--<div ng-if="filter.IsSplitMonthly == true" class="col-lg-4 col-md-4 col-sm-4">-->
+
+                                <!--</div>-->
+                            </div>
+                        </div>
+
+
+                        <!--<div ng-if="filter.IsSplitMonthly == true" class="col-lg-3 col-md-3 col-sm-3">
+                            <div class="form-group">
+                                <div class="form-inline">
+                                    <label for="branch" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                        Month
+                                    </label>
+                                    <select id="branch" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                            ng-disabled="user.Role === rootLevel.BM.toString()"
+                                            ng-model="filter.tMonth" ng-options="m.Value as m.Name for m in MonthList |orderBy:'Value'"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-if="filter.IsSplitMonthly == true" class="col-lg-3 col-md-3 col-sm-3">
+                            <span class="badge">To</span>
+                            <div class="form-group">
+                                <div class="form-inline">
+                                    <label for="branch" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                        Year
+                                    </label>
+                                    <select id="branch" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                            ng-disabled="user.Role === rootLevel.BM.toString()"
+                                            ng-model="filter.tYear" ng-options="m.Value as m.Name for m in YearList |orderBy:'Value': reverse : true"></select>
+                                </div>
+                            </div>
+                        </div>-->
+                        <div class="col-lg-3 col-md-3 col-sm-12">
+                            <div class="form-inline">
+                                <label for="splitmonthly" class="col-lg-8 col-md-8 col-sm-12">
+                                    Split Monthly
+                                </label>
+                                <input type="checkbox" ng-model="filter.IsSplitMonthly"
+                                       id="splitmonthly"
+                                       ng-change="ChangeSplitMonthly()"
+                                       ng-true-value="true" ng-false-value="false"
+                                       checked="checked">
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn-asa-normal pull-right" ng-click="getLedgerList()">Search</button>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <span class="row">
+                    <span ng-repeat="command in commandList">
+                        <span ng-if="command.IsGeneral === true">
+                            <button class="btn-asa-normal pull-left" ng-click="(command.HasView)?openCommandTab(command, tab.id, 'Accounts_General_Ledger',{}): ((command.DisplayName == 'Refresh')? Init() : exportData())">{{command.CommandName}}</button>
+
+                        </span>
+                    </span>
+                    <button class="btn-asa-normal pull-left" ng-click="export()">Export</button>
+                </span>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-8">
+                <hr />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="coa-arrow-div"><i ng-click="showCoA = !showCoA" ng-class="expandArrowStyle()" class="fa"></i><label ng-show="!showCoA">Show CoA</label><label ng-show="showCoA">Hide CoA</label></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div ng-show="showCoA" class="coa-content">
+                    <div ng-include src="getSecondaryPath() + locationStr +'/Scripts/angular-scripts/Templates/List/ChartOfAccount.html'">
+                    </div>
+                </div>
+            </div>
+            <div ng-if="isLeaf == true && filter.IsSplitMonthly == false" class="col-lg-12 col-md-12 col-sm-12 ledger-table-content">
+                <h5>General Ledger For : <strong class="selected-coa"></strong></h5>
+                <table id="glvouchertable" style="width: 100%; border-collapse: collapse; table-layout: auto" datatable="ng"
+                       class="table table-striped table-bordered table-hover table-asa emp-list-font">
+                    <thead>
+                        <tr>
+                            <th style="display: none">DateSort</th>
+                            <th style="width: 15%">Date </th>
+                            <th style="width: 20%">Voucher No. </th>
+                            <th style="width: 35%">Description</th>
+                            <th>Debit</th>
+                            <th>Credit</th>
+                            <th>Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-class="v.Date == 'Total' ? 'GeneralLedger' : ''" ng-repeat="v in ledgers">
+                            <td style="display: none">{{v.DateSort}}</td>
+                            <td>{{v.Date}}</td>
+                            <td title="{{v.VoucherNo}}">{{v.VoucherNoShow}}</td>
+                            <td>{{v.Description}}</td>
+                            <td>{{v.Debit}}</td>
+                            <td>{{v.Credit}}</td>
+                            <td>{{v.Balance}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div ng-if="isLeaf == false && filter.IsSplitMonthly == false" class="col-lg-12 col-md-12 col-sm-12 ledger-table-content">
+                <h5>General Ledger For : <strong class="selected-coa"></strong></h5>
+                <table id="glvouchertable" style="width: 100%; border-collapse: collapse; table-layout: auto" datatable="ng"
+                       class="table table-striped table-bordered table-hover table-asa emp-list-font">
+                    <thead>
+                        <tr>
+                            <th style="display: none"> #</th>
+                            <th style="width: 100%">Account Name </th>
+                            <th style="min-width: 10%">Opening Balance</th>
+                            <th style="min-width: 10%">Debit</th>
+                            <th style="min-width: 10%">Credit</th>
+                            <th style="min-width: 10%">Closing Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-class="v.AccountName == 'Total' ? 'GeneralLedger' : ''" ng-repeat="v in ledgers">
+                            <td style="display: none">{{v.SortOrder}}</td>
+                            <td>{{v.AccountName}}</td>
+                            <td>{{v.OpeningBalance}}</td>
+                            <td>{{v.Debit}}</td>
+                            <td>{{v.Credit}}</td>
+                            <td>{{v.ClosingBalance}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div ng-if="isLeaf == true && filter.IsSplitMonthly == true" class="col-lg-12 col-md-12 col-sm-12 ledger-table-content">
+                <h5>General Ledger For : <strong class="selected-coa"></strong></h5>
+                <table id="glvouchertable" style="width: 100%; border-collapse: collapse; table-layout: auto" datatable="ng"
+                       class="table table-striped table-bordered table-hover table-asa emp-list-font">
+                    <thead>
+                        <tr>
+                            <th style="display: none"> #</th>
+                            <th>Month</th>
+                            <th style="width: 100%">Account Name </th>
+                            <th>Opening Balance</th>
+                            <th>Debit</th>
+                            <th>Credit</th>
+                            <th>Closing Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-class="v.Month == 'Total' ? 'GeneralLedger' : ''" ng-repeat="v in ledgers">
+                            <td style="display: none">{{v.SortOrder}}</td>
+                            <td>{{v.Month}}</td>
+                            <td>{{v.AccountName}}</td>
+                            <td>{{v.OpeningBalance}}</td>
+                            <td>{{v.Debit}}</td>
+                            <td>{{v.Credit}}</td>
+                            <td>{{v.ClosingBalance}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div ng-if="isLeaf == false && filter.IsSplitMonthly == true" class="col-lg-12 col-md-12 col-sm-12 ledger-table-content">
+                <h5>General Ledger For : <strong class="selected-coa"></strong></h5>
+                <table id="glvouchertable" style="width: 100%; border-collapse: collapse; table-layout: auto" datatable="ng"
+                       class="table table-striped table-bordered table-hover table-asa emp-list-font">
+                    <thead>
+                        <tr>
+                            <th style="display: none"> #</th>
+                            <th>Month</th>
+                            <th style="width: 100%">Account Name </th>
+                            <th>Opening Balance</th>
+                            <th>Debit</th>
+                            <th>Credit</th>
+                            <th>Closing Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-class="v.Month == 'Total' ? 'GeneralLedger' : ''" ng-repeat="v in ledgers">
+                            <td style="display: none">{{v.SortOrder}}</td>
+                            <td>{{v.Month}}</td>
+                            <td>{{v.AccountName}}</td>
+                            <td>{{v.OpeningBalance}}</td>
+                            <td>{{v.Debit}}</td>
+                            <td>{{v.Credit}}</td>
+                            <td>{{v.ClosingBalance}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

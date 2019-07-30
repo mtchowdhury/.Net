@@ -1,0 +1,100 @@
+﻿<div class="panel panel-default panel-primary" ng-controller="assetDisposalController">
+    <div class="panel-heading panel-title">
+        Disposal Asset
+    </div>
+    <div class="panel-body font-asa-11">
+        <form angular-validator-submit="addAssetItem()" name="addAssetItemForm" class="form-horizontal" novalidate angular-validator>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-inline">
+                            <label for="dareferenceno" class="col-md-4 col-sm-12">
+                                Reference No : <i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <input type="text" tabindex="2" name="dareferenceno"
+                                   ng-model="assetDisposal.ReferenceNo" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="dareferenceno" validate-on="blur" placeholder="Reference No"
+                                   maxlength="100"
+                                   required-message="'Name field is required'" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div>
+                            <div class="form-inline">
+                                <label for="dadisposaldate" class="col-md-4 col-sm-12">
+                                    Disposal Date<i class="fa fa-asterisk required-icon"></i>
+                                </label>
+                                <div class="dropdown input-group date width-asa">
+                                    <a class="dropdown-toggle" id="dadisposaldate" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                        <div class="input-group date-input-group">
+                                            <input type="text" readonly="readonly" date-time-input="DD-MM-YYYY"
+                                                   class="form-control-asa full-width-asa" data-ng-model="assetDisposal.DisposalDate"
+                                                   is-open="false"
+                                                   required
+                                                   required-message="'Field is required'">
+                                            <span class="input-group-addon input-group-addon-asa"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                        <datetimepicker data-ng-model="assetDisposal.DisposalDate" data-datetimepicker-config="{ startView:'day', minView:'day',dropdownSelector: '#dadisposaldate' }"
+                                                        data-before-render="" />
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-inline">
+                            <label for="dadisposaltype" class="col-md-4 col-sm-12">
+                               Disposal Type<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="dadisposaltype"
+                                    ng-model="filterParams.CategoryId"
+                                    ng-change="filterItem(filterParams.ItemCategoryId)"
+                                    name="dadisposaltype"
+                                    ng-options="category.Id as category.Name for category in categoryItems"></select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-inline">
+                            <label for="dawrittendownvalue" class="col-md-4 col-sm-12">
+                                Written Down Value <i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <input type="text" tabindex="3" name="dawrittendownvalue"
+                                   ng-model="itemType.ShortName" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   maxlength="5"
+                                   id="dawrittendownvalue" validate-on="blur" placeholder="ShortName"
+                                   required-message="'ShortName field is required'" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-inline">
+                            <label for="daamount" class="col-md-4 col-sm-12">
+                               Amount <i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <input type="text" tabindex="3" name="daamount"
+                                   ng-model="itemType.ShortName" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   maxlength="5"
+                                   id="daamount" validate-on="blur" placeholder="Amount"
+                                   required-message="'ShortName field is required'" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-inline">
+                            <label for="danote" class="col-md-4 col-sm-12">
+                               Note <i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <input type="text" tabindex="3" name="danote"
+                                   ng-model="itemType.ShortName" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   maxlength="5"
+                                   id="danote" validate-on="blur" placeholder="Note"
+                                   required-message="'ShortName field is required'" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

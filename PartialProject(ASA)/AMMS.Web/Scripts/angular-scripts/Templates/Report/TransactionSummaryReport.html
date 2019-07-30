@@ -1,0 +1,340 @@
+﻿<div id="general-journal-list" class="panel panel-default panel-primary" ng-controller="transactionSummaryReportController">
+<!--<div class="panel-heading panel-title">
+    Transaction Statement
+</div>-->
+<div class="panel-body">
+
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <span class="badge">Entities</span>
+        <div class="filter-form">
+            <div class="form-group col-lg-4 col-md-4 col-sm-3">
+                <p class="input-group">
+                    <label for="transactiondate" class="col-md-4 col-sm-12">
+                        Date
+                    </label>
+                    <input readonly="readonly" class="form-control-asa" type="text" uib-datepicker-popup="{{format}}"
+                           ng-model="filter.TransactionDate" is-open="popup.opened" datepicker-options="dateOptions" close-text="Close"
+                           alt-input-formats="altInputFormats"/>
+                    <span class="input-group-addon input-group-addon-asa">
+                                <button type="button" ng-click="open()"><i class="fa fa-calendar"></i></button>
+                            </span>
+                </p>
+                <!--<div class="form-inline">
+                    <label for="transactiondate" class="col-md-4 col-sm-12">
+                        Date
+                    </label>
+                    <input type="text"
+                           maxlength="100"
+                           ng-model="filter.TransactionDate"
+                           class="form-control  form-control-asa col-md-8 width-asa col-sm-12"
+                           id="transactiondate" placeholder="Transaction Date"
+                           name="transactiondate"
+                           disabled="disabled">
+                </div>-->
+            </div>
+            <div class="form-group col-md-4 col-lg-4 col-sm-12">
+                <div class="form-inline">
+                    <label for="division" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                        Division
+                    </label>
+                    <select id="division" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                            ng-model="filter.Zone" ng-options="zone.Value as zone.Name for zone in filters.Zones |orderBy:'Name'"
+                            ng-disabled="user.Role === rootLevel.BM.toString()||user.Role === rootLevel.RM.toString()||user.Role === rootLevel.DM.toString()||user.Role === rootLevel.ZM.toString()"
+                            ng-change="getDistrictsByZoneId()"></select>
+                </div>
+            </div>
+            <div class="form-group  col-md-4 col-lg-4 col-sm-12">
+                <div class="form-inline">
+                    <label for="district" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                        District
+                    </label>
+                    <select id="district" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                            ng-model="filter.District" ng-options="d.Value as d.Name for d in filters.Districts |orderBy:'Name'"
+                            ng-disabled="user.Role === rootLevel.BM.toString()||user.Role === rootLevel.RM.toString()||user.Role === rootLevel.DM.toString()"
+                            ng-change="getRegionsByDistrictId()"></select>
+                </div>
+            </div>
+            <div class="form-group  col-md-4 col-lg-4 col-sm-12">
+                <div class="form-inline">
+                    <label for="region" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                        Region
+                    </label>
+                    <select id="region" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                            ng-model="filter.Region" ng-options="m.Value as m.Name for m in filters.Regions |orderBy:'Name'"
+                            ng-disabled="user.Role === rootLevel.BM.toString()||user.Role === rootLevel.RM.toString()"
+                            ng-change="getBranchesByRegionId()"></select>
+                </div>
+            </div>
+            <div class="form-group col-md-4 col-lg-4 col-sm-12">
+                <div class="form-inline">
+                    <label for="branch" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                        Branch
+                    </label>
+                    <select id="branch" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                            ng-disabled="user.Role === rootLevel.BM.toString()"
+                            ng-model="filter.BranchId" ng-options="m.Value as m.Name for m in filters.Branches |orderBy:'Name'"></select>
+                </div>
+            </div>
+            <div class="form-group col-md-4 col-lg-4 col-sm-12">
+                <div class="form-inline">
+                    <label for="loanofficer" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                        Loan Officer
+                    </label>
+                    <select id="loanofficer" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12" name="loanofficer"
+                            ng-model="filter.LoanOfficer" ng-options="m.Value as m.Name for m in filters.LoanOfficers" ng-change="getGroupsByLoanOfficers(filter.LoanOfficer);"></select>
+                </div>
+            </div>
+            <div class="form-group col-md-3 col-lg-4 col-sm-12">
+                <div class="form-inline">
+                    <label for="group" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                        Group
+                    </label>
+                    <select id="group" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12" name="group"
+                            ng-model="filter.Group" ng-options="m.Value as m.Name for m in filters.Groups" ng-change="getMembersByGroup(filter.Group);"></select>
+                </div>
+            </div>
+            <div class="form-group col-md-4 col-lg-4 col-sm-12">
+                <div class="form-inline">
+                    <label for="member" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                        Member
+                    </label>
+                    <select id="member" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12" name="member"
+                            ng-model="filter.Member" ng-options="m.Value as m.Name for m in filters.Members"></select>
+                </div>
+            </div>
+            <div class="form-group col-md-4 col-lg-4 col-sm-12">
+                <div class="form-inline">
+                    <label for="member" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                        Summarized By
+                    </label>
+                    <select id="ts-member" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12" name="member"
+                            ng-model="filter.groupBy" ng-options="m.Value as m.Name for m in filters.GroupByList"></select>
+                </div>
+            </div>
+            <div class="form-group col-md-12 col-lg-12 col-sm-12">
+                <div class="form-inline ">
+                    <button class="btn-default btn-primary pull-right" data-toggle="modal" data-target="#myModalHorizontal" ng-click="popUpExportModal();">Export</button>
+                    <!--<div class="form-group">
+                        <div class="form-inline">
+                            <label class="col-lg-6 col-md-6 col-sm-12">
+                                Select to export <i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <div ng-dropdown-multiselect="" extra-settings="dropdownSetting" class="multiselect-button-loan col-lg-6 col-md-6 col-sm-12"
+                                 options="exportOptions" selected-model="exportOptionSelected" checkboxes="true"></div>
+                        </div>
+                    </div>-->
+                    <button class="btn-default btn-primary pull-right" ng-click="setFirstTabActive();getTransactionSummaryData(transactionSummaryReportConfig.ReportType.SummaryReport);" style="margin-right: 10px;">View</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<div style="margin-top: 10px" class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 report-col">
+        <ul id="report-tab" class="nav nav-tabs" role="tablist">
+            <!--<li ng-repeat="tab in transactionSummaryData" role="presentation" ng-class="getActiveTab($index)">
+                <a href="#{{tab.ReportName}}" aria-controls="{{tab.ReportName}}" role="tab" data-toggle="tab">{{tab.ReportLabel}}</a>
+            </li>-->
+            <li role="presentation" id="tab-ts-summary-data" ng-class="getActiveTab(0)">
+                <a href="#ts-summary-data" aria-controls="ts-summary-data" class="btn-default" role="tab" data-toggle="tab" ng-click="getTransactionSummaryData(transactionSummaryReportConfig.ReportType.SummaryReport)">Summary Report </a>
+            </li>
+            <li role="presentation" id="tab-ts-loancollection" ng-class="getActiveTab(1)">
+                <a href="#ts-loancollection" aria-controls="ts-loancollection" role="tab" data-toggle="tab" ng-click="getTransactionSummaryData(transactionSummaryReportConfig.ReportType.LoanCollection)">Loan Collection</a>
+            </li>
+            <li role="presentation"id="tab-loan-disbursedand-full-paid" ng-class="getActiveTab(2)">
+                <a href="#ts-loan-disbursedand-full-paid" aria-controls="ts-loan-disbursedand-full-paid" role="tab" data-toggle="tab"ng-click="getTransactionSummaryData(transactionSummaryReportConfig.ReportType.LoanDisbursedAndFullPaid)">Loan Disbursed and Full Paid</a>
+            </li>
+            <li role="presentation"id="tab-ts-savings-cbs-collection" ng-class="getActiveTab(3)">
+                <a href="#ts-savings-cbs-collection" aria-controls="ts-savings-cbs-collection" role="tab" data-toggle="tab"ng-click="getTransactionSummaryData(transactionSummaryReportConfig.ReportType.SavingsCbsCollection)">Savings And CBS Collection</a>
+            </li>
+            <li role="presentation" id="tab-ts-savings-cbs-withdrawal"ng-class="getActiveTab(4)">
+                <a href="#ts-savings-cbs-withdrawal" aria-controls="ts-savings-cbs-withdrawal" role="tab" data-toggle="tab"ng-click="getTransactionSummaryData(transactionSummaryReportConfig.ReportType.SavingsCbsWithdrawal)">Savings And CBS Withdrawal</a>
+            </li>
+        </ul>
+
+        <div class="tab-content report-tab-content">
+            <div role="tabpanel" class="tab-pane" ng-class="getActiveTab(0)" id="ts-summary-data">
+                <table class="table-asa tbody tr td table-report-asa" id="tbl-ts-summary-data" dt-instance="dtInstance" dt-options="dtOptions" dt-column-defs="dtColumnDefs" data-page-length='{{setPageLength(tab.Rows)}}'>
+                    <thead>
+                    <tr ng-repeat="layer in transactionSummaryData.SummaryReport[0].Layers">
+                        <th ng-repeat="column in layer.Columns" ng-style="setHeaderStyle(column.ColumnSpan, column.RowSpan, $parent.$index)" colspan="{{column.ColumnSpan}}" rowspan="{{column.RowSpan}}">{{column.ColumnName}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="row in transactionSummaryData.SummaryReport[0].Rows" ng-class="styleTotalRow(row)">
+                        <td ng-repeat="cell in row track by $index">
+                            {{formatCellValue(cell, tab.Columns[$index])}}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" ng-class="getActiveTab(1)" id="ts-loancollection">
+                <table class="table-asa tbody tr td table-report-asa"id="tbl-ts-loancollection" dt-instance="dtInstance" dt-options="dtOptions" dt-column-defs="dtColumnDefs" data-page-length='{{setPageLength(tab.Rows)}}'>
+                    <thead>
+                    <tr ng-repeat="layer in transactionSummaryData.LoanCollection[0].Layers">
+                        <th ng-repeat="column in layer.Columns" ng-style="setHeaderStyle(column.ColumnSpan, column.RowSpan, $parent.$index)" colspan="{{column.ColumnSpan}}" rowspan="{{column.RowSpan}}">{{column.ColumnName}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="row in transactionSummaryData.LoanCollection[0].Rows" ng-class="styleTotalRow(row)">
+                        <td ng-repeat="cell in row track by $index">
+                            {{formatCellValue(cell, tab.Columns[$index])}}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" ng-class="getActiveTab(2)" id="ts-loan-disbursedand-full-paid">
+                <table class="table-asa tbody tr td table-report-asa"id="tbl-loan-disbursedand-full-paid" dt-instance="dtInstance" dt-options="dtOptions" dt-column-defs="dtColumnDefs" data-page-length='{{setPageLength(tab.Rows)}}'>
+                    <thead>
+                    <tr ng-repeat="layer in transactionSummaryData.LoanDisbursedAndFullPaid[0].Layers">
+                        <th ng-repeat="column in layer.Columns" ng-style="setHeaderStyle(column.ColumnSpan, column.RowSpan, $parent.$index)" colspan="{{column.ColumnSpan}}" rowspan="{{column.RowSpan}}">{{column.ColumnName}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="row in transactionSummaryData.LoanDisbursedAndFullPaid[0].Rows" ng-class="styleTotalRow(row)">
+
+                        <td ng-repeat="cell in row track by $index">
+                            {{formatCellValue(cell, tab.Columns[$index])}}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" ng-class="getActiveTab(3)" id="ts-savings-cbs-collection">
+                <table class="table-asa tbody tr td table-report-asa"id="tbl-ts-savings-cbs-collection" dt-instance="dtInstance" dt-options="dtOptions" dt-column-defs="dtColumnDefs" data-page-length='{{setPageLength(tab.Rows)}}'>
+                    <thead>
+                    <tr ng-repeat="layer in transactionSummaryData.SavingsCbsCollection[0].Layers">
+                        <th ng-repeat="column in layer.Columns" ng-style="setHeaderStyle(column.ColumnSpan, column.RowSpan, $parent.$index)" colspan="{{column.ColumnSpan}}" rowspan="{{column.RowSpan}}">{{column.ColumnName}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="row in transactionSummaryData.SavingsCbsCollection[0].Rows" ng-class="styleTotalRow(row)">
+
+                        <td ng-repeat="cell in row track by $index">
+                            {{formatCellValue(cell, tab.Columns[$index])}}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" ng-class="getActiveTab(4)" id="ts-savings-cbs-withdrawal">
+                <table class="table-asa tbody tr td table-report-asa"id="tbl-ts-savings-cbs-withdrawal" dt-instance="dtInstance" dt-options="dtOptions" dt-column-defs="dtColumnDefs" data-page-length='{{setPageLength(tab.Rows)}}'>
+                    <thead>
+                    <tr ng-repeat="layer in transactionSummaryData.SavingsCbsWithdrawal[0].Layers">
+                        <th ng-repeat="column in layer.Columns" ng-style="setHeaderStyle(column.ColumnSpan, column.RowSpan, $parent.$index)" colspan="{{column.ColumnSpan}}" rowspan="{{column.RowSpan}}">{{column.ColumnName}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="row in transactionSummaryData.SavingsCbsWithdrawal[0].Rows" ng-class="styleTotalRow(row)">
+
+                        <td ng-repeat="cell in row track by $index">
+                            {{formatCellValue(cell, tab.Columns[$index])}}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--<div class="tab-content report-tab-content">
+
+        </div>
+        <div class="tab-content report-tab-content">
+
+        </div>
+        <div class="tab-content report-tab-content">
+
+        </div>
+        <div class="tab-content report-tab-content">
+
+        </div>-->
+    </div>
+
+</div>
+</div>
+    <div class="modal fade" id="modalExportSummaryReport" tabindex="-1" role="dialog"
+         aria-labelledby="interestMatrix" aria-hidden="true">
+        <div class="modal-dialog" style="top: 20%;left: 10%;">
+            <div class="modal-content" style="width:550px;">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close"
+                            data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        Please select report(s) to export :
+                    </h4>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <div class="form-inline" style="height:25px;">
+                                    <label for="summaryreport" class="col-lg-6 col-md-6 col-sm-12">
+                                        Summary Report
+                                    </label>
+                                    <input type="checkbox" ng-model="exportOptions.SummaryReport" id="summaryreport" class="col-lg-6 col-md-6 col-sm-12"
+                                           ng-true-value="true" ng-false-value="false">
+                                </div>
+                                <div class="form-inline" style="height:25px;">
+                                    <label for="loancollection" class="col-lg-6 col-md-6 col-sm-12">
+                                        Loan Collection
+                                    </label>
+                                    <input type="checkbox" ng-model="exportOptions.LoanCollection" id="loancollection" class="col-lg-6 col-md-6 col-sm-12"
+                                           ng-true-value="true" ng-false-value="false">
+                                </div>
+                                <div class="form-inline" style="height:25px;">
+                                    <label for="loandisburseandfullpaid" class="col-lg-6 col-md-6 col-sm-12">
+                                        Loan Disbursed and Full Paid
+                                    </label>
+                                    <input type="checkbox" ng-model="exportOptions.LoanDisbursedAndFullPaid" id="loandisburseandfullpaid" class="col-lg-6 col-md-6 col-sm-12"
+                                          ng-true-value="true" ng-false-value="false">
+                                </div>
+                                <div class="form-inline" style="height:25px;">
+                                    <label for="savingsandcbscollection" class="col-lg-6 col-md-6 col-sm-12">
+                                        Savings And CBS Collection
+                                    </label>
+                                    <input type="checkbox" ng-model="exportOptions.SavingsAndCbsCollection" id="savingsandcbscollection" class="col-lg-6 col-md-6 col-sm-12"
+                                           ng-true-value="true" ng-false-value="false">
+                                </div>
+                                <div class="form-inline" style="height:25px;">
+                                    <label for="savingsandcbscollection" class="col-lg-6 col-md-6 col-sm-12">
+                                        Savings And CBS Withdrawal
+                                    </label>
+                                    <input type="checkbox" ng-model="exportOptions.SavingsAndCbsWithdrawal" id="savingsandcbswithdrawal" class="col-lg-6 col-md-6 col-sm-12"
+                                           ng-true-value="true" ng-false-value="false">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                            data-dismiss="modal" ng-click="changeBool(true); ">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="exportTransactionSummaryData();">
+                        Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

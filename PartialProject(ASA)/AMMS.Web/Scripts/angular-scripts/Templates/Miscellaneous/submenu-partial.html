@@ -1,0 +1,18 @@
+﻿<script type="text/ng-template" id="submenu-partial">
+    <a class="side-navbar-all-menu" id="menu_{{submenu.Module}}" ng-style="putIndentation(submenu.Level)" data-toggle="tooltip"
+       data-placement="right" title="{{submenu.ToolTip}}">
+        <i ng-class="showExpandCollapse(submenu.Level)"></i>
+        <span ng-if="submenu.Status == 0">
+            <font color="black"><label ng-style="labelStyle(submenu.Level, submenu.HasMeetingDay, submenu.HasParentMeetingDay,submenu.hasSchedule)" title="{{submenu.ToolTip}}">{{submenu.DisplayName}}</label></font>
+            <i title="{{submenu.Name}}" class="{{submenu.IconClass}} sub_icon" aria-hidden="true"></i>
+        </span>
+        <span ng-if="submenu.Status != 0" ng-click="openNewTab(submenu)">
+            <label style="cursor:pointer" ng-style="labelStyle(submenu.Level, submenu.HasMeetingDay, submenu.HasParentMeetingDay,submenu.hasSchedule)" title="{{submenu.ToolTip}}">{{submenu.DisplayName}}</label>
+            <i title="{{submenu.Name}}" class="{{submenu.IconClass}} sub_icon" aria-hidden="true"></i>
+        </span>
+    </a>
+    <ul ng-if="submenu.SubModules.length > 0" class="sub-menu" style="display: none;">
+        <li class="allMenus" ng-repeat="submenu in submenu.SubModules" ng-include="'submenu-partial'">
+        </li>
+    </ul>
+</script>

@@ -1,0 +1,73 @@
+﻿<div class="panel panel-default panel-primary" ng-controller="gradeAddController">
+    <div class="panel-heading panel-title">
+        Add Grade
+    </div>
+    <div class="panel-body panel-body-asa font-asa-11">
+        <form angular-validator-submit="addGrade()" name="gradeAddForm" class="form-horizontal" novalidate angular-validator>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-lg-offset-2 col-md-offset-2">
+                    <div class="form-group">
+
+                        <div class="form-inline">
+                            <label for="name" class="col-md-4 col-sm-12">
+                                Name<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <input type="text" tabindex="1"
+                                   class="form-control form-control-asa col-md-8 width-asa col-sm-12" id="name"
+                                   placeholder="Grade Name"
+                                   name="name"
+                                   ng-model="grade.Name"
+                                   required-message="'Name is required'" required
+                                   validate-on="ditry">
+                        </div>
+                        
+                        <div class="form-inline">
+                            <label for="code" class="col-md-4 col-sm-12">
+                                Code
+                            </label>
+                            <input type="text" tabindex="3"
+                                   class="form-control form-control-asa col-md-8 width-asa col-sm-12" id="code"
+                                   placeholder="Code "
+                                   name="code"
+                                   ng-model="grade.Code">
+                        </div>
+                        <div class="form-inline">
+                            <label for="sortorder" class="col-md-4 col-sm-12">
+                                Sort Order <i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <input type="number" tabindex="4"
+                                   class="form-control form-control-asa col-md-8 width-asa col-sm-12" id="sortorder"
+                                   placeholder="Sort Order"
+                                   name="sortorder"
+                                   ng-model="grade.SortOrder"
+                                   required-message="'Sort Order is required'" required
+                                   validate-on="ditry">
+                        </div>
+                        <div class="form-inline">
+                            <label for="status" class="col-md-4 col-sm-12">
+                                Status<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select tabindex="47" ng-change=""
+                                    class="form-control form-control-asa form-control-asa-select-box-padding col-md-8 width-asa col-sm-12"
+                                    id="status"
+                                    name="status"
+                                    disabled="disabled"
+                                    ng-model="grade.Status"
+                                    required-message="'status field is required'"
+                                    ng-options="status.Value as status.Name for status in filters.Status" required></select>
+                        </div>
+                        
+
+
+                        <div ng-if="gradeAddForm.$dirty === true && gradeAddForm.$valid === false">
+                            <p class="form-validation-message">Validation failed, one or more required field is missing</p>
+                        </div>
+                        <button style="margin-top: 10px;" type="submit" tabindex="100" class="btn btn-primary pull-right">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

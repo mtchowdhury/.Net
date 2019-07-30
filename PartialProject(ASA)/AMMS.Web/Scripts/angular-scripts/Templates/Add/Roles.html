@@ -1,0 +1,53 @@
+﻿<div class="panel panel-default panel-primary" ng-controller="roleAdminAddController">
+    <div class="panel-heading panel-title">
+        Add Role
+    </div>
+    <div class="panel-body panel-body-asa font-asa-11">
+        <form angular-validator-submit="addRole()" name="roleAddForm" class="form-horizontal" novalidate angular-validator>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-lg-offset-2 col-md-offset-2">
+
+                    <div class="form-inline">
+                        <label for="rolename" class="col-md-4 col-sm-12">
+                            Role <i class="fa fa-asterisk required-icon"></i>
+                        </label>
+                        <input type="text" tabindex="1" name="rolename"
+                               ng-model="roleToAdd.RoleName" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                               id="rolename" placeholder="Role Name"
+                               validator="roleValidator(roleToAdd.RoleName) === true"
+                               invalid-message="roleValidator(roleToAdd.RoleName)"
+                               validate-on="dirty">
+                    </div>
+                    <div class="form-inline">
+                        <label for="rolelevel" class="col-md-4 col-sm-12">
+                            Role Level <i class="fa fa-asterisk required-icon"></i>
+                        </label>
+                        <select tabindex="3" name="rolelevel"
+                                ng-model="roleToAdd.RoleId"
+                                class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                ng-options="role.LevelValue as role.LevelName for role in roleLevels"
+                                id="rolelevel" placeholder="Role Level"
+                                required>
+                            <option value="">--Select Role Level--</option>
+                        </select>
+                    </div>
+                    <div class="form-inline">
+                        <label for="sortorder" class="col-md-4 col-sm-12">
+                            Sort Order <i class="fa fa-asterisk required-icon"></i>
+                        </label>
+                        <input type="text" tabindex="1" name="sortorder"
+                               ng-model="roleToAdd.SortOrder" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                               id="sortorder" placeholder="Sort Order"
+                               required
+                               validate-on="dirty">
+                    </div>
+                    <div ng-if="roleAddForm.$dirty === true && roleAddForm.$valid === false">
+                    </div>
+                    <button style="margin-top: 10px;" type="submit" tabindex="100" class="btn btn-primary pull-right">
+                        Submit
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

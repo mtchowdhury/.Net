@@ -1,0 +1,1060 @@
+﻿<div class="panel panel-default panel-primary" ng-controller="inventoryEntryEditController">
+    <div class="panel-heading panel-title">
+        Close Inventory
+    </div>
+    <div class="panel-body font-asa-11">
+        <form angular-validator-submit="editInventoryEntry()" name="addAssetEntryForm" class="form-horizontal" novalidate angular-validator>
+        <div class="row">
+            <fieldset ng-disabled="true">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="entrydate" class="col-md-4 col-sm-12">
+                                Purchase Date<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <div class="dropdown input-group date width-asa">
+                                <p class="input-group">
+                                    <input readonly="readonly" class="form-control-asa full-width-asa" type="text" uib-datepicker-popup="{{format}}"
+                                           ng-model="asset.PurchaseWorkingDate" is-open="popupEntryDate.opened" datepicker-options="dateOptions" close-text="Close"
+                                           alt-input-formats="altInputFormats"
+                                           ng-change="changeEntryDate()" ng-disabled="roleId ==3 || roleId == 14" />
+                                    <span class="input-group-addon input-group-addon-asa" ng-if="roleId !=3 && roleId != 14">
+                                        <button type="button" ng-click="openEntryDate()"><i class="fa fa-calendar"></i></button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="name" class="col-md-4 col-sm-12">
+                                Name
+                            </label>
+                            <input type="text" tabindex="1" name="name"
+                                   ng-disabled="disableFieldConditonally"
+                                   ng-model="asset.Name" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="name" validate-on="blur" placeholder="Asset Name">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="assettag" class="col-md-4 col-sm-12">
+                                Inventory Id<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <input type="text" tabindex="1" name="assettag"
+                                   ng-model="asset.InventoryId" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="assettag"
+                                   readonly="readonly">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="officename" class="col-md-4 col-sm-12">
+                                Office Name<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <input type="text" tabindex="1" name="officename"
+                                   ng-model="asset.CurrentBranch" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="officename"
+                                   readonly="readonly">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="ItemCategoryName" class="col-md-4 col-sm-12">
+                                Inventory Category<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <input type="text" tabindex="1" name="ItemCategoryName"
+                                   ng-model="asset.ItemCategoryName" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="ItemCategoryName" validate-on="blur" placeholder="ItemCategoryName"
+                                   required-message="'Inventory Category field is required'" readonly="readonly" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="itemtype" class="col-md-4 col-sm-12">
+                                Item Type <i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="itemtype"
+                                    ng-model="asset.ItemTypeId"
+                                    name="itemtype"
+                                    ng-change="filterCategory(asset.ItemTypeId);getVattaxInfo();"
+                                    ng-options="type.Value as type.Name for type in filters.AssetTypeList" readonly="readonly" required disabled="disabled">
+                                <option value="">-- Select Item Type --</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="assettype" class="col-md-4 col-sm-12">
+                                Inventory type<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select type="text" name="assettype"
+                                    ng-model="asset.AssetTypeId"
+                                    class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                    id="assettype" validate-on="blur" placeholder="assettype"
+                                    ng-options="type.Value as type.Name for type in filters.typeList"
+                                    required-message="'Asset type field is required'" readonly="readonly" required disabled></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="supplier" class="col-md-4 col-sm-12">
+                                Supplier
+                            </label>
+                            <select class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="supplier" ng-model="asset.SupplierId"
+                                    name="supplier"
+                                    ng-disabled="disableFieldConditonally"
+                                    ng-options="supplier.Value as supplier.Name for supplier in filters.supplierList">
+                                <option value="">-- Select Supplier --</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="manufacturer" class="col-md-4 col-sm-12">
+                                Manufacturer
+                            </label>
+                            <select class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="manufacturer" ng-model="asset.Manufacturer"
+                                    name="manufacturer"
+                                    ng-disabled="disableFieldConditonally"
+                                    ng-options="manufacturer.Value as manufacturer.Name for manufacturer in filters.manufacturerList">
+                                <option value="">-- Select Manufacturer --</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="brand" class="col-md-4 col-sm-12">
+                                Brand
+                            </label>
+                            <input type="text" name="isfixed"
+                                   ng-disabled="disableFieldConditonally"
+                                   ng-model="asset.Brand" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="brand" validate-on="blur" placeholder="Brand">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="Specification" class="col-md-4 col-sm-12">
+                                Specification
+                            </label>
+                            <textarea ng-model="asset.Specification"
+                                      ng-disabled="disableFieldConditonally"
+                                      class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                      id="Specification" placeholder="Specification" rows="2"
+                                      name="Specification"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="Model" class="col-md-4 col-sm-12">
+                                Model
+                            </label>
+                            <input type="text" name="Model"
+                                   ng-disabled="disableFieldConditonally"
+                                   ng-model="asset.Model" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="Model" validate-on="blur" placeholder="Model">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="serialno" class="col-md-4 col-sm-12">
+                                Serial No.
+                            </label>
+                            <input type="text" name="serialno"
+                                   ng-disabled="disableFieldConditonally"
+                                   ng-model="asset.SerialNumber" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="serialno" validate-on="blur" placeholder="Serial No">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="warrentyexpiredate" class="col-md-4 col-sm-12">
+                                Warranty Expiry Date
+                            </label>
+                            <div class="dropdown input-group date width-asa">
+                                <p class="input-group">
+                                    <input readonly="readonly" class="form-control-asa full-width-asa" type="text" uib-datepicker-popup="{{format}}"
+                                           ng-disabled="disableFieldConditonally"
+                                           ng-model="asset.WarrantyExpireDate" is-open="popupWarrentyDate.opened" datepicker-options="expirydateOptions" close-text="Close"
+                                           alt-input-formats="altInputFormats" />
+                                    <span class="input-group-addon input-group-addon-asa">
+                                        <button type="button" ng-click="openWarrentyDate()"><i class="fa fa-calendar"></i></button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+            <hr>
+        <div class="row">
+            <fieldset ng-disabled="true">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="unitpurchaseprice" class="col-md-4 col-sm-12">
+                                Total Billing Price <i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <input type="number"
+                                   ng-disabled="disableFieldConditonally"
+                                   name="unitpurchaseprice"
+                                   ng-model="asset.BillingPrice"
+                                   class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   ng-model-options='{ debounce: 1000 }'
+                                   id="unitpurchaseprice"
+                                   ng-change="getVattaxInfo(); UpdateTotalPrice()"
+                                   validate-on="blur"
+                                   required
+                                   required-message="'Field is required'"
+                                   placeholder="Billing Price">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="quantity" class="col-md-4 col-sm-12">
+                                Quantity
+                            </label>
+                            <input type="number"
+                                   name="quantity"
+                                   min="1"
+                                   ng-model="asset.Quantity"
+                                   class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="quantity"
+                                   ng-change="UpdateTotalPrice()"
+                                   validate-on="blur" placeholder="Quantity" readonly="readonly">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="unitpurchaseprice" class="col-md-4 col-sm-12">
+                                Unit Billing Price <i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <input type="number"
+                                   name="unitpurchaseprice"
+                                   ng-model="asset.UnitBillingPrice"
+                                   class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   ng-model-options='{ debounce: 1000 }'
+                                   id="unitpurchaseprice"
+                                   validate-on="blur"
+                                   required
+                                   required-message="'Field is required'"
+                                   placeholder="Billing Price" disabled="disabled">
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="row">
+            <fieldset ng-disabled>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="VatAmount" class="col-md-4 col-sm-12">
+                                Vat Exemption ?
+                            </label>
+                            <label>
+                                <input type="radio" ng-model="asset.IsVatExemption" ng-value="true" ng-disabled="disableFieldConditonally" ng-change="getVattaxInfo();">
+                                Yes
+                            </label>
+                            <label>
+                                <input type="radio" ng-model="asset.IsVatExemption" ng-value="false" ng-disabled="disableFieldConditonally" ng-change="getVattaxInfo();">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="VatAmount" class="col-md-4 col-sm-12">
+                                Tax Exemption ?
+                            </label>
+                            <label>
+                                <input type="radio" ng-model="asset.IsTaxExemption" ng-value="true" ng-disabled="disableFieldConditonally" ng-change="getVattaxInfo();">
+                                Yes
+                            </label>
+                            <label>
+                                <input type="radio" ng-model="asset.IsTaxExemption" ng-value="false" ng-disabled="disableFieldConditonally" ng-change="getVattaxInfo();">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-6 col-md-6 col-sm-12" ng-if="asset.IsVatExemption==false" ng-disabled="disableIsVatDeduction">
+                    <div>
+                        <div class="form-inline">
+                            <label for="IsVatIncluded" class="col-md-4 col-sm-12">
+                                Is VAT deductable?<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <input type="checkbox" ng-model="asset.IsVatDeductible"
+                                   id="IsVatIncluded"
+                                   ng-change="getVattaxInfo();"
+                                   ng-true-value="1" ng-false-value="0"
+                                   checked="checked">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12" ng-if="asset.IsVatExemption==true" ng-disabled="disableIsVatDeduction">
+                    <div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12" ng-if="asset.IsTaxExemption==false">
+                    <div>
+                        <div class="form-inline">
+                            <label for="IsVatIncluded" class="col-md-4 col-sm-12">
+                                Is Tax deductable?<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <input type="checkbox" ng-model="asset.IsTaxDeductible"
+                                   id="IsVatIncluded"
+                                   ng-change="getVattaxInfo();"
+                                   ng-true-value="1" ng-false-value="0"
+                                   checked="checked">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12" ng-if="asset.IsTaxExemption==true" ng-disabled="disableIsVatDeduction">
+                    <div>
+
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="row">
+            <fieldset ng-disabled="true">
+                <!--<div class="col-lg-6 col-md-6 col-sm-12">
+            <div>
+                <div class="form-inline">
+                    <label for="VatAmount" class="col-md-4 col-sm-12">
+                        Vat Exemption ?
+                    </label>
+                    <label>
+                        <input type="radio" ng-model="asset.IsVatExemption" ng-value="true" ng-change="getVattaxInfo();">
+                        Yes
+                    </label>
+                    <label>
+                        <input type="radio" ng-model="asset.IsVatExemption" ng-value="false" ng-change="getVattaxInfo();">
+                        No
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div>
+                <div class="form-inline">
+                    <label for="VatAmount" class="col-md-4 col-sm-12">
+                        Tax Exemption ?
+                    </label>
+                    <label>
+                        <input type="radio" ng-model="asset.IsTaxExemption" ng-value="true" ng-change="getVattaxInfo();">
+                        Yes
+                    </label>
+                    <label>
+                        <input type="radio" ng-model="asset.IsTaxExemption" ng-value="false" ng-change="getVattaxInfo();">
+                        No
+                    </label>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-6 col-md-6 col-sm-12" ng-if="asset.IsVatExemption==true" ng-disabled="disableIsVatDeduction">
+            <div>
+                <div class="form-inline">
+                    <label for="IsVatIncluded" class="col-md-4 col-sm-12">
+                        Is VAT deductable?<i class="fa fa-asterisk required-icon"></i>
+                    </label>
+                    <input type="checkbox" ng-model="asset.IsVatDeductible"
+                           id="IsVatIncluded"
+                           ng-change="getVattaxInfo();"
+                           ng-true-value="1" ng-false-value="0"
+                           checked="checked">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12" ng-if="asset.IsVatExemption==false" ng-disabled="disableIsVatDeduction">
+            <div>
+
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12" ng-if="asset.IsTaxExemption==true">
+            <div>
+                <div class="form-inline">
+                    <label for="IsVatIncluded" class="col-md-4 col-sm-12">
+                        Is Tax deductable?<i class="fa fa-asterisk required-icon"></i>
+                    </label>
+                    <input type="checkbox" ng-model="asset.IsTaxDeductible"
+                           id="IsVatIncluded"
+                           ng-change="getVattaxInfo();"
+                           ng-true-value="1" ng-false-value="0"
+                           checked="checked">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12" ng-if="asset.IsTaxExemption==false" ng-disabled="disableIsVatDeduction">
+            <div>
+
+            </div>
+        </div>-->
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="manufacturer" class="col-md-4 col-sm-12">
+                                Vat category<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="manufacturer" ng-model="asset.VatCategory"
+                                    name="manufacturer"
+                                    ng-options="manufacturer.Value as manufacturer.Name for manufacturer in filters.vatcategoryList"
+                                    required-message="'Vat Category  field is required'" required disabled></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="manufacturer" class="col-md-4 col-sm-12">
+                                Tax category<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="manufacturer" ng-model="asset.TaxCategory"
+                                    name="manufacturer"
+                                    ng-options="manufacturer.Value as manufacturer.Name for manufacturer in filters.taxcategorylist"
+                                    required-message="'Tax Category  field is required'" required disabled></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="VatAmount" class="col-md-4 col-sm-12">
+                                Vat Amount
+                            </label>
+                            <input type="number" name="VatAmount"
+                                   ng-model="asset.VatAmountView"
+                                   class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="VatAmount"
+                                   ng-change="getVattaxInfo();"
+                                   validate-on="blur" placeholder="Vat Amount" readonly="readonly">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="VatAmount" class="col-md-4 col-sm-12">
+                                Tax Amount
+                            </label>
+                            <input type="number" name="VatAmount"
+                                   ng-model="asset.TaxAmountView"
+                                   class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="VatAmount"
+                                   ng-change="getVattaxInfo();"
+                                   validate-on="blur" placeholder="Tax Amount" readonly="readonly">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12" ng-if="asset.IsVatExemption==false">
+                    <div>
+                        <div class="form-inline">
+                            <label for="VatAmount" class="col-md-4 col-sm-12">
+                                Mushak-11 ?
+                            </label>
+                            <label>
+                                <input type="radio" ng-model="asset.Mushak11Radio" ng-value="true" ng-change="UpdateTotalPrice()">
+                                Yes
+                            </label>
+                            <!--<label for="VatAmount">
+                        Mushak-11
+                    </label>-->
+                            <input type="text" name="VatAmount"
+                                   ng-model="asset.Mushak11"
+                                   id="Mushak11Radio"
+                                   ng-change="getVattaxInfo();"
+                                   validate-on="blur" placeholder="mushak-11">
+                            <label>
+                                <input type="radio" ng-model="asset.Mushak11Radio" ng-value="false" ng-change="getVattaxInfo();">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12" ng-if="asset.IsVatExemption == true">
+                    <div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="PurchasePrice" class="col-md-4 col-sm-12">
+                                Unit Net Payable
+                            </label>
+                            <input type="number" tabindex="1" name="PurchasePrice"
+                                   ng-model="asset.UnitNetPayable" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="PurchasePrice" validate-on="blur" placeholder="unit net payable" readonly="readonly">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="PurchasePricevat" class="col-md-4 col-sm-12">
+                                Total Net Payable
+                            </label>
+                            <input type="number" tabindex="1" name="PurchasePricevat"
+                                   ng-model="asset.UnitTotalPayable" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="PurchasePricevat" validate-on="blur" placeholder="total net payable" readonly="readonly">
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+            <hr>
+        <div class="row">
+            <fieldset ng-disabled="true">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="purchasemethod" class="col-md-4 col-sm-12">
+                                Purchase Method <i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="purchasemethod" ng-model="asset.PurchaseMethod"
+                                    ng-disabled="disableFieldConditonally"
+                                    name="purchasemethod"
+                                    ng-change="ChangePurchaseMethod()"
+                                    ng-options="method.Value as method.Name for method in filters.purchaseMethodList"
+                                    required-message="'field is required'" required></select>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="IsCheque" class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="bankaccount" class="col-md-4 col-sm-12">
+                                Bank Account <i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="bankaccount" ng-model="asset.BankAccount"
+                                    ng-disabled="disableFieldConditonally"
+                                    name="bankaccount"
+                                    ng-options="bankAccount.Value as bankAccount.Name for bankAccount in filters.bankAccountList"></select>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="IsCheque" class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="ChequeNo" class="col-md-4 col-sm-12">
+                                Cheque Number <i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <input type="text" name="ChequeNo"
+                                   ng-disabled="disableFieldConditonally"
+                                   ng-model="asset.ChequeNo" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="ChequeNo" placeholder="Check Number">
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="IsCheque" class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="ChequeDate" class="col-md-4 col-sm-12">
+                                Cheque Date <i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <div class="dropdown input-group date width-asa">
+                                <p class="input-group">
+                                    <input readonly="readonly" class="form-control-asa full-width-asa" type="text" uib-datepicker-popup="{{format}}"
+                                           ng-disabled="disableFieldConditonally"
+                                           ng-model="asset.ChequeDate" is-open="popupChequeDate.opened" datepicker-options="dateOptionsWithAllDate" close-text="Close"
+                                           alt-input-formats="altInputFormats" />
+                                    <span class="input-group-addon input-group-addon-asa">
+                                        <button type="button" ng-click="openChequeDate()"><i class="fa fa-calendar"></i></button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+            <hr>
+        <div class="row">
+            <fieldset ng-disabled="true">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="LocationOfficeId" class="col-md-4 col-sm-12">
+                                Office Type <i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="OfficeTypeId" ng-model="asset.LocationOfficeType"
+                                    ng-disabled="disableFieldConditonally"
+                                    name="OfficeTypeId"
+                                    required
+                                    required-message="'Please select Office Type'"
+                                    validate-on="dirty"
+                                    ng-change="filterOfficeList(asset.LocationOfficeType)"
+                                    ng-options="OfficeType.Value as OfficeType.Name for OfficeType in filters.OfficeTypeList">
+                                <option value="">-- Select Office Type --</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="LocationOfficeId" class="col-md-4 col-sm-12">
+                                Location Office<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="LocationOfficeId" ng-model="asset.LocationOfficeId"
+                                    ng-disabled="disableFieldConditonally"
+                                    name="LocationOfficeId"
+                                    ng-change="changeLocationOffice()"
+                                    ng-options="office.Value as office.Name for office in BranchList" required></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="AssignedEmployee" class="col-md-4 col-sm-12">
+                                Assigned Employee
+                            </label>
+                            <select class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="AssignedEmployee" ng-model="asset.AssignedEmployee"
+                                    ng-disabled="disableFieldConditonally"
+                                    name="AssignedEmployee"
+                                    ng-options="isAsset.Value as isAsset.Name for isAsset in filters.employeeList">
+                                <option value="">-- Select Assigned Employee --</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="DepartmentId" class="col-md-4 col-sm-12">
+                                Location Department
+                            </label>
+                            <select class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="DepartmentId" ng-model="asset.DepartmentId"
+                                    ng-disabled="disableFieldConditonally"
+                                    name="DepartmentId"
+                                    ng-options="isAsset.Value as isAsset.Name for isAsset in filters.DepartmentList"></select>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+            <div class="row">
+                <!--<div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="expirydate" class="col-md-4 col-sm-12">
+                                Expiry Date<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <div class="dropdown input-group date width-asa">
+                                <p class="input-group">
+                                    <input readonly="readonly" class="form-control-asa full-width-asa" type="text" uib-datepicker-popup="{{format}}"
+                                           ng-model="asset.ExpiryDate" is-open="popupExpiryDate.opened" datepicker-options="expirydateOptions" close-text="Close"
+                                           ng-change="UpdateUsefulLife()" alt-input-formats="altInputFormats" required="required"/>
+                                    <span class="input-group-addon input-group-addon-asa">
+                                        <button type="button" ng-click="openExpiryDate()"><i class="fa fa-calendar"></i></button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+            <hr>
+        <div class="row">
+            <fieldset ng-disabled="true">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="purchaseorder" class="col-md-4 col-sm-12">
+                                PO/WO
+                            </label>
+                            <input type="text" tabindex="1" name="purchaseorder"
+                                   ng-disabled="disableFieldConditonally"
+                                   ng-model="asset.PurchaseOrderNumber" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="purchaseorder" validate-on="blur" placeholder="purchase order">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="purchaseorderdate" class="col-md-4 col-sm-12">
+                                PO/WO Date
+                            </label>
+                            <div class="dropdown input-group date width-asa">
+                                <p class="input-group">
+                                    <input readonly="readonly" class="form-control-asa full-width-asa" type="text" uib-datepicker-popup="{{format}}"
+                                           ng-disabled="disableFieldConditonally"
+                                           ng-model="asset.PurchaseOrderDate" is-open="popupPurchaseOrderDate.opened" datepicker-options="dateOptionsWithPreviousDate" close-text="Close"
+                                           alt-input-formats="altInputFormats" />
+                                    <span class="input-group-addon input-group-addon-asa">
+                                        <button type="button" ng-click="openPurchaseOrderDate()"><i class="fa fa-calendar"></i></button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="challanno" class="col-md-4 col-sm-12">
+                                Challan No
+                            </label>
+                            <input type="text" tabindex="1" name="purchaseorder"
+                                   ng-disabled="disableFieldConditonally"
+                                   ng-model="asset.ChalanNo" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="challanno" validate-on="blur" placeholder="challan no.">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="challandate" class="col-md-4 col-sm-12">
+                                Challan Date
+                            </label>
+                            <div class="dropdown input-group date width-asa">
+                                <p class="input-group">
+                                    <input readonly="readonly" class="form-control-asa full-width-asa" type="text" uib-datepicker-popup="{{format}}"
+                                           ng-disabled="disableFieldConditonally"
+                                           ng-model="asset.ChalanDate" is-open="popupChalanDate.opened" datepicker-options="dateOptionsWithFutureDate" close-text="Close"
+                                           alt-input-formats="altInputFormats" />
+                                    <span class="input-group-addon input-group-addon-asa">
+                                        <button type="button" ng-click="openChalanDate()"><i class="fa fa-calendar"></i></button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="invoiceno" class="col-md-4 col-sm-12">
+                                Invoice No.
+                            </label>
+                            <input type="text" tabindex="1" name="invoiceno"
+                                   ng-disabled="disableFieldConditonally"
+                                   ng-model="asset.InvoiceNumber" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="invoiceno" validate-on="blur" placeholder="invoice no">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="invoiceorderdate" class="col-md-4 col-sm-12">
+                                Invoice Date
+                            </label>
+                            <div class="dropdown input-group date width-asa">
+                                <p class="input-group">
+                                    <input readonly="readonly" ng-readonly="true" class="form-control-asa full-width-asa" type="text" uib-datepicker-popup="{{format}}"
+                                           ng-disabled="disableFieldConditonally"
+                                           ng-model="asset.InvoiceDate" is-open="popupInvoiceDate.opened" datepicker-options="dateOptionsInvoiceDate" close-text="Close"
+                                           alt-input-formats="altInputFormats" />
+                                    <span class="input-group-addon input-group-addon-asa">
+                                        <button type="button" ng-readonly="true"><i class="fa fa-calendar"></i></button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+            <hr>
+            <!--<div class="row">
+                <div class="col-md-6 col-lg-6 col-sm-6">
+                    <div class="form-group" ng-hide="hasFiles">
+                        <label for="AssetImage" class="h4 h4-asa">Image Of Asset</label>
+                        <input ng-change="docSizeBoolChecker()" type="file"
+                               onchange="angular.element(this).scope().assetImageUpload(event)"
+                               id="AssetImage" class="uploadFile" accept=".jpg,.jpeg,.pdf"
+                               ngf-select ngf-keep="true" ng-model="AssetImage" ngf-multiple="false">
+                        <label style="padding-top: 5px; color: blue;">Please select Document or Image type files (Max File Size 3MB) </label>
+                        <label ng-show="docError" style="padding-top: 5px; color: red;">Total File Size Exceeded! (Max File Size 3MB. Selected Total File Size {{ (fileSize/(1024*1024)) |number:2 }}MB!)</label>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-sm-6">
+                    <div class="form-group ">
+                        <table style="text-align: center">
+                            <thead>
+                                <tr>
+                                    <td> Name</td>
+                                    <td> Size (Byte)</td>
+                                    <td> Action</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="file in AssetImage">
+                                    <td>
+                                        {{file.name}}
+                                    </td>
+                                    <td>
+                                        {{file.size }}
+                                    </td>
+                                    <td>
+                                        <i class="fa fa-times asa-icon-DELETE" ng-click="removefile(file,AssetImage,'name')"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-6 col-lg-6 col-sm-6">
+                    <div class="form-group" ng-hide="hasFiles">
+                        <label for="invoicedoc" class="h4 h4-asa">Invoice</label>
+                        <input ng-change="docSizeBoolChecker()" type="file"
+                               onchange="angular.element(this).scope().invoiceImageUpload(event)"
+                               id="invoicedoc" class="uploadFile"
+                               accept=".jpg,.jpeg,.pdf" ngf-select ngf-keep="true"
+                               ng-model="invoiceDoc" ngf-multiple="true">
+                        <label style="padding-top: 5px; color: blue;">Please select Document or Image type files (Max File Size 3MB) </label>
+                        <label ng-show="docError" style="padding-top: 5px; color: red;">Total File Size Exceeded! (Max File Size 3MB. Selected Total File Size {{ (fileSize/(1024*1024)) |number:2 }}MB!)</label>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-sm-6">
+                    <div class="form-group ">
+                        <table style="text-align: center">
+                            <thead>
+                                <tr>
+                                    <td> Name</td>
+                                    <td> Size (Byte)</td>
+                                    <td> Action</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="file in invoiceDoc">
+                                    <td>
+                                        {{file.name}}
+                                    </td>
+                                    <td>
+                                        {{file.size }}
+                                    </td>
+                                    <td>
+                                        <i class="fa fa-times asa-icon-DELETE" ng-click="removefile(file,invoiceDoc,'name')"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-6 col-lg-6 col-sm-6">
+                    <div class="form-group" ng-hide="hasFiles">
+                        <label for="newDocs" class="h4 h4-asa">PO/WO/Others</label>
+                        <input ng-change="docSizeBoolChecker()"
+                               type="file" id="newDocs" class="uploadFile"
+                               onchange="angular.element(this).scope().poImageUpload(event)"
+                               accept=".jpg,.jpeg,.pdf"
+                               ngf-select ngf-keep="true"
+                               ng-model="PO" ngf-multiple="true">
+                        <label style="padding-top: 5px; color: blue;">Please select Document or Image type files (Max File Size 3MB) </label>
+                        <label ng-show="docError" style="padding-top: 5px; color: red;">Total File Size Exceeded! (Max File Size 3MB. Selected Total File Size {{ (fileSize/(1024*1024)) |number:2 }}MB!)</label>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-sm-6">
+                    <div class="form-group ">
+                        <table style="text-align: center">
+                            <thead>
+                                <tr>
+                                    <td> Name</td>
+                                    <td> Size (Byte)</td>
+                                    <td> Action</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="file in PO">
+                                    <td>
+                                        {{file.name}}
+                                    </td>
+                                    <td>
+                                        {{file.size }}
+                                    </td>
+                                    <td>
+                                        <i class="fa fa-times asa-icon-DELETE" ng-click="removefile(file,PO,'name')"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-6 col-lg-6 col-sm-6">
+                    <div class="form-group" ng-hide="hasFiles">
+                        <label for="newDocs" class="h4 h4-asa">Pay Cheque Image</label>
+                        <input ng-change="docSizeBoolChecker()" type="file" id="newDocs"
+                               onchange="angular.element(this).scope().paychequeImageUpload(event)"
+                               class="uploadFile" accept=".jpg,.jpeg,.pdf"
+                               ngf-select ngf-keep="true"
+                               ng-model="Paycheck" ngf-multiple="true">
+                        <label style="padding-top: 5px; color: blue;">Please select Document or Image type files (Max File Size 3MB) </label>
+                        <label ng-show="docError" style="padding-top: 5px; color: red;">Total File Size Exceeded! (Max File Size 3MB. Selected Total File Size {{ (fileSize/(1024*1024)) |number:2 }}MB!)</label>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-sm-6">
+                    <div class="form-group ">
+                        <table style="text-align: center">
+                            <thead>
+                                <tr>
+                                    <td> Name</td>
+                                    <td> Size (Byte)</td>
+                                    <td> Action</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="file in Paycheck">
+                                    <td>
+                                        {{file.name}}
+                                    </td>
+                                    <td>
+                                        {{file.size }}
+                                    </td>
+                                    <td>
+                                        <i class="fa fa-times asa-icon-DELETE" ng-click="removefile(file,Paycheck,'name')"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>-->
+            <hr>
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <label for="astatus" class="col-md-4 col-sm-12">
+                                Status <i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="astatus" ng-model="asset.Status"
+                                    name="astatus"
+                                    required
+                                    required-message="'Please select Status'"
+                                    ng-options="status.Value as status.Name for status in filters.statusList"
+                                    ng-change="assetStatusChange();">
+                                <option value="">-- Select Status --</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <label for="aflag" class="col-md-4 col-sm-12">
+                                Flag <i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                    id="aflag" ng-model="asset.SubStatus"
+                                    name="aflag"
+                                    required
+                                    required-message="'Please select sub status'"
+                                    ng-options="subStatus.Value as subStatus.Name for subStatus in filters.subStatusList">
+                                <option value="">-- Select Flag --</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="col-lg-6 col-md-6 col-sm-12">
+                    <div>
+                        <div class="form-inline">
+                            <label for="disposaldate" class="col-md-4 col-sm-12">
+                                Disposal Date
+                            </label>
+                            <div class="dropdown input-group date width-asa">
+                                <p class="input-group">
+                                    <input readonly="readonly" class="form-control-asa full-width-asa" type="text" uib-datepicker-popup="{{format}}"
+                                           ng-model="asset.DisposalDate" is-open="popupDisposalDate.opened" datepicker-options="dateOptions" close-text="Close"
+                                           alt-input-formats="altInputFormats" />
+                                    <span class="input-group-addon input-group-addon-asa">
+                                        <button type="button" ng-click="openDisposalDate()"><i class="fa fa-calendar"></i></button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+            <div ng-if="addAssetEntryForm.$valid === false && addAssetEntryForm.$dirty === true">
+                <p class="form-validation-message">Validation failed, on or more required field is missing</p>
+            </div>
+            <button type="submit" tabindex="100" class="btn btn-primary">
+                Submit
+            </button>
+        </form>
+    </div>
+</div>

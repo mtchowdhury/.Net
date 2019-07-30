@@ -1,0 +1,36 @@
+﻿<link href="~/Content/Login/login-page-styles.css" rel="stylesheet" />
+@using AMMS.Web.Models
+@model UserModel
+@{
+    ViewBag.Title = "Log in";
+}
+
+<div class="col-md-4"></div>
+<div class="panel panel-default col-md-4 panel-login-page">
+    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+    @Html.AntiForgeryToken()
+    <div class="login-page-panel-heading">
+        <a href="#"><img id="login-page-logo" src="~/Content/Images/asa_logo5.png" /></a>
+    </div>
+    <div class="panel-body">
+        @Html.ValidationSummary(true)
+        <div class="form-group form-group-no-margin">
+            @* @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })*@
+            <label for="UserId" class="conustrol-label login-userid-label">Employee ID</label>
+            <input type="text" class="form-control" id="UserId" name="UserId" value="" required="" title="Please enter you username" placeholder="ASA Employee ID">
+            <span class="help-block"></span>
+        </div>
+        <div class="form-group form-group-no-margin">
+            @*@Html.PasswordFor(m => m.Password, new { @class = "form-control" })*@
+            <label for="Password" class="control-label">Password</label>
+            <input type="password" class="form-control" id="Password" name="Password" value="" required="" title="Please enter your password">
+            <span class="help-block"></span>
+        </div>
+        <button type="submit" class="btn btn-asa btn-block">Log In</button>
+
+        @Html.ActionLink("Forget Password", "ForgotPasswordCheckForEmail")
+    </div>
+    }
+</div>
+<div class="col-md-4"></div>

@@ -1,0 +1,192 @@
+﻿<div id="general-journal-list" class="panel panel-default panel-primary" ng-controller="masterRollReportController">
+    <div class="panel-body">
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <span class="badge">Entities</span>
+                <div class="filter-form">
+                    
+                    <div class="form-group col-md-4 col-lg-4 col-sm-12">
+                        <div class="form-inline">
+                            <label for="division" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                Loan Product
+                            </label>
+                            <select id="division" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                    ng-model="filter.loanType" ng-options="zone.Value as zone.Name for zone in ProductList |orderBy:'Name'"                                   
+                            ></select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group col-md-4 col-lg-4 col-sm-12">
+                        <div class="form-inline">
+                            <label for="division" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                Meeting Day
+                            </label>
+                            <select id="division" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                    ng-model="filter.meetingDayId" ng-options="zone.Value as zone.Name for zone in MeetingDay |orderBy:'Name'"                                   
+                            ></select>
+                        </div>
+                    </div>
+                    
+                    
+
+                    <div class="form-group col-lg-4 col-md-4 col-sm-3">
+                        <p class="input-group">
+                            <label for="transactiondate" class="col-md-4 col-sm-12">
+                                From Date
+                            </label>
+                            <input readonly="readonly" class="form-control-asa" type="text" uib-datepicker-popup="{{format}}"
+                                   ng-model="filter.fromDate" is-open="popup.opened" datepicker-options="dateOptions" close-text="Close"
+                                   ng-change="getLoanOfficersByBranch();"
+                                   alt-input-formats="altInputFormats"/>
+                            <span class="input-group-addon input-group-addon-asa">
+                                <button type="button" ng-click="open()"><i class="fa fa-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="form-group col-lg-4 col-md-4 col-sm-3">
+                        <p class="input-group">
+                            <label for="transactiondate" class="col-md-4 col-sm-12">
+                                To Date
+                            </label>
+                            <input readonly="readonly" class="form-control-asa" type="text" uib-datepicker-popup="{{format}}"
+                                   ng-model="filter.toDate" is-open="popup.opened" datepicker-options="dateOptions" close-text="Close"
+                                   ng-change="getLoanOfficersByBranch();"
+                                   alt-input-formats="altInputFormats"/>
+                            <span class="input-group-addon input-group-addon-asa">
+                                <button type="button" ng-click="open()"><i class="fa fa-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="form-group col-md-4 col-lg-4 col-sm-12">
+                        <div class="form-inline">
+                            <label for="division" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                Division
+                            </label>
+                            <select id="division" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                    ng-model="filter.Zone" ng-options="zone.Value as zone.Name for zone in filters.Zones |orderBy:'Name'"
+                                    ng-disabled="user.Role === rootLevel.BM.toString()||user.Role === rootLevel.RM.toString()||user.Role === rootLevel.DM.toString()||user.Role === rootLevel.ZM.toString()"
+                                    ng-change="getDistrictsByZoneId()"></select>
+                        </div>
+                    </div>
+                    <div class="form-group  col-md-4 col-lg-4 col-sm-12">
+                        <div class="form-inline">
+                            <label for="district" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                District
+                            </label>
+                            <select id="district" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                    ng-model="filter.District" ng-options="d.Value as d.Name for d in filters.Districts |orderBy:'Name'"
+                                    ng-disabled="user.Role === rootLevel.BM.toString()||user.Role === rootLevel.RM.toString()||user.Role === rootLevel.DM.toString()"
+                                    ng-change="getRegionsByDistrictId()"></select>
+                        </div>
+                    </div>
+                    <div class="form-group  col-md-4 col-lg-4 col-sm-12">
+                        <div class="form-inline">
+                            <label for="region" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                Region
+                            </label>
+                            <select id="region" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                    ng-model="filter.Region" ng-options="m.Value as m.Name for m in filters.Regions |orderBy:'Name'"
+                                    ng-disabled="user.Role === rootLevel.BM.toString()||user.Role === rootLevel.RM.toString()"
+                                    ng-change="getBranchesByRegionId()"></select>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4 col-lg-4 col-sm-12">
+                        <div class="form-inline">
+                            <label for="branch" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                Branch
+                            </label>
+                            <select id="branch" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                    ng-disabled="user.Role === rootLevel.BM.toString()"
+                                    ng-model="filter.BranchId" ng-options="m.Value as m.Name for m in filters.Branches |orderBy:'Name'"></select>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4 col-lg-4 col-sm-12">
+                        <div class="form-inline">
+                            <label for="loanofficer" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                Loan Officer
+                            </label>
+                            <select id="loanofficer" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12" name="loanofficer"
+                                    ng-model="filter.LoanOfficer" ng-options="m.Value as m.Name for m in filters.LoanOfficers" ng-change="getGroupsByLoanOfficers(filter.LoanOfficer);"></select>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3 col-lg-4 col-sm-12">
+                        <div class="form-inline">
+                            <label for="group" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                Group
+                            </label>
+                            <select id="group" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12" name="group"
+                                    ng-model="filter.Group" ng-options="m.Value as m.Name for m in filters.Groups" ng-change="getMembersByGroup(filter.LoanOfficer, filter.Group);"></select>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4 col-lg-4 col-sm-12">
+                        <div class="form-inline">
+                            <label for="member" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                Member
+                            </label>
+                            <select id="member" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12" name="member"
+                                    ng-model="filter.Member" ng-options="m.Value as m.Name for m in filters.Members"></select>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4 col-lg-4 col-sm-12">
+                        <div class="form-inline">
+                            <label for="member" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                Summarized By
+                            </label>
+                            <select id="member" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12" name="member"
+                                    ng-model="filter.groupBy" ng-options="m.Value as m.Name for m in filters.GroupByList"></select>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12 col-lg-12 col-sm-12">
+                        <div class="form-inline ">
+                            <button class="btn-default btn-primary pull-right" ng-click="exportTransactionSummaryData();">Export</button>
+                            <button class="btn-default btn-primary pull-right" ng-click="getTransactionSummaryData();" style="margin-right: 10px;">View</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+        <div style="margin-top: 10px" class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 report-col">
+                <ul id="report-tab" ng-if="transactionSummaryData" class="nav nav-tabs" role="tablist">
+                    <li ng-repeat="tab in transactionSummaryData" role="presentation" ng-class="getActiveTab($index)">
+                        <a href="#{{tab.ReportName}}" aria-controls="{{tab.ReportName}}" role="tab" data-toggle="tab">{{tab.ReportLabel}}</a>
+                    </li>
+                </ul>
+
+                <div ng-if="transactionSummaryData" class="tab-content report-tab-content">
+                    <div ng-repeat="tab in transactionSummaryData" role="tabpanel" class="tab-pane" ng-class="getActiveTab($index)" id="{{tab.ReportName}}">
+                        <table class="table-asa tbody tr td table-report-asa" datatable="ng" dt-instance="dtInstance" dt-options="dtOptions" dt-column-defs="dtColumnDefs" data-page-length='{{setPageLength(tab.Rows)}}'>
+                            <thead>
+                                <tr ng-repeat="layer in tab.Layers">
+                                    <th ng-repeat="column in layer.Columns" ng-style="setHeaderStyle(column.ColumnSpan, column.RowSpan, $parent.$index)" colspan="{{column.ColumnSpan}}" rowspan="{{column.RowSpan}}">{{column.ColumnName}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="row in tab.Rows" ng-class="styleTotalRow(row)">
+
+                                    <td ng-repeat="cell in row track by $index">
+                                        {{formatCellValue(cell, tab.Columns[$index])}}
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+

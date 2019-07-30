@@ -1,0 +1,183 @@
+﻿<div class="panel panel-default panel-primary" ng-controller="moduleAdminEditController">
+    <div class="panel-heading panel-title">
+        View Module
+    </div>
+
+    <fieldset ng-disabled="true">
+
+        <div class="panel-body panel-body-asa font-asa-11">
+            <form angular-validator-submit="editModule()" name="moduleEditForm" class="form-horizontal" novalidate angular-validator>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+
+                                <div class="form-inline">
+                                    <label for="name" class="col-md-4 col-sm-12">
+                                        Name<i class="fa fa-asterisk required-icon"></i>
+                                    </label>
+                                    <input type="text" tabindex="2" name="name"
+                                           ng-model="module.Name" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                           validator="moduleNameValidator(module.Name) === true"
+                                           invalid-message="moduleNameValidator(module.Name)"
+                                           id="name" placeholder="Name"
+                                           required
+                                           validate-on="dirty">
+                                </div>
+
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-inline">
+                                    <label for="id" class="col-md-4 col-sm-12">
+                                        Module Id<i class="fa fa-asterisk required-icon"></i>
+                                    </label>
+                                    <input type="number" tabindex="2" name="id"
+                                           ng-model="module.ModuleId" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                           invalid-message="Id is Required"
+                                           id="id" placeholder="Id"
+                                           required
+                                           validate-on="dirty">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-inline">
+                                    <label for="displayname" class="col-md-4 col-sm-12">
+                                        Display Name <i class="fa fa-asterisk required-icon"></i>
+                                    </label>
+                                    <input type="text" tabindex="3" name="displayname"
+                                           ng-model="module.DisplayName" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                           validator="moduleDisplayNameValidator(module.DisplayName) === true"
+                                           invalid-message="moduleDisplayNameValidator(module.DisplayName)"
+                                           id="displayname" placeholder="Display Name"
+                                           required
+                                           validate-on="dirty">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-inline">
+                                    <label for="iconclass" class="col-md-4 col-sm-12">
+                                        Icon Class <i class="fa fa-asterisk required-icon"></i>
+                                    </label>
+                                    <input type="text" tabindex="3" name="iconclass"
+                                           ng-model="module.IconClass" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                           id="iconclass" placeholder="Icon Class"
+                                           required
+                                           invalid-message="Display Name required"
+                                           validate-on="dirty">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-inline">
+                                    <label for="parentname" class="col-md-4 col-sm-12">
+                                        Parent Name
+                                    </label>
+                                    <select ng-if="module.IsRoot === true" class="width-asa form-control form-control-asa col-md-8 col-sm-12" ng-model="module.ParentName">
+                                        <option value="" disabled="disabled">--Select Parent--</option>
+                                    </select>
+                                    <select ng-if="module.IsRoot===false"
+                                            tabindex="3" name="parentname"
+                                            ng-model="module.ParentName"
+                                            class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                            ng-options="module.Name as module.Name for module in moduleListParent | filter : filterParentName()"
+                                            id="parentname" placeholder="Parent Name"
+                                            invalid-message="Parent Name required"
+                                            validate-on="dirty"
+                                            ng-change="filterModules(module.ParentName)">
+                                        <option value="">--Select Parent--</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-inline">
+                                    <label for="sortorder" class="col-md-4 col-sm-12">
+                                        Sort Order <i class="fa fa-asterisk required-icon"></i>
+                                    </label>
+                                    <input type="number" tabindex="3" name="sortorder"
+                                           ng-model="module.SortOrder" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                           id="sortorder" placeholder="Sort Order"
+                                           required
+                                           invalid-message="Sort Order required"
+                                           validate-on="dirty">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-inline">
+                                    <label for="level" class="col-md-4 col-sm-12">
+                                        Level <i class="fa fa-asterisk required-icon"></i>
+                                    </label>
+                                    <input type="number" tabindex="3" name="level"
+                                           ng-model="module.Level" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                           id="level" placeholder="Level"
+                                           required
+                                           invalid-message="Level required"
+                                           validate-on="dirty">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-inline">
+                                    <label for="tooltip" class="col-md-4 col-sm-12">
+                                        Tooltip <i class="fa fa-asterisk required-icon"></i>
+                                    </label>
+                                    <input type="text" tabindex="3" name="tooltip"
+                                           ng-model="module.ToolTip" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                           id="tooltip" placeholder="Tooltip"
+                                           required
+                                           invalid-message="Sort Order required"
+                                           validate-on="dirty">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-inline">
+                                    <label class="col-md-4 col-sm-12">
+                                        Assigned Roles
+                                    </label>
+                                    <div class="multiselect-parent-asa" ng-dropdown-multiselect="" extra-settings="dropdownSetting"
+                                         options="roleList" selected-model="selectedRoles" checkboxes="true"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-inline" style="margin-top: 10px;">
+                                    <label for="root" class="col-md-4 col-sm-12">
+                                        Root?
+                                    </label>
+                                    <input id="root" type="checkbox" ng-model="module.IsRoot" tabindex="4" ng-true-value="true" ng-false-value="false">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 ">
+                                <div class="form-inline" style="margin-top: 10px;">
+                                    <label for="haschildren" class="col-md-4 col-sm-12">
+                                        Has Children?
+                                    </label>
+                                    <input id="haschildren" type="checkbox" ng-model="module.HasChildren" tabindex="4" ng-true-value="true" ng-false-value="false">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-inline" style="margin-top: 10px;">
+                                    <label for="active" class="col-md-4 col-sm-12">
+                                        Active?
+                                    </label>
+                                    <input id="active" type="checkbox" ng-model="module.IsActive" tabindex="4">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div ng-if="module.HasChildren === true" class="form-inline">
+                                    <div class="form-inline">
+                                        <label class="col-md-4 col-sm-12">
+                                            Modules
+                                        </label>
+                                        <div class="multiselect-parent-asa" ng-dropdown-multiselect="" extra-settings="dropdownSetting"
+                                             options="moduleList" selected-model="selectedModules" checkboxes="true" ng-required="required"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </fieldset>
+    
+</div>

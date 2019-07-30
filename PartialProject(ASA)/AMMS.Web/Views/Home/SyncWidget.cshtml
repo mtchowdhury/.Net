@@ -1,0 +1,43 @@
+﻿<div style="margin-top: 20px;" class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-offset-3 col-md-offset-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 style="text-align: center;">Database Synchronization Widget</h4>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label>Sync Direction: </label>
+                        <select id="direction" style="margin-bottom: 5px; width: 120px;" class="form-control">
+                            <option value="Upload">Upload</option>
+                            <option value="Download">Download</option>
+                        </select>
+                    </div>
+                </div>
+                <button id="btn-sync" class="btn btn-block btn-success" onclick="syncService.syncAll()">START</button>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <span id="start-time" class="badge">00:00:00</span>
+                        Start Time:
+                    </li>
+                    <li class="list-group-item">
+                        <span id="completed-time" class="badge">00:00:00</span>
+                        Completed Time:
+                    </li>
+                    <li class="list-group-item">
+                        <span id="uploaded" class="badge">0</span>
+                        Uploaded:
+                    </li>
+                    <li class="list-group-item">
+                        <span id="downloaded" class="badge">0</span>
+                        Downloaded:
+                    </li>
+                    <li class="list-group-item">
+                        <span id="message" class="badge">Ready</span>
+                        Message:
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

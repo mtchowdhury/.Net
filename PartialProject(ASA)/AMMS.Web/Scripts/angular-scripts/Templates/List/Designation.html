@@ -1,0 +1,66 @@
+﻿<div class="row" ng-controller="designationListController">
+    <div class="col-md-12 panel panel-default panel-primary">
+        <div class="col-lg-12 panel-body">
+            <span ng-repeat="command in commandList">
+                <span ng-if="command.IsGeneral === true">
+                    <button ng-click="(command.HasView) ? openCommandTab(command, tab.id, 'Designation',{}):((command.DisplayName == 'Refresh')? Init(): exportData())">
+                        <span>{{command.DisplayName}}</span>
+                    </button>
+
+                </span>
+            </span>
+        </div>
+
+        <div class="col-lg-12 panel-body font-asa-12">
+            <table style="width: 98%" datatable="ng" dt-options="designationListController.dtOptions" dt-column-defs="designationListController.dtColumnDefs"
+                   class="table table-striped table-bordered table-hover table-asa">
+                <thead>
+                    <tr>
+                        <th ng-if="hasNonGeneralCommands">Actions</th>
+                        <th>Name</th>
+                        <th>Short Name</th>
+                        <th>Bangla Name</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Status</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="designation in designationList">
+                        <td ng-if="hasNonGeneralCommands">
+                            <span ng-repeat="command in commandList">
+                                <span ng-if="command.IsGeneral !== true" ng-click="(command.HasView) ? openCommandTab(command, tab.id, 'designation',{'editDesignationId':designation.Id}): handleNonGeneralActions(command.CommandName, designation)">
+                                    <i class="{{command.IconClass}} asa-icon-{{command.CommandName}}" title="{{command.CommandName}}"></i>
+                                </span>
+                            </span>
+                        </td>
+                        <td>{{designation.Name}}</td>
+                        <td>{{designation.ShortName}}</td>
+                        <td>{{designation.BanglaName}}</td>
+                        <td>{{designation.Startdate}}</td>
+                        <td>{{designation.EndDate}}</td>
+                        <td class="danger" ng-if="designation.Status == 0">
+                            Inactive
+                        </td>
+                        
+                        <td class="success" ng-if="designation.Status == 1">
+                            Active
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="deleteDesignation()"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

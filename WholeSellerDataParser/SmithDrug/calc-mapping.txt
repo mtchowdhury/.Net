@@ -1,0 +1,46 @@
+,[FacAcct] = 0967
+,[VeItemnr] = 751727
+,[Idate] = 04052019
+,[VerNr] = 33010
+,[ChgNum] = NULL
+,[Conversion] = 0000000001
+,[Batch] = current date
+,[WholeSaler] = hard coded name of the whoesaler
+,[WhCont] = REPLACE ALL wh_cont WITH STRTRAN(contract,'-','') FOR sale_cr<>'O'
+,[MatchCoid] = ?
+,[MatchType] = ?
+,[ShipQty] = [cqty]
+,[Cost] = [ccost]
+,[TotCost] = [ctotal]
+,[Wac] = [cwac]
+,[ShipDate] = [sdate]
+,[InvDate] = [idate]
+,[RecDate] = [idate]
+,[MmId] = ?
+
+m.wrpid = 36
+replace ALL wrpid WITH m.wrpid, ;
+            wholesaler with 'SmithDrug', ;
+            whid WITH 118
+			
+,[Whid] = 118
+,[WrPid] = 36
+,[ItId] = ?
+
+REPLACE ALL BATCH WITH btime, ;
+			sale_crw WITH sale_cr, ;
+			sale_crsrc WITH 'O'
+			
+,[SaleCrw] = [sale_cr]
+,[SaleCrsrc] = O
+,[Extra] = ?
+
+
+coid >>  // xw_contract is [CPS].[dbo].[xrefWholesalerContract].xw_contract   // m.wh_cont is [Analytics].[wholeseller].[WholeSaleData].wh_cont  // (holding is [Analytics].[wholeseller].[WholeSaleData])
+LOCATE FOR LEFT(xw_contract,15)=m.wh_cont AND BETWEEN(holding.rec_date,co_start,co_end) AND (ISNULL(xw_end) OR xw_end>holding.rec_date)
+
+  select * from 
+   [CPS].[dbo].[xrefWholesalerContract] xw
+   join [Analytics].[wholeseller].[WholeSaleData] wh on Replace(wh.WhCont,'-','') =Left(xw.xw_contract,15) 
+
+no results yielded

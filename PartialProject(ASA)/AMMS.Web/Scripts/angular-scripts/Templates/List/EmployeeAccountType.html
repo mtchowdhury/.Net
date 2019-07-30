@@ -1,0 +1,60 @@
+﻿<div class="container">
+    <div class="row" ng-controller="employeeAccountTypeListController">
+        {{tstVariable}}
+        <div class="col-md-12 panel panel-default panel-primary ">
+            <div class="col-lg-12 panel-body">
+                <span ng-repeat="command in commandList">
+                    <span ng-if="command.IsGeneral === true">
+                        <button ng-click="(command.HasView)? openCommandTab(command, tab.id, 'employeeAccountType',{}) : ((command.DisplayName == 'Refresh')? init() : exportData())"><span>{{command.CommandName}}</span></button>
+                    </span>
+                </span>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 panel-body font-asa-12 table-test">
+                <table datatable="ng" dt-options="employeeAccountTypeListController.dtOptions" dt-column-defs="employeeAccountTypeListController.dtColumnDefs"
+                       class="table table-striped table-bordered table-hover table-asa">
+                    <thead>
+                        <tr>
+                            <th ng-if="hasNonGeneralCommands">Actions</th>
+                            <th>Account Type Id</th>
+                            <th>Account Type Name</th>
+                            <th>Category</th>
+                            <th>Recurring in payroll</th>
+                            <th>Recurring in salary structure</th>
+                            <th>Effective date from</th>
+                            <th>Effective date to</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="employeeAccountType in employeeAccountTypeList | orderBy : 'AccountTypeName'">
+                            <td>
+                                <span ng-repeat="command in commandList">
+                                    <span ng-if="command.IsGeneral !== true" ng-click="(command.HasView) ? openCommandTab(command, tab.id, 'employeeAccountType',{'editemployeeAccountType':employeeAccountType}): handleNonGeneralActions(command.CommandName, employeeAccountType)">
+                                        <i class="{{command.IconClass}} asa-icon-{{command.CommandName}}" title="{{command.ToolTip}}"></i>
+                                    </span>
+                                </span>
+                            </td>
+                            <td>{{employeeAccountType.Id}}</td>
+                            <td>{{employeeAccountType.AccountTypeName}}</td>
+                            <td ng-if="employeeAccountType.Category===1">Loan</td>
+                            <td ng-if="employeeAccountType.Category===2">Fund</td>
+                            <td ng-if="employeeAccountType.Category===3">Savings</td>
+                            <td ng-if="employeeAccountType.Category===4">Security</td>
+                            <td ng-if="employeeAccountType.Category===5">Punishment</td>
+                            <td ng-if="employeeAccountType.Category===6">Allowance</td>
+                            <td ng-if="employeeAccountType.Category===7">Bill</td>
+                            <td ng-if="employeeAccountType.Category===8">Advance</td>
+                            <td ng-if="employeeAccountType.RecurringInPayroll===true">Yes</td>
+                            <td ng-if="employeeAccountType.RecurringInPayroll===false">No</td>
+                            <td ng-if="employeeAccountType.RecurringInSalaryStructure===true">Yes</td>
+                            <td ng-if="employeeAccountType.RecurringInSalaryStructure===false">No</td>
+                            <td>{{employeeAccountType.EffectiveDateFrom}}</td>
+                            <td>{{employeeAccountType.EffectiveDateTo}}</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

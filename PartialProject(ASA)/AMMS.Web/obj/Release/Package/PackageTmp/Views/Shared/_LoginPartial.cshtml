@@ -1,0 +1,67 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+        <ul class="nav navbar-nav navbar-right">
+            <div class="trans localization-div off" id="container" onclick="onContainerClick(this)" ng-click="changeLanguage()">
+
+                <div class="switch" id="switch">
+                </div>
+                <div class="label left">
+                    বাংলা
+                </div>
+                <div class="label right">
+                    English
+                </div>
+            </div>
+        </ul>
+        <ul class="nav navbar-nav navbar-right navbar-asa">
+            <li ng-if="IsHeadOffice==false" class="navbar-label-name"> Working-Day:</li>
+            <li ng-if="IsHeadOffice==false" class="navbar-date-name" ng-controller="workingdayController">
+                <span>
+                    <a class="working-day-text-open" ng-if="isOpened==true" ng-click="closeDate()" title="Working Day">
+                        {{displayDate}}
+                    </a>
+                    <a class="working-day-text-close" ng-if="isOpened==false" title="Day Closed">
+                        {{displayDate}}
+                    </a>
+                    <a ng-if="isOpened==false && showOpenButton == true" ng-click="openDate()">
+                        <i class="fa fa-sun-o icon-open-day" title="Open Day" aria-hidden="true"></i>
+                    </a>
+                </span>
+            </li>
+            <li></li>
+            <li class="navbar-label-name"> User: </li>
+            <li class="navbar-user-name">@User.Identity.GetUserName()</li>
+            <li id="notification_li" ng-controller="notificationController">
+                <a ng-click="notificationClicked()" href="#" id="notificationLink"><span class="fa fa-bell-o" title="Notifications" aria-hidden="true"> </span></a>
+                <span ng-show="notificationCount>0" id="notification_count">{{notificationCount}}</span>
+                <div id="notificationContainer">
+                    <div id="notificationTitle">Notifications</div>
+                    <div id="notificationsBody" class="notifications">
+                        <div style="cursor:pointer"
+                             ng-click="OpenNotificationTab(notification)"
+                             ng-repeat="notification in notifications" class="{{notification.Class}}">
+                            <span ng-if="notification.SeenStatus" style="font-family: wingdings; font-size: 200%;"><i class="fa fa-check" aria-hidden="true"></i></span>
+                            <span ng-if="!notification.SeenStatus" style="font-family: wingdings; font-size: 200%;padding-left: 27px">    </span>
+
+                            <strong>{{notification.Class}}</strong>
+                            <span>{{notification.Message}}</span>
+                        </div>
+                    </div>
+                </div>
+
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()" title="Log out">Logout</a></li>
+            @*<li>@Html.ActionLink("About ASA", "About", "Account", null, new { id = "loginLink" })</li>*@
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        @*<li>@Html.ActionLink("About ASA", "About", "Account", null, new { id = "loginLink" })</li>*@
+    </ul>
+}

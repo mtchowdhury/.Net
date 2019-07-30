@@ -1,0 +1,316 @@
+﻿<div class="panel panel-default panel-primary" ng-controller="assetCategoryEditController">
+    <div class="panel-heading panel-title">
+        Edit Asset Category
+    </div>
+    <div class="panel-body font-asa-11">
+        <form angular-validator-submit="editAssetCategory()" name="editAssetCategoryForm" class="form-horizontal" novalidate angular-validator>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <h6><i class="fa fa-asterisk required-icon"></i> Required Filed</h6>
+                    <h4 class="h4-asa">
+                        General Information
+                    </h4>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <label for="cname" class="col-md-4 col-sm-12">
+                                    Category Name<i class="fa fa-asterisk required-icon"></i>
+                                </label>
+                                <input type="text"
+                                       maxlength="100"
+                                       ng-model="category.Name"
+                                       class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                       id="cname"
+                                       name="cname"
+                                       required
+                                       required-message="'Category Name is required'">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <label for="csname" class="col-md-4 col-sm-12">
+                                    Category Short Name<i class="fa fa-asterisk required-icon"></i>
+                                </label>
+                                <input type="text"
+                                       maxlength="5"
+                                       ng-model="category.ShortName"
+                                       class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                       id="csname"
+                                       name="csname"
+                                       style="text-transform: uppercase"
+                                       required
+                                       required-message="'Category Short Name is required'">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <label for="atype" class="col-md-4 col-sm-12">
+                                    Asset Type<i class="fa fa-asterisk required-icon"></i>
+                                </label>
+                                <select class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                        id="atype" ng-model="category.AssetType"
+                                        name="atype"
+                                        ng-change="productCategoryChange();initinstamont()"
+                                        required-message="'Please select a Product Category'"
+                                        ng-options="type.Value as type.Name for type in assetTypes" required>
+                                    <option value="">-- Select Asset Type --</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <label class="col-md-4 col-sm-12">
+                                    Permitted Office Level<i class="fa fa-asterisk required-icon"></i>
+                                </label>
+                                <div ng-dropdown-multiselect="true" extra-settings="dropdownSetting" class="multiselect-button-loan"
+                                     options="permittedOfficeLevels" selected-model="category.PermittedOfficeLevelsId" checkboxes="true"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <label for="cminulife" class="col-md-4 col-sm-12">
+                                    Min Useful Life(yrs)<i class="fa fa-asterisk required-icon"></i>
+                                </label>
+                                <input type="number"
+                                       maxlength="3"
+                                       ng-model="category.MinimumUsefulLife"
+                                       class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                       min="0"
+                                       onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                                       validator="minimumUsefulLifeValidator()=== true"
+                                       invalid-message="minimumUsefulLifeValidator()"
+                                       validate-on="dirty"
+                                       id="cminulife"
+                                       name="cminulife"
+                                       required
+                                       required-message="'Minimum Useful Life is required'">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <label for="cmaxulife" class="col-md-4 col-sm-12">
+                                    Max Useful Life(yrs)<i class="fa fa-asterisk required-icon"></i>
+                                </label>
+                                <input type="number"
+                                       maxlength="3"
+                                       min="0"
+                                        onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                                       ng-model="category.MaximumUsefulLife"
+                                       class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                       validator="maximumUsefulLifeValidator() === true"
+                                       invalid-message="maximumUsefulLifeValidator()"
+                                       validate-on="dirty"
+                                       id="cmaxulife"
+                                       name="cmaxulife"
+                                       required
+                                       required-message="'Maximum Useful Life is required'">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <label for="cdefulife" class="col-md-4 col-sm-12">
+                                    Default Useful Life(yrs) <i class="fa fa-asterisk required-icon"></i>
+                                </label>
+                                <input type="number"
+                                       maxlength="3"
+                                       min="0"
+                                       onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                                       ng-model="category.DefaultUsefulLife"
+                                       class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                       validator="defaultUsefulLifeValidator() === true"
+                                       invalid-message="defaultUsefulLifeValidator()"
+                                       validate-on="dirty"
+                                       id="cdefulife"
+                                       name="cdefulife"
+                                       required
+                                       required-message="'Default Useful Life is required'">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <label for="astatus" class="col-md-4 col-sm-12">
+                                    Status <i class="fa fa-asterisk required-icon"></i>
+                                </label>
+                                <select class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                        id="astatus" ng-model="category.Status"
+                                        name="astatus"
+                                        required-message="'Please select a Product Category'"
+                                        ng-options="status.Value as status.Name for status in statusList" required>
+                                    <option value="">-- Select Status --</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-12 col-lg-12" style="margin-left: -11px">
+                        <h4 class="h4-asa">
+                            Depreciation And Useful Life Setup
+                        </h4>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <table class="table-asa tbody tr td table-asa thead tr th">
+                                    <thead>
+                                        <tr>
+
+                                            <th>Effective From<i class="fa fa-asterisk required-icon"></i></th>
+                                            <th>Effective To</th>
+                                            <th>Depreciation Method<i class="fa fa-asterisk required-icon"></i></th>
+                                            <th>Minimum Rate<i class="fa fa-asterisk required-icon"></i></th>
+                                            <th>Default Rate <i class="fa fa-asterisk required-icon"></i></th>
+                                            <th>Maximum Rate <i class="fa fa-asterisk required-icon"></i></th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="depreciation in category.CategoryDepreciations">
+
+                                            <td>
+                                                <!--<div class="dropdown input-group date width-asa">
+                                                    <a class="dropdown-toggle" id="eDatef" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                                        <div class="input-group date-input-group">
+                                                            <input type="text"
+                                                                   style="width: 100px"
+                                                                   required
+                                                                   date-time-input="DD-MM-YYYY"
+                                                                   class="form-control-asa "
+                                                                   ng-model="depreciation.EffectiveDateFrom"
+                                                                   validate-on="dirty"
+                                                                   disabled="disabled"
+                                                                   required-message="'Effective From date field is required'">
+                                                            <span class="input-group-addon input-group-addon-asa"><i class="fa fa-calendar"></i></span>
+                                                        </div>
+                                                    </a>
+                                                    <ul ng-hide="(category.CategoryDepreciations.length>1 && $index===0) ||depreciation.disarmed" class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                        <datetimepicker ng-model="depreciation.EffectiveDateFrom" data-datetimepicker-config="{ startView:'day', minView:'day',dropdownSelector: '#eDatef' }"
+                                                                        data-before-render="beforeDateRender($dates)"/>
+                                                    </ul>
+                                                </div>-->
+                                                <div class="dropdown input-group date width-asa">
+                                                    <p class="input-group">
+                                                        <input readonly="readonly" class="form-control-asa full-width-asa" type="text" uib-datepicker-popup="{{format}}"
+                                                               ng-change="effectiveDateFromChanged($index)"
+                                                               ng-model="depreciation.EffectiveDateFrom" is-open="popupEffectiveDateFrom[$index].opened" datepicker-options="dateOptionsEffectiveDateFrom" close-text="Close"
+                                                               alt-input-formats="altInputFormats" />
+                                                        <span class="input-group-addon input-group-addon-asa">
+                                                            <button type="button" ng-click="openEffectiveDateFrom($index);"><i class="fa fa-calendar"></i></button>
+                                                        </span>
+                                                    </p>
+                                                </div>
+
+                                            </td>
+                                            <td>
+                                                <div class="dropdown input-group date width-asa">
+                                                    <a class="dropdown-toggle" id="eDatet" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                                        <div class="input-group date-input-group">
+                                                            <input type="text"
+                                                                   style="width: 100px"
+                                                                   date-time-input="YYYY-MM-DD"
+                                                                   class="form-control-asa "
+                                                                   ng-model="depreciation.EffectiveDateTo"
+                                                                   ng-disabled="true"
+                                                                   validate-on="dirty">
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <select id="depMethod{{$index}}" ng-model="depreciation.DepreciationMethod"
+                                                        class="form-control form-control-asa form-control-asa-select-box-padding"
+                                                        required-message="'Depreciation method is required'" required
+                                                        validate-on="ditry"
+                                                        ng-disabled="depreciation.disarmed"
+                                                        ng-change="disabler($index)"
+                                                        ng-options="method.Value as method.Name for method in depriciationMethods">
+                                                    <option value="">Select</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="number"
+                                                       name="{{$index}}minDep"
+                                                       required-message="'Value is required'" required
+                                                       validate-on="ditry"
+                                                       ng-disabled="depreciation.disabler"
+                                                       min="0"
+                                                       class="form-control form-control-asa" ng-model="depreciation.MinDepreciationRate" style="width: 50px"
+                                                       onkeypress="return event.charCode >= 48 && event.charCode <= 57"/>
+                                                <span id="minDep{{$index}}" style="color:red"></span>
+                                            </td>
+                                            <td>
+                                                <input type="number"
+                                                       name="{{$index}}defDep"
+                                                       required-message="'Value is required'" required
+                                                       validate-on="ditry"
+                                                       ng-disabled="depreciation.disabler"
+                                                       min="0"
+                                                       class="form-control form-control-asa" ng-model="depreciation.DefaultDepreciationRate" style="width: 50px"
+                                                       onkeypress="return event.charCode >= 48 && event.charCode <= 57"/>
+                                                <span id="defDep{{$index}}" style="color:red"></span>
+                                            </td>
+
+                                            <td>
+                                                <input type="number"
+                                                       name="{{$index}}maxDep"
+                                                      required-message="'Value is required'" required
+                                                       validate-on="ditry"
+                                                       ng-disabled="depreciation.disabler"
+                                                       min="0"
+                                                       class="form-control form-control-asa" ng-model="depreciation.MaxDepreciationRate" style="width: 50px"
+                                                       onkeypress="return event.charCode >= 48 && event.charCode <= 57"/>
+                                                <span id="maxDep{{$index}}" style="color:red"></span>
+                                            </td>
+                                            <td>
+                                                <i ng-hide="depreciation.disarmed" class="fa fa-times asa-icon-DELETE" ng-click="removeDepriciationRow($index)"></i>
+                                            </td>
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h4><span class="pull-right"><label class="font-asa-12"></label><i class="fa fa-plus-circle add-remove-loan-field" aria-hidden="true" ng-click="addDepriciationRow()"></i></span></h4>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div ng-if="editAssetCategoryForm.$valid === false && editAssetCategoryForm.$dirty === true">
+                            <p class="form-validation-message">Validation failed, on or more required field is missing</p>
+                        </div>
+                        <button type="submit" tabindex="100" class="btn btn-primary">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

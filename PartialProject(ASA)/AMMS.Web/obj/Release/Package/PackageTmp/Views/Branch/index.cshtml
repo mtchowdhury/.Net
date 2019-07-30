@@ -1,0 +1,51 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width"/>
+    <script type="text/javascript" src="https://rawgit.com/ricmoo/aes-js/master/index.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/2.3.1/jsencrypt.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/core.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="~/Scripts/branch.js"></script>
+    <script src="~/Scripts/encryption/aes.js"></script>
+    <script src="~/Scripts/encryption/encryption.js"></script>
+
+
+    <title>Branch</title>
+</head>
+<body>
+<div class="container">
+    <form>
+        <div class="form-group">
+            <button type="button" class="btn btn-success" id="branchDetailsButton">Get A Specific Branch</button>
+            <button type="button" class="btn btn-success" id="allBranchButton">Get All Branch</button>
+            <button type="button" class="btn btn-success" id="getModuleByUserButton">Get Module By User</button>
+            <button type="button" class="btn btn-success" id="getPropertiesByUserButton">Get Properties By User</button>
+            <button type="button" class="btn btn-success" id="getCommandsByRoleIdPropertyId">Get Commands By Role</button>
+
+        </div>
+    </form>
+    <form>
+        <div class="form-group">
+            <textarea class="form-control" rows="5" id="Details"></textarea>
+        </div>
+    </form>
+    <form>
+        <div class="form-group">
+            <textarea class="form-control" rows="5" id="cacheKey"></textarea>
+            <button type="button" class="btn btn-success" id="deleteCache">Delete Cache</button>
+        </div>
+    </form> 
+</div>
+</body>
+</html>

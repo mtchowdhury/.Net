@@ -1,0 +1,498 @@
+﻿<div class="panel panel-default panel-primary" ng-controller="employeeAccountEditController">
+    <div class="panel-heading panel-title">
+        Close Employee Account
+    </div>
+
+
+
+    <div class="panel-body font-asa-11">
+        <form angular-validator-submit="editEmployeeAccount()" name="editEmployeeAccountForm" class="form-horizontal" novalidate angular-validator>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <h6><i class="fa fa-asterisk required-icon"></i> Required Field</h6>
+                    <h4>
+                        <a class="h4-asa" role="button" data-toggle="collapse" href="#collapseAddEmployeeGenInfo" aria-expanded="true" aria-controls="collapseAddEmployeeGenInfo" onclick="accordionUtility.setCaret('gi')">
+                            General Information
+                            <i id="gi-down" class="fa fa-caret-down"></i>
+                            <i id="gi-up" class="fa fa-caret-up hide-caret"></i>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseAddEmployeeGenInfo" class="panel-collapse in" role="tabpanel" aria-labelledby="headingAddGeneral" showHide="showHide">
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+
+                        <div class="form-group">
+                            <fieldset ng-disabled="eaccount.Status==2|| eaccount.Status==1">
+                                <div class="form-inline">
+                                    <label for="name" class="col-md-4 col-sm-12">
+                                        Name <i class="fa fa-asterisk required-icon"></i>
+                                    </label>
+                                    <input type="" tabindex="1" name="Name"
+                                           readonly="readonly"
+                                           ng-model="eaccount.EmployeeName" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                           id="name" validate-on="blur" placeholder="Name"
+                                           required-message="'Name field is required'" required>
+                                </div>
+                                <div class="form-inline">
+                                    <label for="atype" class="col-md-4 col-sm-12">
+                                        Account Type<i class="fa fa-asterisk required-icon"></i>
+                                    </label>
+                                    <select tabindex="6"
+                                            class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                            id="atype" ng-model="eaccount.AccountTypeId"
+                                            name="atype"
+                                            ng-disabled="true"
+                                            required-message="'Marital status field is required'"
+                                            ng-change="getAccoutTypeById();getEmployeeAccountCycleCount();clearTypeChangeData();providentFundLoanServiceChargeStepper();"
+                                            ng-options="accountType.Value as accountType.Name for accountType in filters.AccountTypes" required></select>
+                                </div>
+                                <div class="form-inline">
+                                    <label for="aotype" class="col-md-4 col-sm-12">
+                                        Opening Type<i class="fa fa-asterisk required-icon"></i>
+                                    </label>
+                                    <select tabindex="6"
+                                            disabled="disabled"
+                                            class="form-control form-control-asa form-control-asa-select-box-padding width-asa col-md-8 col-sm-12"
+                                            id="aotype" ng-model="eaccount.AccountOpeningType"
+                                            name="aotype"
+                                            required-message="'Marital status field is required'"
+                                            ng-options="accountOpeningType.Value as accountOpeningType.Name for accountOpeningType in filters.AccountOpeningTypes" required></select>
+                                </div>
+                                <div ng-if="selectedAccountType.Category===1 || selectedAccountType.Category===5 ||eaccount.SalaryStructureId!==null" class="form-inline">
+                                    <label for="pamount" class="col-md-4 col-sm-12">
+                                        Principal Amount<i class="fa fa-asterisk required-icon"></i>
+                                    </label>
+                                    <input type="number" tabindex="3"
+                                           ng-disabled="roleWiseDiabledGeneralField"
+                                           ng-change="calculateOtherValue();validateSubsidy();"
+                                           ng-model="eaccount.PrincipalAmount"
+                                           class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                           id="pamount" placeholder="principal amount" name="pamount"
+                                           required-message="'Principal Amount field is required'" required>
+                                </div>
+                                <div ng-if="(selectedAccountType.Category===1 || selectedAccountType.Category===5||selectedAccountType.Category===5
+                                 ||selectedAccountType.Category===3||selectedAccountType.Category===4) && eaccount.AccountOpeningType===3 || (eaccount.ReceiveAmount!==undefined&& eaccount.ReceiveAmount!==null)" class="form-inline">
+                                    <label for="ramount" class="col-md-4 col-sm-12">
+                                        Receive Amount<i class="fa fa-asterisk required-icon"></i>
+                                    </label>
+                                    <input type="number" tabindex="3"
+                                           ng-disabled="roleWiseDiabledGeneralField"
+                                           ng-model="eaccount.ReceiveAmount"
+                                           class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                           id="ramount" placeholder="receive amount" name="ramount">
+                                </div>
+
+                                <div ng-if="eaccount.SalaryStructureId===null">
+                                    <!--<div ng-if="(selectedAccountType.Category===1 || selectedAccountType.Category===5||selectedAccountType.Category===5
+                                    ||selectedAccountType.Category===3||selectedAccountType.Category===4) && eaccount.AccountOpeningType===3" class="form-inline">
+                                               <label for="ramount" class="col-md-4 col-sm-12">
+                                                   Receive Amount<i class="fa fa-asterisk required-icon"></i>
+                                               </label>
+                                               <input type="number" tabindex="3"
+                                                      ng-model="eaccount.ReceiveAmount"
+                                                      class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                                      id="ramount" placeholder="receive amount" name="ramount">
+                                           </div>-->
+                                    <div ng-if="selectedAccountType.Category===1" class="form-inline">
+                                        <label for="srate" class="col-md-4 col-sm-12">
+                                            Service Charge Rate<i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <input type="number" tabindex="3"
+                                               ng-model="eaccount.ServiceChargeRate"
+                                               class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                               id="srate" placeholder="service charge rate" name="srate"
+                                               disabled="disabled"
+                                               required-message="'Service Charge Rate field is required'" required>
+                                    </div>
+                                    <div ng-if="selectedAccountType.Category===1" class="form-inline">
+                                        <label for="scharge" class="col-md-4 col-sm-12">
+                                            Service Charge <i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <input type="number" tabindex="3"
+                                               readonly="readonly"
+                                               ng-model="eaccount.ServiceCharge"
+                                               class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                               id="scharge" placeholder="service charge" name="scharge"
+                                               required-message="'Service Charge field is required'" required>
+                                    </div>
+                                    <!--<div ng-show="selectedAccountType.Category===2 ||selectedAccountType.Category===3" class="form-inline">
+                                        <label for="iamount" class="col-md-4 col-sm-12">
+                                            Interest Amount <i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <input type="number" tabindex="3"
+                                               readonly="readonly"
+                                               ng-model="eaccount.ServiceCharge"
+                                               class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                               id="iamount" placeholder="Interest Amount" name="iamount">
+                                    </div>-->
+                                    <div ng-if="selectedAccountType.Category===1" class="form-inline">
+                                        <label for="disbursed" class="col-md-4 col-sm-12">
+                                            Disburse with Service Charge <i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <input type="number" tabindex="3"
+                                               readonly="readonly"
+                                               ng-model="eaccount.Disbursed"
+                                               class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                               id="disbursed" placeholder="disbursed amount" name="disbursed"
+                                               required-message="'Disbursed Amount field is required'" required>
+                                    </div>
+
+                                </div>
+                            </fieldset>
+
+                            <!--<div class="form-inline">
+                                <label class="col-md-4 col-sm-12 fa-pull-left pull-left">
+                                    Repeat in Payroll
+                                </label>
+                                <input type="checkbox" ng-model="sameAddress"
+                                       ng-true-value="'YES'" ng-false-value="'NO'" ng-click="sameAddressToggle()">
+                            </div>-->
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <fieldset ng-disabled="eaccount.Status==2 || eaccount.Status==1">
+                            <div ng-if="eaccount.SalaryStructureId===null">
+
+                                <div ng-if="selectedAccountType.Category===1||selectedAccountType.Category===5" class="form-inline">
+                                    <label for="duration" class="col-md-4 col-sm-12">
+                                        Duration <i class="fa fa-asterisk required-icon"></i>
+                                    </label>
+                                    <select tabindex="3"
+                                            ng-disabled="roleWiseDiabledGeneralField"
+                                            ng-change="calculateOtherValue();providentFundLoanServiceChargeStepper();"
+                                            class="form-control form-control-asa form-control-asa-select-box-padding col-md-8 width-asa col-sm-12"
+                                            id="duration" ng-model="eaccount.Duration" name="duration"
+                                            required-message="'Duration is required'" ng-options="duration.Value as duration.Name for duration in filters.Duration" required></select>
+                                </div>
+
+
+
+                                <div ng-if="selectedAccountType.Category===1||selectedAccountType.Category===5" class="form-inline">
+                                    <label for="installmentType" class="col-md-4 col-sm-12">
+                                        Installment Type<i class="fa fa-asterisk required-icon"></i>
+                                    </label>
+                                    <select tabindex="10"
+                                            disabled="disabled"
+                                            class="form-control form-control-asa form-control-asa-select-box-padding col-md-8 width-asa col-sm-12"
+                                            id="installmentType" ng-model="eaccount.InstallmentType" name="installmentType"
+                                            required-message="'Installment Type is required'" ng-options="aotype.Value as aotype.Name for aotype in filters.InstallmentTypes" required></select>
+                                </div>
+                                <div ng-if="selectedAccountType.Category===1||selectedAccountType.Category===5" class="form-inline">
+                                    <label for="totalInstallment" class="col-md-4 col-sm-12">
+                                        Total Installment <i class="fa fa-asterisk required-icon"></i>
+                                    </label>
+                                    <input type="number" tabindex="3"
+                                           ng-model="eaccount.TotalInstallment"
+                                           class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                           id="totalInstallment" placeholder="total installment no#" name="totalInstallment"
+                                           disabled="disabled"
+                                           required-message="' Total Installment field is required'" required>
+                                </div>
+                                <div ng-if="selectedAccountType.Category===1 || selectedAccountType.Category===5" class="form-inline">
+                                    <label for="installmentAmount" class="col-md-4 col-sm-12">
+                                        Installment Amount <i class="fa fa-asterisk required-icon"></i>
+                                    </label>
+                                    <input type="number" tabindex="3"
+                                           ng-model="eaccount.InstallmentAmount"
+                                           class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                           id="installmentAmount" placeholder="installment amount" name="installmentAmount"
+                                           disabled="disabled"
+                                           required-message="' Installment Amount field is required'" required>
+                                </div>
+                                <div ng-if="selectedAccountType.Category===1" class="form-inline">
+                                    <label for="subsidyAmount" class="col-md-4 col-sm-12">
+                                        Subsidy Amount <i class="fa fa-asterisk required-icon"></i>
+                                    </label>
+                                    <input type="number" tabindex="3"
+                                           ng-disabled="roleWiseDiabledGeneralField"
+                                           ng-model="eaccount.SubsidyAmount"
+                                           ng-change="calculateOtherValue();validateSubsidy();"
+                                           class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                           id="subsidyAmount" placeholder="Subsidy amount" name="subsidyAmount"
+                                           required-message="' Subsidy Amount field is required'" required>
+                                </div>
+                                <div class="form-inline">
+                                    <label for="lifeCycle" class="col-md-4 col-sm-12">
+                                        Life Cycle<i class="fa fa-asterisk required-icon"></i>
+                                    </label>
+                                    <select tabindex="10"
+                                            ng-disabled="roleWiseDiabledGeneralField"
+                                            class="form-control form-control-asa form-control-asa-select-box-padding col-md-8 width-asa col-sm-12"
+                                            id="lifeCycle" ng-model="eaccount.LifeCycle" name="lifeCycle"
+                                            required-message="'Life Cycle is required'" ng-options="cycle.Value as cycle.Name for cycle in filters.LifeCycles" required></select>
+                                </div>
+                                <div class="form-inline">
+                                    <label for="cycle" class="col-md-4 col-sm-12">
+                                        Cycle <i class="fa fa-asterisk required-icon"></i>
+                                    </label>
+                                    <input type="number" tabindex="3"
+                                           ng-disabled="true"
+                                           ng-model="eaccount.Cycle"
+                                           class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                           id="cycle" placeholder="Cycle" name="cycle"
+                                           required-message="' Cycle field is required'" required>
+                                </div>
+
+
+                            </div>
+                        </fieldset>
+
+                        <div class="form-inline">
+                            <label for="status" class="col-md-4 col-sm-12">
+                                Status<i class="fa fa-asterisk required-icon"></i>
+                            </label>
+                            <select tabindex="10"
+                                    ng-change="setClosingDate()"
+                                    class="form-control form-control-asa form-control-asa-select-box-padding col-md-8 width-asa col-sm-12"
+                                    id="status" ng-model="eaccount.Status" name="status"
+                                    required-message="'Status is required'" ng-options="status.Value as status.Name for status in filters.Status" required></select>
+                        </div>
+
+                    </div>
+
+                    <div ng-if="eaccount.SalaryStructureId===null" class="col-lg-12 col-md-12 col-sm-12" ng-disabled="true">
+                        <fieldset ng-disabled="true">
+                            <label>
+                                Repeat in Payroll
+                            </label>
+                            <input type="checkbox" ng-model="eaccount.RepeatInPayroll" ng-disabled="roleWiseDiabledGeneralField" />
+                        </fieldset>
+
+                    </div>
+
+
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <hr />
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <h4>
+                        <a class="h4-asa" role="button" data-toggle="collapse" href="#collapseAddEmployeePermanentAddress" aria-expanded="true" aria-controls="collapseAddEmployeePermanentAddress" onclick="accordionUtility.setCaret('pa')">
+                            Date Information
+                            <i id="pa-down" class="fa fa-caret-down"></i>
+                            <i id="pa-up" class="fa fa-caret-up hide-caret"></i>
+                        </a>
+                    </h4>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset ng-disabled="roleWiseDiabledGeneralField">
+                        <div id="collapseAddEmployeePermanentAddress" class="panel-collapse in" role="tabpanel" aria-labelledby="headingAddGeneral" showHide="showHide">
+
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <fieldset ng-disabled="true">
+                                        <div ng-if="!((selectedAccountType.Category===1 || selectedAccountType.Category===5)&& eaccount.SalaryStructureId===null)" class="form-inline">
+                                            <label class="col-md-4 col-sm-12">
+                                                Opening Date<i class="fa fa-asterisk required-icon"></i>
+                                            </label>
+                                            <div class="dropdown input-group date width-asa">
+                                                <p class="input-group">
+                                                    <input readonly="readonly" class="form-control-asa full-width-asa" type="text" uib-datepicker-popup="{{format}}"
+                                                           ng-model="eaccount.OpeningDate" is-open="openingpPop.opened" datepicker-options="dateOptions"
+                                                           close-text="Close" alt-input-formats="altInputFormats"
+                                                           ng-change="opValidator()" />
+                                                    <span class="input-group-addon input-group-addon-asa" ng-if="eaccount.Status!==2">
+                                                        <button type="button" ng-click="openOpop()"><i class="fa fa-calendar"></i></button>
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div ng-if="(selectedAccountType.Category===1 || selectedAccountType.Category===5) && eaccount.SalaryStructureId===null" class="form-inline">
+                                            <label class="col-md-4 col-sm-12">
+                                                Disburse Date<i class="fa fa-asterisk required-icon"></i>
+                                            </label>
+                                            <div class="dropdown input-group date width-asa">
+                                                <p class="input-group">
+                                                    <input readonly="readonly" class="form-control-asa full-width-asa" type="text" uib-datepicker-popup="{{format}}" ng-model="eaccount.DisburseDate"
+                                                           is-open="disbursePop.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" ng-change="opValidator()" />
+                                                    <span class="input-group-addon input-group-addon-asa" ng-if="eaccount.Status!==2">
+                                                        <button type="button" ng-click="openDpop()"><i class="fa fa-calendar"></i></button>
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div ng-if="eaccount.Status===0" class="form-inline">
+                                        <label class="col-md-4 col-sm-12">
+                                            Closing Date<i class="fa fa-asterisk required-icon"></i>
+                                        </label>
+                                        <div class="dropdown input-group date width-asa">
+                                            <p class="input-group">
+                                                <input readonly="readonly" class="form-control-asa full-width-asa" type="text" uib-datepicker-popup="{{format}}" ng-model="eaccount.ClosingDate"
+                                                       is-open="closingPop.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" ng-change="clsValidator()" />
+                                                <span class="input-group-addon input-group-addon-asa">
+                                                    <button type="button" ng-click="openCpop()"><i class="fa fa-calendar"></i></button>
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>                                  
+                                    <div ng-if="eaccount.ReceiveDate!==null||eaccount.ReceiveDate!==undefined" class="form-inline">
+                                        <label class="col-md-4 col-sm-12">
+                                            Receive Date
+                                        </label>
+                                        <div class="dropdown input-group date width-asa">
+                                            <p class="input-group">
+                                                <input readonly="readonly" class="form-control-asa full-width-asa" type="text" uib-datepicker-popup="{{format}}" ng-model="eaccount.ReceiveDate"
+                                                       is-open="receivePop.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" />
+                                                <span class="input-group-addon input-group-addon-asa" ng-if="eaccount.Status!==2">
+                                                    <!--<button type="button" ng-click="openRpop()"><i class="fa fa-calendar"></i></button>-->
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <hr />
+                </div>
+
+                <div>
+                    <!--ng-if="eaccount.SalaryStructureId===null"-->
+
+
+
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+
+                        <h4>
+                            <a class="h4-asa" role="button" data-toggle="collapse" href="#collapseAddEmployeePresentAddress" aria-expanded="true" aria-controls="collapseAddEmployeePresentAddress" onclick="accordionUtility.setCaret('ci')">
+                                Cheque Information
+                                <i id="ci-down" class="fa fa-caret-down"></i>
+                                <i id="ci-up" class="fa fa-caret-up hide-caret"></i>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseAddEmployeePresentAddress" class="panel-collapse in" role="tabpanel" aria-labelledby="headingAddGeneral" showHide="showHide">
+
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <fieldset ng-disabled="eaccount.Status==2 || roleWiseDiabledGeneralField || eaccount.Status==1">
+                                <!--<label>
+                                    Present Address Same as permanent:
+                                </label>
+                                <input type="checkbox" ng-model="sameAddress"
+                                       ng-true-value="'YES'" ng-false-value="'NO'" ng-click="sameAddressToggle()">-->
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+
+
+                                        <div class="form-inline">
+                                            <label for="chequeAmount" class="col-md-4 col-sm-12">
+                                                Cheque Amount
+                                            </label>
+                                            <input type="number" tabindex="30"
+                                                   ng-model="eaccount.ChequeAmount"
+                                                   class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                                   id="chequeAmount" placeholder="Cheque Amount"
+                                                   name="chequeAmount">
+                                        </div>
+                                        <div class="form-inline">
+                                            <label for="chequeNo" class="col-md-4 col-sm-12">
+                                                Cheque No#
+                                            </label>
+                                            <input type="text" tabindex="30"
+                                                   ng-model="eaccount.ChequeNo"
+                                                   class="form-control form-control-asa col-md-8 width-asa col-sm-12"
+                                                   id="chequeNo" placeholder="Cheque No"
+                                                   name="chequeNo">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="form-inline">
+                                            <label for="bankaccount" class="col-md-4 col-sm-12">
+                                                Bank Account
+                                            </label>
+                                            <select tabindex="10"
+                                                    class="form-control form-control-asa form-control-asa-select-box-padding col-md-8 width-asa col-sm-12"
+                                                    id="bankaccount" ng-model="eaccount.BankAccount" name="bankaccount"
+                                                    ng-options="bank.Value as bank.Name for bank in filters.BankAccounts"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <hr />
+                    </div>
+                </div>
+                <div ng-if="eaccount.ReceivedFromBranch!==undefined||eaccount.ReceivedFromBranch!==null">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <h4>
+                            <a class="h4-asa" role="button" data-toggle="collapse" href="#collapseAddEmployeeAcademic" aria-expanded="true" aria-controls="collapseAddEmployeeAcademic" onclick="accordionUtility.setCaret('ac')">
+                                Receive Information
+                                <i id="ac-down" class="fa fa-caret-down"></i>
+                                <i id="ac-up" class="fa fa-caret-up hide-caret"></i>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseAddEmployeeAcademic" class="panel-collapse in" role="tabpanel" aria-labelledby="headingAddGeneral" showHide="showHide">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <fieldset ng-disabled="true">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="form-inline">
+                                            <label for="receivedfrom" class="col-md-4 col-sm-12">
+                                                Received From(Branch)
+                                            </label>
+                                            <select tabindex="10"
+                                                    disabled="disabled"
+                                                    class="form-control form-control-asa form-control-asa-select-box-padding col-md-8 width-asa col-sm-12"
+                                                    id="receivedfrom" ng-model="eaccount.ReceiveBranch" name="receivedfrom"
+                                                    ng-options="branch.Value as branch.Name for branch in filters.Branches"></select>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="form-inline">
+                                            <label for="receivedfromdistrict" class="col-md-4 col-sm-12">
+                                                Received From(District)
+                                            </label>
+                                            <select tabindex="10"
+                                                    disabled="disabled"
+                                                    class="form-control form-control-asa form-control-asa-select-box-padding col-md-8 width-asa col-sm-12"
+                                                    id="receivedfromdistrict" ng-model="eaccount.ReceiveDistrict" name="receivedfromdistrict"
+                                                    ng-options="district.Value as district.Name for district in filters.Districts"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <hr />
+                </div>
+            </div>
+
+            <div ng-if="editEmployeeAccountForm.$valid === false && editEmployeeAccountForm.$dirty === true">
+                <p class="form-validation-message">Validation failed, one or more required field is missing</p>
+            </div>
+            <button type="submit" tabindex="100" class="btn btn-primary">
+                Submit
+            </button>
+
+        </form>
+    </div>
+
+</div>

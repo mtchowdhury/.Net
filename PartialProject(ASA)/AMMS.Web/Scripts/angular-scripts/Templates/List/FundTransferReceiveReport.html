@@ -1,0 +1,757 @@
+﻿<div id="general-journal-list" class="panel panel-default panel-primary" ng-controller="fundTransferReportController">
+    <!--<div class="panel-heading panel-title">
+        Transaction Statement
+    </div>-->
+    <div class="panel-body">
+
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-8">
+                <span class="badge">Entities</span>
+                <div class="filter-form">
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <label for="entity" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                Entities
+                            </label>
+                            <select id="entity" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                    ng-model="filter.Entity" ng-options="ent.Value as ent.Name for ent in filters.Entity"
+                                    ng-disabled="user.Role===rootLevel.LO.toString()||user.Role===rootLevel.BM.toString()||user.Role===rootLevel.RM.toString()||user.Role===rootLevel.ABM.toString()||user.Role===rootLevel.ASE.toString()"
+                                    ng-change="correspondingEntityDataLoader(filter.Entity)"></select>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div ng-if="filter.Entity===4||filter.Entity===5" class="col-lg-8 col-md-8 col-sm-12">
+                <span class="badge">Entities</span>
+                <div class="filter-form">
+                    <div ng-if="filter.Entity===4">
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <label for="division" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                    Division
+                                </label>
+                                <!--<select id="division" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                            ng-model="filter.Zone" ng-options="zone.Value as zone.Name for zone in filters.Zones |orderBy:'Name'"
+                                            ng-disabled="user.Role === rootLevel.BM.toString()||user.Role === rootLevel.RM.toString()||user.Role === rootLevel.DM.toString()||user.Role === rootLevel.ZM.toString()"
+                                            ng-change="getDistrictsByZoneId()"></select>-->
+                                <div ng-dropdown-multiselect=""
+                                     class="multiselect-button-loan col-lg-6 col-md-6 col-sm-12"
+                                     options="ZoneListMain"
+                                     selected-model="Zones"
+                                     checkboxes="true"
+                                     extra-settings="dropdownSetting"
+                                     events="{ onItemSelect: onZoneChange, onItemDeselect : onZoneChange}"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <label for="district" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                    District
+                                </label>
+                                <!--<select id="district" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                            ng-model="filter.District" ng-options="d.Value as d.Name for d in filters.Districts |orderBy:'Name'"
+                                            ng-disabled="user.Role === rootLevel.BM.toString()||user.Role === rootLevel.RM.toString()||user.Role === rootLevel.DM.toString()"
+                                            ng-change="getRegionsByDistrictId()"></select>-->
+                                <div ng-dropdown-multiselect="" extra-settings="dropdownSetting" class="multiselect-button-loan col-lg-6 col-md-6 col-sm-12"
+                                     options="DistrictListMain"
+                                     selected-model="Districts"
+                                     checkboxes="true"
+                                     events="{ onItemSelect: onDistrictChange, onItemDeselect : onDistrictChange}"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <label for="region" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                    Region
+                                </label>
+                                <!--<select id="region" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                            ng-model="filter.Region" ng-options="m.Value as m.Name for m in filters.Regions |orderBy:'Name'"
+                                            ng-disabled="user.Role === rootLevel.BM.toString()||user.Role === rootLevel.RM.toString()"
+                                            ng-change="getBranchesByRegionId()"></select>-->
+                                <div ng-dropdown-multiselect="" extra-settings="dropdownSetting" class="multiselect-button-loan col-lg-6 col-md-6 col-sm-12"
+                                     options="RegionListMain"
+                                     selected-model="Regions"
+                                     checkboxes="true"
+                                     events="{ onItemSelect: onRegionChange, onItemDeselect : onRegionChange}"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <label for="branch" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                    Branch
+                                </label>
+                                <!--<select id="branch" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                            ng-disabled="user.Role === rootLevel.BM.toString()"
+                                            ng-model="filter.BranchId" ng-options="m.Value as m.Name for m in filters.Branches |orderBy:'Name'"></select>-->
+                                <div ng-dropdown-multiselect="" extra-settings="dropdownSetting" class="multiselect-button-loan col-lg-6 col-md-6 col-sm-12"
+                                     options="BranchListMain" selected-model="Branches" checkboxes="false"></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div ng-if="filter.Entity===5">
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <label for="divoffices" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                    Divisional Offices
+                                </label>
+                                <select id="divoffices" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                        ng-model="filter.DivisionalOffice" ng-options="do.Value as do.Name for do in filters.DivisionalOffices |orderBy:'Name'"></select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <span class="badge">Filters</span>
+                <div class="filter-form">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <div class="form-inline">
+                                <label class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                    From Date
+                                </label>
+                                <div class="dropdown input-group date width-asa">
+                                    <p class="input-group date-input-group">
+                                        <input readonly="readonly" class="form-control-asa full-width-asa" type="text"
+                                               uib-datepicker-popup="{{format}}" ng-model="filter.FromDateM" is-open="fromPop.opened"
+                                               datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats"
+                                               ng-change="fromValidator()" />
+                                        <span class="input-group-addon input-group-addon-asa">
+                                            <button type="button" ng-click="fromPopper()"><i class="fa fa-calendar"></i></button>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <div class="form-inline">
+                                <label class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                    To Date
+                                </label>
+                                <div class="dropdown input-group date width-asa">
+                                    <p class="input-group date-input-group">
+                                        <input readonly="readonly" class="form-control-asa full-width-asa" type="text"
+                                               uib-datepicker-popup="{{format}}" ng-model="filter.ToDateM" is-open="toPop.opened"
+                                               datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats"
+                                               ng-change="toValidator()" />
+                                        <span class="input-group-addon input-group-addon-asa">
+                                            <button type="button" ng-click="toPopper()"><i class="fa fa-calendar"></i></button>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="col-lg-3 col-md-3 col-sm-3">
+                            <div class="form-inline">
+                                <label for="entryMethod" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                    Report
+                                </label>
+                                <select id="entryMethod" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                        ng-model="filter.ReportType" ng-options="CashAndBankStatusReport.Value as CashAndBankStatusReport.Name for CashAndBankStatusReport in filters.CashAndBankStatusReports">
+                                    <option value="">Select Report</option>
+                                </select>
+                            </div>
+                        </div>-->
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="branch" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                            Consolidation By
+                                        </label>
+                                        <select id="consolidationby" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                                ng-model="filter.ConsolidatedBy" ng-options="m.Value as m.Name for m in ConsolidatedByList |orderBy:'Value'"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        <label for="branch" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                            Period Type
+                                        </label>
+                                        <select id="periodtype" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                                ng-model="filter.PeriodType" ng-options="m.Value as m.Name for m in PeriodTypeList |orderBy:'Value'"></select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4">
+                                        <span class="badge">From</span>
+                                        <div class="filter-form">
+                                            <div class="form-group">
+                                                <div class="form-inline">
+                                                    <label for="branch" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                                        Year
+                                                    </label>
+                                                    <select id="branch" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                                            ng-model="filter.fYear" ng-options="m.Value as m.Name for m in YearList |orderBy:'Value': reverse : true"></select>
+                                                </div>
+                                            </div>
+                                            <div ng-if="filter.PeriodType == 2" class="form-group">
+                                                <div class="form-inline">
+                                                    <label for="branch" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                                        Quarter
+                                                    </label>
+                                                    <select id="branch" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                                            ng-model="filter.fMonth" ng-options="m.Value as m.Name for m in QuarterList |orderBy:'Value'"></select>
+                                                </div>
+                                            </div>
+                                            <div ng-if="filter.PeriodType == 3" class="form-group">
+                                                <div class="form-inline">
+                                                    <label for="branch" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                                        Month
+                                                    </label>
+                                                    <select id="branch" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                                            ng-model="filter.fMonth" ng-options="m.Value as m.Name for m in MonthList |orderBy:'Value'"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4">
+                                        <span class="badge">To</span>
+                                        <div class="filter-form">
+                                            <div class="form-group">
+                                                <div class="form-inline">
+                                                    <label for="branch" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                                        Year
+                                                    </label>
+                                                    <select id="branch" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                                            ng-disabled="user.Role === rootLevel.BM.toString()"
+                                                            ng-model="filter.tYear" ng-options="m.Value as m.Name for m in YearList |orderBy:'Value': reverse : true"></select>
+                                                </div>
+                                            </div>
+                                            <div ng-if="filter.PeriodType == 2" class="form-group">
+                                                <div class="form-inline">
+                                                    <label for="branch" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                                        Quarter
+                                                    </label>
+                                                    <select id="branch" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                                            ng-model="filter.tMonth" ng-options="m.Value as m.Name for m in QuarterList |orderBy:'Value'"></select>
+                                                </div>
+                                            </div>
+                                            <div ng-if="filter.PeriodType == 3" class="form-group">
+                                                <div class="form-inline">
+                                                    <label for="branch" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                                        Month
+                                                    </label>
+                                                    <select id="branch" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                                            ng-model="filter.tMonth" ng-options="m.Value as m.Name for m in MonthList |orderBy:'Value'"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!--<div ng-if="filter.IsSplitMonthly == true" class="col-lg-3 col-md-3 col-sm-3">
+                                        <div class="form-group">
+                                            <div class="form-inline">
+                                                <label for="branch" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                                    Month
+                                                </label>
+                                                <select id="branch" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                                        ng-disabled="user.Role === rootLevel.BM.toString()"
+                                                        ng-model="filter.tMonth" ng-options="m.Value as m.Name for m in MonthList |orderBy:'Value'"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div ng-if="filter.IsSplitMonthly == true" class="col-lg-3 col-md-3 col-sm-3">
+                                        <span class="badge">To</span>
+                                        <div class="form-group">
+                                            <div class="form-inline">
+                                                <label for="branch" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                                    Year
+                                                </label>
+                                                <select id="branch" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                                        ng-disabled="user.Role === rootLevel.BM.toString()"
+                                                        ng-model="filter.tYear" ng-options="m.Value as m.Name for m in YearList |orderBy:'Value': reverse : true"></select>
+                                            </div>
+                                        </div>
+                                    </div>-->
+
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="col-lg-3 col-md-3 col-sm-3">
+                            <div class="form-inline">
+                                <label class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                    Account Head
+                                </label>
+                                <div class="dropdown input-group date width-asa">
+                                    <p class="input-group date-input-group">
+                                        <input readonly="readonly" class="form-control-asa full-width-asa" type="text"
+                                               placeholder="right select"
+                                               ng-model="filter.AccountHead.name"
+                                               title="{{filter.AccountHead.title}}"
+                                               id="accountHead" />
+                                        <span class="input-group-addon input-group-addon-asa">
+                                            <button type="button" data-toggle="modal" data-target="#myModalHorizontal" ng-click="viewOptionModifier(false)"><i class="fa fa-rocket"></i></button>
+                                        </span>
+                                    </p>
+                                    <input type="number" tabindex="" name="accountHead"
+                                           ng-model="filter.AccountHead" class="width-asa form-control form-control-asa col-md-5 col-sm-12"
+                                           id="accountHead" validate-on="blur" placeholder="Account Head "
+                                           ng-disabled="false">
+                                    <span class="col-lg-2 col-md-2 col-sm-12" >
+                                        <button type="button" ng-click="AccountHeadFetcher()"><i class="fal fa-dot-circle"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>-->
+                    </div>
+
+
+                    <!--<div class="col-lg-3 col-md-3 col-sm-3">
+                        <div class="form-inline">
+                            <label for="module" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                Module
+                            </label>
+                            <select id="module" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                    ng-model="filter.Module" ng-options="lo.Value as lo.Name for lo in filters.Module"
+                                    ng-change="getGroupsByLoanOfficer(filter.loanOfficer)">
+                                <option value="">Select</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <div class="form-inline">
+                            <label for="voucherType" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                Voucher Type
+                            </label>
+                            <select id="voucherType" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                    ng-model="filter.VoucherType" ng-options="lo.Value as lo.Name for lo in filters.VoucherType"
+                                    ng-change="getGroupsByLoanOfficer(filter.loanOfficer)">
+                                <option value="">Select</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <div class="form-inline">
+                            <label for="VoucherId" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                Voucher Id
+
+                            </label>
+                            <input type="text" tabindex="" name="VoucherId"
+                                   ng-model="filter.VoucherId" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="VoucherId" validate-on="blur" placeholder="Voucher Id "
+                                   ng-disabled="false">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <div class="form-inline">
+                            <label for="enteredby" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                Entered By
+                            </label>
+                            <input type="number" tabindex="" name="enteredby"
+                                   ng-model="filter.EnteredBy" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="enteredby" validate-on="blur" placeholder="Entered by "
+                                   ng-disabled="false">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <div class="form-inline">
+                            <label for="amountFrom" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                Amount From
+                            </label>
+                            <select id="ts-loan-officer" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                            ng-model="filter.loanOfficer" ng-options="lo.Value as lo.Name for lo in loanOfficerList"
+                            ng-change="getGroupsByLoanOfficer(filter.loanOfficer)"></select>
+                            <input type="number" tabindex="" name="amountFrom"
+                                   ng-model="filter.AmountFrom" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="amountFrom" validate-on="blur" placeholder="Amount "
+                                   ng-disabled="false">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <div class="form-inline">
+                            <label for="amountTo" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                Amount To
+                            </label>
+                            <input type="number" tabindex="" name="amountTo"
+                                   ng-model="filter.AmountTo" class="width-asa form-control form-control-asa col-md-8 col-sm-12"
+                                   id="amountTo" validate-on="blur" placeholder="Amount "
+                                   ng-disabled="false">
+                        </div>
+                    </div>-->
+                    <!--<div class="col-lg-3 col-md-3 col-sm-3">
+                        <div class="form-inline">
+                            <label for="ts-loan-officer" class="label-form-control-asa col-lg-4 col-md-4 col-sm-12">
+                                Entered By
+                            </label>
+                            <select id="ts-loan-officer" class="width-asa form-control form-control-asa col-lg-8 col-md-8 col-sm-12"
+                                    ng-model="filter.EnteredBy" ng-options="lo.Value as lo.Name for lo in loanOfficerList"
+                                    ng-change="getGroupsByLoanOfficer(filter.loanOfficer)"></select>
+                        </div>
+                    </div>-->
+                    <button class="btn-asa-normal pull-right" ng-click="getReportData()">Load</button>
+
+
+
+
+
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4">
+
+
+                <span class="row">
+                    <!--<span ng-repeat="command in commandList">
+                        <span ng-if="command.IsGeneral === true">
+                            <button class="btn-asa-normal pull-left" ng-click="(command.HasView)?openCommandTab(command, tab.id, 'Accounts_General_Journal',{}): ((command.DisplayName == 'Refresh')? Init() : exportData(filter.ReportType))">{{command.CommandName}}</button>
+                        </span>
+
+                    </span>-->
+                    <!--<button class="btn-asa-normal pull-left" ng-click="editVoucher()">Edit</button>
+                    <button class="btn-asa-normal pull-left" ng-click="deleteVoucher()">Delete</button>-->
+                    <button class="btn-asa-normal pull-left" ng-click="exportData(filter.ReportType)">Export</button>
+                </span>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-8">
+                <hr />
+            </div>
+        </div>
+
+
+
+
+    <!--<div class="row">
+    <div ng-if="reportData.length>0" class="col-lg-12 col-md-12 col-sm-12 panel-body">
+    <div ng-if="filter.ConsolidatedBy==1" style="overflow: scroll">
+        <table id="receiveTable" datatable="ng" dt-Options="dtOptions"
+               class="table table-striped table-bordered table-hover table-asa emp-list-font" style="width: 1050px">
+            <thead>
+            <tr>
+                <th>DivisionName</th>
+                <th>DistrictName</th>
+                <th>RegionName </th>
+                <th>BranchName</th>
+                <th>Current Account Opening Balance</th>
+                <th>Sum of All Debit in Bank Account (Current)</th>
+                <th>Sum of All Credit in Bank Account (Current)</th>
+                <th>Current Account Closing Balance</th>
+                <th>[STD Account Opening Balance</th>
+                <th>Sum of All Debit in Bank Account (STD)</th>
+                <th>Sum of All Credit in Bank Account (STD)</th>
+                <th>STD Account Closing Balance</th>
+                <th>STD Account Gross Interest</th>
+                <th>Cash in Hand Opening Balance</th>
+                <th>Cash in Hand Debit</th>
+                <th>Cash in Hand Credit</th>
+                <th>Cash in Hand Closing Balance</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="r in reportData.GlobalMatchedData">
+
+                <td>{{r.DivisionName}}</td>
+                <td>{{r.DistrictName}}</td>
+                <td>{{r.RegionName}}</td>
+                <td>{{r.BranchName}}</td>
+                <td>{{r.CurrentAccountOpeningBalance}}</td>
+                <td>{{r.SumofAllDebitinBankAccountCurrent}}</td>
+                <td>{{r.SumofAllCreditinBankAccountCurrent}}</td>
+                <td>{{r.CurrentAccountClosingBalance}}</td>
+                <td>{{r.STDAccountOpeningBalance}}</td>
+                <td>{{r.SumofAllDebitinBankAccountSTD}}</td>
+                <td>{{r.SumofAllCreditinBankAccountSTD}}</td>
+                <td>{{r.STDAccountClosingBalance}}</td>
+                <td>{{r.STDAccountGrossInterest}}</td>
+                <td>{{r.CashinHandOpeningBalance}}</td>
+                <td>{{r.CashinHandDebit}}</td>
+                <td>{{r.CashinHandCredit}}</td>
+                <td>{{r.CashinHandClosingBalance}}</td>
+
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+    <div ng-if="filter.ConsolidatedBy==2" style="overflow: scroll">
+        <table id="receiveTable" datatable="ng" dt-Options="dtOptions"
+               class="table table-striped table-bordered table-hover table-asa emp-list-font" style="width: 1050px">
+            <thead>
+            <tr>
+                <th>DivisionName</th>
+                <th>DistrictName</th>
+                <th>RegionName </th>
+
+                <th>Current Account Opening Balance</th>
+                <th>Sum of All Debit in Bank Account (Current)</th>
+                <th>Sum of All Credit in Bank Account (Current)</th>
+                <th>Current Account Closing Balance</th>
+                <th>[STD Account Opening Balance</th>
+                <th>Sum of All Debit in Bank Account (STD)</th>
+                <th>Sum of All Credit in Bank Account (STD)</th>
+                <th>STD Account Closing Balance</th>
+                <th>STD Account Gross Interest</th>
+                <th>Cash in Hand Opening Balance</th>
+                <th>Cash in Hand Debit</th>
+                <th>Cash in Hand Credit</th>
+                <th>Cash in Hand Closing Balance</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="r in reportData">
+
+                <td>{{r.DivisionName}}</td>
+                <td>{{r.DistrictName}}</td>
+                <td>{{r.RegionName}}</td>
+
+                <td>{{r.CurrentAccountOpeningBalance}}</td>
+                <td>{{r.SumofAllDebitinBankAccountCurrent}}</td>
+                <td>{{r.SumofAllCreditinBankAccountCurrent}}</td>
+                <td>{{r.CurrentAccountClosingBalance}}</td>
+                <td>{{r.STDAccountOpeningBalance}}</td>
+                <td>{{r.SumofAllDebitinBankAccountSTD}}</td>
+                <td>{{r.SumofAllCreditinBankAccountSTD}}</td>
+                <td>{{r.STDAccountClosingBalance}}</td>
+                <td>{{r.STDAccountGrossInterest}}</td>
+                <td>{{r.CashinHandOpeningBalance}}</td>
+                <td>{{r.CashinHandDebit}}</td>
+                <td>{{r.CashinHandCredit}}</td>
+                <td>{{r.CashinHandClosingBalance}}</td>
+
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+    <div ng-if="filter.ConsolidatedBy==3" style="overflow: scroll">
+        <table id="receiveTable" datatable="ng" dt-Options="dtOptions"
+               class="table table-striped table-bordered table-hover table-asa emp-list-font" style="width: 1050px">
+            <thead>
+            <tr>
+                <th>DivisionName</th>
+                <th>DistrictName</th>
+
+                <th>Current Account Opening Balance</th>
+                <th>Sum of All Debit in Bank Account (Current)</th>
+                <th>Sum of All Credit in Bank Account (Current)</th>
+                <th>Current Account Closing Balance</th>
+                <th>[STD Account Opening Balance</th>
+                <th>Sum of All Debit in Bank Account (STD)</th>
+                <th>Sum of All Credit in Bank Account (STD)</th>
+                <th>STD Account Closing Balance</th>
+                <th>STD Account Gross Interest</th>
+                <th>Cash in Hand Opening Balance</th>
+                <th>Cash in Hand Debit</th>
+                <th>Cash in Hand Credit</th>
+                <th>Cash in Hand Closing Balance</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="r in reportData">
+
+                <td>{{r.DivisionName}}</td>
+                <td>{{r.DistrictName}}</td>
+
+                <td>{{r.CurrentAccountOpeningBalance}}</td>
+                <td>{{r.SumofAllDebitinBankAccountCurrent}}</td>
+                <td>{{r.SumofAllCreditinBankAccountCurrent}}</td>
+                <td>{{r.CurrentAccountClosingBalance}}</td>
+                <td>{{r.STDAccountOpeningBalance}}</td>
+                <td>{{r.SumofAllDebitinBankAccountSTD}}</td>
+                <td>{{r.SumofAllCreditinBankAccountSTD}}</td>
+                <td>{{r.STDAccountClosingBalance}}</td>
+                <td>{{r.STDAccountGrossInterest}}</td>
+                <td>{{r.CashinHandOpeningBalance}}</td>
+                <td>{{r.CashinHandDebit}}</td>
+                <td>{{r.CashinHandCredit}}</td>
+                <td>{{r.CashinHandClosingBalance}}</td>
+
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+    <div ng-if="filter.ConsolidatedBy==4" style="overflow: scroll">
+        <table id="receiveTable" datatable="ng" dt-Options="dtOptions"
+               class="table table-striped table-bordered table-hover table-asa emp-list-font" style="width: 1050px">
+            <thead>
+            <tr>
+
+                <th>DivisionName</th>
+
+                <th>Current Account Opening Balance</th>
+                <th>Sum of All Debit in Bank Account (Current)</th>
+                <th>Sum of All Credit in Bank Account (Current)</th>
+                <th>Current Account Closing Balance</th>
+                <th>[STD Account Opening Balance</th>
+                <th>Sum of All Debit in Bank Account (STD)</th>
+                <th>Sum of All Credit in Bank Account (STD)</th>
+                <th>STD Account Closing Balance</th>
+                <th>STD Account Gross Interest</th>
+                <th>Cash in Hand Opening Balance</th>
+                <th>Cash in Hand Debit</th>
+                <th>Cash in Hand Credit</th>
+                <th>Cash in Hand Closing Balance</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="r in reportData">
+
+                <td>{{r.DivisionName}}</td>
+
+                <td>{{r.CurrentAccountOpeningBalance}}</td>
+                <td>{{r.SumofAllDebitinBankAccountCurrent}}</td>
+                <td>{{r.SumofAllCreditinBankAccountCurrent}}</td>
+                <td>{{r.CurrentAccountClosingBalance}}</td>
+                <td>{{r.STDAccountOpeningBalance}}</td>
+                <td>{{r.SumofAllDebitinBankAccountSTD}}</td>
+                <td>{{r.SumofAllCreditinBankAccountSTD}}</td>
+                <td>{{r.STDAccountClosingBalance}}</td>
+                <td>{{r.STDAccountGrossInterest}}</td>
+                <td>{{r.CashinHandOpeningBalance}}</td>
+                <td>{{r.CashinHandDebit}}</td>
+                <td>{{r.CashinHandCredit}}</td>
+                <td>{{r.CashinHandClosingBalance}}</td>
+
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+    </div>
+
+    </div>
+
+    </div>-->
+        <div style="margin-top: 10px" class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 report-col">
+                <ul id="report-tab" class="nav nav-tabs" role="tablist">
+                    <li role="presentation" ng-class="active">
+                        <a href="#mainData" aria-controls="mainData" role="tab" data-toggle="tab">Matched Data</a>
+                    </li>
+                    <li role="presentation" ng-class="">
+                        <a href="#notes" aria-controls="notes" role="tab" data-toggle="tab">MissMatched Data</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content report-tab-content">
+
+                    <div role="tabpanel" class="tab-pane" ng-class="active" id="mainData">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6" style="float:left">
+                                <table>
+                                    <tr>
+                                        <th>Transferring Division</th>
+                                        <th>Transferring District</th>
+                                        <th>Transferring Region</th>
+                                        <th>Transaferring Branch</th>
+                                        <th>Transaferring Date</th>
+                                        <th>Transferring Amount</th>
+                                        <th>Transferred To Branch</th>
+                                        <th>Receiving Division</th>
+                                        <th>Receiving District</th>
+                                        <th>Receiving Region</th>
+                                        <th>Receiving Branch</th>
+                                        <th>Receiving Date</th>
+                                        <th>Receiving Amount</th>
+                                        <th>Receving From Branch</th>
+                                    </tr>
+                                    <tr ng-repeat="p in reportData.GlobalMatchedData">
+                                        <td>{{p.TransferringDivision}}</td>
+                                        <td>{{p.TransferringDistrict}}</td>
+                                        <td>{{p.TransferringRegion}}</td>
+                                        <td>{{p.TransferringBranch}}</td>
+                                        <td >{{p.TransaferringDate}}</td>
+
+                                        <td>{{p.TransferringAmount}}</td>
+                                        <td>{{p.TransferredToBranch}}</td>
+                                        <td>{{p.ReceivingDivision}}</td>
+                                        <td>{{p.ReceivingDistrict}}</td>
+                                        <td>{{p.ReceivingRegion}}</td>
+
+                                        <td>{{p.ReceivingBranch}}</td>
+                                        <td>{{p.ReceivingDate}}</td>
+                                        <td>{{p.ReceivingAmount}}</td>
+                                        <td>{{p.RecevingFromBranch}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane" ng-class="" id="notes">
+                        <div class="col-lg-12 col-md-12 col-sm-12" style="float:left">
+                            <table>
+                                <tr>
+                                    <th>Transferring Division</th>
+                                    <th>Transferring District</th>
+                                    <th>Transferring Region</th>
+                                    <th>Transaferring Branch</th>
+                                    <th>Transaferring Date</th>
+                                    <th>Transferring Amount</th>
+                                    <th>Transferred To Branch</th>
+                                    <th>Receiving Division</th>
+                                    <th>Receiving District</th>
+                                    <th>Receiving Region</th>
+                                    <th>Receiving Branch</th>
+                                    <th>Receiving Date</th>
+                                    <th>Receiving Amount</th>
+                                    <th>Receving From Branch</th>
+                                </tr>
+                                <tr ng-repeat="p in reportData.GlobalMissMatchedData">
+                                    <td>{{p.TransferringDivision}}</td>
+                                    <td>{{p.TransferringDistrict}}</td>
+                                    <td>{{p.TransferringRegion}}</td>
+                                    <td>{{p.TransferringBranch}}</td>
+                                    <td>{{p.TransaferringDate}}</td>
+
+                                    <td>{{p.TransferringAmount}}</td>
+                                    <td>{{p.TransferredToBranch}}</td>
+                                    <td>{{p.ReceivingDivision}}</td>
+                                    <td>{{p.ReceivingDistrict}}</td>
+                                    <td>{{p.ReceivingRegion}}</td>
+
+                                    <td>{{p.ReceivingBranch}}</td>
+                                    <td>{{p.ReceivingDate}}</td>
+                                    <td>{{p.ReceivingAmount}}</td>
+                                    <td>{{p.RecevingFromBranch}}</td>
+                                </tr>
+                            </table>
+                        </div>
+
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+

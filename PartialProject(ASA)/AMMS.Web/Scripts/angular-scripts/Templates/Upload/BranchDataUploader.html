@@ -1,0 +1,71 @@
+﻿<div class="row" ng-controller="branchDataUploadController" style="height: 500px; cursor: auto">
+
+    <!--this is universal data uploader except for the functionality of managing folder paths-->
+    <div class="col-md-12 panel panel-default panel-primary">
+        <div class="panel-body font-asa-11">
+
+            <div class="row">
+
+                <div class="col-md-6 col-lg-6 col-sm-12" style="padding-top: 15px;">
+                    <label for="file">Upload File<i class="fa fa-asterisk required-icon"></i> [choose only brach generated .001 format file] </label>
+                    <div class="form-group">
+
+                        <div class="form-inline">
+
+                            <input type="file" id="file" class="uploadFile" accept="*" ngf-select ngf-keep="true" ng-model="files" ngf-multiple="true">
+
+                            <!--<label style="text-align: right; color: blue; margin-left: 15px;">Please select Valid file type</label>-->
+                        </div>
+                        <div class="form-group " style="margin-left: 15px; margin-Top: 10px">
+                            <table class="upload" style="text-align: center" datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs">
+                                <thead>
+                                <tr>
+                                    <th style="width: 16% !important"> Name</th>
+                                    <th> Branch Name</th>
+                                    <th> Upload Date</th>
+                                    <th> Working Date</th>
+                                    <th style="width: 100px"> Status</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-if="files.length>0">
+                                    <td style="width: 16% !important">
+                                        {{files[files.length-1].name}} <i class="fa fa-times asa-icon-DELETE" ng-click="removefile()"></i>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        pending
+                                    </td>
+
+                                </tr>
+                                <tr ng-repeat="row in dataRows |orderBy:sortType:sortReverse">
+                                    <td style="width: 57% !important">{{row.FIleName}}</td>
+                                    <td>{{row.BranchName}}</td>
+                                    <td>{{row.LastUploadedDate}}</td>
+                                    <td>{{row.LastBranchWorkingDate}}</td>
+                                    <td style="width: 100px">{{row.Status}}</td>
+
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    
+                    <div class="col-md-12 col-lg-12 col-sm-12">
+                        <button  class="btn btn-primary" style="margin-left: 14px" ng-click="getLocalBranchData()">
+                            Reload
+                        </button>
+                        <button type="submit" class="btn btn-primary" style="margin-left: 14px" ng-click="upload()">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
