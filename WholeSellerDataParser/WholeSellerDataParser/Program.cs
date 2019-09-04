@@ -15,7 +15,7 @@ namespace WholeSellerDataParser
         {
             _fileProcessor=new FileProcessor();
             var processed= _fileProcessor.ProcessAllWholeSeller();
-            MessageBox.Show("File Processed:"+ processed.ToString());
+            //MessageBox.Show("File Processed:"+ processed.ToString());
         }
     }
 }

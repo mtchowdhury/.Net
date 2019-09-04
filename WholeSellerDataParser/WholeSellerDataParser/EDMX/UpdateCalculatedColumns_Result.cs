@@ -7,61 +7,59 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WholeSellerDataParser.EDMX
+using System;
+using System.Collections.Generic;
+
+public partial class UpdateCalculatedColumns_Result
 {
-    using System;
-    
-    public partial class UpdateCalculatedColumns_Result
-    {
-        public int Id { get; set; }
-        public string FcDate { get; set; }
-        public string DcName { get; set; }
-        public string DcDea { get; set; }
-        public string FacName { get; set; }
-        public string FacDea { get; set; }
-        public string Cwac { get; set; }
-        public string Ccost { get; set; }
-        public string Cqty { get; set; }
-        public string SaleCr { get; set; }
-        public string Contract { get; set; }
-        public string ContStart { get; set; }
-        public string Ndc { get; set; }
-        public string OldNdc { get; set; }
-        public string Upc { get; set; }
-        public string Upn { get; set; }
-        public string Invoice { get; set; }
-        public string Sdate { get; set; }
-        public string Ctotal { get; set; }
-        public string ProdName { get; set; }
-        public string ProdSize { get; set; }
-        public string ProdString { get; set; }
-        public string Filler { get; set; }
-        public string UpDnChg { get; set; }
-        public string Filler2 { get; set; }
-        public string FacAcct { get; set; }
-        public string VeItemnr { get; set; }
-        public string Idate { get; set; }
-        public string VerNr { get; set; }
-        public string ChgNum { get; set; }
-        public string Conversion { get; set; }
-        public string Batch { get; set; }
-        public string WholeSaler { get; set; }
-        public string WhCont { get; set; }
-        public string MatchCoid { get; set; }
-        public string MatchType { get; set; }
-        public string ShipQty { get; set; }
-        public string Cost { get; set; }
-        public string TotCost { get; set; }
-        public string Wac { get; set; }
-        public string ShipDate { get; set; }
-        public string InvDate { get; set; }
-        public string RecDate { get; set; }
-        public string MmId { get; set; }
-        public string Whid { get; set; }
-        public string WrPid { get; set; }
-        public string ItId { get; set; }
-        public string SaleCrw { get; set; }
-        public string SaleCrsrc { get; set; }
-        public string Extra { get; set; }
-    }
+    public int Id { get; set; }
+    public string FcDate { get; set; }
+    public string DcName { get; set; }
+    public string DcDea { get; set; }
+    public string FacName { get; set; }
+    public string FacDea { get; set; }
+    public string Cwac { get; set; }
+    public string Ccost { get; set; }
+    public string Cqty { get; set; }
+    public string SaleCr { get; set; }
+    public string Contract { get; set; }
+    public string ContStart { get; set; }
+    public string Ndc { get; set; }
+    public string OldNdc { get; set; }
+    public string Upc { get; set; }
+    public string Upn { get; set; }
+    public string Invoice { get; set; }
+    public string Sdate { get; set; }
+    public string Ctotal { get; set; }
+    public string ProdName { get; set; }
+    public string ProdSize { get; set; }
+    public string ProdString { get; set; }
+    public string Filler { get; set; }
+    public string UpDnChg { get; set; }
+    public string Filler2 { get; set; }
+    public string FacAcct { get; set; }
+    public string VeItemnr { get; set; }
+    public string Idate { get; set; }
+    public string VerNr { get; set; }
+    public string ChgNum { get; set; }
+    public string Conversion { get; set; }
+    public string Batch { get; set; }
+    public string WholeSaler { get; set; }
+    public string WhCont { get; set; }
+    public string MatchCoid { get; set; }
+    public string MatchType { get; set; }
+    public string ShipQty { get; set; }
+    public string Cost { get; set; }
+    public string TotCost { get; set; }
+    public string Wac { get; set; }
+    public string ShipDate { get; set; }
+    public string InvDate { get; set; }
+    public string RecDate { get; set; }
+    public string MmId { get; set; }
+    public string Whid { get; set; }
+    public string WrPid { get; set; }
+    public string ItId { get; set; }
+    public string SaleCrw { get; set; }
+    public string SaleCrsrc { get; set; }
+    public string Extra { get; set; }
 }

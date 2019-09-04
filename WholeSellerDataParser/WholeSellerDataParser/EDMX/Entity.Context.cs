@@ -34,6 +34,17 @@ namespace WholeSellerDataParser.EDMX
         public virtual DbSet<Amerisource> Amerisources { get; set; }
         public virtual DbSet<NcMutual> NcMutuals { get; set; }
         public virtual DbSet<BioCare> BioCares { get; set; }
+        public virtual DbSet<ValleyWholesale> ValleyWholesales { get; set; }
+        public virtual DbSet<MorrisDickson> MorrisDicksons { get; set; }
+        public virtual DbSet<Anda> Andas { get; set; }
+        public virtual DbSet<MCKESSON> MCKESSONs { get; set; }
+        public virtual DbSet<RnSPharma> RnSPharmas { get; set; }
+        public virtual DbSet<ASD> ASDs { get; set; }
+        public virtual DbSet<HDSmith> HDSmiths { get; set; }
+        public virtual DbSet<CardinalSPD> CardinalSPDs { get; set; }
+        public virtual DbSet<CuraScript> CuraScripts { get; set; }
+        public virtual DbSet<Kinray> Kinrays { get; set; }
+        public virtual DbSet<McKessonSP> McKessonSPs { get; set; }
     
         public virtual ObjectResult<UpdateCalculatedColumns_Result> UpdateCalculatedColumns()
         {

@@ -41,14 +41,20 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EPPlus, Version=4.5.3.1, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.3.1\lib\net40\EPPlus.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="FastMember, Version=1.0.0.9, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FastMember.1.1.0\lib\net40\FastMember.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
@@ -62,7 +68,19 @@
   <ItemGroup>
     <Compile Include="DataParser\FileProcessor.cs" />
     <Compile Include="DataParser\WholeSellers\AmerisourceProcessor.cs" />
+    <Compile Include="DataParser\WholeSellers\ASDProcesor.cs" />
     <Compile Include="DataParser\WholeSellers\BioCareProcessor.cs" />
+    <Compile Include="DataParser\WholeSellers\AndaProcesor.cs" />
+    <Compile Include="DataParser\WholeSellers\CardinalSPDProcessor.cs" />
+    <Compile Include="DataParser\WholeSellers\CuraScriptProcessor.cs" />
+    <Compile Include="DataParser\WholeSellers\HDSmithProcessor.cs" />
+    <Compile Include="DataParser\WholeSellers\KinrayProcessro.cs" />
+    <Compile Include="DataParser\WholeSellers\MckessonProcessor.cs" />
+    <Compile Include="DataParser\WholeSellers\McKessonSPProcessor.cs" />
+    <Compile Include="DataParser\WholeSellers\MorrisDicksonProcesor.cs" />
+    <Compile Include="DataParser\WholeSellers\RnSProcessor.cs" />
+    <Compile Include="DataParser\WholeSellers\RDCProcesor.cs" />
+    <Compile Include="DataParser\WholeSellers\ValleyWholesaleProcesor.cs" />
     <Compile Include="DataParser\WholeSellers\CardinalProcesor.cs" />
     <Compile Include="DataParser\WholeSellers\DakotaProcessor.cs" />
     <Compile Include="DataParser\WholeSellers\NcMutualProcessor.cs" />
@@ -71,12 +89,20 @@
     <Compile Include="EDMX\Amerisource.cs">
       <DependentUpon>Entity.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\Anda.cs">
+      <DependentUpon>Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ASD.cs">
+      <DependentUpon>Entity.tt</DependentUpon>
+    </Compile>
     <Compile Include="EDMX\BioCare.cs">
       <DependentUpon>Entity.tt</DependentUpon>
     </Compile>
     <Compile Include="EDMX\Cardinal.cs">
       <DependentUpon>Entity.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\CardinalSPD.cs" />
+    <Compile Include="EDMX\CuraScript.cs" />
     <Compile Include="EDMX\Dakota.cs">
       <DependentUpon>Entity.tt</DependentUpon>
     </Compile>
@@ -95,13 +121,33 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Entity.edmx</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\HDSmith.cs">
+      <DependentUpon>Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Kinray.cs" />
+    <Compile Include="EDMX\MCKESSON.cs">
+      <DependentUpon>Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\McKessonSP.cs" />
+    <Compile Include="EDMX\MorrisDickson.cs">
+      <DependentUpon>Entity.tt</DependentUpon>
+    </Compile>
     <Compile Include="EDMX\NcMutual.cs">
+      <DependentUpon>Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\RDC.cs">
+      <DependentUpon>Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\RnSPharma.cs">
       <DependentUpon>Entity.tt</DependentUpon>
     </Compile>
     <Compile Include="EDMX\SmithDrug.cs">
       <DependentUpon>Entity.tt</DependentUpon>
     </Compile>
     <Compile Include="EDMX\UpdateCalculatedColumns_Result.cs">
+      <DependentUpon>Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\ValleyWholesale.cs">
       <DependentUpon>Entity.tt</DependentUpon>
     </Compile>
     <Compile Include="EDMX\ValueDrug.cs">

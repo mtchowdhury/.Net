@@ -1,0 +1,1043 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AnalyticsModelStoreContainer" CdmEntityContainer="AnalyticsEntities">
+    <EntitySetMapping Name="SmithDrugs">
+      <EntityTypeMapping TypeName="AnalyticsModel.SmithDrug">
+        <MappingFragment StoreEntitySet="SmithDrugs">
+          <ScalarProperty Name="Extra" ColumnName="Extra" />
+          <ScalarProperty Name="SaleCrsrc" ColumnName="SaleCrsrc" />
+          <ScalarProperty Name="SaleCrw" ColumnName="SaleCrw" />
+          <ScalarProperty Name="ItId" ColumnName="ItId" />
+          <ScalarProperty Name="WrPid" ColumnName="WrPid" />
+          <ScalarProperty Name="Whid" ColumnName="Whid" />
+          <ScalarProperty Name="MmId" ColumnName="MmId" />
+          <ScalarProperty Name="RecDate" ColumnName="RecDate" />
+          <ScalarProperty Name="InvDate" ColumnName="InvDate" />
+          <ScalarProperty Name="ShipDate" ColumnName="ShipDate" />
+          <ScalarProperty Name="Wac" ColumnName="Wac" />
+          <ScalarProperty Name="TotCost" ColumnName="TotCost" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="ShipQty" ColumnName="ShipQty" />
+          <ScalarProperty Name="MatchType" ColumnName="MatchType" />
+          <ScalarProperty Name="MatchCoid" ColumnName="MatchCoid" />
+          <ScalarProperty Name="WhCont" ColumnName="WhCont" />
+          <ScalarProperty Name="WholeSaler" ColumnName="WholeSaler" />
+          <ScalarProperty Name="Batch" ColumnName="Batch" />
+          <ScalarProperty Name="Conversion" ColumnName="Conversion" />
+          <ScalarProperty Name="ChgNum" ColumnName="ChgNum" />
+          <ScalarProperty Name="VerNr" ColumnName="VerNr" />
+          <ScalarProperty Name="Idate" ColumnName="Idate" />
+          <ScalarProperty Name="VeItemnr" ColumnName="VeItemnr" />
+          <ScalarProperty Name="FacAcct" ColumnName="FacAcct" />
+          <ScalarProperty Name="Filler2" ColumnName="Filler2" />
+          <ScalarProperty Name="UpDnChg" ColumnName="UpDnChg" />
+          <ScalarProperty Name="Filler" ColumnName="Filler" />
+          <ScalarProperty Name="ProdString" ColumnName="ProdString" />
+          <ScalarProperty Name="ProdSize" ColumnName="ProdSize" />
+          <ScalarProperty Name="ProdName" ColumnName="ProdName" />
+          <ScalarProperty Name="Ctotal" ColumnName="Ctotal" />
+          <ScalarProperty Name="Sdate" ColumnName="Sdate" />
+          <ScalarProperty Name="Invoice" ColumnName="Invoice" />
+          <ScalarProperty Name="Upn" ColumnName="Upn" />
+          <ScalarProperty Name="Upc" ColumnName="Upc" />
+          <ScalarProperty Name="OldNdc" ColumnName="OldNdc" />
+          <ScalarProperty Name="Ndc" ColumnName="Ndc" />
+          <ScalarProperty Name="ContStart" ColumnName="ContStart" />
+          <ScalarProperty Name="Contract" ColumnName="Contract" />
+          <ScalarProperty Name="SaleCr" ColumnName="SaleCr" />
+          <ScalarProperty Name="Cqty" ColumnName="Cqty" />
+          <ScalarProperty Name="Ccost" ColumnName="Ccost" />
+          <ScalarProperty Name="Cwac" ColumnName="Cwac" />
+          <ScalarProperty Name="FacDea" ColumnName="FacDea" />
+          <ScalarProperty Name="FacName" ColumnName="FacName" />
+          <ScalarProperty Name="DcDea" ColumnName="DcDea" />
+          <ScalarProperty Name="DcName" ColumnName="DcName" />
+          <ScalarProperty Name="FcDate" ColumnName="FcDate" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ValueDrugs">
+      <EntityTypeMapping TypeName="AnalyticsModel.ValueDrug">
+        <MappingFragment StoreEntitySet="ValueDrugs">
+          <ScalarProperty Name="Extra" ColumnName="Extra" />
+          <ScalarProperty Name="SaleCRSRC" ColumnName="SaleCRSRC" />
+          <ScalarProperty Name="SaleCRW" ColumnName="SaleCRW" />
+          <ScalarProperty Name="RecDate" ColumnName="RecDate" />
+          <ScalarProperty Name="SaleCR" ColumnName="SaleCR" />
+          <ScalarProperty Name="WRPId" ColumnName="WRPId" />
+          <ScalarProperty Name="WHId" ColumnName="WHId" />
+          <ScalarProperty Name="ITId" ColumnName="ITId" />
+          <ScalarProperty Name="MMId" ColumnName="MMId" />
+          <ScalarProperty Name="MatchType" ColumnName="MatchType" />
+          <ScalarProperty Name="MatchCoid" ColumnName="MatchCoid" />
+          <ScalarProperty Name="WhCont" ColumnName="WhCont" />
+          <ScalarProperty Name="ApprDate" ColumnName="ApprDate" />
+          <ScalarProperty Name="ChgAmount" ColumnName="ChgAmount" />
+          <ScalarProperty Name="ChgDate" ColumnName="ChgDate" />
+          <ScalarProperty Name="TotCost" ColumnName="TotCost" />
+          <ScalarProperty Name="UpDnCHG" ColumnName="UpDnCHG" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="ShipQty" ColumnName="ShipQty" />
+          <ScalarProperty Name="OrderQty" ColumnName="OrderQty" />
+          <ScalarProperty Name="WAC" ColumnName="WAC" />
+          <ScalarProperty Name="InvDate" ColumnName="InvDate" />
+          <ScalarProperty Name="ShipDate" ColumnName="ShipDate" />
+          <ScalarProperty Name="OderDate" ColumnName="OderDate" />
+          <ScalarProperty Name="Batch" ColumnName="Batch" />
+          <ScalarProperty Name="WhNotes" ColumnName="WhNotes" />
+          <ScalarProperty Name="PONumber" ColumnName="PONumber" />
+          <ScalarProperty Name="DropShip" ColumnName="DropShip" />
+          <ScalarProperty Name="ReasonNS" ColumnName="ReasonNS" />
+          <ScalarProperty Name="NetItem" ColumnName="NetItem" />
+          <ScalarProperty Name="Special" ColumnName="Special" />
+          <ScalarProperty Name="PrivContr" ColumnName="PrivContr" />
+          <ScalarProperty Name="CapRDate" ColumnName="CapRDate" />
+          <ScalarProperty Name="CCHGAmount" ColumnName="CCHGAmount" />
+          <ScalarProperty Name="CHGNum" ColumnName="CHGNum" />
+          <ScalarProperty Name="CCHGDate" ColumnName="CCHGDate" />
+          <ScalarProperty Name="GPO" ColumnName="GPO" />
+          <ScalarProperty Name="Contract" ColumnName="Contract" />
+          <ScalarProperty Name="CTotCost" ColumnName="CTotCost" />
+          <ScalarProperty Name="CUPDNCHG" ColumnName="CUPDNCHG" />
+          <ScalarProperty Name="CCost" ColumnName="CCost" />
+          <ScalarProperty Name="CShipQty" ColumnName="CShipQty" />
+          <ScalarProperty Name="COrderQty" ColumnName="COrderQty" />
+          <ScalarProperty Name="Cwac" ColumnName="Cwac" />
+          <ScalarProperty Name="OuterPK" ColumnName="OuterPK" />
+          <ScalarProperty Name="ProdUD" ColumnName="ProdUD" />
+          <ScalarProperty Name="ProdUM" ColumnName="ProdUM" />
+          <ScalarProperty Name="ProdSize" ColumnName="ProdSize" />
+          <ScalarProperty Name="ProdStrng" ColumnName="ProdStrng" />
+          <ScalarProperty Name="ProdForm" ColumnName="ProdForm" />
+          <ScalarProperty Name="ProdName" ColumnName="ProdName" />
+          <ScalarProperty Name="VeItemNR" ColumnName="VeItemNR" />
+          <ScalarProperty Name="UPC" ColumnName="UPC" />
+          <ScalarProperty Name="NDC" ColumnName="NDC" />
+          <ScalarProperty Name="WhOEN" ColumnName="WhOEN" />
+          <ScalarProperty Name="Vendor" ColumnName="Vendor" />
+          <ScalarProperty Name="Invoice" ColumnName="Invoice" />
+          <ScalarProperty Name="CInvDate" ColumnName="CInvDate" />
+          <ScalarProperty Name="CShipDate" ColumnName="CShipDate" />
+          <ScalarProperty Name="COrderDate" ColumnName="COrderDate" />
+          <ScalarProperty Name="FacAcct" ColumnName="FacAcct" />
+          <ScalarProperty Name="FacState" ColumnName="FacState" />
+          <ScalarProperty Name="FacCity" ColumnName="FacCity" />
+          <ScalarProperty Name="FacHin" ColumnName="FacHin" />
+          <ScalarProperty Name="FacDea" ColumnName="FacDea" />
+          <ScalarProperty Name="FacName" ColumnName="FacName" />
+          <ScalarProperty Name="WholeSaler" ColumnName="WholeSaler" />
+          <ScalarProperty Name="DcDea" ColumnName="DcDea" />
+          <ScalarProperty Name="DcName" ColumnName="DcName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cardinals">
+      <EntityTypeMapping TypeName="AnalyticsModel.Cardinal">
+        <MappingFragment StoreEntitySet="Cardinal">
+          <ScalarProperty Name="EXTRA" ColumnName="EXTRA" />
+          <ScalarProperty Name="SALE_CRSRC" ColumnName="SALE_CRSRC" />
+          <ScalarProperty Name="SALE_CRW" ColumnName="SALE_CRW" />
+          <ScalarProperty Name="WH_CONT" ColumnName="WH_CONT" />
+          <ScalarProperty Name="MATCH_TYPE" ColumnName="MATCH_TYPE" />
+          <ScalarProperty Name="MATCH_COID" ColumnName="MATCH_COID" />
+          <ScalarProperty Name="WRPID" ColumnName="WRPID" />
+          <ScalarProperty Name="WHID" ColumnName="WHID" />
+          <ScalarProperty Name="ITID" ColumnName="ITID" />
+          <ScalarProperty Name="MMID" ColumnName="MMID" />
+          <ScalarProperty Name="REC_DATE" ColumnName="REC_DATE" />
+          <ScalarProperty Name="SHIP_DATE" ColumnName="SHIP_DATE" />
+          <ScalarProperty Name="INV_DATE" ColumnName="INV_DATE" />
+          <ScalarProperty Name="SALE_CR" ColumnName="SALE_CR" />
+          <ScalarProperty Name="WHOLESALER" ColumnName="WHOLESALER" />
+          <ScalarProperty Name="BATCH" ColumnName="BATCH" />
+          <ScalarProperty Name="CONTRACT" ColumnName="CONTRACT" />
+          <ScalarProperty Name="COST" ColumnName="COST" />
+          <ScalarProperty Name="SHIP_QTY" ColumnName="SHIP_QTY" />
+          <ScalarProperty Name="SDATE" ColumnName="SDATE" />
+          <ScalarProperty Name="GPO" ColumnName="GPO" />
+          <ScalarProperty Name="AHFS" ColumnName="AHFS" />
+          <ScalarProperty Name="AWP" ColumnName="AWP" />
+          <ScalarProperty Name="WAC" ColumnName="WAC" />
+          <ScalarProperty Name="COST_PLLUS" ColumnName="COST_PLLUS" />
+          <ScalarProperty Name="IDATE" ColumnName="IDATE" />
+          <ScalarProperty Name="FILLER5" ColumnName="FILLER5" />
+          <ScalarProperty Name="PROD_SIZE" ColumnName="PROD_SIZE" />
+          <ScalarProperty Name="INVOICE" ColumnName="INVOICE" />
+          <ScalarProperty Name="FILLER4" ColumnName="FILLER4" />
+          <ScalarProperty Name="ITEM_SIZE" ColumnName="ITEM_SIZE" />
+          <ScalarProperty Name="PROD_STRNG" ColumnName="PROD_STRNG" />
+          <ScalarProperty Name="PROD_FORM" ColumnName="PROD_FORM" />
+          <ScalarProperty Name="PROD_UD" ColumnName="PROD_UD" />
+          <ScalarProperty Name="GENERIC" ColumnName="GENERIC" />
+          <ScalarProperty Name="PROD_NAME" ColumnName="PROD_NAME" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="NDC13" ColumnName="NDC13" />
+          <ScalarProperty Name="NDC" ColumnName="NDC" />
+          <ScalarProperty Name="WH_OEN" ColumnName="WH_OEN" />
+          <ScalarProperty Name="FAC_NAME" ColumnName="FAC_NAME" />
+          <ScalarProperty Name="FAC_DEA" ColumnName="FAC_DEA" />
+          <ScalarProperty Name="DC_DEA" ColumnName="DC_DEA" />
+          <ScalarProperty Name="FAC_ACCT" ColumnName="FAC_ACCT" />
+          <ScalarProperty Name="DC_NR" ColumnName="DC_NR" />
+          <ScalarProperty Name="DC_NAME" ColumnName="DC_NAME" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Dakotas">
+      <EntityTypeMapping TypeName="AnalyticsModel.Dakota">
+        <MappingFragment StoreEntitySet="Dakota">
+          <ScalarProperty Name="EXTRA" ColumnName="EXTRA" />
+          <ScalarProperty Name="SALE_CRSRC" ColumnName="SALE_CRSRC" />
+          <ScalarProperty Name="SALE_CRW" ColumnName="SALE_CRW" />
+          <ScalarProperty Name="WRPID" ColumnName="WRPID" />
+          <ScalarProperty Name="WHID" ColumnName="WHID" />
+          <ScalarProperty Name="ITID" ColumnName="ITID" />
+          <ScalarProperty Name="MMID" ColumnName="MMID" />
+          <ScalarProperty Name="APPR_DATE" ColumnName="APPR_DATE" />
+          <ScalarProperty Name="CHG_DATE" ColumnName="CHG_DATE" />
+          <ScalarProperty Name="REC_DATE" ColumnName="REC_DATE" />
+          <ScalarProperty Name="INV_DATE" ColumnName="INV_DATE" />
+          <ScalarProperty Name="SHIP_DATE" ColumnName="SHIP_DATE" />
+          <ScalarProperty Name="ORDER_DATE" ColumnName="ORDER_DATE" />
+          <ScalarProperty Name="MATCH_TYPE" ColumnName="MATCH_TYPE" />
+          <ScalarProperty Name="MATCH_COID" ColumnName="MATCH_COID" />
+          <ScalarProperty Name="WH_CONT" ColumnName="WH_CONT" />
+          <ScalarProperty Name="BATCH" ColumnName="BATCH" />
+          <ScalarProperty Name="PO_NUMBER" ColumnName="PO_NUMBER" />
+          <ScalarProperty Name="DROP_SHIP" ColumnName="DROP_SHIP" />
+          <ScalarProperty Name="OMIT" ColumnName="OMIT" />
+          <ScalarProperty Name="NET_PR" ColumnName="NET_PR" />
+          <ScalarProperty Name="WH_SPEC" ColumnName="WH_SPEC" />
+          <ScalarProperty Name="PRIV_CONTR" ColumnName="PRIV_CONTR" />
+          <ScalarProperty Name="ADATE" ColumnName="ADATE" />
+          <ScalarProperty Name="CHG_AMOUNT" ColumnName="CHG_AMOUNT" />
+          <ScalarProperty Name="CHG_NUM" ColumnName="CHG_NUM" />
+          <ScalarProperty Name="CDATE" ColumnName="CDATE" />
+          <ScalarProperty Name="SALE_CR" ColumnName="SALE_CR" />
+          <ScalarProperty Name="CONTRACT" ColumnName="CONTRACT" />
+          <ScalarProperty Name="TOT_COST" ColumnName="TOT_COST" />
+          <ScalarProperty Name="UP_DN_CHG" ColumnName="UP_DN_CHG" />
+          <ScalarProperty Name="COST" ColumnName="COST" />
+          <ScalarProperty Name="SHIP_QTY" ColumnName="SHIP_QTY" />
+          <ScalarProperty Name="ORDER_QTY" ColumnName="ORDER_QTY" />
+          <ScalarProperty Name="WAC" ColumnName="WAC" />
+          <ScalarProperty Name="AWP" ColumnName="AWP" />
+          <ScalarProperty Name="ITEM_SIZE" ColumnName="ITEM_SIZE" />
+          <ScalarProperty Name="PROD_UD" ColumnName="PROD_UD" />
+          <ScalarProperty Name="OUTER_PK" ColumnName="OUTER_PK" />
+          <ScalarProperty Name="PROD_UM" ColumnName="PROD_UM" />
+          <ScalarProperty Name="PROD_SIZE" ColumnName="PROD_SIZE" />
+          <ScalarProperty Name="PROD_STRNG" ColumnName="PROD_STRNG" />
+          <ScalarProperty Name="PROD_FORM" ColumnName="PROD_FORM" />
+          <ScalarProperty Name="PROD_NAME" ColumnName="PROD_NAME" />
+          <ScalarProperty Name="VE_ITEMNR" ColumnName="VE_ITEMNR" />
+          <ScalarProperty Name="UPC" ColumnName="UPC" />
+          <ScalarProperty Name="NDC" ColumnName="NDC" />
+          <ScalarProperty Name="WH_OEN" ColumnName="WH_OEN" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="INVOICE" ColumnName="INVOICE" />
+          <ScalarProperty Name="IDATE" ColumnName="IDATE" />
+          <ScalarProperty Name="SDATE" ColumnName="SDATE" />
+          <ScalarProperty Name="ODATE" ColumnName="ODATE" />
+          <ScalarProperty Name="FAC_ACCT" ColumnName="FAC_ACCT" />
+          <ScalarProperty Name="FAC_STATE" ColumnName="FAC_STATE" />
+          <ScalarProperty Name="FAC_CITY" ColumnName="FAC_CITY" />
+          <ScalarProperty Name="FAC_HIN" ColumnName="FAC_HIN" />
+          <ScalarProperty Name="FAC_DEA" ColumnName="FAC_DEA" />
+          <ScalarProperty Name="FAC_NAME" ColumnName="FAC_NAME" />
+          <ScalarProperty Name="WHOLESALER" ColumnName="WHOLESALER" />
+          <ScalarProperty Name="DC_DEA" ColumnName="DC_DEA" />
+          <ScalarProperty Name="DC_NAME" ColumnName="DC_NAME" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Amerisources">
+      <EntityTypeMapping TypeName="AnalyticsModel.Amerisource">
+        <MappingFragment StoreEntitySet="Amerisource">
+          <ScalarProperty Name="EXTRA" ColumnName="EXTRA" />
+          <ScalarProperty Name="SALE_CRSRC" ColumnName="SALE_CRSRC" />
+          <ScalarProperty Name="SALE_CRW" ColumnName="SALE_CRW" />
+          <ScalarProperty Name="UPC" ColumnName="UPC" />
+          <ScalarProperty Name="SALE_CR" ColumnName="SALE_CR" />
+          <ScalarProperty Name="WRPID" ColumnName="WRPID" />
+          <ScalarProperty Name="WHID" ColumnName="WHID" />
+          <ScalarProperty Name="ITID" ColumnName="ITID" />
+          <ScalarProperty Name="MMID" ColumnName="MMID" />
+          <ScalarProperty Name="REC_DATE" ColumnName="REC_DATE" />
+          <ScalarProperty Name="INV_DATE" ColumnName="INV_DATE" />
+          <ScalarProperty Name="SHIP_DATE" ColumnName="SHIP_DATE" />
+          <ScalarProperty Name="MATCH_TYPE" ColumnName="MATCH_TYPE" />
+          <ScalarProperty Name="MATCH_COID" ColumnName="MATCH_COID" />
+          <ScalarProperty Name="WH_CONT" ColumnName="WH_CONT" />
+          <ScalarProperty Name="PROD_SIZE" ColumnName="PROD_SIZE" />
+          <ScalarProperty Name="PROD_STRNG" ColumnName="PROD_STRNG" />
+          <ScalarProperty Name="BATCH" ColumnName="BATCH" />
+          <ScalarProperty Name="PO_NUMBER" ColumnName="PO_NUMBER" />
+          <ScalarProperty Name="DROP_SHIP" ColumnName="DROP_SHIP" />
+          <ScalarProperty Name="WH_NOTES" ColumnName="WH_NOTES" />
+          <ScalarProperty Name="PRIV_CONTR" ColumnName="PRIV_CONTR" />
+          <ScalarProperty Name="CONTRACT" ColumnName="CONTRACT" />
+          <ScalarProperty Name="GPO" ColumnName="GPO" />
+          <ScalarProperty Name="WH_CONTID" ColumnName="WH_CONTID" />
+          <ScalarProperty Name="TOT_COST" ColumnName="TOT_COST" />
+          <ScalarProperty Name="UP_DN_CHG" ColumnName="UP_DN_CHG" />
+          <ScalarProperty Name="COST" ColumnName="COST" />
+          <ScalarProperty Name="SHIP_QTY" ColumnName="SHIP_QTY" />
+          <ScalarProperty Name="ORDER_QTY" ColumnName="ORDER_QTY" />
+          <ScalarProperty Name="WAC" ColumnName="WAC" />
+          <ScalarProperty Name="AWP" ColumnName="AWP" />
+          <ScalarProperty Name="PROD_UD" ColumnName="PROD_UD" />
+          <ScalarProperty Name="PROD_UM" ColumnName="PROD_UM" />
+          <ScalarProperty Name="SIZE_CD" ColumnName="SIZE_CD" />
+          <ScalarProperty Name="SIZE_QTY" ColumnName="SIZE_QTY" />
+          <ScalarProperty Name="STR_CD" ColumnName="STR_CD" />
+          <ScalarProperty Name="STR_QTY" ColumnName="STR_QTY" />
+          <ScalarProperty Name="PROD_FORM" ColumnName="PROD_FORM" />
+          <ScalarProperty Name="PROD_NAME" ColumnName="PROD_NAME" />
+          <ScalarProperty Name="VE_ITEMNR" ColumnName="VE_ITEMNR" />
+          <ScalarProperty Name="NDC" ColumnName="NDC" />
+          <ScalarProperty Name="WH_OEN" ColumnName="WH_OEN" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="INVOICE" ColumnName="INVOICE" />
+          <ScalarProperty Name="IDATE" ColumnName="IDATE" />
+          <ScalarProperty Name="SDATE" ColumnName="SDATE" />
+          <ScalarProperty Name="FAC_ACCT" ColumnName="FAC_ACCT" />
+          <ScalarProperty Name="FAC_STATE" ColumnName="FAC_STATE" />
+          <ScalarProperty Name="FAC_CITY" ColumnName="FAC_CITY" />
+          <ScalarProperty Name="FAC_HIN" ColumnName="FAC_HIN" />
+          <ScalarProperty Name="FAC_DEA" ColumnName="FAC_DEA" />
+          <ScalarProperty Name="FAC_NAME" ColumnName="FAC_NAME" />
+          <ScalarProperty Name="WHOLESALER" ColumnName="WHOLESALER" />
+          <ScalarProperty Name="DC_DEA" ColumnName="DC_DEA" />
+          <ScalarProperty Name="DC_NAME" ColumnName="DC_NAME" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NcMutuals">
+      <EntityTypeMapping TypeName="AnalyticsModel.NcMutual">
+        <MappingFragment StoreEntitySet="NcMutual">
+          <ScalarProperty Name="EXTRA" ColumnName="EXTRA" />
+          <ScalarProperty Name="SALE_CRSRC" ColumnName="SALE_CRSRC" />
+          <ScalarProperty Name="SALE_CRW" ColumnName="SALE_CRW" />
+          <ScalarProperty Name="SALE_CR" ColumnName="SALE_CR" />
+          <ScalarProperty Name="WRPID" ColumnName="WRPID" />
+          <ScalarProperty Name="WHID" ColumnName="WHID" />
+          <ScalarProperty Name="ITID" ColumnName="ITID" />
+          <ScalarProperty Name="MMID" ColumnName="MMID" />
+          <ScalarProperty Name="REC_DATE" ColumnName="REC_DATE" />
+          <ScalarProperty Name="INV_DATE" ColumnName="INV_DATE" />
+          <ScalarProperty Name="SHIP_DATE" ColumnName="SHIP_DATE" />
+          <ScalarProperty Name="ORDER_DATE" ColumnName="ORDER_DATE" />
+          <ScalarProperty Name="MATCH_TYPE" ColumnName="MATCH_TYPE" />
+          <ScalarProperty Name="MATCH_COID" ColumnName="MATCH_COID" />
+          <ScalarProperty Name="WH_CONT" ColumnName="WH_CONT" />
+          <ScalarProperty Name="BATCH" ColumnName="BATCH" />
+          <ScalarProperty Name="WH_NOTES" ColumnName="WH_NOTES" />
+          <ScalarProperty Name="PO_NUMBER" ColumnName="PO_NUMBER" />
+          <ScalarProperty Name="DROP_SHIP" ColumnName="DROP_SHIP" />
+          <ScalarProperty Name="NOT_SHIP" ColumnName="NOT_SHIP" />
+          <ScalarProperty Name="NET_ITEM" ColumnName="NET_ITEM" />
+          <ScalarProperty Name="SOURCE" ColumnName="SOURCE" />
+          <ScalarProperty Name="PRIV_CONTR" ColumnName="PRIV_CONTR" />
+          <ScalarProperty Name="CHG_APPR" ColumnName="CHG_APPR" />
+          <ScalarProperty Name="CHG_AMOUNT" ColumnName="CHG_AMOUNT" />
+          <ScalarProperty Name="CHG_NUM" ColumnName="CHG_NUM" />
+          <ScalarProperty Name="CHG_DATE" ColumnName="CHG_DATE" />
+          <ScalarProperty Name="GPO" ColumnName="GPO" />
+          <ScalarProperty Name="CONTRACT" ColumnName="CONTRACT" />
+          <ScalarProperty Name="TOT_COST" ColumnName="TOT_COST" />
+          <ScalarProperty Name="UP_DN_CHG" ColumnName="UP_DN_CHG" />
+          <ScalarProperty Name="COST" ColumnName="COST" />
+          <ScalarProperty Name="SHIP_QTY" ColumnName="SHIP_QTY" />
+          <ScalarProperty Name="ORDER_QTY" ColumnName="ORDER_QTY" />
+          <ScalarProperty Name="WAC" ColumnName="WAC" />
+          <ScalarProperty Name="AWP" ColumnName="AWP" />
+          <ScalarProperty Name="TOTAL_UNIT" ColumnName="TOTAL_UNIT" />
+          <ScalarProperty Name="PROD_UD" ColumnName="PROD_UD" />
+          <ScalarProperty Name="OUTER_PACK" ColumnName="OUTER_PACK" />
+          <ScalarProperty Name="PROD_UM" ColumnName="PROD_UM" />
+          <ScalarProperty Name="PROD_SIZE" ColumnName="PROD_SIZE" />
+          <ScalarProperty Name="PROD_STRNG" ColumnName="PROD_STRNG" />
+          <ScalarProperty Name="PROD_FORM" ColumnName="PROD_FORM" />
+          <ScalarProperty Name="PROD_NAME" ColumnName="PROD_NAME" />
+          <ScalarProperty Name="VE_ITEMNR" ColumnName="VE_ITEMNR" />
+          <ScalarProperty Name="UPC" ColumnName="UPC" />
+          <ScalarProperty Name="NDC" ColumnName="NDC" />
+          <ScalarProperty Name="WH_OEN" ColumnName="WH_OEN" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="INVOICE" ColumnName="INVOICE" />
+          <ScalarProperty Name="IDATE" ColumnName="IDATE" />
+          <ScalarProperty Name="SDATE" ColumnName="SDATE" />
+          <ScalarProperty Name="ODATE" ColumnName="ODATE" />
+          <ScalarProperty Name="FAC_ACCT" ColumnName="FAC_ACCT" />
+          <ScalarProperty Name="FAC_STATE" ColumnName="FAC_STATE" />
+          <ScalarProperty Name="FAC_CITY" ColumnName="FAC_CITY" />
+          <ScalarProperty Name="FAC_HIN" ColumnName="FAC_HIN" />
+          <ScalarProperty Name="FAC_DEA" ColumnName="FAC_DEA" />
+          <ScalarProperty Name="FAC_NAME" ColumnName="FAC_NAME" />
+          <ScalarProperty Name="WHOLESALER" ColumnName="WHOLESALER" />
+          <ScalarProperty Name="DC_DEA" ColumnName="DC_DEA" />
+          <ScalarProperty Name="DC_NAME" ColumnName="DC_NAME" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BioCares">
+      <EntityTypeMapping TypeName="AnalyticsModel.BioCare">
+        <MappingFragment StoreEntitySet="BioCare">
+          <ScalarProperty Name="EXTRA" ColumnName="EXTRA" />
+          <ScalarProperty Name="SALE_CRSRC" ColumnName="SALE_CRSRC" />
+          <ScalarProperty Name="SALE_CRW" ColumnName="SALE_CRW" />
+          <ScalarProperty Name="UPC" ColumnName="UPC" />
+          <ScalarProperty Name="SALE_CR" ColumnName="SALE_CR" />
+          <ScalarProperty Name="WRPID" ColumnName="WRPID" />
+          <ScalarProperty Name="WHID" ColumnName="WHID" />
+          <ScalarProperty Name="ITID" ColumnName="ITID" />
+          <ScalarProperty Name="MMID" ColumnName="MMID" />
+          <ScalarProperty Name="REC_DATE" ColumnName="REC_DATE" />
+          <ScalarProperty Name="MATCH_TYPE" ColumnName="MATCH_TYPE" />
+          <ScalarProperty Name="MATCH_COID" ColumnName="MATCH_COID" />
+          <ScalarProperty Name="WH_CONT" ColumnName="WH_CONT" />
+          <ScalarProperty Name="TOT_COST" ColumnName="TOT_COST" />
+          <ScalarProperty Name="SHIP_QTY" ColumnName="SHIP_QTY" />
+          <ScalarProperty Name="COST" ColumnName="COST" />
+          <ScalarProperty Name="WHOLESALER" ColumnName="WHOLESALER" />
+          <ScalarProperty Name="BATCH" ColumnName="BATCH" />
+          <ScalarProperty Name="WH_NOTES" ColumnName="WH_NOTES" />
+          <ScalarProperty Name="FILLER4" ColumnName="FILLER4" />
+          <ScalarProperty Name="WAC" ColumnName="WAC" />
+          <ScalarProperty Name="VE_ITEMNR" ColumnName="VE_ITEMNR" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="UP_DN_CHG" ColumnName="UP_DN_CHG" />
+          <ScalarProperty Name="PROD_UM" ColumnName="PROD_UM" />
+          <ScalarProperty Name="PROD_NAME" ColumnName="PROD_NAME" />
+          <ScalarProperty Name="CTOTCOST" ColumnName="CTOTCOST" />
+          <ScalarProperty Name="FILLER3" ColumnName="FILLER3" />
+          <ScalarProperty Name="PROD_SIZE" ColumnName="PROD_SIZE" />
+          <ScalarProperty Name="SHIP_DATE" ColumnName="SHIP_DATE" />
+          <ScalarProperty Name="CQTY" ColumnName="CQTY" />
+          <ScalarProperty Name="FILLER2" ColumnName="FILLER2" />
+          <ScalarProperty Name="NDC" ColumnName="NDC" />
+          <ScalarProperty Name="INVOICE" ColumnName="INVOICE" />
+          <ScalarProperty Name="INV_DATE" ColumnName="INV_DATE" />
+          <ScalarProperty Name="FILLER1" ColumnName="FILLER1" />
+          <ScalarProperty Name="DROP_SHIP" ColumnName="DROP_SHIP" />
+          <ScalarProperty Name="DC_NAME" ColumnName="DC_NAME" />
+          <ScalarProperty Name="DC_DEA" ColumnName="DC_DEA" />
+          <ScalarProperty Name="WH_OEN" ColumnName="WH_OEN" />
+          <ScalarProperty Name="FAC_STATE" ColumnName="FAC_STATE" />
+          <ScalarProperty Name="FAC_CITY" ColumnName="FAC_CITY" />
+          <ScalarProperty Name="FAC_HIN" ColumnName="FAC_HIN" />
+          <ScalarProperty Name="FAC_DEA" ColumnName="FAC_DEA" />
+          <ScalarProperty Name="FAC_ACCT" ColumnName="FAC_ACCT" />
+          <ScalarProperty Name="FAC_NAME" ColumnName="FAC_NAME" />
+          <ScalarProperty Name="CCOST" ColumnName="CCOST" />
+          <ScalarProperty Name="CONTRACT" ColumnName="CONTRACT" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ValleyWholesales">
+      <EntityTypeMapping TypeName="AnalyticsModel.ValleyWholesale">
+        <MappingFragment StoreEntitySet="ValleyWholesale">
+          <ScalarProperty Name="EXTRA" ColumnName="EXTRA" />
+          <ScalarProperty Name="SALE_CRSRC" ColumnName="SALE_CRSRC" />
+          <ScalarProperty Name="SALE_CRW" ColumnName="SALE_CRW" />
+          <ScalarProperty Name="ITID" ColumnName="ITID" />
+          <ScalarProperty Name="WRPID" ColumnName="WRPID" />
+          <ScalarProperty Name="WHID" ColumnName="WHID" />
+          <ScalarProperty Name="MMID" ColumnName="MMID" />
+          <ScalarProperty Name="REC_DATE" ColumnName="REC_DATE" />
+          <ScalarProperty Name="MATCH_COID" ColumnName="MATCH_COID" />
+          <ScalarProperty Name="WH_CONT" ColumnName="WH_CONT" />
+          <ScalarProperty Name="INV_DATE" ColumnName="INV_DATE" />
+          <ScalarProperty Name="SHIP_DATE" ColumnName="SHIP_DATE" />
+          <ScalarProperty Name="MATCH_TYPE" ColumnName="MATCH_TYPE" />
+          <ScalarProperty Name="TOT_COST" ColumnName="TOT_COST" />
+          <ScalarProperty Name="SHIP_QTY" ColumnName="SHIP_QTY" />
+          <ScalarProperty Name="COST" ColumnName="COST" />
+          <ScalarProperty Name="WAC" ColumnName="WAC" />
+          <ScalarProperty Name="BATCH" ColumnName="BATCH" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="IDATE" ColumnName="IDATE" />
+          <ScalarProperty Name="VE_ITEMNR" ColumnName="VE_ITEMNR" />
+          <ScalarProperty Name="FAC_ACCT" ColumnName="FAC_ACCT" />
+          <ScalarProperty Name="DIVISION" ColumnName="DIVISION" />
+          <ScalarProperty Name="UP_CHARGE" ColumnName="UP_CHARGE" />
+          <ScalarProperty Name="DI" ColumnName="DI" />
+          <ScalarProperty Name="PROD_NAME" ColumnName="PROD_NAME" />
+          <ScalarProperty Name="CTOT_COST" ColumnName="CTOT_COST" />
+          <ScalarProperty Name="SDATE" ColumnName="SDATE" />
+          <ScalarProperty Name="INVOICE" ColumnName="INVOICE" />
+          <ScalarProperty Name="NDC" ColumnName="NDC" />
+          <ScalarProperty Name="PROD_CODE" ColumnName="PROD_CODE" />
+          <ScalarProperty Name="CONTRACT" ColumnName="CONTRACT" />
+          <ScalarProperty Name="SALE_CR" ColumnName="SALE_CR" />
+          <ScalarProperty Name="CQTY" ColumnName="CQTY" />
+          <ScalarProperty Name="CCOST" ColumnName="CCOST" />
+          <ScalarProperty Name="CWAC" ColumnName="CWAC" />
+          <ScalarProperty Name="FAC_DEA" ColumnName="FAC_DEA" />
+          <ScalarProperty Name="FAC_NAME" ColumnName="FAC_NAME" />
+          <ScalarProperty Name="DC_DEA" ColumnName="DC_DEA" />
+          <ScalarProperty Name="WHOLESALER" ColumnName="WHOLESALER" />
+          <ScalarProperty Name="PDATE" ColumnName="PDATE" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MorrisDicksons">
+      <EntityTypeMapping TypeName="AnalyticsModel.MorrisDickson">
+        <MappingFragment StoreEntitySet="MorrisDickson">
+          <ScalarProperty Name="EXTRA" ColumnName="EXTRA" />
+          <ScalarProperty Name="SALE_CRSRC" ColumnName="SALE_CRSRC" />
+          <ScalarProperty Name="SALE_CRW" ColumnName="SALE_CRW" />
+          <ScalarProperty Name="ITID" ColumnName="ITID" />
+          <ScalarProperty Name="WRPID" ColumnName="WRPID" />
+          <ScalarProperty Name="WHID" ColumnName="WHID" />
+          <ScalarProperty Name="MMID" ColumnName="MMID" />
+          <ScalarProperty Name="REC_DATE" ColumnName="REC_DATE" />
+          <ScalarProperty Name="INV_DATE" ColumnName="INV_DATE" />
+          <ScalarProperty Name="SHIP_DATE" ColumnName="SHIP_DATE" />
+          <ScalarProperty Name="WAC" ColumnName="WAC" />
+          <ScalarProperty Name="TOT_COST" ColumnName="TOT_COST" />
+          <ScalarProperty Name="COST" ColumnName="COST" />
+          <ScalarProperty Name="SHIP_QTY" ColumnName="SHIP_QTY" />
+          <ScalarProperty Name="MATCH_TYPE" ColumnName="MATCH_TYPE" />
+          <ScalarProperty Name="MATCH_COID" ColumnName="MATCH_COID" />
+          <ScalarProperty Name="WH_CONT" ColumnName="WH_CONT" />
+          <ScalarProperty Name="WHOLESALER" ColumnName="WHOLESALER" />
+          <ScalarProperty Name="BATCH" ColumnName="BATCH" />
+          <ScalarProperty Name="DISCOUNT" ColumnName="DISCOUNT" />
+          <ScalarProperty Name="CREDREBILL" ColumnName="CREDREBILL" />
+          <ScalarProperty Name="CONVERSION" ColumnName="CONVERSION" />
+          <ScalarProperty Name="CHG_NUM" ColumnName="CHG_NUM" />
+          <ScalarProperty Name="IDATE" ColumnName="IDATE" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="FILLER1" ColumnName="FILLER1" />
+          <ScalarProperty Name="VE_ITEMNR" ColumnName="VE_ITEMNR" />
+          <ScalarProperty Name="WH_OEN" ColumnName="WH_OEN" />
+          <ScalarProperty Name="FAC_ACCT" ColumnName="FAC_ACCT" />
+          <ScalarProperty Name="DC_NR" ColumnName="DC_NR" />
+          <ScalarProperty Name="PROD_STRNG" ColumnName="PROD_STRNG" />
+          <ScalarProperty Name="PROD_SIZE" ColumnName="PROD_SIZE" />
+          <ScalarProperty Name="PROD_NAME" ColumnName="PROD_NAME" />
+          <ScalarProperty Name="CTOTAL" ColumnName="CTOTAL" />
+          <ScalarProperty Name="SDATE" ColumnName="SDATE" />
+          <ScalarProperty Name="INVOICE" ColumnName="INVOICE" />
+          <ScalarProperty Name="FILLER" ColumnName="FILLER" />
+          <ScalarProperty Name="UPN" ColumnName="UPN" />
+          <ScalarProperty Name="UPC" ColumnName="UPC" />
+          <ScalarProperty Name="OLD_NDC" ColumnName="OLD_NDC" />
+          <ScalarProperty Name="NDC" ColumnName="NDC" />
+          <ScalarProperty Name="CONT_START" ColumnName="CONT_START" />
+          <ScalarProperty Name="CONTRACT" ColumnName="CONTRACT" />
+          <ScalarProperty Name="SALE_CR" ColumnName="SALE_CR" />
+          <ScalarProperty Name="CQTY" ColumnName="CQTY" />
+          <ScalarProperty Name="CCOST" ColumnName="CCOST" />
+          <ScalarProperty Name="CWAC" ColumnName="CWAC" />
+          <ScalarProperty Name="FAC_STATE" ColumnName="FAC_STATE" />
+          <ScalarProperty Name="FAC_CITY" ColumnName="FAC_CITY" />
+          <ScalarProperty Name="FAC_HIN" ColumnName="FAC_HIN" />
+          <ScalarProperty Name="FAC_DEA" ColumnName="FAC_DEA" />
+          <ScalarProperty Name="FAC_NAME" ColumnName="FAC_NAME" />
+          <ScalarProperty Name="DC_DEA" ColumnName="DC_DEA" />
+          <ScalarProperty Name="DC_NAME" ColumnName="DC_NAME" />
+          <ScalarProperty Name="FCDATE" ColumnName="FCDATE" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Andas">
+      <EntityTypeMapping TypeName="AnalyticsModel.Anda">
+        <MappingFragment StoreEntitySet="Anda">
+          <ScalarProperty Name="EXTRA" ColumnName="EXTRA" />
+          <ScalarProperty Name="SALE_CRSRC" ColumnName="SALE_CRSRC" />
+          <ScalarProperty Name="SALE_CRW" ColumnName="SALE_CRW" />
+          <ScalarProperty Name="ITID" ColumnName="ITID" />
+          <ScalarProperty Name="MMID" ColumnName="MMID" />
+          <ScalarProperty Name="SALE_CR" ColumnName="SALE_CR" />
+          <ScalarProperty Name="MATCH_TYPE" ColumnName="MATCH_TYPE" />
+          <ScalarProperty Name="MATCH_COID" ColumnName="MATCH_COID" />
+          <ScalarProperty Name="WH_CONT" ColumnName="WH_CONT" />
+          <ScalarProperty Name="REC_DATE" ColumnName="REC_DATE" />
+          <ScalarProperty Name="ORDER_DATE" ColumnName="ORDER_DATE" />
+          <ScalarProperty Name="COST" ColumnName="COST" />
+          <ScalarProperty Name="DC_NAME" ColumnName="DC_NAME" />
+          <ScalarProperty Name="WHOLESALER" ColumnName="WHOLESALER" />
+          <ScalarProperty Name="WRPID" ColumnName="WRPID" />
+          <ScalarProperty Name="WHID" ColumnName="WHID" />
+          <ScalarProperty Name="BATCH" ColumnName="BATCH" />
+          <ScalarProperty Name="FILLER3" ColumnName="FILLER3" />
+          <ScalarProperty Name="GPO" ColumnName="GPO" />
+          <ScalarProperty Name="CONTRACT" ColumnName="CONTRACT" />
+          <ScalarProperty Name="FILLER2" ColumnName="FILLER2" />
+          <ScalarProperty Name="FILLER1" ColumnName="FILLER1" />
+          <ScalarProperty Name="TOT_COST" ColumnName="TOT_COST" />
+          <ScalarProperty Name="SHIP_QTY" ColumnName="SHIP_QTY" />
+          <ScalarProperty Name="ORDER_QTY" ColumnName="ORDER_QTY" />
+          <ScalarProperty Name="PROD_SIZE" ColumnName="PROD_SIZE" />
+          <ScalarProperty Name="PROD_STRNG" ColumnName="PROD_STRNG" />
+          <ScalarProperty Name="PROD_FORM" ColumnName="PROD_FORM" />
+          <ScalarProperty Name="PROD_NAME" ColumnName="PROD_NAME" />
+          <ScalarProperty Name="UPC" ColumnName="UPC" />
+          <ScalarProperty Name="NDC" ColumnName="NDC" />
+          <ScalarProperty Name="VE_ITEMNR" ColumnName="VE_ITEMNR" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="INVOICE" ColumnName="INVOICE" />
+          <ScalarProperty Name="INV_DATE" ColumnName="INV_DATE" />
+          <ScalarProperty Name="ODATE" ColumnName="ODATE" />
+          <ScalarProperty Name="FAC_STATE" ColumnName="FAC_STATE" />
+          <ScalarProperty Name="FAC_CITY" ColumnName="FAC_CITY" />
+          <ScalarProperty Name="FAC_HIN" ColumnName="FAC_HIN" />
+          <ScalarProperty Name="FAC_DEA" ColumnName="FAC_DEA" />
+          <ScalarProperty Name="FAC_NAME" ColumnName="FAC_NAME" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MCKESSONs">
+      <EntityTypeMapping TypeName="AnalyticsModel.MCKESSON">
+        <MappingFragment StoreEntitySet="MCKESSON">
+          <ScalarProperty Name="EXTRA" ColumnName="EXTRA" />
+          <ScalarProperty Name="SALE_CRSRC" ColumnName="SALE_CRSRC" />
+          <ScalarProperty Name="SALE_CRW" ColumnName="SALE_CRW" />
+          <ScalarProperty Name="REC_DATE" ColumnName="REC_DATE" />
+          <ScalarProperty Name="MATCH_TYPE" ColumnName="MATCH_TYPE" />
+          <ScalarProperty Name="MATCH_COID" ColumnName="MATCH_COID" />
+          <ScalarProperty Name="WH_CONT" ColumnName="WH_CONT" />
+          <ScalarProperty Name="DC_NAME" ColumnName="DC_NAME" />
+          <ScalarProperty Name="WRPID" ColumnName="WRPID" />
+          <ScalarProperty Name="ITID" ColumnName="ITID" />
+          <ScalarProperty Name="MMID" ColumnName="MMID" />
+          <ScalarProperty Name="SALE_CR" ColumnName="SALE_CR" />
+          <ScalarProperty Name="BATCH" ColumnName="BATCH" />
+          <ScalarProperty Name="FILLER07" ColumnName="FILLER07" />
+          <ScalarProperty Name="FILLER06" ColumnName="FILLER06" />
+          <ScalarProperty Name="CHG_AMOUNT" ColumnName="CHG_AMOUNT" />
+          <ScalarProperty Name="REASON_DES" ColumnName="REASON_DES" />
+          <ScalarProperty Name="CREDIT_CD" ColumnName="CREDIT_CD" />
+          <ScalarProperty Name="WH_NOTES" ColumnName="WH_NOTES" />
+          <ScalarProperty Name="REASON_NS" ColumnName="REASON_NS" />
+          <ScalarProperty Name="LEAD_NAME" ColumnName="LEAD_NAME" />
+          <ScalarProperty Name="CONTRACT" ColumnName="CONTRACT" />
+          <ScalarProperty Name="GPO" ColumnName="GPO" />
+          <ScalarProperty Name="NEWEXTRA" ColumnName="NEWEXTRA" />
+          <ScalarProperty Name="TOT_COST" ColumnName="TOT_COST" />
+          <ScalarProperty Name="COST" ColumnName="COST" />
+          <ScalarProperty Name="SHIP_QTY" ColumnName="SHIP_QTY" />
+          <ScalarProperty Name="ORDER_QTY" ColumnName="ORDER_QTY" />
+          <ScalarProperty Name="WAC" ColumnName="WAC" />
+          <ScalarProperty Name="AWP" ColumnName="AWP" />
+          <ScalarProperty Name="FILLER05" ColumnName="FILLER05" />
+          <ScalarProperty Name="PROD_UM" ColumnName="PROD_UM" />
+          <ScalarProperty Name="GEN_IND" ColumnName="GEN_IND" />
+          <ScalarProperty Name="PROD_SIZE" ColumnName="PROD_SIZE" />
+          <ScalarProperty Name="PROD_STRNG" ColumnName="PROD_STRNG" />
+          <ScalarProperty Name="GEN_NAME" ColumnName="GEN_NAME" />
+          <ScalarProperty Name="GEN_ID" ColumnName="GEN_ID" />
+          <ScalarProperty Name="PROD_FORM" ColumnName="PROD_FORM" />
+          <ScalarProperty Name="FILLER04" ColumnName="FILLER04" />
+          <ScalarProperty Name="FILLER03" ColumnName="FILLER03" />
+          <ScalarProperty Name="FILLER02" ColumnName="FILLER02" />
+          <ScalarProperty Name="FILLER01" ColumnName="FILLER01" />
+          <ScalarProperty Name="UPC" ColumnName="UPC" />
+          <ScalarProperty Name="NDC" ColumnName="NDC" />
+          <ScalarProperty Name="DC_NR" ColumnName="DC_NR" />
+          <ScalarProperty Name="PROD_NAME" ColumnName="PROD_NAME" />
+          <ScalarProperty Name="VE_ITEMNR" ColumnName="VE_ITEMNR" />
+          <ScalarProperty Name="VE_ACCT" ColumnName="VE_ACCT" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="PO_NUMBER" ColumnName="PO_NUMBER" />
+          <ScalarProperty Name="INVOICE" ColumnName="INVOICE" />
+          <ScalarProperty Name="INV_DATE" ColumnName="INV_DATE" />
+          <ScalarProperty Name="SHIP_DATE" ColumnName="SHIP_DATE" />
+          <ScalarProperty Name="FAC_DEA" ColumnName="FAC_DEA" />
+          <ScalarProperty Name="FAC_ZIP" ColumnName="FAC_ZIP" />
+          <ScalarProperty Name="FAC_STATE" ColumnName="FAC_STATE" />
+          <ScalarProperty Name="FAC_CITY" ColumnName="FAC_CITY" />
+          <ScalarProperty Name="FAC_ADDR" ColumnName="FAC_ADDR" />
+          <ScalarProperty Name="FAC_NAME" ColumnName="FAC_NAME" />
+          <ScalarProperty Name="FAC_ACCT" ColumnName="FAC_ACCT" />
+          <ScalarProperty Name="WHOLESALER" ColumnName="WHOLESALER" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RnSPharmas">
+      <EntityTypeMapping TypeName="AnalyticsModel.RnSPharma">
+        <MappingFragment StoreEntitySet="RnSPharma">
+          <ScalarProperty Name="EXTRA" ColumnName="EXTRA" />
+          <ScalarProperty Name="SALE_CRSRC" ColumnName="SALE_CRSRC" />
+          <ScalarProperty Name="SALE_CRW" ColumnName="SALE_CRW" />
+          <ScalarProperty Name="ITID" ColumnName="ITID" />
+          <ScalarProperty Name="MMID" ColumnName="MMID" />
+          <ScalarProperty Name="SALE_CR" ColumnName="SALE_CR" />
+          <ScalarProperty Name="MATCH_TYPE" ColumnName="MATCH_TYPE" />
+          <ScalarProperty Name="MATCH_COID" ColumnName="MATCH_COID" />
+          <ScalarProperty Name="WH_CONT" ColumnName="WH_CONT" />
+          <ScalarProperty Name="CONTRACT" ColumnName="CONTRACT" />
+          <ScalarProperty Name="REC_DATE" ColumnName="REC_DATE" />
+          <ScalarProperty Name="WHOLESALER" ColumnName="WHOLESALER" />
+          <ScalarProperty Name="WRPID" ColumnName="WRPID" />
+          <ScalarProperty Name="WHID" ColumnName="WHID" />
+          <ScalarProperty Name="NDC" ColumnName="NDC" />
+          <ScalarProperty Name="COST" ColumnName="COST" />
+          <ScalarProperty Name="BATCH" ColumnName="BATCH" />
+          <ScalarProperty Name="FILLER2" ColumnName="FILLER2" />
+          <ScalarProperty Name="TOT_COST" ColumnName="TOT_COST" />
+          <ScalarProperty Name="SHIP_QTY" ColumnName="SHIP_QTY" />
+          <ScalarProperty Name="INVOICE" ColumnName="INVOICE" />
+          <ScalarProperty Name="INV_DATE" ColumnName="INV_DATE" />
+          <ScalarProperty Name="CNDC" ColumnName="CNDC" />
+          <ScalarProperty Name="PROD_NAME" ColumnName="PROD_NAME" />
+          <ScalarProperty Name="FILLER1" ColumnName="FILLER1" />
+          <ScalarProperty Name="FAC_HIN" ColumnName="FAC_HIN" />
+          <ScalarProperty Name="FAC_DEA" ColumnName="FAC_DEA" />
+          <ScalarProperty Name="FAC_ZIP" ColumnName="FAC_ZIP" />
+          <ScalarProperty Name="FAC_STATE" ColumnName="FAC_STATE" />
+          <ScalarProperty Name="FAC_CITY" ColumnName="FAC_CITY" />
+          <ScalarProperty Name="FAC_ADDR" ColumnName="FAC_ADDR" />
+          <ScalarProperty Name="FAC_NAME" ColumnName="FAC_NAME" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ASDs">
+      <EntityTypeMapping TypeName="AnalyticsModel.ASD">
+        <MappingFragment StoreEntitySet="ASD">
+          <ScalarProperty Name="EXTRA" ColumnName="EXTRA" />
+          <ScalarProperty Name="SALE_CRSRC" ColumnName="SALE_CRSRC" />
+          <ScalarProperty Name="SALE_CRW" ColumnName="SALE_CRW" />
+          <ScalarProperty Name="ITID" ColumnName="ITID" />
+          <ScalarProperty Name="MMID" ColumnName="MMID" />
+          <ScalarProperty Name="SALE_CR" ColumnName="SALE_CR" />
+          <ScalarProperty Name="MATCH_TYPE" ColumnName="MATCH_TYPE" />
+          <ScalarProperty Name="MATCH_COID" ColumnName="MATCH_COID" />
+          <ScalarProperty Name="WH_CONT" ColumnName="WH_CONT" />
+          <ScalarProperty Name="REC_DATE" ColumnName="REC_DATE" />
+          <ScalarProperty Name="SHIP_DATE" ColumnName="SHIP_DATE" />
+          <ScalarProperty Name="INV_DATE" ColumnName="INV_DATE" />
+          <ScalarProperty Name="WHOLESALER" ColumnName="WHOLESALER" />
+          <ScalarProperty Name="WRPID" ColumnName="WRPID" />
+          <ScalarProperty Name="WHID" ColumnName="WHID" />
+          <ScalarProperty Name="NDC" ColumnName="NDC" />
+          <ScalarProperty Name="BATCH" ColumnName="BATCH" />
+          <ScalarProperty Name="PLASMA" ColumnName="PLASMA" />
+          <ScalarProperty Name="FILLER5" ColumnName="FILLER5" />
+          <ScalarProperty Name="FILLER4" ColumnName="FILLER4" />
+          <ScalarProperty Name="FILLER3" ColumnName="FILLER3" />
+          <ScalarProperty Name="FILLER2" ColumnName="FILLER2" />
+          <ScalarProperty Name="CONTRACT" ColumnName="CONTRACT" />
+          <ScalarProperty Name="INVOICE" ColumnName="INVOICE" />
+          <ScalarProperty Name="IDATE" ColumnName="IDATE" />
+          <ScalarProperty Name="WH_OEN" ColumnName="WH_OEN" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="PROD_NAME" ColumnName="PROD_NAME" />
+          <ScalarProperty Name="TOT_COST" ColumnName="TOT_COST" />
+          <ScalarProperty Name="COST" ColumnName="COST" />
+          <ScalarProperty Name="SDATE" ColumnName="SDATE" />
+          <ScalarProperty Name="SHIP_QTY" ColumnName="SHIP_QTY" />
+          <ScalarProperty Name="CNDC" ColumnName="CNDC" />
+          <ScalarProperty Name="FAC_STATE" ColumnName="FAC_STATE" />
+          <ScalarProperty Name="FAC_CITY" ColumnName="FAC_CITY" />
+          <ScalarProperty Name="FAC_ADDR" ColumnName="FAC_ADDR" />
+          <ScalarProperty Name="FAC_HIN" ColumnName="FAC_HIN" />
+          <ScalarProperty Name="FAC_DEA" ColumnName="FAC_DEA" />
+          <ScalarProperty Name="FAC_NAME" ColumnName="FAC_NAME" />
+          <ScalarProperty Name="FAC_ACCT" ColumnName="FAC_ACCT" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HDSmiths">
+      <EntityTypeMapping TypeName="AnalyticsModel.HDSmith">
+        <MappingFragment StoreEntitySet="HDSmith">
+          <ScalarProperty Name="EXTRA" ColumnName="EXTRA" />
+          <ScalarProperty Name="SALE_CRSRC" ColumnName="SALE_CRSRC" />
+          <ScalarProperty Name="SALE_CRW" ColumnName="SALE_CRW" />
+          <ScalarProperty Name="ITID" ColumnName="ITID" />
+          <ScalarProperty Name="WRPID" ColumnName="WRPID" />
+          <ScalarProperty Name="WHID" ColumnName="WHID" />
+          <ScalarProperty Name="MMID" ColumnName="MMID" />
+          <ScalarProperty Name="REC_DATE" ColumnName="REC_DATE" />
+          <ScalarProperty Name="INV_DATE" ColumnName="INV_DATE" />
+          <ScalarProperty Name="SHIP_DATE" ColumnName="SHIP_DATE" />
+          <ScalarProperty Name="WAC" ColumnName="WAC" />
+          <ScalarProperty Name="TOT_COST" ColumnName="TOT_COST" />
+          <ScalarProperty Name="COST" ColumnName="COST" />
+          <ScalarProperty Name="SHIP_QTY" ColumnName="SHIP_QTY" />
+          <ScalarProperty Name="MATCH_TYPE" ColumnName="MATCH_TYPE" />
+          <ScalarProperty Name="MATCH_COID" ColumnName="MATCH_COID" />
+          <ScalarProperty Name="WH_CONT" ColumnName="WH_CONT" />
+          <ScalarProperty Name="WHOLESALER" ColumnName="WHOLESALER" />
+          <ScalarProperty Name="BATCH" ColumnName="BATCH" />
+          <ScalarProperty Name="DISCOUNT" ColumnName="DISCOUNT" />
+          <ScalarProperty Name="CREDREBILL" ColumnName="CREDREBILL" />
+          <ScalarProperty Name="CONVERSION" ColumnName="CONVERSION" />
+          <ScalarProperty Name="CONT_ALT" ColumnName="CONT_ALT" />
+          <ScalarProperty Name="IDATE" ColumnName="IDATE" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="VE_ITEMNR" ColumnName="VE_ITEMNR" />
+          <ScalarProperty Name="WH_OEN" ColumnName="WH_OEN" />
+          <ScalarProperty Name="FAC_ACCT" ColumnName="FAC_ACCT" />
+          <ScalarProperty Name="DC_NR" ColumnName="DC_NR" />
+          <ScalarProperty Name="FILLER" ColumnName="FILLER" />
+          <ScalarProperty Name="PROD_STRNG" ColumnName="PROD_STRNG" />
+          <ScalarProperty Name="PROD_SIZE" ColumnName="PROD_SIZE" />
+          <ScalarProperty Name="PROD_NAME" ColumnName="PROD_NAME" />
+          <ScalarProperty Name="CTOTAL" ColumnName="CTOTAL" />
+          <ScalarProperty Name="SDATE" ColumnName="SDATE" />
+          <ScalarProperty Name="INVOICE" ColumnName="INVOICE" />
+          <ScalarProperty Name="UPN" ColumnName="UPN" />
+          <ScalarProperty Name="UPC" ColumnName="UPC" />
+          <ScalarProperty Name="OLD_NDC" ColumnName="OLD_NDC" />
+          <ScalarProperty Name="NDC" ColumnName="NDC" />
+          <ScalarProperty Name="CONT_START" ColumnName="CONT_START" />
+          <ScalarProperty Name="CONTRACT" ColumnName="CONTRACT" />
+          <ScalarProperty Name="SALE_CR" ColumnName="SALE_CR" />
+          <ScalarProperty Name="CQTY" ColumnName="CQTY" />
+          <ScalarProperty Name="CCOST" ColumnName="CCOST" />
+          <ScalarProperty Name="CWAC" ColumnName="CWAC" />
+          <ScalarProperty Name="FAC_STATE" ColumnName="FAC_STATE" />
+          <ScalarProperty Name="FAC_CITY" ColumnName="FAC_CITY" />
+          <ScalarProperty Name="FAC_HIN" ColumnName="FAC_HIN" />
+          <ScalarProperty Name="FAC_DEA" ColumnName="FAC_DEA" />
+          <ScalarProperty Name="FAC_NAME" ColumnName="FAC_NAME" />
+          <ScalarProperty Name="DC_DEA" ColumnName="DC_DEA" />
+          <ScalarProperty Name="DC_NAME" ColumnName="DC_NAME" />
+          <ScalarProperty Name="FCDATE" ColumnName="FCDATE" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CardinalSPDs">
+      <EntityTypeMapping TypeName="AnalyticsModel.CardinalSPD">
+        <MappingFragment StoreEntitySet="CardinalSPD">
+          <ScalarProperty Name="EXTRA" ColumnName="EXTRA" />
+          <ScalarProperty Name="SALE_CRSRC" ColumnName="SALE_CRSRC" />
+          <ScalarProperty Name="SALE_CRW" ColumnName="SALE_CRW" />
+          <ScalarProperty Name="ITID" ColumnName="ITID" />
+          <ScalarProperty Name="MMID" ColumnName="MMID" />
+          <ScalarProperty Name="SALE_CR" ColumnName="SALE_CR" />
+          <ScalarProperty Name="MATCH_TYPE" ColumnName="MATCH_TYPE" />
+          <ScalarProperty Name="MATCH_COID" ColumnName="MATCH_COID" />
+          <ScalarProperty Name="WH_CONT" ColumnName="WH_CONT" />
+          <ScalarProperty Name="REC_DATE" ColumnName="REC_DATE" />
+          <ScalarProperty Name="DC_NAME" ColumnName="DC_NAME" />
+          <ScalarProperty Name="WHOLESALER" ColumnName="WHOLESALER" />
+          <ScalarProperty Name="WRPID" ColumnName="WRPID" />
+          <ScalarProperty Name="WHID" ColumnName="WHID" />
+          <ScalarProperty Name="COST" ColumnName="COST" />
+          <ScalarProperty Name="BATCH" ColumnName="BATCH" />
+          <ScalarProperty Name="FILLAR23" ColumnName="FILLAR23" />
+          <ScalarProperty Name="FILLER22" ColumnName="FILLER22" />
+          <ScalarProperty Name="FILLER21" ColumnName="FILLER21" />
+          <ScalarProperty Name="FILLQR20" ColumnName="FILLQR20" />
+          <ScalarProperty Name="FILLER19" ColumnName="FILLER19" />
+          <ScalarProperty Name="FILLER18" ColumnName="FILLER18" />
+          <ScalarProperty Name="FILLER17" ColumnName="FILLER17" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="FILLER16" ColumnName="FILLER16" />
+          <ScalarProperty Name="FILLER15" ColumnName="FILLER15" />
+          <ScalarProperty Name="FILLER14" ColumnName="FILLER14" />
+          <ScalarProperty Name="PROD_NAME" ColumnName="PROD_NAME" />
+          <ScalarProperty Name="FILLER13" ColumnName="FILLER13" />
+          <ScalarProperty Name="TOT_COST" ColumnName="TOT_COST" />
+          <ScalarProperty Name="SHIP_DATE" ColumnName="SHIP_DATE" />
+          <ScalarProperty Name="FILLER12" ColumnName="FILLER12" />
+          <ScalarProperty Name="FILLER11" ColumnName="FILLER11" />
+          <ScalarProperty Name="SHIP_QTY" ColumnName="SHIP_QTY" />
+          <ScalarProperty Name="FILLER10" ColumnName="FILLER10" />
+          <ScalarProperty Name="FILLER9" ColumnName="FILLER9" />
+          <ScalarProperty Name="PROD_STRNG" ColumnName="PROD_STRNG" />
+          <ScalarProperty Name="FILLER8" ColumnName="FILLER8" />
+          <ScalarProperty Name="PROD_FORM" ColumnName="PROD_FORM" />
+          <ScalarProperty Name="FILLER7" ColumnName="FILLER7" />
+          <ScalarProperty Name="ORDER_DATE" ColumnName="ORDER_DATE" />
+          <ScalarProperty Name="FILLER6" ColumnName="FILLER6" />
+          <ScalarProperty Name="NDC" ColumnName="NDC" />
+          <ScalarProperty Name="INVOICE" ColumnName="INVOICE" />
+          <ScalarProperty Name="INV_DATE" ColumnName="INV_DATE" />
+          <ScalarProperty Name="GPO" ColumnName="GPO" />
+          <ScalarProperty Name="DROP_SHIP" ColumnName="DROP_SHIP" />
+          <ScalarProperty Name="FILLER5" ColumnName="FILLER5" />
+          <ScalarProperty Name="FILLER4" ColumnName="FILLER4" />
+          <ScalarProperty Name="FAC_STATE" ColumnName="FAC_STATE" />
+          <ScalarProperty Name="PO_NUMBER" ColumnName="PO_NUMBER" />
+          <ScalarProperty Name="FILLER3" ColumnName="FILLER3" />
+          <ScalarProperty Name="FAC_NAME" ColumnName="FAC_NAME" />
+          <ScalarProperty Name="FAC_HIN" ColumnName="FAC_HIN" />
+          <ScalarProperty Name="FAC_DEA" ColumnName="FAC_DEA" />
+          <ScalarProperty Name="FAC_CITY" ColumnName="FAC_CITY" />
+          <ScalarProperty Name="FAC_ACCT" ColumnName="FAC_ACCT" />
+          <ScalarProperty Name="COST_TOT" ColumnName="COST_TOT" />
+          <ScalarProperty Name="FILLER2" ColumnName="FILLER2" />
+          <ScalarProperty Name="CHG_NUM" ColumnName="CHG_NUM" />
+          <ScalarProperty Name="CHG_DATE" ColumnName="CHG_DATE" />
+          <ScalarProperty Name="CHG_AMOUNT" ColumnName="CHG_AMOUNT" />
+          <ScalarProperty Name="FILLER1" ColumnName="FILLER1" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CuraScripts">
+      <EntityTypeMapping TypeName="AnalyticsModel.CuraScript">
+        <MappingFragment StoreEntitySet="CuraScript">
+          <ScalarProperty Name="EXTRA" ColumnName="EXTRA" />
+          <ScalarProperty Name="SALE_CRSRC" ColumnName="SALE_CRSRC" />
+          <ScalarProperty Name="SALE_CRW" ColumnName="SALE_CRW" />
+          <ScalarProperty Name="SALE_CR" ColumnName="SALE_CR" />
+          <ScalarProperty Name="WRPID" ColumnName="WRPID" />
+          <ScalarProperty Name="WHID" ColumnName="WHID" />
+          <ScalarProperty Name="ITID" ColumnName="ITID" />
+          <ScalarProperty Name="MMID" ColumnName="MMID" />
+          <ScalarProperty Name="REC_DATE" ColumnName="REC_DATE" />
+          <ScalarProperty Name="MATCH_TYPE" ColumnName="MATCH_TYPE" />
+          <ScalarProperty Name="MATCH_COID" ColumnName="MATCH_COID" />
+          <ScalarProperty Name="WHOLESALER" ColumnName="WHOLESALER" />
+          <ScalarProperty Name="WH_CONT" ColumnName="WH_CONT" />
+          <ScalarProperty Name="BATCH" ColumnName="BATCH" />
+          <ScalarProperty Name="TOT_FEE" ColumnName="TOT_FEE" />
+          <ScalarProperty Name="TOT_COST" ColumnName="TOT_COST" />
+          <ScalarProperty Name="COST" ColumnName="COST" />
+          <ScalarProperty Name="SHIP_QTY" ColumnName="SHIP_QTY" />
+          <ScalarProperty Name="FILLER3" ColumnName="FILLER3" />
+          <ScalarProperty Name="INVOICE" ColumnName="INVOICE" />
+          <ScalarProperty Name="INV_DATE" ColumnName="INV_DATE" />
+          <ScalarProperty Name="WH_OEN" ColumnName="WH_OEN" />
+          <ScalarProperty Name="NDC" ColumnName="NDC" />
+          <ScalarProperty Name="LOT_EXPR" ColumnName="LOT_EXPR" />
+          <ScalarProperty Name="LOT_NUMBER" ColumnName="LOT_NUMBER" />
+          <ScalarProperty Name="VE_ITEMNR" ColumnName="VE_ITEMNR" />
+          <ScalarProperty Name="PROD_NAME" ColumnName="PROD_NAME" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="CONTRACT" ColumnName="CONTRACT" />
+          <ScalarProperty Name="FAC_DEA" ColumnName="FAC_DEA" />
+          <ScalarProperty Name="FAC_ZIP" ColumnName="FAC_ZIP" />
+          <ScalarProperty Name="FAC_STATE" ColumnName="FAC_STATE" />
+          <ScalarProperty Name="FAC_CITY" ColumnName="FAC_CITY" />
+          <ScalarProperty Name="FILLER2" ColumnName="FILLER2" />
+          <ScalarProperty Name="FILLER1" ColumnName="FILLER1" />
+          <ScalarProperty Name="FAC_NAME" ColumnName="FAC_NAME" />
+          <ScalarProperty Name="FAC_ACCT" ColumnName="FAC_ACCT" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kinrays">
+      <EntityTypeMapping TypeName="AnalyticsModel.Kinray">
+        <MappingFragment StoreEntitySet="Kinray">
+          <ScalarProperty Name="EXTRA" ColumnName="EXTRA" />
+          <ScalarProperty Name="SALE_CRSRC" ColumnName="SALE_CRSRC" />
+          <ScalarProperty Name="SALE_CRW" ColumnName="SALE_CRW" />
+          <ScalarProperty Name="ITID" ColumnName="ITID" />
+          <ScalarProperty Name="MMID" ColumnName="MMID" />
+          <ScalarProperty Name="SALE_CR" ColumnName="SALE_CR" />
+          <ScalarProperty Name="MATCH_TYPE" ColumnName="MATCH_TYPE" />
+          <ScalarProperty Name="MATCH_COID" ColumnName="MATCH_COID" />
+          <ScalarProperty Name="WH_CONT" ColumnName="WH_CONT" />
+          <ScalarProperty Name="REC_DATE" ColumnName="REC_DATE" />
+          <ScalarProperty Name="INV_DATE" ColumnName="INV_DATE" />
+          <ScalarProperty Name="DC_NAME" ColumnName="DC_NAME" />
+          <ScalarProperty Name="WHOLESALER" ColumnName="WHOLESALER" />
+          <ScalarProperty Name="WRPID" ColumnName="WRPID" />
+          <ScalarProperty Name="WHID" ColumnName="WHID" />
+          <ScalarProperty Name="BATCH" ColumnName="BATCH" />
+          <ScalarProperty Name="VE_ITEMNR" ColumnName="VE_ITEMNR" />
+          <ScalarProperty Name="FAC_ACCT" ColumnName="FAC_ACCT" />
+          <ScalarProperty Name="FAC_DEA" ColumnName="FAC_DEA" />
+          <ScalarProperty Name="CONTRACT" ColumnName="CONTRACT" />
+          <ScalarProperty Name="GPO" ColumnName="GPO" />
+          <ScalarProperty Name="IDATE" ColumnName="IDATE" />
+          <ScalarProperty Name="INVOICE" ColumnName="INVOICE" />
+          <ScalarProperty Name="TOT_COST" ColumnName="TOT_COST" />
+          <ScalarProperty Name="COST" ColumnName="COST" />
+          <ScalarProperty Name="SHIP_QTY" ColumnName="SHIP_QTY" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="PROD_SIZE" ColumnName="PROD_SIZE" />
+          <ScalarProperty Name="PROD_NAME" ColumnName="PROD_NAME" />
+          <ScalarProperty Name="NDC" ColumnName="NDC" />
+          <ScalarProperty Name="FAC_NAME" ColumnName="FAC_NAME" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="McKessonSPs">
+      <EntityTypeMapping TypeName="AnalyticsModel.McKessonSP">
+        <MappingFragment StoreEntitySet="McKessonSP">
+          <ScalarProperty Name="EXTRA" ColumnName="EXTRA" />
+          <ScalarProperty Name="SALE_CRSRC" ColumnName="SALE_CRSRC" />
+          <ScalarProperty Name="SALE_CRW" ColumnName="SALE_CRW" />
+          <ScalarProperty Name="ITID" ColumnName="ITID" />
+          <ScalarProperty Name="MMID" ColumnName="MMID" />
+          <ScalarProperty Name="SALE_CR" ColumnName="SALE_CR" />
+          <ScalarProperty Name="MATCH_TYPE" ColumnName="MATCH_TYPE" />
+          <ScalarProperty Name="MATCH_COID" ColumnName="MATCH_COID" />
+          <ScalarProperty Name="WH_CONT" ColumnName="WH_CONT" />
+          <ScalarProperty Name="REC_DATE" ColumnName="REC_DATE" />
+          <ScalarProperty Name="INV_DATE" ColumnName="INV_DATE" />
+          <ScalarProperty Name="SHIP_DATE" ColumnName="SHIP_DATE" />
+          <ScalarProperty Name="ORDER_DATE" ColumnName="ORDER_DATE" />
+          <ScalarProperty Name="WHOLESALER" ColumnName="WHOLESALER" />
+          <ScalarProperty Name="WRPID" ColumnName="WRPID" />
+          <ScalarProperty Name="WHID" ColumnName="WHID" />
+          <ScalarProperty Name="BATCH" ColumnName="BATCH" />
+          <ScalarProperty Name="FILLER13" ColumnName="FILLER13" />
+          <ScalarProperty Name="WH_OEN" ColumnName="WH_OEN" />
+          <ScalarProperty Name="FILLER12" ColumnName="FILLER12" />
+          <ScalarProperty Name="FILLER11" ColumnName="FILLER11" />
+          <ScalarProperty Name="WAC" ColumnName="WAC" />
+          <ScalarProperty Name="VE_ITEMNR" ColumnName="VE_ITEMNR" />
+          <ScalarProperty Name="FILLER10" ColumnName="FILLER10" />
+          <ScalarProperty Name="VENDOR" ColumnName="VENDOR" />
+          <ScalarProperty Name="UPC" ColumnName="UPC" />
+          <ScalarProperty Name="UP_DN_CHG" ColumnName="UP_DN_CHG" />
+          <ScalarProperty Name="PROD_UD" ColumnName="PROD_UD" />
+          <ScalarProperty Name="PROD_NAME" ColumnName="PROD_NAME" />
+          <ScalarProperty Name="FILLER9" ColumnName="FILLER9" />
+          <ScalarProperty Name="TOT_COST" ColumnName="TOT_COST" />
+          <ScalarProperty Name="SDATE" ColumnName="SDATE" />
+          <ScalarProperty Name="FILLER8" ColumnName="FILLER8" />
+          <ScalarProperty Name="REASON_NS" ColumnName="REASON_NS" />
+          <ScalarProperty Name="SHIP_QTY" ColumnName="SHIP_QTY" />
+          <ScalarProperty Name="ORDER_QTY" ColumnName="ORDER_QTY" />
+          <ScalarProperty Name="PROD_UM" ColumnName="PROD_UM" />
+          <ScalarProperty Name="PROD_STRNG" ColumnName="PROD_STRNG" />
+          <ScalarProperty Name="PROD_SIZE" ColumnName="PROD_SIZE" />
+          <ScalarProperty Name="PROD_FORM" ColumnName="PROD_FORM" />
+          <ScalarProperty Name="OUTER_PK" ColumnName="OUTER_PK" />
+          <ScalarProperty Name="ODATE" ColumnName="ODATE" />
+          <ScalarProperty Name="COST" ColumnName="COST" />
+          <ScalarProperty Name="NDC" ColumnName="NDC" />
+          <ScalarProperty Name="INVOICE" ColumnName="INVOICE" />
+          <ScalarProperty Name="IDATE" ColumnName="IDATE" />
+          <ScalarProperty Name="GPO" ColumnName="GPO" />
+          <ScalarProperty Name="DROP_SHIP" ColumnName="DROP_SHIP" />
+          <ScalarProperty Name="FILLER7" ColumnName="FILLER7" />
+          <ScalarProperty Name="DC_NAME" ColumnName="DC_NAME" />
+          <ScalarProperty Name="DC_DEA" ColumnName="DC_DEA" />
+          <ScalarProperty Name="FAC_STATE" ColumnName="FAC_STATE" />
+          <ScalarProperty Name="PO_NUMBER" ColumnName="PO_NUMBER" />
+          <ScalarProperty Name="FILLER6" ColumnName="FILLER6" />
+          <ScalarProperty Name="FAC_NAME" ColumnName="FAC_NAME" />
+          <ScalarProperty Name="FAC_HIN" ColumnName="FAC_HIN" />
+          <ScalarProperty Name="FAC_DEA" ColumnName="FAC_DEA" />
+          <ScalarProperty Name="FAC_CITY" ColumnName="FAC_CITY" />
+          <ScalarProperty Name="FAC_ACCT" ColumnName="FAC_ACCT" />
+          <ScalarProperty Name="FILLER5" ColumnName="FILLER5" />
+          <ScalarProperty Name="CONTRACT" ColumnName="CONTRACT" />
+          <ScalarProperty Name="FILLER4" ColumnName="FILLER4" />
+          <ScalarProperty Name="FILLER3" ColumnName="FILLER3" />
+          <ScalarProperty Name="FILLER2" ColumnName="FILLER2" />
+          <ScalarProperty Name="FILLER1" ColumnName="FILLER1" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

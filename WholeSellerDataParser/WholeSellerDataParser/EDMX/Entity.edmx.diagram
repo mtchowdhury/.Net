@@ -11,7 +11,18 @@
         <EntityTypeShape EntityType="AnalyticsModel.Dakota" Width="1.5" PointX="7.375" PointY="0.75" />
         <EntityTypeShape EntityType="AnalyticsModel.Amerisource" Width="1.5" PointX="9.375" PointY="0.75" />
         <EntityTypeShape EntityType="AnalyticsModel.NcMutual" Width="1.5" PointX="11.375" PointY="0.75" />
-        <EntityTypeShape EntityType="AnalyticsModel.BioCare" Width="1.5" PointX="0.75" PointY="12.75" />
+        <EntityTypeShape EntityType="AnalyticsModel.BioCare" Width="1.5" PointX="1.25" PointY="15.875" />
+        <EntityTypeShape EntityType="AnalyticsModel.ValleyWholesale" Width="1.5" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="AnalyticsModel.MorrisDickson" Width="1.5" PointX="15.125" PointY="0.875" />
+        <EntityTypeShape EntityType="AnalyticsModel.Anda" Width="1.5" PointX="17" PointY="0.875" />
+        <EntityTypeShape EntityType="AnalyticsModel.MCKESSON" Width="1.5" PointX="3.375" PointY="15.75" />
+        <EntityTypeShape EntityType="AnalyticsModel.ASD" Width="1.5" PointX="5.5" PointY="15.875" />
+        <EntityTypeShape EntityType="AnalyticsModel.RnSPharma" Width="1.5" PointX="13.375" PointY="13.75" />
+        <EntityTypeShape EntityType="AnalyticsModel.HDSmith" Width="1.5" PointX="5.375" PointY="14.75" />
+        <EntityTypeShape EntityType="AnalyticsModel.CardinalSPD" Width="1.5" PointX="8.375" PointY="14.75" />
+        <EntityTypeShape EntityType="AnalyticsModel.CuraScript" Width="1.5" PointX="10.375" PointY="14.75" />
+        <EntityTypeShape EntityType="AnalyticsModel.Kinray" Width="1.5" PointX="15.375" PointY="13.75" />
+        <EntityTypeShape EntityType="AnalyticsModel.McKessonSP" Width="1.5" PointX="17.375" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

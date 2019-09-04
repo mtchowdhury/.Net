@@ -85,8 +85,10 @@ namespace WholeSellerDataParser.DataParser.WholeSellers
                     var ponumber
                        = ss[37];
 
-
-                    var sss = DateTime.Parse(idate.Trim());
+                    //var sssss = idate.Trim().Substring(0, 10)+ " 00:00:00 AM";
+                   // var sss = DateTime.Parse(idate.Trim().Substring(0,10));
+                    //var sss = DateTime.Parse(sdate.Trim());
+                   // var sss = DateTime.ParseExact(idate.Trim().Substring(0, 10) + " 00:00:00 AM", "MM/dd/yyyy h:mm:ss tt", System.Globalization.CultureInfo.InvariantCulture); ;
 
                     entries.Add(new Amerisource
                     {
@@ -135,9 +137,9 @@ namespace WholeSellerDataParser.DataParser.WholeSellers
                         WH_CONT = contract,
                        // MATCH_COID = GetDateTimeFromString(IDATE),
                       //  MATCH_TYPE = GetDateTimeFromString(ADATE.Trim()),
-                        SHIP_DATE = DateTime.Parse(sdate.Trim()),
-                        INV_DATE = DateTime.Parse(idate.Trim()),
-                        REC_DATE = DateTime.Parse(idate.Trim()),
+                        SHIP_DATE = DateTime.ParseExact(sdate.Trim().Substring(0, 10) + " 00:00:00 AM", "MM/dd/yyyy h:mm:ss tt", System.Globalization.CultureInfo.InvariantCulture),
+                        INV_DATE = DateTime.ParseExact(idate.Trim().Substring(0, 10) + " 00:00:00 AM", "MM/dd/yyyy h:mm:ss tt", System.Globalization.CultureInfo.InvariantCulture),
+                        REC_DATE = DateTime.ParseExact(idate.Trim().Substring(0, 10) + " 00:00:00 AM", "MM/dd/yyyy h:mm:ss tt", System.Globalization.CultureInfo.InvariantCulture),
                         
                         WHID = 0,
                         WRPID = 7,

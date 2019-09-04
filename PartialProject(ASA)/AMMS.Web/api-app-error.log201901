@@ -1,9 +1,0 @@
-2019-01-06 12:57:45,772 [13] ERROR AMMS.Logger.Services.LoggerService - A task was canceled.
-2019-01-06 12:58:47,592 [25] ERROR AMMS.Logger.Services.LoggerService - An error occurred while sending the request.
-2019-01-21 12:55:34,692 [22] ERROR AMMS.Logger.Services.LoggerService - A task was canceled.
-2019-01-21 13:04:18,548 [7] ERROR AMMS.Logger.Services.LoggerService - A task was canceled.
-2019-01-21 13:04:38,030 [7] ERROR AMMS.Logger.Services.LoggerService - A public action method 'Index' was not found on controller 'AMMS.Web.Controllers.AccountController'.
-2019-01-21 13:04:41,199 [7] ERROR AMMS.Logger.Services.LoggerService - A public action method 'Index' was not found on controller 'AMMS.Web.Controllers.AccountController'.
-2019-01-21 13:05:06,474 [8] ERROR AMMS.Logger.Services.LoggerService - A public action method 'Index' was not found on controller 'AMMS.Web.Controllers.AccountController'.
-2019-01-21 13:07:02,499 [8] ERROR AMMS.Logger.Services.LoggerService - A task was canceled.
-2019-01-21 13:13:21,444 [8] ERROR AMMS.Logger.Services.LoggerService - A task was canceled.

@@ -7,75 +7,72 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WholeSellerDataParser.EDMX
+using System;
+using System.Collections.Generic;
+
+public partial class Dakota
 {
-    using System;
-    using System.Collections.Generic;
-    
-    public partial class Dakota
-    {
-        public int Id { get; set; }
-        public string DC_NAME { get; set; }
-        public string DC_DEA { get; set; }
-        public string WHOLESALER { get; set; }
-        public string FAC_NAME { get; set; }
-        public string FAC_DEA { get; set; }
-        public string FAC_HIN { get; set; }
-        public string FAC_CITY { get; set; }
-        public string FAC_STATE { get; set; }
-        public string FAC_ACCT { get; set; }
-        public string ODATE { get; set; }
-        public string SDATE { get; set; }
-        public string IDATE { get; set; }
-        public string INVOICE { get; set; }
-        public string VENDOR { get; set; }
-        public string WH_OEN { get; set; }
-        public string NDC { get; set; }
-        public string UPC { get; set; }
-        public string VE_ITEMNR { get; set; }
-        public string PROD_NAME { get; set; }
-        public string PROD_FORM { get; set; }
-        public string PROD_STRNG { get; set; }
-        public string PROD_SIZE { get; set; }
-        public string PROD_UM { get; set; }
-        public Nullable<int> OUTER_PK { get; set; }
-        public string PROD_UD { get; set; }
-        public Nullable<int> ITEM_SIZE { get; set; }
-        public string AWP { get; set; }
-        public string WAC { get; set; }
-        public Nullable<int> ORDER_QTY { get; set; }
-        public Nullable<int> SHIP_QTY { get; set; }
-        public Nullable<double> COST { get; set; }
-        public Nullable<double> UP_DN_CHG { get; set; }
-        public Nullable<double> TOT_COST { get; set; }
-        public string CONTRACT { get; set; }
-        public string SALE_CR { get; set; }
-        public string CDATE { get; set; }
-        public string CHG_NUM { get; set; }
-        public Nullable<double> CHG_AMOUNT { get; set; }
-        public string ADATE { get; set; }
-        public string PRIV_CONTR { get; set; }
-        public string WH_SPEC { get; set; }
-        public string NET_PR { get; set; }
-        public string OMIT { get; set; }
-        public string DROP_SHIP { get; set; }
-        public string PO_NUMBER { get; set; }
-        public Nullable<System.DateTime> BATCH { get; set; }
-        public string WH_CONT { get; set; }
-        public Nullable<int> MATCH_COID { get; set; }
-        public string MATCH_TYPE { get; set; }
-        public Nullable<System.DateTime> ORDER_DATE { get; set; }
-        public Nullable<System.DateTime> SHIP_DATE { get; set; }
-        public Nullable<System.DateTime> INV_DATE { get; set; }
-        public Nullable<System.DateTime> REC_DATE { get; set; }
-        public Nullable<System.DateTime> CHG_DATE { get; set; }
-        public Nullable<System.DateTime> APPR_DATE { get; set; }
-        public Nullable<int> MMID { get; set; }
-        public Nullable<int> ITID { get; set; }
-        public Nullable<int> WHID { get; set; }
-        public Nullable<int> WRPID { get; set; }
-        public string SALE_CRW { get; set; }
-        public string SALE_CRSRC { get; set; }
-        public string EXTRA { get; set; }
-    }
+    public int Id { get; set; }
+    public string DC_NAME { get; set; }
+    public string DC_DEA { get; set; }
+    public string WHOLESALER { get; set; }
+    public string FAC_NAME { get; set; }
+    public string FAC_DEA { get; set; }
+    public string FAC_HIN { get; set; }
+    public string FAC_CITY { get; set; }
+    public string FAC_STATE { get; set; }
+    public string FAC_ACCT { get; set; }
+    public string ODATE { get; set; }
+    public string SDATE { get; set; }
+    public string IDATE { get; set; }
+    public string INVOICE { get; set; }
+    public string VENDOR { get; set; }
+    public string WH_OEN { get; set; }
+    public string NDC { get; set; }
+    public string UPC { get; set; }
+    public string VE_ITEMNR { get; set; }
+    public string PROD_NAME { get; set; }
+    public string PROD_FORM { get; set; }
+    public string PROD_STRNG { get; set; }
+    public string PROD_SIZE { get; set; }
+    public string PROD_UM { get; set; }
+    public Nullable<int> OUTER_PK { get; set; }
+    public string PROD_UD { get; set; }
+    public Nullable<int> ITEM_SIZE { get; set; }
+    public string AWP { get; set; }
+    public string WAC { get; set; }
+    public Nullable<int> ORDER_QTY { get; set; }
+    public Nullable<int> SHIP_QTY { get; set; }
+    public Nullable<double> COST { get; set; }
+    public Nullable<double> UP_DN_CHG { get; set; }
+    public Nullable<double> TOT_COST { get; set; }
+    public string CONTRACT { get; set; }
+    public string SALE_CR { get; set; }
+    public string CDATE { get; set; }
+    public string CHG_NUM { get; set; }
+    public Nullable<double> CHG_AMOUNT { get; set; }
+    public string ADATE { get; set; }
+    public string PRIV_CONTR { get; set; }
+    public string WH_SPEC { get; set; }
+    public string NET_PR { get; set; }
+    public string OMIT { get; set; }
+    public string DROP_SHIP { get; set; }
+    public string PO_NUMBER { get; set; }
+    public Nullable<System.DateTime> BATCH { get; set; }
+    public string WH_CONT { get; set; }
+    public Nullable<int> MATCH_COID { get; set; }
+    public string MATCH_TYPE { get; set; }
+    public Nullable<System.DateTime> ORDER_DATE { get; set; }
+    public Nullable<System.DateTime> SHIP_DATE { get; set; }
+    public Nullable<System.DateTime> INV_DATE { get; set; }
+    public Nullable<System.DateTime> REC_DATE { get; set; }
+    public Nullable<System.DateTime> CHG_DATE { get; set; }
+    public Nullable<System.DateTime> APPR_DATE { get; set; }
+    public Nullable<int> MMID { get; set; }
+    public Nullable<int> ITID { get; set; }
+    public Nullable<int> WHID { get; set; }
+    public Nullable<int> WRPID { get; set; }
+    public string SALE_CRW { get; set; }
+    public string SALE_CRSRC { get; set; }
+    public string EXTRA { get; set; }
 }

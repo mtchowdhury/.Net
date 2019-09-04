@@ -1,7 +1,0 @@
-2019-01-28 11:36:06,472 [12] INFO AMMS.Logger.Services.LoggerService - user: 264, Accessed : /hrms/employeeAccount/editEmployeeAccount
-2019-01-28 11:47:11,945 [23] INFO AMMS.Logger.Services.LoggerService - user: 264, Accessed : /hrms/employeeAccount/editEmployeeAccount
-2019-01-28 12:43:13,942 [14] INFO AMMS.Logger.Services.LoggerService - user: 264, Accessed : /hrms/employeeAccount/editEmployeeAccount
-2019-01-28 14:44:56,887 [40] INFO AMMS.Logger.Services.LoggerService - user: 264, Accessed : /hrms/employeeAccount/editEmployeeAccount
-2019-01-28 15:15:57,349 [13] INFO AMMS.Logger.Services.LoggerService - user: 264, Accessed : /hrms/employeeAccount/editEmployeeAccount
-2019-01-28 15:42:30,571 [18] INFO AMMS.Logger.Services.LoggerService - user: 264, Accessed : /hrms/employeeAccount/editEmployeeAccount
-2019-01-28 16:19:17,860 [32] INFO AMMS.Logger.Services.LoggerService - user: 264, Accessed : /hrms/employeeAccount/editEmployeeAccount

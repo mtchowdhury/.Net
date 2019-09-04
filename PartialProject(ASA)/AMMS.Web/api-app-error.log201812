@@ -1,4 +1,0 @@
-2018-12-10 14:25:44,468 [167] ERROR AMMS.Logger.Services.LoggerService - The controller for path '/justATest' was not found or does not implement IController.
-2018-12-10 14:26:14,593 [167] ERROR AMMS.Logger.Services.LoggerService - The controller for path '/justATest' was not found or does not implement IController.
-2018-12-10 14:26:30,085 [167] ERROR AMMS.Logger.Services.LoggerService - The controller for path '/justATest' was not found or does not implement IController.
-2018-12-20 12:07:28,097 [80] ERROR AMMS.Logger.Services.LoggerService - A task was canceled.

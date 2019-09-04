@@ -1,0 +1,1043 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AnalyticsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Amerisource">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DC_NAME" Type="nvarchar" MaxLength="20" />
+    <Property Name="DC_DEA" Type="nvarchar" MaxLength="20" />
+    <Property Name="WHOLESALER" Type="nvarchar" MaxLength="50" />
+    <Property Name="FAC_NAME" Type="nvarchar" MaxLength="50" />
+    <Property Name="FAC_DEA" Type="nvarchar" MaxLength="20" />
+    <Property Name="FAC_HIN" Type="nvarchar" MaxLength="20" />
+    <Property Name="FAC_CITY" Type="nvarchar" MaxLength="30" />
+    <Property Name="FAC_STATE" Type="nvarchar" MaxLength="10" />
+    <Property Name="FAC_ACCT" Type="nvarchar" MaxLength="20" />
+    <Property Name="SDATE" Type="nvarchar" MaxLength="50" />
+    <Property Name="IDATE" Type="nvarchar" MaxLength="50" />
+    <Property Name="INVOICE" Type="nvarchar" MaxLength="20" />
+    <Property Name="VENDOR" Type="nvarchar" MaxLength="60" />
+    <Property Name="WH_OEN" Type="nvarchar" MaxLength="20" />
+    <Property Name="NDC" Type="nvarchar" MaxLength="30" />
+    <Property Name="VE_ITEMNR" Type="nvarchar" MaxLength="20" />
+    <Property Name="PROD_NAME" Type="nvarchar" MaxLength="100" />
+    <Property Name="PROD_FORM" Type="nvarchar" MaxLength="10" />
+    <Property Name="STR_QTY" Type="nvarchar" MaxLength="10" />
+    <Property Name="STR_CD" Type="nvarchar" MaxLength="20" />
+    <Property Name="SIZE_QTY" Type="nvarchar" MaxLength="20" />
+    <Property Name="SIZE_CD" Type="nvarchar" MaxLength="10" />
+    <Property Name="PROD_UM" Type="nvarchar" MaxLength="10" />
+    <Property Name="PROD_UD" Type="nvarchar" MaxLength="10" />
+    <Property Name="AWP" Type="float" />
+    <Property Name="WAC" Type="float" />
+    <Property Name="ORDER_QTY" Type="int" />
+    <Property Name="SHIP_QTY" Type="int" />
+    <Property Name="COST" Type="nvarchar" MaxLength="10" />
+    <Property Name="UP_DN_CHG" Type="nvarchar" MaxLength="10" />
+    <Property Name="TOT_COST" Type="nvarchar" MaxLength="10" />
+    <Property Name="WH_CONTID" Type="nvarchar" MaxLength="20" />
+    <Property Name="GPO" Type="nvarchar" MaxLength="20" />
+    <Property Name="CONTRACT" Type="nvarchar" MaxLength="40" />
+    <Property Name="PRIV_CONTR" Type="nvarchar" MaxLength="40" />
+    <Property Name="WH_NOTES" Type="nvarchar" MaxLength="50" />
+    <Property Name="DROP_SHIP" Type="nvarchar" MaxLength="10" />
+    <Property Name="PO_NUMBER" Type="nvarchar" MaxLength="20" />
+    <Property Name="BATCH" Type="datetime" />
+    <Property Name="PROD_STRNG" Type="nvarchar" MaxLength="30" />
+    <Property Name="PROD_SIZE" Type="nvarchar" MaxLength="10" />
+    <Property Name="WH_CONT" Type="nvarchar" MaxLength="30" />
+    <Property Name="MATCH_COID" Type="int" />
+    <Property Name="MATCH_TYPE" Type="nvarchar" MaxLength="10" />
+    <Property Name="SHIP_DATE" Type="date" />
+    <Property Name="INV_DATE" Type="date" />
+    <Property Name="REC_DATE" Type="date" />
+    <Property Name="MMID" Type="int" />
+    <Property Name="ITID" Type="int" />
+    <Property Name="WHID" Type="int" />
+    <Property Name="WRPID" Type="int" />
+    <Property Name="SALE_CR" Type="nvarchar" MaxLength="10" />
+    <Property Name="UPC" Type="nvarchar" MaxLength="30" />
+    <Property Name="SALE_CRW" Type="nvarchar" MaxLength="10" />
+    <Property Name="SALE_CRSRC" Type="nvarchar" MaxLength="10" />
+    <Property Name="EXTRA" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Anda">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FAC_NAME" Type="nvarchar" MaxLength="50" />
+    <Property Name="FAC_DEA" Type="nvarchar" MaxLength="250" />
+    <Property Name="FAC_HIN" Type="nvarchar" MaxLength="250" />
+    <Property Name="FAC_CITY" Type="nvarchar" MaxLength="250" />
+    <Property Name="FAC_STATE" Type="nvarchar" MaxLength="250" />
+    <Property Name="ODATE" Type="nvarchar" MaxLength="250" />
+    <Property Name="INV_DATE" Type="nvarchar" MaxLength="50" />
+    <Property Name="INVOICE" Type="nvarchar" MaxLength="250" />
+    <Property Name="VENDOR" Type="nvarchar" MaxLength="250" />
+    <Property Name="VE_ITEMNR" Type="nvarchar" MaxLength="250" />
+    <Property Name="NDC" Type="nvarchar" MaxLength="250" />
+    <Property Name="UPC" Type="nvarchar" MaxLength="250" />
+    <Property Name="PROD_NAME" Type="nvarchar" MaxLength="250" />
+    <Property Name="PROD_FORM" Type="nvarchar" MaxLength="250" />
+    <Property Name="PROD_STRNG" Type="nvarchar" MaxLength="250" />
+    <Property Name="PROD_SIZE" Type="nvarchar" MaxLength="250" />
+    <Property Name="ORDER_QTY" Type="nvarchar" MaxLength="50" />
+    <Property Name="SHIP_QTY" Type="nvarchar" MaxLength="50" />
+    <Property Name="TOT_COST" Type="nvarchar" MaxLength="50" />
+    <Property Name="FILLER1" Type="nvarchar" MaxLength="50" />
+    <Property Name="FILLER2" Type="nvarchar" MaxLength="250" />
+    <Property Name="CONTRACT" Type="nvarchar" MaxLength="250" />
+    <Property Name="GPO" Type="nvarchar" MaxLength="250" />
+    <Property Name="FILLER3" Type="nvarchar" MaxLength="250" />
+    <Property Name="BATCH" Type="nvarchar" MaxLength="250" />
+    <Property Name="WHID" Type="int" />
+    <Property Name="WRPID" Type="int" />
+    <Property Name="WHOLESALER" Type="nvarchar" MaxLength="250" />
+    <Property Name="DC_NAME" Type="nvarchar" MaxLength="250" />
+    <Property Name="COST" Type="decimal" Precision="10" Scale="4" />
+    <Property Name="ORDER_DATE" Type="date" />
+    <Property Name="REC_DATE" Type="date" />
+    <Property Name="WH_CONT" Type="nvarchar" MaxLength="250" />
+    <Property Name="MATCH_COID" Type="int" />
+    <Property Name="MATCH_TYPE" Type="nvarchar" MaxLength="250" />
+    <Property Name="SALE_CR" Type="nvarchar" MaxLength="250" />
+    <Property Name="MMID" Type="int" />
+    <Property Name="ITID" Type="int" />
+    <Property Name="SALE_CRW" Type="nvarchar" MaxLength="250" />
+    <Property Name="SALE_CRSRC" Type="nvarchar" MaxLength="250" />
+    <Property Name="EXTRA" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="ASD">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FAC_ACCT" Type="nvarchar" MaxLength="50" />
+    <Property Name="FAC_NAME" Type="nvarchar" MaxLength="250" />
+    <Property Name="FAC_DEA" Type="nvarchar" MaxLength="50" />
+    <Property Name="FAC_HIN" Type="nvarchar" MaxLength="50" />
+    <Property Name="FAC_ADDR" Type="nvarchar" MaxLength="250" />
+    <Property Name="FAC_CITY" Type="nvarchar" MaxLength="50" />
+    <Property Name="FAC_STATE" Type="nvarchar" MaxLength="50" />
+    <Property Name="CNDC" Type="nvarchar" MaxLength="250" />
+    <Property Name="SHIP_QTY" Type="nvarchar" MaxLength="50" />
+    <Property Name="SDATE" Type="nvarchar" MaxLength="50" />
+    <Property Name="COST" Type="nvarchar" MaxLength="50" />
+    <Property Name="TOT_COST" Type="nvarchar" MaxLength="50" />
+    <Property Name="PROD_NAME" Type="nvarchar" MaxLength="250" />
+    <Property Name="VENDOR" Type="nvarchar" MaxLength="250" />
+    <Property Name="WH_OEN" Type="nvarchar" MaxLength="50" />
+    <Property Name="IDATE" Type="nvarchar" MaxLength="50" />
+    <Property Name="INVOICE" Type="nvarchar" MaxLength="50" />
+    <Property Name="CONTRACT" Type="nvarchar" MaxLength="50" />
+    <Property Name="FILLER2" Type="nvarchar" MaxLength="50" />
+    <Property Name="FILLER3" Type="nvarchar" MaxLength="50" />
+    <Property Name="FILLER4" Type="nvarchar" MaxLength="50" />
+    <Property Name="FILLER5" Type="nvarchar" MaxLength="50" />
+    <Property Name="PLASMA" Type="nvarchar" MaxLength="50" />
+    <Property Name="BATCH" Type="nvarchar" MaxLength="50" />
+    <Property Name="NDC" Type="nvarchar" MaxLength="50" />
+    <Property Name="WHID" Type="int" />
+    <Property Name="WRPID" Type="int" />
+    <Property Name="WHOLESALER" Type="nvarchar" MaxLength="50" />
+    <Property Name="INV_DATE" Type="date" />
+    <Property Name="SHIP_DATE" Type="date" />
+    <Property Name="REC_DATE" Type="date" />
+    <Property Name="WH_CONT" Type="nvarchar" MaxLength="50" />
+    <Property Name="MATCH_COID" Type="int" />
+    <Property Name="MATCH_TYPE" Type="nvarchar" MaxLength="50" />
+    <Property Name="SALE_CR" Type="nvarchar" MaxLength="50" />
+    <Property Name="MMID" Type="int" />
+    <Property Name="ITID" Type="int" />
+    <Property Name="SALE_CRW" Type="nvarchar" MaxLength="50" />
+    <Property Name="SALE_CRSRC" Type="nvarchar" MaxLength="50" />
+    <Property Name="EXTRA" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="BioCare">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CONTRACT" Type="nvarchar" MaxLength="20" />
+    <Property Name="CCOST" Type="float" />
+    <Property Name="FAC_NAME" Type="nvarchar" MaxLength="60" />
+    <Property Name="FAC_ACCT" Type="nvarchar" MaxLength="40" />
+    <Property Name="FAC_DEA" Type="nvarchar" MaxLength="30" />
+    <Property Name="FAC_HIN" Type="nvarchar" MaxLength="40" />
+    <Property Name="FAC_CITY" Type="nvarchar" MaxLength="30" />
+    <Property Name="FAC_STATE" Type="nvarchar" MaxLength="10" />
+    <Property Name="WH_OEN" Type="nvarchar" MaxLength="30" />
+    <Property Name="DC_DEA" Type="nvarchar" MaxLength="10" />
+    <Property Name="DC_NAME" Type="nvarchar" MaxLength="20" />
+    <Property Name="DROP_SHIP" Type="nvarchar" MaxLength="10" />
+    <Property Name="FILLER1" Type="nvarchar" MaxLength="20" />
+    <Property Name="INV_DATE" Type="nvarchar" MaxLength="10" />
+    <Property Name="INVOICE" Type="nvarchar" MaxLength="20" />
+    <Property Name="NDC" Type="nvarchar" MaxLength="20" />
+    <Property Name="FILLER2" Type="nvarchar" MaxLength="10" />
+    <Property Name="CQTY" Type="nvarchar" MaxLength="10" />
+    <Property Name="SHIP_DATE" Type="date" />
+    <Property Name="PROD_SIZE" Type="int" />
+    <Property Name="FILLER3" Type="int" />
+    <Property Name="CTOTCOST" Type="float" />
+    <Property Name="PROD_NAME" Type="nvarchar" MaxLength="30" />
+    <Property Name="PROD_UM" Type="nvarchar" MaxLength="10" />
+    <Property Name="UP_DN_CHG" Type="nvarchar" MaxLength="20" />
+    <Property Name="VENDOR" Type="nvarchar" MaxLength="30" />
+    <Property Name="VE_ITEMNR" Type="nvarchar" MaxLength="30" />
+    <Property Name="WAC" Type="nvarchar" MaxLength="20" />
+    <Property Name="FILLER4" Type="nvarchar" MaxLength="20" />
+    <Property Name="WH_NOTES" Type="nvarchar" MaxLength="30" />
+    <Property Name="BATCH" Type="datetime" />
+    <Property Name="WHOLESALER" Type="nvarchar" MaxLength="20" />
+    <Property Name="COST" Type="nvarchar" MaxLength="20" />
+    <Property Name="SHIP_QTY" Type="nvarchar" MaxLength="20" />
+    <Property Name="TOT_COST" Type="nvarchar" MaxLength="20" />
+    <Property Name="WH_CONT" Type="nvarchar" MaxLength="20" />
+    <Property Name="MATCH_COID" Type="int" />
+    <Property Name="MATCH_TYPE" Type="nvarchar" MaxLength="10" />
+    <Property Name="REC_DATE" Type="date" />
+    <Property Name="MMID" Type="int" />
+    <Property Name="ITID" Type="int" />
+    <Property Name="WHID" Type="int" />
+    <Property Name="WRPID" Type="int" />
+    <Property Name="SALE_CR" Type="nvarchar" MaxLength="10" />
+    <Property Name="UPC" Type="nvarchar" MaxLength="20" />
+    <Property Name="SALE_CRW" Type="nvarchar" MaxLength="10" />
+    <Property Name="SALE_CRSRC" Type="nvarchar" MaxLength="10" />
+    <Property Name="EXTRA" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Cardinal">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DC_NAME" Type="nvarchar" MaxLength="124" />
+    <Property Name="DC_NR" Type="nvarchar" MaxLength="22" />
+    <Property Name="FAC_ACCT" Type="nvarchar" MaxLength="94" />
+    <Property Name="DC_DEA" Type="nvarchar" MaxLength="58" />
+    <Property Name="FAC_DEA" Type="nvarchar" MaxLength="58" />
+    <Property Name="FAC_NAME" Type="nvarchar" MaxLength="244" />
+    <Property Name="WH_OEN" Type="nvarchar" MaxLength="64" />
+    <Property Name="NDC" Type="nvarchar" MaxLength="70" />
+    <Property Name="NDC13" Type="nvarchar" MaxLength="82" />
+    <Property Name="VENDOR" Type="nvarchar" MaxLength="244" />
+    <Property Name="PROD_NAME" Type="nvarchar" MaxLength="244" />
+    <Property Name="GENERIC" Type="nvarchar" MaxLength="244" />
+    <Property Name="PROD_UD" Type="nvarchar" MaxLength="10" />
+    <Property Name="PROD_FORM" Type="nvarchar" MaxLength="20" />
+    <Property Name="PROD_STRNG" Type="nvarchar" MaxLength="20" />
+    <Property Name="ITEM_SIZE" Type="int" />
+    <Property Name="FILLER4" Type="nvarchar" MaxLength="94" />
+    <Property Name="INVOICE" Type="nvarchar" MaxLength="94" />
+    <Property Name="PROD_SIZE" Type="float" />
+    <Property Name="FILLER5" Type="nvarchar" MaxLength="82" />
+    <Property Name="IDATE" Type="nvarchar" MaxLength="10" />
+    <Property Name="COST_PLLUS" Type="nvarchar" MaxLength="30" />
+    <Property Name="WAC" Type="nvarchar" MaxLength="64" />
+    <Property Name="AWP" Type="nvarchar" MaxLength="64" />
+    <Property Name="AHFS" Type="int" />
+    <Property Name="GPO" Type="nvarchar" MaxLength="40" />
+    <Property Name="SDATE" Type="nvarchar" MaxLength="10" />
+    <Property Name="SHIP_QTY" Type="int" />
+    <Property Name="COST" Type="nvarchar" MaxLength="64" />
+    <Property Name="CONTRACT" Type="nvarchar" MaxLength="94" />
+    <Property Name="BATCH" Type="datetime" />
+    <Property Name="WHOLESALER" Type="nvarchar" MaxLength="50" />
+    <Property Name="SALE_CR" Type="nvarchar" MaxLength="10" />
+    <Property Name="INV_DATE" Type="date" />
+    <Property Name="SHIP_DATE" Type="date" />
+    <Property Name="REC_DATE" Type="date" />
+    <Property Name="MMID" Type="int" />
+    <Property Name="ITID" Type="int" />
+    <Property Name="WHID" Type="int" />
+    <Property Name="WRPID" Type="int" />
+    <Property Name="MATCH_COID" Type="int" />
+    <Property Name="MATCH_TYPE" Type="nvarchar" MaxLength="161" />
+    <Property Name="WH_CONT" Type="nvarchar" MaxLength="50" />
+    <Property Name="SALE_CRW" Type="nvarchar" MaxLength="10" />
+    <Property Name="SALE_CRSRC" Type="nvarchar" MaxLength="10" />
+    <Property Name="EXTRA" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="CardinalSPD">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FILLER1" Type="nvarchar" MaxLength="10" />
+    <Property Name="CHG_AMOUNT" Type="nvarchar" MaxLength="10" />
+    <Property Name="CHG_DATE" Type="nvarchar" MaxLength="20" />
+    <Property Name="CHG_NUM" Type="nvarchar" MaxLength="20" />
+    <Property Name="FILLER2" Type="nvarchar" MaxLength="20" />
+    <Property Name="COST_TOT" Type="float" />
+    <Property Name="FAC_ACCT" Type="nvarchar" MaxLength="20" />
+    <Property Name="FAC_CITY" Type="nvarchar" MaxLength="30" />
+    <Property Name="FAC_DEA" Type="nvarchar" MaxLength="30" />
+    <Property Name="FAC_HIN" Type="nvarchar" MaxLength="20" />
+    <Property Name="FAC_NAME" Type="nvarchar" MaxLength="50" />
+    <Property Name="FILLER3" Type="nvarchar" MaxLength="20" />
+    <Property Name="PO_NUMBER" Type="nvarchar" MaxLength="30" />
+    <Property Name="FAC_STATE" Type="nvarchar" MaxLength="10" />
+    <Property Name="FILLER4" Type="nvarchar" MaxLength="10" />
+    <Property Name="FILLER5" Type="nvarchar" MaxLength="10" />
+    <Property Name="DROP_SHIP" Type="nvarchar" MaxLength="10" />
+    <Property Name="GPO" Type="nvarchar" MaxLength="20" />
+    <Property Name="INV_DATE" Type="nvarchar" MaxLength="20" />
+    <Property Name="INVOICE" Type="nvarchar" MaxLength="30" />
+    <Property Name="NDC" Type="nvarchar" MaxLength="30" />
+    <Property Name="FILLER6" Type="nvarchar" MaxLength="10" />
+    <Property Name="ORDER_DATE" Type="nvarchar" MaxLength="10" />
+    <Property Name="FILLER7" Type="nvarchar" MaxLength="10" />
+    <Property Name="PROD_FORM" Type="nvarchar" MaxLength="30" />
+    <Property Name="FILLER8" Type="nvarchar" MaxLength="10" />
+    <Property Name="PROD_STRNG" Type="nvarchar" MaxLength="50" />
+    <Property Name="FILLER9" Type="nvarchar" MaxLength="10" />
+    <Property Name="FILLER10" Type="nvarchar" MaxLength="10" />
+    <Property Name="SHIP_QTY" Type="int" />
+    <Property Name="FILLER11" Type="nvarchar" MaxLength="10" />
+    <Property Name="FILLER12" Type="nvarchar" MaxLength="10" />
+    <Property Name="SHIP_DATE" Type="nvarchar" MaxLength="20" />
+    <Property Name="TOT_COST" Type="float" />
+    <Property Name="FILLER13" Type="nvarchar" MaxLength="10" />
+    <Property Name="PROD_NAME" Type="nvarchar" MaxLength="50" />
+    <Property Name="FILLER14" Type="nvarchar" MaxLength="10" />
+    <Property Name="FILLER15" Type="nvarchar" MaxLength="10" />
+    <Property Name="FILLER16" Type="nvarchar" MaxLength="10" />
+    <Property Name="VENDOR" Type="nvarchar" MaxLength="30" />
+    <Property Name="FILLER17" Type="nvarchar" MaxLength="10" />
+    <Property Name="FILLER18" Type="nvarchar" MaxLength="10" />
+    <Property Name="FILLER19" Type="nvarchar" MaxLength="10" />
+    <Property Name="FILLQR20" Type="nvarchar" MaxLength="10" />
+    <Property Name="FILLER21" Type="nvarchar" MaxLength="10" />
+    <Property Name="FILLER22" Type="nvarchar" MaxLength="10" />
+    <Property Name="FILLAR23" Type="nvarchar" MaxLength="10" />
+    <Property Name="BATCH" Type="datetime" />
+    <Property Name="COST" Type="float" />
+    <Property Name="WHID" Type="int" />
+    <Property Name="WRPID" Type="int" />
+    <Property Name="WHOLESALER" Type="nvarchar" MaxLength="50" />
+    <Property Name="DC_NAME" Type="nvarchar" MaxLength="50" />
+    <Property Name="REC_DATE" Type="date" />
+    <Property Name="WH_CONT" Type="nvarchar" MaxLength="30" />
+    <Property Name="MATCH_COID" Type="int" />
+    <Property Name="MATCH_TYPE" Type="nvarchar" MaxLength="10" />
+    <Property Name="SALE_CR" Type="nvarchar" MaxLength="10" />
+    <Property Name="MMID" Type="int" />
+    <Property Name="ITID" Type="int" />
+    <Property Name="SALE_CRW" Type="nvarchar" MaxLength="10" />
+    <Property Name="SALE_CRSRC" Type="nvarchar" MaxLength="10" />
+    <Property Name="EXTRA" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="CuraScript">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FAC_ACCT" Type="nvarchar" MaxLength="20" />
+    <Property Name="FAC_NAME" Type="nvarchar" MaxLength="50" />
+    <Property Name="FILLER1" Type="nvarchar" MaxLength="20" />
+    <Property Name="FILLER2" Type="nvarchar" MaxLength="20" />
+    <Property Name="FAC_CITY" Type="nvarchar" MaxLength="30" />
+    <Property Name="FAC_STATE" Type="nvarchar" MaxLength="10" />
+    <Property Name="FAC_ZIP" Type="nvarchar" MaxLength="20" />
+    <Property Name="FAC_DEA" Type="nvarchar" MaxLength="30" />
+    <Property Name="CONTRACT" Type="nvarchar" MaxLength="30" />
+    <Property Name="VENDOR" Type="nvarchar" MaxLength="50" />
+    <Property Name="PROD_NAME" Type="nvarchar" MaxLength="60" />
+    <Property Name="VE_ITEMNR" Type="nvarchar" MaxLength="20" />
+    <Property Name="LOT_NUMBER" Type="nvarchar" MaxLength="30" />
+    <Property Name="LOT_EXPR" Type="nvarchar" MaxLength="20" />
+    <Property Name="NDC" Type="nvarchar" MaxLength="20" />
+    <Property Name="WH_OEN" Type="nvarchar" MaxLength="20" />
+    <Property Name="INV_DATE" Type="nvarchar" MaxLength="20" />
+    <Property Name="INVOICE" Type="nvarchar" MaxLength="20" />
+    <Property Name="FILLER3" Type="nvarchar" MaxLength="10" />
+    <Property Name="SHIP_QTY" Type="int" />
+    <Property Name="COST" Type="float" />
+    <Property Name="TOT_COST" Type="float" />
+    <Property Name="TOT_FEE" Type="float" />
+    <Property Name="BATCH" Type="datetime" />
+    <Property Name="WH_CONT" Type="nvarchar" MaxLength="10" />
+    <Property Name="WHOLESALER" Type="nvarchar" MaxLength="20" />
+    <Property Name="MATCH_COID" Type="int" />
+    <Property Name="MATCH_TYPE" Type="nvarchar" MaxLength="20" />
+    <Property Name="REC_DATE" Type="date" />
+    <Property Name="MMID" Type="int" />
+    <Property Name="ITID" Type="int" />
+    <Property Name="WHID" Type="int" />
+    <Property Name="WRPID" Type="int" />
+    <Property Name="SALE_CR" Type="nvarchar" MaxLength="10" />
+    <Property Name="SALE_CRW" Type="nvarchar" MaxLength="10" />
+    <Property Name="SALE_CRSRC" Type="nvarchar" MaxLength="10" />
+    <Property Name="EXTRA" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Dakota">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DC_NAME" Type="nvarchar" MaxLength="50" />
+    <Property Name="DC_DEA" Type="nvarchar" MaxLength="30" />
+    <Property Name="WHOLESALER" Type="nvarchar" MaxLength="100" />
+    <Property Name="FAC_NAME" Type="nvarchar" MaxLength="100" />
+    <Property Name="FAC_DEA" Type="nvarchar" MaxLength="30" />
+    <Property Name="FAC_HIN" Type="nvarchar" MaxLength="30" />
+    <Property Name="FAC_CITY" Type="nvarchar" MaxLength="30" />
+    <Property Name="FAC_STATE" Type="nvarchar" MaxLength="20" />
+    <Property Name="FAC_ACCT" Type="nvarchar" MaxLength="30" />
+    <Property Name="ODATE" Type="nvarchar" MaxLength="10" />
+    <Property Name="SDATE" Type="nvarchar" MaxLength="10" />
+    <Property Name="IDATE" Type="nvarchar" MaxLength="10" />
+    <Property Name="INVOICE" Type="nvarchar" MaxLength="20" />
+    <Property Name="VENDOR" Type="nvarchar" MaxLength="100" />
+    <Property Name="WH_OEN" Type="nvarchar" MaxLength="15" />
+    <Property Name="NDC" Type="nvarchar" MaxLength="30" />
+    <Property Name="UPC" Type="nvarchar" MaxLength="30" />
+    <Property Name="VE_ITEMNR" Type="nvarchar" MaxLength="20" />
+    <Property Name="PROD_NAME" Type="nvarchar" MaxLength="100" />
+    <Property Name="PROD_FORM" Type="nvarchar" MaxLength="20" />
+    <Property Name="PROD_STRNG" Type="nvarchar" MaxLength="30" />
+    <Property Name="PROD_SIZE" Type="nvarchar" MaxLength="30" />
+    <Property Name="PROD_UM" Type="nvarchar" MaxLength="10" />
+    <Property Name="OUTER_PK" Type="int" />
+    <Property Name="PROD_UD" Type="nvarchar" MaxLength="10" />
+    <Property Name="ITEM_SIZE" Type="int" />
+    <Property Name="AWP" Type="nvarchar" MaxLength="50" />
+    <Property Name="WAC" Type="nvarchar" MaxLength="50" />
+    <Property Name="ORDER_QTY" Type="int" />
+    <Property Name="SHIP_QTY" Type="int" />
+    <Property Name="COST" Type="float" />
+    <Property Name="UP_DN_CHG" Type="float" />
+    <Property Name="TOT_COST" Type="float" />
+    <Property Name="CONTRACT" Type="nvarchar" MaxLength="30" />
+    <Property Name="SALE_CR" Type="nvarchar" MaxLength="5" />
+    <Property Name="CDATE" Type="nvarchar" MaxLength="10" />
+    <Property Name="CHG_NUM" Type="nvarchar" MaxLength="20" />
+    <Property Name="CHG_AMOUNT" Type="float" />
+    <Property Name="ADATE" Type="nvarchar" MaxLength="10" />
+    <Property Name="PRIV_CONTR" Type="nvarchar" MaxLength="5" />
+    <Property Name="WH_SPEC" Type="nvarchar" MaxLength="5" />
+    <Property Name="NET_PR" Type="nvarchar" MaxLength="5" />
+    <Property Name="OMIT" Type="nvarchar" MaxLength="30" />
+    <Property Name="DROP_SHIP" Type="nvarchar" MaxLength="5" />
+    <Property Name="PO_NUMBER" Type="nvarchar" MaxLength="30" />
+    <Property Name="BATCH" Type="datetime" />
+    <Property Name="WH_CONT" Type="nvarchar" MaxLength="30" />
+    <Property Name="MATCH_COID" Type="int" />
+    <Property Name="MATCH_TYPE" Type="nvarchar" MaxLength="5" />
+    <Property Name="ORDER_DATE" Type="date" />
+    <Property Name="SHIP_DATE" Type="date" />
+    <Property Name="INV_DATE" Type="date" />
+    <Property Name="REC_DATE" Type="date" />
+    <Property Name="CHG_DATE" Type="date" />
+    <Property Name="APPR_DATE" Type="date" />
+    <Property Name="MMID" Type="int" />
+    <Property Name="ITID" Type="int" />
+    <Property Name="WHID" Type="int" />
+    <Property Name="WRPID" Type="int" />
+    <Property Name="SALE_CRW" Type="nvarchar" MaxLength="5" />
+    <Property Name="SALE_CRSRC" Type="nvarchar" MaxLength="5" />
+    <Property Name="EXTRA" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="HDSmith">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FCDATE" Type="nvarchar" MaxLength="8" />
+    <Property Name="DC_NAME" Type="nvarchar" MaxLength="40" />
+    <Property Name="DC_DEA" Type="nvarchar" MaxLength="9" />
+    <Property Name="FAC_NAME" Type="nvarchar" MaxLength="25" />
+    <Property Name="FAC_DEA" Type="nvarchar" MaxLength="9" />
+    <Property Name="FAC_HIN" Type="nvarchar" MaxLength="9" />
+    <Property Name="FAC_CITY" Type="nvarchar" MaxLength="20" />
+    <Property Name="FAC_STATE" Type="nvarchar" MaxLength="2" />
+    <Property Name="CWAC" Type="nvarchar" MaxLength="10" />
+    <Property Name="CCOST" Type="nvarchar" MaxLength="10" />
+    <Property Name="CQTY" Type="nvarchar" MaxLength="6" />
+    <Property Name="SALE_CR" Type="nvarchar" MaxLength="1" />
+    <Property Name="CONTRACT" Type="nvarchar" MaxLength="12" />
+    <Property Name="CONT_START" Type="nvarchar" MaxLength="8" />
+    <Property Name="NDC" Type="nvarchar" MaxLength="11" />
+    <Property Name="OLD_NDC" Type="nvarchar" MaxLength="11" />
+    <Property Name="UPC" Type="nvarchar" MaxLength="12" />
+    <Property Name="UPN" Type="nvarchar" MaxLength="13" />
+    <Property Name="INVOICE" Type="nvarchar" MaxLength="12" />
+    <Property Name="SDATE" Type="nvarchar" MaxLength="8" />
+    <Property Name="CTOTAL" Type="nvarchar" MaxLength="12" />
+    <Property Name="PROD_NAME" Type="nvarchar" MaxLength="40" />
+    <Property Name="PROD_SIZE" Type="nvarchar" MaxLength="9" />
+    <Property Name="PROD_STRNG" Type="nvarchar" MaxLength="9" />
+    <Property Name="FILLER" Type="nvarchar" MaxLength="6" />
+    <Property Name="DC_NR" Type="nvarchar" MaxLength="10" />
+    <Property Name="FAC_ACCT" Type="nvarchar" MaxLength="10" />
+    <Property Name="WH_OEN" Type="nvarchar" MaxLength="10" />
+    <Property Name="VE_ITEMNR" Type="nvarchar" MaxLength="10" />
+    <Property Name="VENDOR" Type="nvarchar" MaxLength="40" />
+    <Property Name="IDATE" Type="nvarchar" MaxLength="8" />
+    <Property Name="CONT_ALT" Type="nvarchar" MaxLength="12" />
+    <Property Name="CONVERSION" Type="nvarchar" MaxLength="10" />
+    <Property Name="CREDREBILL" Type="nvarchar" MaxLength="1" />
+    <Property Name="DISCOUNT" Type="nvarchar" MaxLength="1" />
+    <Property Name="BATCH" Type="nvarchar" MaxLength="20" />
+    <Property Name="WHOLESALER" Type="nvarchar" MaxLength="20" />
+    <Property Name="WH_CONT" Type="nvarchar" MaxLength="15" />
+    <Property Name="MATCH_COID" Type="int" />
+    <Property Name="MATCH_TYPE" Type="nvarchar" MaxLength="1" />
+    <Property Name="SHIP_QTY" Type="int" />
+    <Property Name="COST" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="TOT_COST" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="WAC" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="SHIP_DATE" Type="datetime" />
+    <Property Name="INV_DATE" Type="datetime" />
+    <Property Name="REC_DATE" Type="datetime" />
+    <Property Name="MMID" Type="int" />
+    <Property Name="WHID" Type="int" />
+    <Property Name="WRPID" Type="int" />
+    <Property Name="ITID" Type="int" />
+    <Property Name="SALE_CRW" Type="nvarchar" MaxLength="1" />
+    <Property Name="SALE_CRSRC" Type="nvarchar" MaxLength="1" />
+    <Property Name="EXTRA" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Kinray">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FAC_NAME" Type="nvarchar" MaxLength="60" />
+    <Property Name="NDC" Type="nvarchar" MaxLength="30" />
+    <Property Name="PROD_NAME" Type="nvarchar" MaxLength="60" />
+    <Property Name="PROD_SIZE" Type="nvarchar" MaxLength="20" />
+    <Property Name="VENDOR" Type="nvarchar" MaxLength="50" />
+    <Property Name="SHIP_QTY" Type="int" />
+    <Property Name="COST" Type="float" />
+    <Property Name="TOT_COST" Type="float" />
+    <Property Name="INVOICE" Type="nvarchar" MaxLength="20" />
+    <Property Name="IDATE" Type="nvarchar" MaxLength="10" />
+    <Property Name="GPO" Type="nvarchar" MaxLength="10" />
+    <Property Name="CONTRACT" Type="nvarchar" MaxLength="20" />
+    <Property Name="FAC_DEA" Type="nvarchar" MaxLength="30" />
+    <Property Name="FAC_ACCT" Type="nvarchar" MaxLength="30" />
+    <Property Name="VE_ITEMNR" Type="nvarchar" MaxLength="20" />
+    <Property Name="BATCH" Type="datetime" />
+    <Property Name="WHID" Type="int" />
+    <Property Name="WRPID" Type="int" />
+    <Property Name="WHOLESALER" Type="nvarchar" MaxLength="30" />
+    <Property Name="DC_NAME" Type="nvarchar" MaxLength="30" />
+    <Property Name="INV_DATE" Type="date" />
+    <Property Name="REC_DATE" Type="date" />
+    <Property Name="WH_CONT" Type="nvarchar" MaxLength="30" />
+    <Property Name="MATCH_COID" Type="int" />
+    <Property Name="MATCH_TYPE" Type="nvarchar" MaxLength="10" />
+    <Property Name="SALE_CR" Type="nvarchar" MaxLength="10" />
+    <Property Name="MMID" Type="int" />
+    <Property Name="ITID" Type="int" />
+    <Property Name="SALE_CRW" Type="nvarchar" MaxLength="10" />
+    <Property Name="SALE_CRSRC" Type="nvarchar" MaxLength="10" />
+    <Property Name="EXTRA" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="MCKESSON">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WHOLESALER" Type="nvarchar" MaxLength="40" />
+    <Property Name="FAC_ACCT" Type="nvarchar" MaxLength="20" />
+    <Property Name="FAC_NAME" Type="nvarchar" MaxLength="40" />
+    <Property Name="FAC_ADDR" Type="nvarchar" MaxLength="50" />
+    <Property Name="FAC_CITY" Type="nvarchar" MaxLength="40" />
+    <Property Name="FAC_STATE" Type="nvarchar" MaxLength="30" />
+    <Property Name="FAC_ZIP" Type="nvarchar" MaxLength="20" />
+    <Property Name="FAC_DEA" Type="nvarchar" MaxLength="30" />
+    <Property Name="SHIP_DATE" Type="nvarchar" MaxLength="20" />
+    <Property Name="INV_DATE" Type="nvarchar" MaxLength="20" />
+    <Property Name="INVOICE" Type="nvarchar" MaxLength="40" />
+    <Property Name="PO_NUMBER" Type="nvarchar" MaxLength="40" />
+    <Property Name="VENDOR" Type="nvarchar" MaxLength="50" />
+    <Property Name="VE_ACCT" Type="nvarchar" MaxLength="20" />
+    <Property Name="VE_ITEMNR" Type="nvarchar" MaxLength="30" />
+    <Property Name="PROD_NAME" Type="nvarchar" MaxLength="50" />
+    <Property Name="DC_NR" Type="nvarchar" MaxLength="30" />
+    <Property Name="NDC" Type="nvarchar" MaxLength="30" />
+    <Property Name="UPC" Type="nvarchar" MaxLength="30" />
+    <Property Name="FILLER01" Type="nvarchar" MaxLength="30" />
+    <Property Name="FILLER02" Type="nvarchar" MaxLength="30" />
+    <Property Name="FILLER03" Type="nvarchar" MaxLength="30" />
+    <Property Name="FILLER04" Type="nvarchar" MaxLength="30" />
+    <Property Name="PROD_FORM" Type="nvarchar" MaxLength="50" />
+    <Property Name="GEN_ID" Type="nvarchar" MaxLength="20" />
+    <Property Name="GEN_NAME" Type="nvarchar" MaxLength="30" />
+    <Property Name="PROD_STRNG" Type="nvarchar" MaxLength="50" />
+    <Property Name="PROD_SIZE" Type="nvarchar" MaxLength="30" />
+    <Property Name="GEN_IND" Type="nvarchar" MaxLength="20" />
+    <Property Name="PROD_UM" Type="nvarchar" MaxLength="40" />
+    <Property Name="FILLER05" Type="nvarchar" MaxLength="30" />
+    <Property Name="AWP" Type="float" />
+    <Property Name="WAC" Type="float" />
+    <Property Name="ORDER_QTY" Type="int" />
+    <Property Name="SHIP_QTY" Type="int" />
+    <Property Name="COST" Type="float" />
+    <Property Name="TOT_COST" Type="float" />
+    <Property Name="NEWEXTRA" Type="int" />
+    <Property Name="GPO" Type="nvarchar" MaxLength="20" />
+    <Property Name="CONTRACT" Type="nvarchar" MaxLength="30" />
+    <Property Name="LEAD_NAME" Type="nvarchar" MaxLength="30" />
+    <Property Name="REASON_NS" Type="nvarchar" MaxLength="40" />
+    <Property Name="WH_NOTES" Type="nvarchar" MaxLength="50" />
+    <Property Name="CREDIT_CD" Type="nvarchar" MaxLength="40" />
+    <Property Name="REASON_DES" Type="nvarchar" MaxLength="60" />
+    <Property Name="CHG_AMOUNT" Type="float" />
+    <Property Name="FILLER06" Type="nvarchar" MaxLength="40" />
+    <Property Name="FILLER07" Type="nvarchar" MaxLength="30" />
+    <Property Name="BATCH" Type="datetime" />
+    <Property Name="SALE_CR" Type="nvarchar" MaxLength="10" />
+    <Property Name="MMID" Type="int" />
+    <Property Name="ITID" Type="int" />
+    <Property Name="WRPID" Type="int" />
+    <Property Name="DC_NAME" Type="nvarchar" MaxLength="50" />
+    <Property Name="WH_CONT" Type="nvarchar" MaxLength="40" />
+    <Property Name="MATCH_COID" Type="int" />
+    <Property Name="MATCH_TYPE" Type="nvarchar" MaxLength="10" />
+    <Property Name="REC_DATE" Type="date" />
+    <Property Name="SALE_CRW" Type="nvarchar" MaxLength="10" />
+    <Property Name="SALE_CRSRC" Type="nvarchar" MaxLength="10" />
+    <Property Name="EXTRA" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="McKessonSP">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FILLER1" Type="nvarchar" MaxLength="10" />
+    <Property Name="FILLER2" Type="nvarchar" MaxLength="10" />
+    <Property Name="FILLER3" Type="nvarchar" MaxLength="10" />
+    <Property Name="FILLER4" Type="nvarchar" MaxLength="10" />
+    <Property Name="CONTRACT" Type="nvarchar" MaxLength="20" />
+    <Property Name="FILLER5" Type="nvarchar" MaxLength="10" />
+    <Property Name="FAC_ACCT" Type="nvarchar" MaxLength="30" />
+    <Property Name="FAC_CITY" Type="nvarchar" MaxLength="30" />
+    <Property Name="FAC_DEA" Type="nvarchar" MaxLength="20" />
+    <Property Name="FAC_HIN" Type="nvarchar" MaxLength="20" />
+    <Property Name="FAC_NAME" Type="nvarchar" MaxLength="50" />
+    <Property Name="FILLER6" Type="nvarchar" MaxLength="10" />
+    <Property Name="PO_NUMBER" Type="nvarchar" MaxLength="30" />
+    <Property Name="FAC_STATE" Type="nvarchar" MaxLength="10" />
+    <Property Name="DC_DEA" Type="nvarchar" MaxLength="20" />
+    <Property Name="DC_NAME" Type="nvarchar" MaxLength="30" />
+    <Property Name="FILLER7" Type="nvarchar" MaxLength="10" />
+    <Property Name="DROP_SHIP" Type="nvarchar" MaxLength="10" />
+    <Property Name="GPO" Type="nvarchar" MaxLength="20" />
+    <Property Name="IDATE" Type="nvarchar" MaxLength="10" />
+    <Property Name="INVOICE" Type="nvarchar" MaxLength="30" />
+    <Property Name="NDC" Type="nvarchar" MaxLength="30" />
+    <Property Name="COST" Type="float" />
+    <Property Name="ODATE" Type="nvarchar" MaxLength="10" />
+    <Property Name="OUTER_PK" Type="nvarchar" MaxLength="10" />
+    <Property Name="PROD_FORM" Type="nvarchar" MaxLength="30" />
+    <Property Name="PROD_SIZE" Type="int" />
+    <Property Name="PROD_STRNG" Type="nvarchar" MaxLength="20" />
+    <Property Name="PROD_UM" Type="nvarchar" MaxLength="10" />
+    <Property Name="ORDER_QTY" Type="int" />
+    <Property Name="SHIP_QTY" Type="int" />
+    <Property Name="REASON_NS" Type="nvarchar" MaxLength="10" />
+    <Property Name="FILLER8" Type="nvarchar" MaxLength="10" />
+    <Property Name="SDATE" Type="nvarchar" MaxLength="10" />
+    <Property Name="TOT_COST" Type="float" />
+    <Property Name="FILLER9" Type="nvarchar" MaxLength="10" />
+    <Property Name="PROD_NAME" Type="nvarchar" MaxLength="30" />
+    <Property Name="PROD_UD" Type="nvarchar" MaxLength="20" />
+    <Property Name="UP_DN_CHG" Type="nvarchar" MaxLength="30" />
+    <Property Name="UPC" Type="nvarchar" MaxLength="30" />
+    <Property Name="VENDOR" Type="nvarchar" MaxLength="50" />
+    <Property Name="FILLER10" Type="nvarchar" MaxLength="20" />
+    <Property Name="VE_ITEMNR" Type="nvarchar" MaxLength="20" />
+    <Property Name="WAC" Type="float" />
+    <Property Name="FILLER11" Type="nvarchar" MaxLength="10" />
+    <Property Name="FILLER12" Type="nvarchar" MaxLength="10" />
+    <Property Name="WH_OEN" Type="nvarchar" MaxLength="20" />
+    <Property Name="FILLER13" Type="nvarchar" MaxLength="10" />
+    <Property Name="BATCH" Type="datetime" />
+    <Property Name="WHID" Type="int" />
+    <Property Name="WRPID" Type="int" />
+    <Property Name="WHOLESALER" Type="nvarchar" MaxLength="30" />
+    <Property Name="ORDER_DATE" Type="date" />
+    <Property Name="SHIP_DATE" Type="date" />
+    <Property Name="INV_DATE" Type="date" />
+    <Property Name="REC_DATE" Type="date" />
+    <Property Name="WH_CONT" Type="nvarchar" MaxLength="20" />
+    <Property Name="MATCH_COID" Type="int" />
+    <Property Name="MATCH_TYPE" Type="nvarchar" MaxLength="10" />
+    <Property Name="SALE_CR" Type="nvarchar" MaxLength="10" />
+    <Property Name="MMID" Type="int" />
+    <Property Name="ITID" Type="int" />
+    <Property Name="SALE_CRW" Type="nvarchar" MaxLength="10" />
+    <Property Name="SALE_CRSRC" Type="nvarchar" MaxLength="10" />
+    <Property Name="EXTRA" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="MorrisDickson">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FCDATE" Type="nvarchar" MaxLength="8" />
+    <Property Name="DC_NAME" Type="nvarchar" MaxLength="250" />
+    <Property Name="DC_DEA" Type="nvarchar" MaxLength="50" />
+    <Property Name="FAC_NAME" Type="nvarchar" MaxLength="250" />
+    <Property Name="FAC_DEA" Type="nvarchar" MaxLength="50" />
+    <Property Name="FAC_HIN" Type="nvarchar" MaxLength="50" />
+    <Property Name="FAC_CITY" Type="nvarchar" MaxLength="50" />
+    <Property Name="FAC_STATE" Type="nvarchar" MaxLength="2" />
+    <Property Name="CWAC" Type="nvarchar" MaxLength="50" />
+    <Property Name="CCOST" Type="nvarchar" MaxLength="50" />
+    <Property Name="CQTY" Type="nvarchar" MaxLength="50" />
+    <Property Name="SALE_CR" Type="nvarchar" MaxLength="50" />
+    <Property Name="CONTRACT" Type="nvarchar" MaxLength="50" />
+    <Property Name="CONT_START" Type="nvarchar" MaxLength="50" />
+    <Property Name="NDC" Type="nvarchar" MaxLength="50" />
+    <Property Name="OLD_NDC" Type="nvarchar" MaxLength="50" />
+    <Property Name="UPC" Type="nvarchar" MaxLength="50" />
+    <Property Name="UPN" Type="nvarchar" MaxLength="50" />
+    <Property Name="FILLER" Type="nvarchar" MaxLength="50" />
+    <Property Name="INVOICE" Type="nvarchar" MaxLength="50" />
+    <Property Name="SDATE" Type="nvarchar" MaxLength="50" />
+    <Property Name="CTOTAL" Type="nvarchar" MaxLength="50" />
+    <Property Name="PROD_NAME" Type="nvarchar" MaxLength="250" />
+    <Property Name="PROD_SIZE" Type="nvarchar" MaxLength="50" />
+    <Property Name="PROD_STRNG" Type="nvarchar" MaxLength="50" />
+    <Property Name="DC_NR" Type="nvarchar" MaxLength="50" />
+    <Property Name="FAC_ACCT" Type="nvarchar" MaxLength="50" />
+    <Property Name="WH_OEN" Type="nvarchar" MaxLength="50" />
+    <Property Name="VE_ITEMNR" Type="nvarchar" MaxLength="50" />
+    <Property Name="FILLER1" Type="nvarchar" MaxLength="50" />
+    <Property Name="VENDOR" Type="nvarchar" MaxLength="250" />
+    <Property Name="IDATE" Type="nvarchar" MaxLength="50" />
+    <Property Name="CHG_NUM" Type="nvarchar" MaxLength="50" />
+    <Property Name="CONVERSION" Type="nvarchar" MaxLength="50" />
+    <Property Name="CREDREBILL" Type="nvarchar" MaxLength="50" />
+    <Property Name="DISCOUNT" Type="nvarchar" MaxLength="50" />
+    <Property Name="BATCH" Type="nvarchar" MaxLength="50" />
+    <Property Name="WHOLESALER" Type="nvarchar" MaxLength="50" />
+    <Property Name="WH_CONT" Type="nvarchar" MaxLength="50" />
+    <Property Name="MATCH_COID" Type="int" />
+    <Property Name="MATCH_TYPE" Type="nvarchar" MaxLength="50" />
+    <Property Name="SHIP_QTY" Type="int" />
+    <Property Name="COST" Type="decimal" Precision="10" Scale="4" />
+    <Property Name="TOT_COST" Type="decimal" Precision="10" Scale="4" />
+    <Property Name="WAC" Type="decimal" Precision="10" Scale="4" />
+    <Property Name="SHIP_DATE" Type="date" />
+    <Property Name="INV_DATE" Type="date" />
+    <Property Name="REC_DATE" Type="date" />
+    <Property Name="MMID" Type="int" />
+    <Property Name="WHID" Type="int" />
+    <Property Name="WRPID" Type="int" />
+    <Property Name="ITID" Type="int" />
+    <Property Name="SALE_CRW" Type="nvarchar" MaxLength="50" />
+    <Property Name="SALE_CRSRC" Type="nvarchar" MaxLength="50" />
+    <Property Name="EXTRA" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="NcMutual">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DC_NAME" Type="nvarchar" MaxLength="30" />
+    <Property Name="DC_DEA" Type="nvarchar" MaxLength="30" />
+    <Property Name="WHOLESALER" Type="nvarchar" MaxLength="40" />
+    <Property Name="FAC_NAME" Type="nvarchar" MaxLength="50" />
+    <Property Name="FAC_DEA" Type="nvarchar" MaxLength="20" />
+    <Property Name="FAC_HIN" Type="nvarchar" MaxLength="20" />
+    <Property Name="FAC_CITY" Type="nvarchar" MaxLength="20" />
+    <Property Name="FAC_STATE" Type="nvarchar" MaxLength="20" />
+    <Property Name="FAC_ACCT" Type="nvarchar" MaxLength="20" />
+    <Property Name="ODATE" Type="nvarchar" MaxLength="10" />
+    <Property Name="SDATE" Type="nvarchar" MaxLength="10" />
+    <Property Name="IDATE" Type="nvarchar" MaxLength="10" />
+    <Property Name="INVOICE" Type="nvarchar" MaxLength="20" />
+    <Property Name="VENDOR" Type="nvarchar" MaxLength="40" />
+    <Property Name="WH_OEN" Type="nvarchar" MaxLength="20" />
+    <Property Name="NDC" Type="nvarchar" MaxLength="30" />
+    <Property Name="UPC" Type="nvarchar" MaxLength="30" />
+    <Property Name="VE_ITEMNR" Type="nvarchar" MaxLength="20" />
+    <Property Name="PROD_NAME" Type="nvarchar" MaxLength="50" />
+    <Property Name="PROD_FORM" Type="nvarchar" MaxLength="30" />
+    <Property Name="PROD_STRNG" Type="nvarchar" MaxLength="40" />
+    <Property Name="PROD_SIZE" Type="nvarchar" MaxLength="20" />
+    <Property Name="PROD_UM" Type="nvarchar" MaxLength="20" />
+    <Property Name="OUTER_PACK" Type="nvarchar" MaxLength="30" />
+    <Property Name="PROD_UD" Type="nvarchar" MaxLength="20" />
+    <Property Name="TOTAL_UNIT" Type="nvarchar" MaxLength="20" />
+    <Property Name="AWP" Type="float" />
+    <Property Name="WAC" Type="float" />
+    <Property Name="ORDER_QTY" Type="int" />
+    <Property Name="SHIP_QTY" Type="int" />
+    <Property Name="COST" Type="nvarchar" MaxLength="10" />
+    <Property Name="UP_DN_CHG" Type="float" />
+    <Property Name="TOT_COST" Type="float" />
+    <Property Name="CONTRACT" Type="nvarchar" MaxLength="30" />
+    <Property Name="GPO" Type="nvarchar" MaxLength="20" />
+    <Property Name="CHG_DATE" Type="nvarchar" MaxLength="10" />
+    <Property Name="CHG_NUM" Type="nvarchar" MaxLength="20" />
+    <Property Name="CHG_AMOUNT" Type="nvarchar" MaxLength="20" />
+    <Property Name="CHG_APPR" Type="nvarchar" MaxLength="20" />
+    <Property Name="PRIV_CONTR" Type="nvarchar" MaxLength="30" />
+    <Property Name="SOURCE" Type="nvarchar" MaxLength="30" />
+    <Property Name="NET_ITEM" Type="nvarchar" MaxLength="30" />
+    <Property Name="NOT_SHIP" Type="nvarchar" MaxLength="30" />
+    <Property Name="DROP_SHIP" Type="nvarchar" MaxLength="30" />
+    <Property Name="PO_NUMBER" Type="nvarchar" MaxLength="30" />
+    <Property Name="WH_NOTES" Type="nvarchar" MaxLength="30" />
+    <Property Name="BATCH" Type="datetime" />
+    <Property Name="WH_CONT" Type="nvarchar" MaxLength="30" />
+    <Property Name="MATCH_COID" Type="int" />
+    <Property Name="MATCH_TYPE" Type="nvarchar" MaxLength="10" />
+    <Property Name="ORDER_DATE" Type="date" />
+    <Property Name="SHIP_DATE" Type="date" />
+    <Property Name="INV_DATE" Type="date" />
+    <Property Name="REC_DATE" Type="date" />
+    <Property Name="MMID" Type="int" />
+    <Property Name="ITID" Type="int" />
+    <Property Name="WHID" Type="int" />
+    <Property Name="WRPID" Type="int" />
+    <Property Name="SALE_CR" Type="nvarchar" MaxLength="10" />
+    <Property Name="SALE_CRW" Type="nvarchar" MaxLength="10" />
+    <Property Name="SALE_CRSRC" Type="nvarchar" MaxLength="10" />
+    <Property Name="EXTRA" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="RnSPharma">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FAC_NAME" Type="nvarchar" MaxLength="60" />
+    <Property Name="FAC_ADDR" Type="nvarchar" MaxLength="70" />
+    <Property Name="FAC_CITY" Type="nvarchar" MaxLength="50" />
+    <Property Name="FAC_STATE" Type="nvarchar" MaxLength="10" />
+    <Property Name="FAC_ZIP" Type="nvarchar" MaxLength="20" />
+    <Property Name="FAC_DEA" Type="nvarchar" MaxLength="30" />
+    <Property Name="FAC_HIN" Type="nvarchar" MaxLength="30" />
+    <Property Name="FILLER1" Type="nvarchar" MaxLength="20" />
+    <Property Name="PROD_NAME" Type="nvarchar" MaxLength="100" />
+    <Property Name="CNDC" Type="nvarchar" MaxLength="20" />
+    <Property Name="INV_DATE" Type="nvarchar" MaxLength="10" />
+    <Property Name="INVOICE" Type="nvarchar" MaxLength="20" />
+    <Property Name="SHIP_QTY" Type="int" />
+    <Property Name="TOT_COST" Type="float" />
+    <Property Name="FILLER2" Type="nvarchar" MaxLength="20" />
+    <Property Name="BATCH" Type="datetime" />
+    <Property Name="COST" Type="float" />
+    <Property Name="NDC" Type="nvarchar" MaxLength="50" />
+    <Property Name="WHID" Type="int" />
+    <Property Name="WRPID" Type="int" />
+    <Property Name="WHOLESALER" Type="nvarchar" MaxLength="30" />
+    <Property Name="REC_DATE" Type="date" />
+    <Property Name="CONTRACT" Type="nvarchar" MaxLength="30" />
+    <Property Name="WH_CONT" Type="nvarchar" MaxLength="30" />
+    <Property Name="MATCH_COID" Type="int" />
+    <Property Name="MATCH_TYPE" Type="nvarchar" MaxLength="10" />
+    <Property Name="SALE_CR" Type="nvarchar" MaxLength="10" />
+    <Property Name="MMID" Type="int" />
+    <Property Name="ITID" Type="int" />
+    <Property Name="SALE_CRW" Type="nvarchar" MaxLength="10" />
+    <Property Name="SALE_CRSRC" Type="nvarchar" MaxLength="10" />
+    <Property Name="EXTRA" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="SmithDrugs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FcDate" Type="nvarchar" MaxLength="30" />
+    <Property Name="DcName" Type="nvarchar" MaxLength="30" />
+    <Property Name="DcDea" Type="nvarchar" MaxLength="25" />
+    <Property Name="FacName" Type="nvarchar" MaxLength="30" />
+    <Property Name="FacDea" Type="nvarchar" MaxLength="30" />
+    <Property Name="Cwac" Type="nvarchar" MaxLength="30" />
+    <Property Name="Ccost" Type="nvarchar" MaxLength="30" />
+    <Property Name="Cqty" Type="nvarchar" MaxLength="30" />
+    <Property Name="SaleCr" Type="nvarchar" MaxLength="50" />
+    <Property Name="Contract" Type="nvarchar" MaxLength="50" />
+    <Property Name="ContStart" Type="nvarchar" MaxLength="30" />
+    <Property Name="Ndc" Type="nvarchar" MaxLength="30" />
+    <Property Name="OldNdc" Type="nvarchar" MaxLength="30" />
+    <Property Name="Upc" Type="nvarchar" MaxLength="30" />
+    <Property Name="Upn" Type="nvarchar" MaxLength="50" />
+    <Property Name="Invoice" Type="nvarchar" MaxLength="30" />
+    <Property Name="Sdate" Type="nvarchar" MaxLength="30" />
+    <Property Name="Ctotal" Type="nvarchar" MaxLength="30" />
+    <Property Name="ProdName" Type="nvarchar" MaxLength="50" />
+    <Property Name="ProdSize" Type="nvarchar" MaxLength="30" />
+    <Property Name="ProdString" Type="nvarchar" MaxLength="50" />
+    <Property Name="Filler" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpDnChg" Type="nvarchar" MaxLength="30" />
+    <Property Name="Filler2" Type="nvarchar" MaxLength="50" />
+    <Property Name="FacAcct" Type="nvarchar" MaxLength="30" />
+    <Property Name="VeItemnr" Type="nvarchar" MaxLength="30" />
+    <Property Name="Idate" Type="nvarchar" MaxLength="30" />
+    <Property Name="VerNr" Type="nvarchar" MaxLength="50" />
+    <Property Name="ChgNum" Type="nvarchar" MaxLength="50" />
+    <Property Name="Conversion" Type="nvarchar" MaxLength="30" />
+    <Property Name="Batch" Type="nvarchar" MaxLength="30" />
+    <Property Name="WholeSaler" Type="nvarchar" MaxLength="50" />
+    <Property Name="WhCont" Type="nvarchar" MaxLength="50" />
+    <Property Name="MatchCoid" Type="nvarchar" MaxLength="30" />
+    <Property Name="MatchType" Type="nvarchar" MaxLength="50" />
+    <Property Name="ShipQty" Type="nvarchar" MaxLength="30" />
+    <Property Name="Cost" Type="nvarchar" MaxLength="30" />
+    <Property Name="TotCost" Type="nvarchar" MaxLength="30" />
+    <Property Name="Wac" Type="nvarchar" MaxLength="30" />
+    <Property Name="ShipDate" Type="nvarchar" MaxLength="20" />
+    <Property Name="InvDate" Type="nvarchar" MaxLength="20" />
+    <Property Name="RecDate" Type="nvarchar" MaxLength="20" />
+    <Property Name="MmId" Type="nvarchar" MaxLength="30" />
+    <Property Name="Whid" Type="nvarchar" MaxLength="30" />
+    <Property Name="WrPid" Type="nvarchar" MaxLength="30" />
+    <Property Name="ItId" Type="nvarchar" MaxLength="30" />
+    <Property Name="SaleCrw" Type="nvarchar" MaxLength="50" />
+    <Property Name="SaleCrsrc" Type="nvarchar" MaxLength="50" />
+    <Property Name="Extra" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="ValleyWholesale">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PDATE" Type="nvarchar" MaxLength="250" />
+    <Property Name="WHOLESALER" Type="nvarchar" MaxLength="250" />
+    <Property Name="DC_DEA" Type="nvarchar" MaxLength="250" />
+    <Property Name="FAC_NAME" Type="nvarchar" MaxLength="250" />
+    <Property Name="FAC_DEA" Type="nvarchar" MaxLength="250" />
+    <Property Name="CWAC" Type="nvarchar" MaxLength="50" />
+    <Property Name="CCOST" Type="nvarchar" MaxLength="50" />
+    <Property Name="CQTY" Type="nvarchar" MaxLength="50" />
+    <Property Name="SALE_CR" Type="nvarchar" MaxLength="50" />
+    <Property Name="CONTRACT" Type="nvarchar" MaxLength="50" />
+    <Property Name="PROD_CODE" Type="nvarchar" MaxLength="50" />
+    <Property Name="NDC" Type="nvarchar" MaxLength="50" />
+    <Property Name="INVOICE" Type="nvarchar" MaxLength="50" />
+    <Property Name="SDATE" Type="nvarchar" MaxLength="50" />
+    <Property Name="CTOT_COST" Type="nvarchar" MaxLength="50" />
+    <Property Name="PROD_NAME" Type="nvarchar" MaxLength="50" />
+    <Property Name="DI" Type="nvarchar" MaxLength="50" />
+    <Property Name="UP_CHARGE" Type="nvarchar" MaxLength="50" />
+    <Property Name="DIVISION" Type="nvarchar" MaxLength="50" />
+    <Property Name="FAC_ACCT" Type="nvarchar" MaxLength="50" />
+    <Property Name="VE_ITEMNR" Type="nvarchar" MaxLength="50" />
+    <Property Name="IDATE" Type="nvarchar" MaxLength="50" />
+    <Property Name="VENDOR" Type="nvarchar" MaxLength="50" />
+    <Property Name="BATCH" Type="nvarchar" MaxLength="50" />
+    <Property Name="WAC" Type="decimal" Precision="10" Scale="4" />
+    <Property Name="COST" Type="decimal" Precision="10" Scale="4" />
+    <Property Name="SHIP_QTY" Type="int" />
+    <Property Name="TOT_COST" Type="decimal" Precision="20" Scale="4" />
+    <Property Name="MATCH_TYPE" Type="nvarchar" MaxLength="50" />
+    <Property Name="SHIP_DATE" Type="date" />
+    <Property Name="INV_DATE" Type="date" />
+    <Property Name="WH_CONT" Type="nvarchar" MaxLength="50" />
+    <Property Name="MATCH_COID" Type="int" />
+    <Property Name="REC_DATE" Type="date" />
+    <Property Name="MMID" Type="int" />
+    <Property Name="WHID" Type="int" />
+    <Property Name="WRPID" Type="int" />
+    <Property Name="ITID" Type="int" />
+    <Property Name="SALE_CRW" Type="nvarchar" MaxLength="1" />
+    <Property Name="SALE_CRSRC" Type="nvarchar" MaxLength="1" />
+    <Property Name="EXTRA" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="ValueDrugs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DcName" Type="nvarchar" MaxLength="30" />
+    <Property Name="DcDea" Type="nvarchar" MaxLength="30" />
+    <Property Name="WholeSaler" Type="nvarchar" MaxLength="40" />
+    <Property Name="FacName" Type="nvarchar" MaxLength="40" />
+    <Property Name="FacDea" Type="nvarchar" MaxLength="30" />
+    <Property Name="FacHin" Type="nvarchar" MaxLength="30" />
+    <Property Name="FacCity" Type="nvarchar" MaxLength="35" />
+    <Property Name="FacState" Type="nvarchar" MaxLength="30" />
+    <Property Name="FacAcct" Type="nvarchar" MaxLength="30" />
+    <Property Name="COrderDate" Type="nvarchar" MaxLength="30" />
+    <Property Name="CShipDate" Type="nvarchar" MaxLength="30" />
+    <Property Name="CInvDate" Type="nvarchar" MaxLength="30" />
+    <Property Name="Invoice" Type="nvarchar" MaxLength="30" />
+    <Property Name="Vendor" Type="nvarchar" MaxLength="50" />
+    <Property Name="WhOEN" Type="nvarchar" MaxLength="30" />
+    <Property Name="NDC" Type="nvarchar" MaxLength="30" />
+    <Property Name="UPC" Type="nvarchar" MaxLength="30" />
+    <Property Name="VeItemNR" Type="nvarchar" MaxLength="30" />
+    <Property Name="ProdName" Type="nvarchar" MaxLength="50" />
+    <Property Name="ProdForm" Type="nvarchar" MaxLength="30" />
+    <Property Name="ProdStrng" Type="nvarchar" MaxLength="30" />
+    <Property Name="ProdSize" Type="nvarchar" MaxLength="30" />
+    <Property Name="ProdUM" Type="nvarchar" MaxLength="30" />
+    <Property Name="ProdUD" Type="nvarchar" MaxLength="30" />
+    <Property Name="OuterPK" Type="nvarchar" MaxLength="30" />
+    <Property Name="Cwac" Type="nvarchar" MaxLength="30" />
+    <Property Name="COrderQty" Type="nvarchar" MaxLength="30" />
+    <Property Name="CShipQty" Type="nvarchar" MaxLength="30" />
+    <Property Name="CCost" Type="nvarchar" MaxLength="30" />
+    <Property Name="CUPDNCHG" Type="nvarchar" MaxLength="30" />
+    <Property Name="CTotCost" Type="nvarchar" MaxLength="30" />
+    <Property Name="Contract" Type="nvarchar" MaxLength="30" />
+    <Property Name="GPO" Type="nvarchar" MaxLength="30" />
+    <Property Name="CCHGDate" Type="nvarchar" MaxLength="30" />
+    <Property Name="CHGNum" Type="nvarchar" MaxLength="30" />
+    <Property Name="CCHGAmount" Type="nvarchar" MaxLength="30" />
+    <Property Name="CapRDate" Type="nvarchar" MaxLength="30" />
+    <Property Name="PrivContr" Type="nvarchar" MaxLength="30" />
+    <Property Name="Special" Type="nvarchar" MaxLength="30" />
+    <Property Name="NetItem" Type="nvarchar" MaxLength="30" />
+    <Property Name="ReasonNS" Type="nvarchar" MaxLength="30" />
+    <Property Name="DropShip" Type="nvarchar" MaxLength="30" />
+    <Property Name="PONumber" Type="nvarchar" MaxLength="30" />
+    <Property Name="WhNotes" Type="nvarchar" MaxLength="40" />
+    <Property Name="Batch" Type="nvarchar" MaxLength="30" />
+    <Property Name="OderDate" Type="date" />
+    <Property Name="ShipDate" Type="date" />
+    <Property Name="InvDate" Type="date" />
+    <Property Name="WAC" Type="nvarchar" MaxLength="30" />
+    <Property Name="OrderQty" Type="int" />
+    <Property Name="ShipQty" Type="int" />
+    <Property Name="Cost" Type="nvarchar" MaxLength="30" />
+    <Property Name="UpDnCHG" Type="nvarchar" MaxLength="30" />
+    <Property Name="TotCost" Type="nvarchar" MaxLength="30" />
+    <Property Name="ChgDate" Type="date" />
+    <Property Name="ChgAmount" Type="nvarchar" MaxLength="30" />
+    <Property Name="ApprDate" Type="date" />
+    <Property Name="WhCont" Type="nvarchar" MaxLength="30" />
+    <Property Name="MatchCoid" Type="int" />
+    <Property Name="MatchType" Type="nvarchar" MaxLength="30" />
+    <Property Name="MMId" Type="int" />
+    <Property Name="ITId" Type="int" />
+    <Property Name="WHId" Type="int" />
+    <Property Name="WRPId" Type="int" />
+    <Property Name="SaleCR" Type="nvarchar" MaxLength="30" />
+    <Property Name="RecDate" Type="date" />
+    <Property Name="SaleCRW" Type="nvarchar" MaxLength="30" />
+    <Property Name="SaleCRSRC" Type="nvarchar" MaxLength="30" />
+    <Property Name="Extra" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityContainer Name="AnalyticsModelStoreContainer">
+    <EntitySet Name="Amerisource" EntityType="Self.Amerisource" Schema="wholesaler" store:Type="Tables" />
+    <EntitySet Name="Anda" EntityType="Self.Anda" Schema="wholesaler" store:Type="Tables" />
+    <EntitySet Name="ASD" EntityType="Self.ASD" Schema="wholesaler" store:Type="Tables" />
+    <EntitySet Name="BioCare" EntityType="Self.BioCare" Schema="wholesaler" store:Type="Tables" />
+    <EntitySet Name="Cardinal" EntityType="Self.Cardinal" Schema="wholesaler" store:Type="Tables" />
+    <EntitySet Name="CardinalSPD" EntityType="Self.CardinalSPD" Schema="wholesaler" store:Type="Tables" />
+    <EntitySet Name="CuraScript" EntityType="Self.CuraScript" Schema="wholesaler" store:Type="Tables" />
+    <EntitySet Name="Dakota" EntityType="Self.Dakota" Schema="wholesaler" store:Type="Tables" />
+    <EntitySet Name="HDSmith" EntityType="Self.HDSmith" Schema="wholesaler" store:Type="Tables" />
+    <EntitySet Name="Kinray" EntityType="Self.Kinray" Schema="wholesaler" store:Type="Tables" />
+    <EntitySet Name="MCKESSON" EntityType="Self.MCKESSON" Schema="wholesaler" store:Type="Tables" />
+    <EntitySet Name="McKessonSP" EntityType="Self.McKessonSP" Schema="wholesaler" store:Type="Tables" />
+    <EntitySet Name="MorrisDickson" EntityType="Self.MorrisDickson" Schema="wholesaler" store:Type="Tables" />
+    <EntitySet Name="NcMutual" EntityType="Self.NcMutual" Schema="wholesaler" store:Type="Tables" />
+    <EntitySet Name="RnSPharma" EntityType="Self.RnSPharma" Schema="wholesaler" store:Type="Tables" />
+    <EntitySet Name="SmithDrugs" EntityType="Self.SmithDrugs" Schema="wholesaler" store:Type="Tables" />
+    <EntitySet Name="ValleyWholesale" EntityType="Self.ValleyWholesale" Schema="wholesaler" store:Type="Tables" />
+    <EntitySet Name="ValueDrugs" EntityType="Self.ValueDrugs" Schema="wholesaler" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
