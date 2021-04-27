@@ -1,0 +1,131 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@using APKBuilder.Models
+@model BuildRequest
+@{
+    if (ViewBag.Entity == null)
+    {
+        ViewBag.Entity = "gh";}
+    if (ViewBag.Env == null)
+    {
+        ViewBag.Env = "dev";
+    }
+    if (ViewBag.Branch == null)
+    {
+        ViewBag.Branch = "development";
+    }
+}
+
+    <div class="container">
+        <div class="text-center jumbotron">
+
+            <h1 class="display-4">
+                AMSL
+            </h1>
+            <h3>AMBS Tab APK Builder</h3>
+
+            <form id="form1" method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Index">
+                <table class="apk">
+                    <tr class="text-left" >
+                        <td>Entity: </td>
+                        <td>
+                            @*<input type="text" id="txtFirstName" name="entity"/>*@
+                            <select id="entity" name="entity"  >
+                                <option value="gh">Ghana</option>
+                                <option value="in">India</option>
+                                <option value="ng">Nigeria</option>
+                                <option value="ke">Kenya</option>
+                                <option value="lk">Sri Lanka</option>
+                                <option value="mm">Myanmar</option>
+                                <option value="ph">Philippines</option>
+                                <option value="rw">Rwanda</option>
+                                <option value="tz">Tanzania</option>
+                                <option value="zm">Zambia</option>
+                                <option value="ug">Uganda</option>
+                                <option value="sl">Sierra Leon</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr class="text-left">
+                        <td class="pull-left ">Environment: </td>
+                        <td>
+                            @*<input type="text" id="txtLastName" name="env"/>*@
+                            <select id="env" name="env" class="pull-left">
+                                <option value="dev">Dev</option>
+                                <option value="qa">QA</option>
+                                <option value="Prod">Prod</option>
+                                <option value="UAT">UAT</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr class="text-left">
+                        <td>Git Branch: </td>
+                        <td>
+                            <select id="branch" name="branch">
+                                <option value="Build_Automation">Build_Automation</option>
+                                <option value="development">Development</option>
+                                <option value="QA">QA</option>
+
+                            </select>
+                        </td>
+                    </tr>
+                    <tr class="text-right">
+                        <td>
+                            <input type="hidden" name="guid" id="guid" value="@ViewBag.GUID" />
+                            <input type="hidden" name="guid" id="entity-key" value="@ViewBag.Entity" />
+                            <input type="hidden" name="guid" id="env-key" value="@ViewBag.Env" />
+                            <input type="hidden" name="guid" id="branch-key" value="@ViewBag.Branch" />
+                            <input type="hidden" name="filePath" id="filePath" value="" />
+                        </td>
+                        <td><input id="sendButton" style="margin-top: 5%" class="btn btn-primary" type="submit" value="Build" /></td>
+                        <td><input class="btn btn-success" style="margin-top: 7%; margin-left: 7%; display: none" id="dl-btn" type="submit"  value="Download APK" formaction="Home/Download" /></td>
+                    </tr>
+                </table>
+                <hr />
+                
+            </form>
+
+
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <hr />
+                <div id="spinner">
+                    Please wait while target apk is being built
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+
+            @*<div class="col-6 bg-success alert-success">
+                    <ul id="messagesList"></ul>
+                </div>*@
+            <div class="alert alert-success" style="display: none" id="successDiv">
+                <strong id="messagesList"></strong>
+            </div>
+            @*<div class="col-6 bg-danger alert-danger">
+                    <ul id="errorList"></ul>
+                </div>*@
+            <div class="alert alert-danger" style="display: none" id="errorDiv">
+                <strong id="errorList"></strong>
+            </div>
+        </div>
+    </div>
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/socket.js"></script>
+    <script src="~/js/loader-animation.js"></script>
+
+    <script type="text/javascript">
+        function isPostBack() {
+            return document.referrer.indexOf(document.location.href) > -1;
+        }
+        if (isPostBack()) {
+            showProgress();
+            $("#entity").val($("#entity-key").val()).change();
+            $("#env").val($("#env-key").val()).change();
+            $("#branch").val($("#branch-key").val()).change();
+        }
+    </script>
+
