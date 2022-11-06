@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ambs-nextgen-service-Product
+  name: ambs-nextgen-service-Product-deployment
+  namespace: development-services
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ambs-nextgen-service-Product
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: ambs-nextgen-service-Product
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: env
+                    operator: In
+                    values:
+                      - amsl-node1
+                      - amsl-node2
+      terminationGracePeriodSeconds: 30
+      serviceAccountName: ambs-nextgen-service-Product-sa
+      containers:
+        - image: 192.168.97.34:5000/ambs-nextgen-service-Product:TAG_NUMBER
+          imagePullPolicy: Always
+          name: ambs-nextgen-service-Product-container
+          ports:
+            - containerPort: 80
+          resources: {}
+      imagePullSecrets:
+        - name: amsl-registry-key
+
+status: {}
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: ambs-nextgen-service-Product-sa
+  namespace: development-services
+  labels:
+    account: ambs-nextgen-service-Product
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: ambs-nextgen-service-Product
+  name: ambs-nextgen-service-Product
+  namespace: development-services
+spec:
+  type: LoadBalancer
+  # externalIPs:
+  #   - 192.168.0.26
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: ambs-nextgen-service-Product
+status:
+  loadBalancer: {}
+
+---
+# apiVersion: networking.istio.io/v1alpha3
+# kind: VirtualService
+# metadata:
+#   name: "ambs-next-gen-admin"
+
+# spec:
+#   hosts:
+#     - "*"
+#   gateways:
+#     - ambs-nextgen-gateway
+#   http:
+#     - match:
+#         - port:
+#         - uri:
+#             exact: /admin
+#       route:
+#         - destination:
+#             host: "ambs-next-gen-admin"
+#             port:
+#               number: 80
