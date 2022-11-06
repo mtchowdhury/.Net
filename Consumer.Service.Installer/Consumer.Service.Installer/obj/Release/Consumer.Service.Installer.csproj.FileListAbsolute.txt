@@ -1,0 +1,9 @@
+D:\PG\Consumer.Service.Installer\Consumer.Service.Installer\bin\Release\Consumer.Service.Installer.exe.config
+D:\PG\Consumer.Service.Installer\Consumer.Service.Installer\bin\Release\Consumer.Service.Installer.exe
+D:\PG\Consumer.Service.Installer\Consumer.Service.Installer\bin\Release\Consumer.Service.Installer.pdb
+D:\PG\Consumer.Service.Installer\Consumer.Service.Installer\obj\Release\Consumer.Service.Installer.ConsumerInstaller.resources
+D:\PG\Consumer.Service.Installer\Consumer.Service.Installer\obj\Release\Consumer.Service.Installer.Properties.Resources.resources
+D:\PG\Consumer.Service.Installer\Consumer.Service.Installer\obj\Release\Consumer.Service.Installer.csproj.GenerateResource.cache
+D:\PG\Consumer.Service.Installer\Consumer.Service.Installer\obj\Release\Consumer.Service.Installer.csproj.CoreCompileInputs.cache
+D:\PG\Consumer.Service.Installer\Consumer.Service.Installer\obj\Release\Consumer.Service.Installer.exe
+D:\PG\Consumer.Service.Installer\Consumer.Service.Installer\obj\Release\Consumer.Service.Installer.pdb
